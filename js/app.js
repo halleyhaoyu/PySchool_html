@@ -8,8 +8,9 @@
 	 * 配置域名，当前web app 需要和api配置相同域名
 	 * owner.hostname：API 服务器域名
 	 */
-	owner.hostname='http://api.course.com:8081/course-api';
+	//owner.hostname='http://api.course.com:8081/course-api';
 	
+	owner.hostname='http://192.168.0.185:8081/course-api';
 	
 	/**
 	 * 用户登录
@@ -21,10 +22,18 @@
 		loginInfo.account = loginInfo.account || '';
 		loginInfo.password = loginInfo.password || '';
 		if (loginInfo.account.length < 4) {
-			return callback('账号最短为 4 个字符');
+			var msg={
+					code:-1,
+					msg:"账号最短为 4 个字符！"
+				}
+			return callback(msg);
 		}
 		if (loginInfo.password.length < 6) {
-			return callback('密码最短为 6 个字符');
+			var msg={
+					code:-1,
+					msg:"密码最短为 6 个字符！"
+				}
+			return callback(msg);
 		}
 //		var users = JSON.parse(localStorage.getItem('$users') || '[]');
 //		var authed = users.some(function(user) {
