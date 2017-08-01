@@ -4,10 +4,16 @@
  * 请注意将相关方法调整成 “基于服务端Service” 的实现。
  **/
 (function($, owner) {
+	/*
+	 * 配置域名，当前web app 需要和api配置相同域名
+	 * owner.hostname：API 服务器域名
+	 */
+	owner.hostname='http://api.course.com:8081/course-api';
+	
+	
 	/**
 	 * 用户登录
 	 **/
-	owner.hostname='http://api.course.com:8081/course-api';
 	owner.login = function(loginInfo, callback) {
 		//mui.toast('欢迎体验Hello MUI');
 		callback = callback || $.noop;
@@ -81,55 +87,7 @@
 		window.location.href='../login.html'
 		
 	}
-/*
- * 获取课程列表
- * */
-	owner.getCourseAll=function(userInfo,pageSize,pageIndex,callback){
-		mui.ajax( owner.hostname+'/view/teachingManage/listData.shtml?manageId='+userInfo.manageId+'&pageSize='+pageSize+'&pageIndex='+pageIndex,{
-			
-			dataType:'json',//服务器返回json格式数据
-			type:'post',//HTTP请求类型
-			timeout:10000,//超时时间设置为10秒； 
-	        //contentType:"application/x-www-form-urlencoded; charset=utf-8",
-			headers:{'Content-Type':'application/json; charset=utf-8'},	              
-			success:function(data){
-				return callback(data);
-			},
-			error:function(xhr,type,errorThrown){
-				//异常处理；
-				var msg={
-					code:-1,
-					msg:"获取数据失败！"
-				}
-					return callback(msg);
-			}
-		});
-	}
-	
-	/*
-	  * 获取活动 
-	  */
-	owner.getActivityAll=function(userInfo,pageSize,pageIndex,callback){
-		mui.ajax( owner.hostname+'/view/activity/listData.shtml?manageId='+userInfo.manageId+'&pageSize='+pageSize+'&pageIndex='+pageIndex,{
-			
-			dataType:'json',//服务器返回json格式数据
-			type:'post',//HTTP请求类型
-			timeout:10000,//超时时间设置为10秒； 
-	        //contentType:"application/x-www-form-urlencoded; charset=utf-8",
-			headers:{'Content-Type':'application/json; charset=utf-8'},	              
-			success:function(data){
-				return callback(data);
-			},
-			error:function(xhr,type,errorThrown){
-				//异常处理；
-				var msg={
-					code:-1,
-					msg:"获取数据失败！"
-				}
-					return callback(msg);
-			}
-		});
-	}
+
 	/**
 	 * 新用户注册
 	 **/
@@ -232,4 +190,58 @@
 			}
 		}
 	}
+	
+	
+	
+	/*
+	 * 业务功能
+	 * */
+	owner.getCommon=function(url,callback){
+		mui.ajax( url,{			
+			dataType:'json',//服务器返回json格式数据
+			type:'get',//HTTP请求类型
+			timeout:10000,//超时时间设置为10秒； 
+	        //contentType:"application/x-www-form-urlencoded; charset=utf-8",
+			headers:{'Content-Type':'application/json; charset=utf-8'},	              
+			success:function(data){
+				return callback(data);
+			},
+			error:function(xhr,type,errorThrown){
+				//异常处理；
+				var msg={
+					code:-1,
+					msg:"获取数据失败！"
+				}
+					return callback(msg);
+			}
+		});
+	}
+
+	/*
+	 * 课程-获取课程列表
+	 * */
+	owner.getCourseAll=function(userInfo,pageSize,pageIndex,callback){
+		var url=owner.hostname+'/view/teachingManage/listData.shtml?manageId='+userInfo.manageId+'&pageSize='+pageSize+'&pageIndex='+pageIndex;
+		return owner.getCommon(url,callback);
+	}
+	
+	/*
+	  * 活动 -获取活动列表
+	  */
+	owner.getActivityAll=function(userInfo,pageSize,pageIndex,callback){		
+		var url=owner.hostname+'/view/activity/listData.shtml?manageId='+userInfo.manageId+'&pageSize='+pageSize+'&pageIndex='+pageIndex;
+		return owner.getCommon(url,callback);
+	}
+	
+		/*
+	  * 成果 -获取列表
+	  */
+	owner.getShowAll=function(userInfo,actFine,pageSize,pageIndex,callback){
+		//view/activity/activityShow.shtml?manageId=55&actFine=1
+		var url=owner.hostname+'/view/activity/activityShow.shtml?manageId='+userInfo.manageId+'&actFine='+actFine+'&pageSize='+pageSize+'&pageIndex='+pageIndex;
+		return owner.getCommon(url,callback); 
+	}
+	
+	
+	
 }(mui, window.app = {}));

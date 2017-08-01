@@ -150,16 +150,16 @@
 	<script src="../js/app.js"></script>
 	<script type="text/javascript">
         mui.init();
-        document.getElementById('it1').addEventListener('tap',function(){
-			$('#action-1').css('display','block');
-			$('#action-2').css('display','block');
-            $('.mui-bar-nav').css('box-shadow','0 1px 6px #ccc');
-        });
-        document.getElementById('it2').addEventListener('tap',function(){
-			$('#action-1').css('display','none');
-			$('#action-2').css('display','none');
-			$('.mui-bar-nav').css('box-shadow','none');
-        }); 
+//      document.getElementById('it1').addEventListener('tap',function(){
+//			$('#action-1').css('display','block');
+//			$('#action-2').css('display','block');
+//          $('.mui-bar-nav').css('box-shadow','0 1px 6px #ccc');
+//      });
+//      document.getElementById('it2').addEventListener('tap',function(){
+//			$('#action-1').css('display','none');
+//			$('#action-2').css('display','none');
+//			$('.mui-bar-nav').css('box-shadow','none');
+//      }); 
         mui('#main_bar').on('tap', 'a', function(e) {
 		    //获取目标子页的id
 		    var targetTab = this.getAttribute('href');
@@ -170,6 +170,7 @@
 				//阻尼系数
 				var deceleration = mui.os.ios?0.003:0.0009;
 				var pageIndex = 1;
+				var color_css = new Array("sc_purple","sc_cyan","sc_orange","sc_pink")
 				$('.mui-scroll-wrapper').scroll({
 					bounce: false,
 					indicators: true, //是否显示滚动条
@@ -232,10 +233,11 @@
 						for (var i = 0; i < objectList.length; i++) {
 							li = document.createElement('li');
 							li.className = 'mui-table-view-cell';
-							var insertHtml=""
+							var insertHtml="";
+							var colorIndex = Math.ceil(Math.random()*4)-1;
 							if(index==0){ //我的课程
 								insertHtml+="<div class=\"myh5_card\">";
-								insertHtml+="	<a href=\"#\" class=\"top sc_orange\">";//	
+								insertHtml+="	<a href=\"#\" class=\"top "+color_css[colorIndex]+"\">";//	
 								insertHtml+="		<img src=\"../images/school/cc_pic.png\" class=\"photo\" />";
 								insertHtml+="		<p class=\"title\">"+objectList[i].rcName+"</p>";
 								insertHtml+="		<p class=\"content1\">班级："+objectList[i].tcId+"</p>";
@@ -244,7 +246,7 @@
 								insertHtml+="</div>";
 							}else if(index==1){//全部课程
 								insertHtml+="<div class=\"myh5_card\">";
-								insertHtml+="	<a href=\"#\" class=\"top sc_pink\">";
+								insertHtml+="	<a href=\"#\" class=\"top "+color_css[colorIndex]+"\">";
 								insertHtml+="		<img src=\"../images/school/cc_pic.png\" class=\"photo\" />";
 								insertHtml+="		<img src=\"../images/school/sc_add.png\" class=\"arrow\" />";
 								insertHtml+="		<p class=\"title\">"+objectList[i].rcName+"</p>";
