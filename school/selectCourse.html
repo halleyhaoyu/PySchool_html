@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>选课</title>
     <script src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/vue.min.js"></script>
+	<script type="text/javascript" src="../js/app.js"></script>
     <link href="../css/mui.css" rel="stylesheet"/>
 	<link href="../css/icons-extra.css" rel="stylesheet"/>
 	<link href="../css/app.css" rel="stylesheet"/>
@@ -23,7 +25,7 @@
 		<div class="course-top-div">
 			<a class="course-top-a">
 				<img src="../images/school/cc_pic.png" class="course-cc-pic">
-				<p class="course-top-p">艺术摄影</p>
+				<p class="course-top-p">{{courseInfo.rcName}}</p>
 			</a>
 		</div>
 
@@ -33,7 +35,7 @@
 			</div>
 			<div class="course-desc-right">
 				<p class="course-desc-title">简介</p>
-				<p>摄影术的诞生是随着欧洲资本主义的发展应运而生的，150多年来，它经历了一个由简单到复杂。</p>
+				<p>{{courseInfo.rcDesc}}</p>
 			</div>
 		</div>
 
@@ -41,9 +43,9 @@
 		<div class="open-class-desc">
 			<div class="open-class-div">
 				<p class="course-desc-title">开班情况</p>
-				<div class="open-class-content">
-					三年级一班<label class="open-class-label">王老师</label>
-					<label class="open-class-label red">剩余10</label>/30
+				<div v-for="item in classList" class="open-class-content">
+					{{item.tcName}}<label class="open-class-label">{{item.tcTeacherName}}</label>
+					<label class="open-class-label red">剩余{{item.tcApplicantsNums}}</label>/{{item.tcNums}}
 					<div class="add-info">加入</div>
 				</div>
 
@@ -51,19 +53,7 @@
 					三年级一班<label class="open-class-label">王老师</label>
 					<label class="open-class-label red">剩余10</label>/30
 					<div class="del-info">退出</div>
-				</div>
-
-				<div class="open-class-content">
-					三年级一班<label class="open-class-label">王老师</label>
-					<label class="open-class-label red">剩余10</label>/30
-					<div class="add-info">加入</div>
-				</div>
-
-				<div class="open-class-content">
-					三年级一班<label class="open-class-label">王老师</label>
-					<label class="open-class-label red">剩余10</label>/30
-					<div class="del-info">退出</div>
-				</div>
+				</div> 
 			</div>
 		</div>
 
@@ -73,6 +63,98 @@
 	
 <script type="text/javascript" charset="UTF-8">
   	mui.init();
+  	var vm = new Vue({
+		el: '.mui-content',
+		data: {
+			courseInfo:{
+		        "rcId": 2,
+		        "rcCode": "2000001",
+		        "rcName": "warking，上海 测试",
+		        "rcTime": "2017-07-11 09:01:05",
+		        "rcDesc": "啊但是发生地方",
+		        "rcPeriod": 19,
+		        "rcClassForm": "走班制",
+		        "rcOperId": 3,
+		        "deleteFalg": 0,
+		        "deleteTime": 1499742828000
+		    }
+			,classList:[{
+						"tcId": 1,
+						"tcName": "A班",
+						"tcRcId": 2,
+						"tcSchoolId": 1,
+						"tcTime": "2017-07-15 17:17:36",
+						"tcUpdateTime": "2017-07-17 17:19:43",
+						"tcUpdateUser": "dev",
+						"tcAddress": "阿斯顿发生地方",
+						"tcTeacherId": 7,
+						"tcTeacherName": "李四",
+						"tcOperId": 40,
+						"tcOperName": "dev",
+						"tcNums": 18,
+						"tcTmId": 1,
+						"tcApplicantsNums": 5,
+						"deleteFalg": 0,
+						"deleteTime": 1500283184000,
+						"tcStartTime": 1500739200000,
+						"tcEndTime": 1506614400000,
+						"hasJoin": "0"
+						},
+						{
+						"tcId": 5,
+						"tcName": "A班1",
+						"tcRcId": 2,
+						"tcSchoolId": 1,
+						"tcTime": "2017-07-15 17:39:24",
+						"tcAddress": "asdfasdf",
+						"tcTeacherId": 13,
+						"tcTeacherName": "test",
+						"tcOperId": 40,
+						"tcOperName": "dev",
+						"tcNums": 15,
+						"tcTmId": 1,
+						"tcApplicantsNums": 0,
+						"deleteFalg": 0,
+						"deleteTime": 1500111563000,
+						"tcStartTime": 1500912000000,
+						"tcEndTime": 1501776000000,
+						"hasJoin": "0"
+					}]
+				
+		} 
+	});
+	
+	
+	document.addEventListener('get_select_course_detail', function(event) {
+		courseId = event.detail.courseId;
+		if(!courseId) {
+			return;
+		} 
+		console.info("courseId:  "+courseId);
+		app.getCourseSelect(courseId,function(data){
+			if(data.code==0){
+				vm.courseInfo=data.object; 
+				vm.classList =  data.objectList;
+			}
+			mui.toast(data.msg);
+		});
+			 
+	});
+
+	//重写返回逻辑
+	mui.back = function() {
+		plus.webview.currentWebview().hide("auto", 300);
+	}
+	
+	//窗口隐藏时，重置页面数据
+	mui.plusReady(function () {
+		var self = plus.webview.currentWebview();
+		self.addEventListener("hide",function (e) {
+			window.scrollTo(0, 0);
+			//vm.resetData();
+		},false);
+		 
+	})
 </script>
 </body>
 </html>

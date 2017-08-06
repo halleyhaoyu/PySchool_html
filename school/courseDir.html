@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>课程目录</title>
     <script src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/vue.min.js"></script>
+	<script type="text/javascript" src="../js/app.js"></script>
     <link href="../css/mui.css" rel="stylesheet"/>
 	<link href="../css/app.css" rel="stylesheet"/>
     <link href="../css/school/courseAll.css" rel="stylesheet"/>
@@ -12,6 +14,11 @@
 	<link href="../css/dashboard.css" rel="stylesheet"/>
 	<link href="../css/top.css" rel="stylesheet"/>
 	<link href="../css/school/courseDir.css" rel="stylesheet"/>
+	<style>
+		.course-dir-ui{margin: 0px; padding: 0px;}
+		.course-dir-ui li{list-style: none;}
+		
+	</style>
 </head>
 <body>
 	<header class="mui-bar mui-bar-nav">
@@ -22,34 +29,202 @@
 	</header>
 
 	<div class="mui-content">
-
-		<div class="myh5_card">
-			<div class="course-title-icon"></div>
-			<div class="course-title">第一章   摄影赏析</div>
-			<p class="course-desc">1. 生活照赏析</p>
-			<p class="course-desc">2. 艺术照赏析</p>
-			<p class="course-desc">3. 生活照赏析</p>
-			<p class="course-desc">4. 艺术照赏析</p>
-		</div>
-
-		<div class="myh5_card">
-			<div class="course-title-icon"></div>
-			<div class="course-title">第一章   摄影赏析</div>
-			<p class="course-desc">1. 生活照赏析</p>
-			<p class="course-desc">2. 艺术照赏析</p>
-		</div>
-
-		<div class="myh5_card">
-			<div class="course-title-icon"></div>
-			<div class="course-title">第一章   摄影赏析</div>
-			<p class="course-desc">1. 生活照赏析</p>
-			<p class="course-desc">2. 艺术照赏析</p>
-		</div>
-
+		<ul id="list" class="course-dir-ui" >
+			<li v-for="item in courseDirList">
+				<div class="myh5_card">
+					<div class="course-title-icon"></div>
+					<div class="course-title">{{item.text}}</div>
+					<ul id="clist" class="course-dir-ui" >
+						<li v-for="citem in item.childList" >
+							<a href="javascript:;" :data-guid="citem.id"  @tap="open_course_detail(citem)">
+								<p class="course-desc">{{citem.text}}</p>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<li>	
+				<div class="myh5_card">
+					<div class="course-title-icon"></div>
+					<div class="course-title">第一章 摄影赏析</div>
+					<a id="2" title="1. 生活照赏析" href="#">
+						<p class="course-desc">1. 生活照赏析</p>
+					</a>
+					<a id="2" title="2. 艺术照赏析" href="#">
+						<p class="course-desc">2. 艺术照赏析</p>
+					</a>
+				</div>
+			</li>
+			<li>
+				<div class="myh5_card">
+					<div class="course-title-icon"></div>
+					<div class="course-title">第一章 摄影赏析</div>
+					<p class="course-desc">1. 生活照赏析</p>
+					<p class="course-desc">2. 艺术照赏析</p>
+				</div>
+			</li>
+		</ul>
 	</div>
-	
 <script type="text/javascript" charset="UTF-8">
+	
   	mui.init();
+  	var dirList= new Array();
+  	var courseId=0; //课程ID
+  	var currentDetailTitle = "";
+	var webview_course_detail = null; //详情页webview
+  	
+  	function getDefaultData() {
+		return { 
+			courseDirList:[
+	        ]
+		}
+	}
+  	
+  	var vm = new Vue({
+		el: '.mui-content',
+		data: getDefaultData(),
+		methods: {
+			resetData: function() {//重置数据
+				Object.assign(this.$data, getDefaultData());
+			}
+		}
+	});
+	
+	//监听自定义事件，获取新闻详情
+	document.addEventListener('get_course_dir_detail', function(event) {
+		courseId = event.detail.courseId;
+		if(!courseId) {
+			return;
+		}
+		
+		//前页传入的数据，直接渲染，无需等待ajax请求详情后
+//		vm.courseDir = event.detail.cover;
+//		vm.title = event.detail.title;
+//		vm.author = event.detail.author;
+//		vm.time = event.detail.time;
+		//向服务端请求文章详情内容
+		console.info("courseId:  "+courseId);
+		app.getCourseDir(courseId,0,function(data){
+			if(data.code==0){
+ 
+				console.log(data.objectList.length);
+				for(var i=0;i<data.objectList.length;i++){
+					(function(i){
+						//console.log(data.objectList[i].id);
+						app.getCourseDir(courseId,data.objectList[i].id,function(data){
+							//console.log(data.code);
+							//console.log(data.msg);
+							if(data.code==0){
+								data.objectList[i].childList=data.objectList;
+								//console.log(data.objectList[i].childList[0].text);
+							}
+						});
+					}(i));
+				}
+				 
+				vm.courseDirList = // data.objectList;
+				[{
+		            "id": "1",
+		            "text": "第一章、摄影赏析",
+		            "state": "closed",
+		            "checked": false,
+		            "childList":[
+				        {
+				            "id": "2",
+				            "text": "1、生活照赏析",
+				            "state": "open",
+				            "checked": false
+				        },
+				        {
+				            "id": "3",
+				            "text": "2、艺术照赏析",
+				            "state": "open",
+				            "checked": false
+				        }
+				    ]
+		        }] 
+			 	pageIndex=1;
+			}
+			mui.toast(data.msg);
+		});
+			 
+	});
+
+	//重写返回逻辑
+	mui.back = function() {
+		plus.webview.currentWebview().hide("auto", 300);
+	}
+	
+	//窗口隐藏时，重置页面数据
+	mui.plusReady(function () {
+		var self = plus.webview.currentWebview();
+		self.addEventListener("hide",function (e) {
+			window.scrollTo(0, 0);
+			vm.resetData();
+		},false);
+		
+		//预加载详情页
+		webview_course_detail = mui.preload({
+			url: 'courseDetails.html',
+			id: 'course_detail',
+			styles: {
+				"render": "always",
+				"popGesture": "hide",
+				"bounce": "vertical" 
+			}
+		});
+		
+//		mui('.mui-content').on('tap','a',function(){
+//			//console.info("this.href:  " + this.href);
+//			console.log(this.id);
+//			console.log(this.title);
+//			open_course_detail(this.id,this.title);
+//		});
+//		console.info("add Tap on a ");
+		
+	})
+	
+
+	
+//	window.addEventListener('courseId',function(event){
+//	  //获得事件参数
+//	  var courseId = event.detail.courseId;
+//	  //根据id向服务器请求新闻详情
+//	  console.info(courseId)
+//	  
+//	  mui.plusReady(function(){
+//	    //关闭等待框
+//	    plus.nativeUI.closeWaiting();
+//	    //显示当前页面
+//	    mui.currentWebview.show();
+//	  });
+//
+//
+//	});
+	
+
+ 
+		
+	/**
+	 * 打开课程
+	 *  
+	 */
+	function open_course_detail(item) {
+		
+			console.log(item.id);
+			console.log(item.text);
+			//触发子窗口变更新闻详情
+		mui.fire(webview_course_detail, 'get_course_detail', {
+				chapId: item.id,
+				courseId:courseId,
+				title:item.text
+			});
+ 
+			setTimeout(function () {
+				webview_course_detail.show("slide-in-right", 300);
+		},150);
+	}
+
 </script>
 </body>
 </html>
