@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>百度地图</title>
+
+    <link href="../css/mui.css" rel="stylesheet"/>
+	<link href="../css/walking/dashboard.css" rel="stylesheet"/>
+	<link href="../css/walking/top.css" rel="stylesheet"/>
+    <style type="text/css">
+	    	body{
+	    		overflow: hidden;
+	    	}
+    		.mui-bar .mui-icon {
+		    font-size: 24px;
+		    position: relative;
+		    z-index: 20;
+		    padding-top: 30px;
+		    padding-bottom: 10px;
+		    color: #fff;
+		}
+		.mui-bar .mui-title {
+		    color: #fff;
+		    opacity: 1;
+		}
+		.BMap_Marker div img {
+			width:32px !important;
+		}
+    		.iw_poi_title {color:#CC5522;font-size:14px;font-weight:bold;overflow:hidden;padding-right:13px;white-space:nowrap}
+    		.iw_poi_content {font:12px arial,sans-serif;overflow:visible;padding-top:4px;white-space:-moz-pre-wrap;word-wrap:break-word}
+    </style>
+</head>
+<body class="pagebg  bg_gradient">
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">上海中心大厦</h1>
+	</header>
+	<!--百度地图容器-->
+  	<div style="width:100%;margin-top:64px;" id="myMap"></div>
+		
+	<input type="hidden" id="custAdr" value="浦东新区"/>
+	<script src="../js/jquery-2.1.4.min.js"></script>
+	<script src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=IyzyBvtFDeolBwAEMiEhS33N"></script>
+	
+	<script type="text/javascript">
+    mui.init();
+	
+	jQuery(document).ready(function() {
+		localSearch();
+		onResizeWindow();
+	});
+	window.onresize = onResizeWindow;
+	function onResizeWindow(){
+		$("body").css("height",$(window).height());
+		var mp = document.getElementById('myMap');
+		mp.style.height = window.innerHeight-64+ "px";
+	}
+	
+	var map,marker,cityName,or_point,label,address;
+	var myGeo = new BMap.Geocoder();
+	var icon = new BMap.Icon("../images/walking/map_marker.gif", new BMap.Size(32,32));
+	function localSearch(){
+	    map = new BMap.Map("myMap"); // 创建地图实例
+		map.addControl(new BMap.NavigationControl());
+		map.addControl(new BMap.GeolocationControl());//开启定位
+		map.enableScrollWheelZoom();  // 开启鼠标滚轮缩放    
+	    map.enableKeyboard();         // 开启键盘控制    
+	    map.enableContinuousZoom();   // 开启连续缩放效果    
+	    map.enableInertialDragging(); // 开启惯性拖拽效果  
+		map.setMapStyle({style:'bluish'});//百度地图主题
+		
+		address = '上海市浦东新区陆家嘴银城中路501号';
+		
+		myGeo.getPoint(address, function(point){   
+      		if (point) {
+		        map.centerAndZoom(point, 17);
+		        mark(point);
+            }else{
+            	function getAddr(result){
+                    myGeo.getPoint(address, function(point){ //第一步getPoint是地址解析。
+    		            if (point) {
+    				        map.centerAndZoom(point, 17);
+    				        mark(point);
+    		            }else{
+    		            
+    		            }
+            		}, result.name); //定位获得城市
+    			}
+    	        var myCity = new BMap.LocalCity();//根据所在城市进行定位
+    	        myCity.get(getAddr);
+            }    
+		}); 
+			
+		
+	}
+	
+	//添加标记
+	function mark(point){
+		var lays= map.getOverlays();
+		for(var i=0;i<lays.length;i++){
+			map.removeOverlay(lays[i]);
+		}
+		marker = new BMap.Marker(point,{icon:icon});
+		map.addOverlay(marker); 
+	}
+	
+	
+	</script>
+
+</body>
+</html>

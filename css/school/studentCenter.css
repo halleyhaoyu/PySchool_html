@@ -49,10 +49,11 @@ body{
 }
 .myh5_card .top .title {
 	font-size: 24px;
-	color: #FFF;
-	font-weight: bold;
-	margin: 30px 0 0 80px;
-	text-align: center;
+    color: #333;
+    font-weight: bold;
+    margin: 30px 0 0 80px;
+    text-align: center;
+    opacity: .65;
 }
 .myh5_card .top .photo {
 	position: fixed;
