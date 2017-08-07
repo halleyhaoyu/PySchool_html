@@ -10,7 +10,8 @@
 	 */
 	//owner.hostname='http://api.course.com:8081/course-api';
 	
-	owner.hostname='http://192.168.31.232:8081/course-api';
+	//owner.hostname='http://192.168.31.232:8081/course-api';
+	owner.hostname='http://192.168.0.185:8081/course-api';
 	
 	/**
 	 * 用户登录

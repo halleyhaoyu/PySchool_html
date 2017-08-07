@@ -36,7 +36,7 @@
 					<div class="course-title">{{item.text}}</div>
 					<ul id="clist" class="course-dir-ui" >
 						<li v-for="citem in item.childList" >
-							<a href="javascript:;" :data-guid="citem.id"  @tap="open_course_detail(citem)">
+							<a href="javascript:;" :data-guid="citem.id"  @tap="open_course_detail(citem,item)">
 								<p class="course-desc">{{citem.text}}</p>
 							</a>
 						</li>
@@ -209,15 +209,15 @@
 	 * 打开课程
 	 *  
 	 */
-	function open_course_detail(item) {
+	function open_course_detail(citem,pitem) {
 		
-			console.log(item.id);
-			console.log(item.text);
+			console.log(citem.id);
+			console.log(citem.text);
 			//触发子窗口变更新闻详情
 		mui.fire(webview_course_detail, 'get_course_detail', {
-				chapId: item.id,
+				chapId: citem.id,
 				courseId:courseId,
-				title:item.text
+				title:pitem.text
 			});
  
 			setTimeout(function () {
