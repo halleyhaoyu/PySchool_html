@@ -143,7 +143,8 @@
 	owner.getCourseDir=function(rcId,parentId,callback){
 		var userInfo = app.getState(); 
 		// /view/teachingManage/listTreeData.shtml?manageId=55&rcId=4&id=5
-		var url=owner.hostname+'/view/teachingManage/listTreeData.shtml?manageId='+userInfo.manageId+'&rcId='+rcId+'&id='+parentId;
+		//  view/teachingManage/listAllTreeData.shtml?manageId=55&rcId=4
+		var url=owner.hostname+'/view/teachingManage/listAllTreeData.shtml?manageId='+userInfo.manageId+'&rcId='+rcId;
 	
 		return owner.getCommon(url,callback); 
 	}

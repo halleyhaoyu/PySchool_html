@@ -35,7 +35,7 @@
 					<div class="course-title-icon"></div>
 					<div class="course-title">{{item.text}}</div>
 					<ul id="clist" class="course-dir-ui" >
-						<li v-for="citem in item.childList" >
+						<li v-for="citem in item.children" >
 							<a href="javascript:;" :data-guid="citem.id"  @tap="open_course_detail(citem,item)">
 								<p class="course-desc">{{citem.text}}</p>
 							</a>
@@ -74,7 +74,7 @@
 	var webview_course_detail = null; //详情页webview
   	
   	function getDefaultData() {
-		return { 
+		return {
 			courseDirList:[
 	        ]
 		}
@@ -128,18 +128,21 @@
 		            "text": "第一章、摄影赏析",
 		            "state": "closed",
 		            "checked": false,
-		            "childList":[
+					"rcId": "2",
+		            "children":[
 				        {
 				            "id": "2",
 				            "text": "1、生活照赏析",
 				            "state": "open",
-				            "checked": false
+				            "checked": false,
+							"rcId": "2"
 				        },
 				        {
 				            "id": "3",
 				            "text": "2、艺术照赏析",
 				            "state": "open",
-				            "checked": false
+				            "checked": false,
+							"rcId": "2"
 				        }
 				    ]
 		        }] 

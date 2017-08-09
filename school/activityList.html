@@ -181,7 +181,11 @@
 								insertHtml+="<a id=\""+objectList[i].actId+"\" href=\"#\">";
 								insertHtml+="<div class=\"show-desc\">";
 								insertHtml+="	<div class=\"show-desc-right\">";
-								insertHtml+="		<div class=\"ac-end\">已结束</div>";
+								if(objectList[i].actId==2){
+									insertHtml+="		<div class=\"ac-end\">已结束</div>";
+								}else{
+									insertHtml+="		<div class=\"ac-end-no\">未结束</div>";
+								}
 								insertHtml+="	</div>";
 								insertHtml+="	<div class=\"show-desc-left\">";
 								insertHtml+="		<p class=\"show-desc-title\">"+objectList[i].actName+"</p>";

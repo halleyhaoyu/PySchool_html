@@ -199,22 +199,23 @@
 									var self = this;
 									var userInfo = app.getState(); 
 									if(userInfo.manageId!=undefined && userInfo.manageId!=''){
-										app.getCourseAll(5,1,function(data){
-											if(data.code==0){												
+										
+										pageIndex=1;
+										console.info(pageIndex);
+										app.getCourseAll(5,pageIndex,function(data){
+											if(data.code==0){
 												var ul = self.element.querySelector('.mui-table-view');
 												ul.innerHTML="";
-												ul.insertBefore(createFragment(index,ul, data.objectList), ul.firstChild);
+												ul.insertBefore(createFragment(index,ul, data), ul.firstChild);
 //												if(insex==0){
 //													courseList0=data.objectList;
 //												}esle{
 //													courseList1=data.objectList;
 //												}
-											 	 pageIndex=1;
 											}else{
 												mui.toast(data.msg);
 											}
-											
-												self.endPullDownToRefresh();
+											self.endPullDownToRefresh();
 										});
 									}else{
 										app.gotoLogin();
@@ -227,16 +228,17 @@
 									var aa = index;
 									var userInfo = app.getState(); 
 									if(userInfo.manageId!=undefined && userInfo.manageId!=''){
-										app.getCourseAll(5,pageIndex+1,function(data){
-											if(data.code==0){												
+										pageIndex++;
+										console.info(pageIndex);
+										app.getCourseAll(5,pageIndex,function(data){
+											if(data.code==0){
 												var ul = self.element.querySelector('.mui-table-view'); 
-												ul.appendChild(createFragment(index,ul, data.objectList), ul.firstChild);
+												ul.appendChild(createFragment(index,ul, data), ul.firstChild);
 //												if(insex==0){
 //													courseList0.concat(data.objectList);
 //												}esle{
 //													courseList1.concat(data.objectList);
 //												}
-											 	 pageIndex++;
 											}else{
 												mui.toast(data.msg);
 											}
@@ -250,10 +252,16 @@
 							}
 						});
 					});
-					var createFragment = function(index,ul, objectList) {
+					var createFragment = function(index,ul, data) {
 						var length = ul.querySelectorAll('li').length;
 						var fragment = document.createDocumentFragment();
 						var li;
+						var objectList=[];
+						if(index==0){
+							objectList=data.objectList1;
+						}else{
+							objectList=data.objectList;
+						}
 						for (var i = 0; i < objectList.length; i++) {
 							li = document.createElement('li');
 							li.className = 'mui-table-view-cell';
@@ -261,8 +269,8 @@
 							var colorIndex = Math.ceil(Math.random()*4)-1;
 							if(index==0){ //我的课程
 								insertHtml+="<div class=\"myh5_card\">";
-								insertHtml+="	<a id=\""+objectList[i].rcId+"\" href=\"#\" class=\"top "+color_css[colorIndex]+"\">";//	
-								insertHtml+="		<img src=\"../images/school/cc_pic.png\" class=\"photo\" />";
+								insertHtml+="	<a id=\""+objectList[i].tcId+"_"+objectList[i].rcId+"\" href=\"#\" class=\"top "+color_css[colorIndex]+"\">";//	
+								insertHtml+="		<img src=\""+objectList[i].rcLogo+"\" class=\"photo\" />";
 								insertHtml+="		<p class=\"title\">"+objectList[i].rcName+"</p>";
 								insertHtml+="		<p class=\"content1\">班级："+objectList[i].tcId+"</p>";
 								insertHtml+="		<p class=\"content2\">时间："+objectList[i].rcTime+"</p>";
@@ -270,8 +278,8 @@
 								insertHtml+="</div>";
 							}else if(index==1){//全部课程
 								insertHtml+="<div class=\"myh5_card\">";
-								insertHtml+="	<a id=\""+objectList[i].rcId+"\" href=\"#\" class=\"top "+color_css[colorIndex]+"\">";
-								insertHtml+="		<img src=\"../images/school/cc_pic.png\" class=\"photo\" />";
+								insertHtml+="	<a id=\""+objectList[i].tcId+"_"+objectList[i].rcId+"\" href=\"#\" class=\"top "+color_css[colorIndex]+"\">";
+								insertHtml+="		<img src=\""+objectList[i].rcLogo+"\" class=\"photo\" />";
 								insertHtml+="		<img src=\"../images/school/sc_add.png\" class=\"arrow\" />";
 								insertHtml+="		<p class=\"title\">"+objectList[i].rcName+"</p>";
 								insertHtml+="		<p class=\"content1\">班级："+objectList[i].tcId+"</p>";
@@ -312,11 +320,18 @@
 			
 			mui('#item1').on('tap','a',function(){
 				//console.info("this.href:  " + this.href);
-				open_course_dir_detail(this.id);
+				var ids=this.id.split("_");
+				console.info(ids[0]);
+				console.info(ids[1]);
+				open_course_dir_detail(ids[0],ids[1]);
 			});
 			mui('#item2').on('tap','a',function(){
 				//console.info("this.href:  " + this.href);
-				open_select_course_detail(this.href);
+				var ids=this.id.split("_"); 
+				console.info(this.id);
+				console.info(ids[0]);
+				console.info(ids[1]);
+				open_select_course_detail(ids[1]);
 			});
 			
 		});

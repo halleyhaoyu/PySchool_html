@@ -371,7 +371,8 @@
 					"js/mui.pullToRefresh.material.js",
 					"js/jquery-2.1.4.min.js",
 					"css/icons-extra.css",
-					"school/courseAll.html"
+					"school/courseAll.html",
+					"css/school/pushCommon.css"
 				],
 				"refer": [],
 				"priority": 0
