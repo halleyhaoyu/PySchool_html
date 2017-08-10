@@ -130,9 +130,9 @@
 	/*
 	 * 课程-获取课程详情
 	 * */
-	owner.getCourseDetail=function(chapId,courseId,callback){
+	owner.getCourseDetail=function(chapId,courseId,classId,callback){
 		var userInfo = app.getState(); 
-		var classId = userInfo.studentsDetail==undefined?0:userInfo.studentsDetail.stdClass;
+		var classId = classId==undefined?0:classId;
 		var url=owner.hostname+'/view/teachingManage/detailView.shtml?chapClassId='+chapId+'&manageId='+userInfo.manageId+'&tmId='+courseId+'&tcId='+classId ;
 		return owner.getCommon(url,callback);
 	}
@@ -170,13 +170,14 @@
 	/*
 	  * 活动 -获取活动详情
 	  */
-	owner.getActivityDetail=function(activityId,callback){		
-//		var url=owner.hostname+'/view/activity/listData.shtml?manageId='+userInfo.manageId+'&pageSize='+pageSize+'&pageIndex='+pageIndex;
-//		return owner.getCommon(url,callback);
-		var msg={
-				code:-1,
-				msg:"获取数据失败！"
-			}
+	owner.getActivityDetail=function(activityId,callback){
+		//view/activity/detailView.shtml?actId=1
+		var url=owner.hostname+'/view/activity/detailView.shtml?actId='+activityId;
+		return owner.getCommon(url,callback);
+//		var msg={
+//				code:-1,
+//				msg:"获取数据失败！"
+//			}
 		return callback(msg);
 	}
 	

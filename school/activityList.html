@@ -19,7 +19,8 @@
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 		<img src="../images/head-dz.png" class="head-dz"/>
 		<h1 class="mui-title">活动</h1>
-		<a class="mui-pull-right top-edit"> 交流区 </a>
+		<a id="activity_exchange_area"  href="#"  class="mui-pull-right top-edit"> 交流区 </a>
+		<a id="activity_add_detail"     href="#"  class="mui-pull-right top-edit" style="left:50px; right:250px">活动申请</a>
 	</header>
 
 	
@@ -99,6 +100,8 @@
 	  	
 	  	
 		var webview_activity_detail = null; //详情页webview
+		var webview_activity_add_detail = null; // 申请活动详情
+		var webview_activity_exchange_area = null; //交流区
 		var activityList=[];
 		
 		
@@ -216,11 +219,83 @@
 				"bounce": "vertical" 
 			}
 		});
+		
+		webview_activity_add_detail = mui.preload({
+			url: 'addActivity.html',
+			id: 'add_activity',
+			styles: {
+				"render": "always",
+				"popGesture": "hide",
+				"bounce": "vertical" 
+			}
+		});
+		
+		webview_activity_exchange_area = mui.preload({
+			url: 'exchangeArea.html',
+			id: 'exchange_area',
+			styles: {
+				"render": "always",
+				"popGesture": "hide",
+				"bounce": "vertical" 
+			}
+		});
+		
+		
 		 
 		mui('#item1mobile').on('tap','a',function(){
 			//console.info("this.href:  " + this.href);
 			open_activity_detail(this.id);
 		}); 
+		
+		
+		
+		
+		
+		mui(document.body).on('tap', '#activity_add_detail', function() {
+		    console.info("1");
+			//console.info("this.href:  " + this.href);
+			mui.fire(webview_activity_add_detail, 'get_activity_add_detail', {
+				//activityId: id
+			}); 
+			
+			console.info("2");
+			setTimeout(function () {
+				webview_activity_add_detail.show("slide-in-right", 300);
+			},150);
+			
+			console.info("3");
+		});
+		
+		 
+		mui(document.body).on('tap','#activity_exchange_area',function(){
+			//console.info("this.href:  " + this.href);
+			
+			console.info("21");
+			mui.fire(webview_activity_exchange_area, 'get_activity_exchange_area', {
+				//activityId: id
+			}); 
+			console.info("22");
+			setTimeout(function () {
+				webview_activity_exchange_area.show("slide-in-right", 300);
+			},150);
+			
+			console.info("23");
+		}); 
+		
+		
+		var backButtonPress = 0;
+			mui.back = function(event) {
+				backButtonPress++;
+				if (backButtonPress > 1) {
+					plus.runtime.quit();
+				} else {
+					plus.nativeUI.toast('再按一次退出应用');
+				}
+				setTimeout(function() {
+					backButtonPress = 0;
+				}, 1000);
+				return false;
+			}; 
 	});
 	
 	/**

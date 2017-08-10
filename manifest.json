@@ -345,7 +345,9 @@
 					"school/activityDetails.html"
 				],
 				"refer": [
-					"school/personalCenter.html"
+					"school/personalCenter.html",
+					"school/exchangeArea.html",
+					"school/addActivity.html"
 				],
 				"priority": 0
 			},
@@ -442,7 +444,9 @@
 					"css/foot.css",
 					"css/mui.css",
 					"css/icons-extra.css",
-					"images/bigicon4.png"
+					"images/bigicon4.png",
+					"js/app.js",
+					"js/vue.min.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -456,7 +460,74 @@
 					"js/mui.min.js",
 					"css/dashboard.css",
 					"js/vue.min.js",
-					"school/courseAll.html"
+					"school/courseAll.html",
+					"js/app.js",
+					"css/icons-extra.css",
+					"school/scShowAll.html"
+				],
+				"refer": [
+					"school/activityReply.html",
+					"school/everyoneWorks.html"
+				],
+				"priority": 0
+			},
+			"school/exchangeArea.html": {
+				"resources": [
+					"images/school/addfile.png",
+					"images/bigicon1.png",
+					"css/school/exchangeArea.css",
+					"images/school/recording.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"school/addActivity.html": {
+				"resources": [
+					"js/mui.picker.js",
+					"images/school/camera.png",
+					"images/school/add-icon.png",
+					"images/school/plus.png",
+					"js/vue.min.js",
+					"css/school/addActivityReply.css",
+					"css/mui.css",
+					"js/jquery-2.1.4.min.js",
+					"images/school/minus.png",
+					"images/school/voice.png",
+					"js/mui.min.js",
+					"images/school/album.png",
+					"js/mui.poppicker.js",
+					"css/mui.picker.min.css",
+					"css/mui.poppicker.css",
+					"images/school/copy.png",
+					"js/app.js",
+					"css/app.css",
+					"css/dashboard.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"school/activityReply.html": {
+				"resources": [
+					"css/school/activityReply.css",
+					"js/mui.picker.js",
+					"js/mui.poppicker.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css",
+					"js/jquery-2.1.4.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"school/everyoneWorks.html": {
+				"resources": [
+					"js/app.js",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/dashboard.css",
+					"js/vue.min.js",
+					"images/school/head-pic.png",
+					"css/school/everyoneWorks.css",
+					"css/mui.css"
 				],
 				"refer": [],
 				"priority": 0

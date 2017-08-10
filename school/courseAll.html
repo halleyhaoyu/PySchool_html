@@ -27,8 +27,8 @@
 					全部课程
 				</a>
 			</div>
-			<a class="mui-pull-right top-edit"
-			   id="action-2"> 编辑 </a>
+			<!--<a class="mui-pull-right top-edit"
+			   id="action-2"> 编辑 </a>-->
 		</header>
 		<nav id="main_bar" class="mui-bar mui-bar-tab">
 			<a class="mui-tab-item mui-active" href="courseAll.html">
@@ -58,16 +58,17 @@
 								<ul class="mui-table-view">									
 									<li class="mui-table-view-cell">
 										<div class="myh5_card" > 
-											<a  href="#"  class="top sc_purple">
+											<a id="11_2" href="#"  class="top sc_purple">
 												<img src="../images/school/cc_pic.png" class="photo" />
 												<p class="title">Walking 上海</p>
 												<p href="#"  class="content1">“国际理解教育”</p>
 												<p class="content2">校本课程教材 试用本</p>
 											</a>
-										</div></li>
+										</div>
+									</li>
 									<li class="mui-table-view-cell">
 										<div class="myh5_card">
-											<a id="101" href="#" class="top sc_cyan">
+											<a id="11_2" href="#" class="top sc_cyan">
 												<img src="../images/school/cc_pic.png" class="photo" />
 												<p class="title">艺术摄影</p>
 												<p class="content1">班级：三 1 班</p>
@@ -109,7 +110,7 @@
 								<ul class="mui-table-view">									
 									<li class="mui-table-view-cell">
 										<div class="myh5_card">
-											<a id="1000" href="1" class="top sc_cyan">
+											<a id="11_2" href="1" class="top sc_cyan">
 												<img src="../images/school/cc_pic.png" class="photo" />
 												<img src="../images/school/sc_add.png" class="arrow" />
 												<p class="title">Walking 上海</p>
@@ -121,7 +122,7 @@
 																	
 									<li class="mui-table-view-cell">
 										<div class="myh5_card">
-											<a id="2000" href="2" class="top sc_pink">
+											<a id="11_2" href="2" class="top sc_pink">
 												<img src="../images/school/cc_pic.png" class="photo" />
 												<img src="../images/school/sc_add.png" class="arrow" />
 												<p class="title">Walking 上海</p>
@@ -334,6 +335,19 @@
 				open_select_course_detail(ids[1]);
 			});
 			
+			var backButtonPress = 0;
+			mui.back = function(event) {
+				backButtonPress++;
+				if (backButtonPress > 1) {
+					plus.runtime.quit();
+				} else {
+					plus.nativeUI.toast('再按一次退出应用');
+				}
+				setTimeout(function() {
+					backButtonPress = 0;
+				}, 1000);
+				return false;
+			}; 
 		});
 		
 		 /**
@@ -341,10 +355,11 @@
 		 * 
 		 * @param {Object} item 当前点击
 		 */
-		function open_course_dir_detail(id) {			
+		function open_course_dir_detail(classId,courseId) {			
 			//触发子窗口变更详情
 			mui.fire(webview_course_dir_detail, 'get_course_dir_detail', {
-				courseId: id
+				courseId: courseId,
+				classId:classId
 			});
  
 			setTimeout(function () {
