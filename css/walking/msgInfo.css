@@ -1,0 +1,276 @@
+body{
+	overflow: hidden;
+}
+
+.mui-bar .mui-icon {
+    font-size: 24px;
+    position: relative;
+    z-index: 20;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    color: #fff;
+}
+
+.clearfloat:after {
+	display: block;
+	clear: both;
+	content: "";
+	visibility: hidden;
+	height: 0
+}
+
+.mui-content {
+	padding: 20px;
+	background-color: transparent;
+	padding-top:64px !important;
+}
+
+.pagebg {
+	background-color: #fff
+}
+
+.pagebg2 {
+	background-color: #1baaff
+}
+
+
+/**
+ * **************************************图片轮播Start**************************************
+ */
+
+.introText {
+	position: absolute;
+	top: 214px;
+	background-color: #FFFFFF;
+	padding: 16px;
+	z-index: 100;
+}
+
+.introText h1 {
+	font-size: 18px;
+	font-family: "微软雅黑";
+}
+
+.introText small {
+	color: #999;
+	margin: 10px 0;
+	display: block;
+}
+
+.introText .local img {
+	width: 16px;
+	height: 16px;
+}
+
+.introText .local p {
+	color: #A22FB8;
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+	font-size: 14px;
+}
+
+.introText .text {
+	font-size: 14px;
+	font-family: "微软雅黑";
+	margin-top: 10px;
+	overflow: auto;
+}
+.introText .text::-webkit-scrollbar {display:none}
+.introText .text p{
+	text-indent: 2em;
+}
+
+.introText .text img{
+	width: 80px;
+    margin: 12px 0 0;
+}
+
+.playStop {
+	width:50px;
+	height:50px;
+	background-color: #A22FB8;
+	right: 0px;
+	position: absolute;
+	top: -25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 100;
+}
+.play,.stop{
+	width: 18px;
+	height: 18px;
+}
+
+.stop {
+	display: none;
+}
+/*滚动*/
+
+.swiper-container {
+	height:150px;
+}
+
+.swiper-slide {
+	background-position: center;
+	background-size: cover;
+}
+
+/**
+ * **************************************图片轮播End**************************************
+ */
+
+/**
+ * **************************************词汇Start**************************************
+ */
+.msg-title{
+	background: #956cdc;
+    height:52px;
+}
+.msg-title p:first-child{
+	color: #fff;
+	padding: 6px 16px 0 16px;
+}
+.msg-title p:last-child{
+	color: #fff;
+	padding: 0 16px 6px 16px;
+	font-size:12px;
+	opacity: .65;
+}
+
+#item2,#item3{
+	overflow: auto;
+}
+#item2::-webkit-scrollbar, #item3::-webkit-scrollbar{display:none}
+#autotype ul{
+	height:512px;
+}
+ul li {
+	height: 123px;
+}
+
+.name1,
+.name2 {
+	width: 60px;
+	height: 60px;
+	display: inline-block;
+	margin-top: 30px;
+	position: relative;
+}
+
+.name1 {
+	margin-left: 10px;
+}
+
+.name2 {
+	margin-right: 10px;
+}
+
+.mui-table-view-cell {
+	padding: 20px 15px 11px 15px;
+}
+
+.name1 img,
+.name2 img {
+	width: 50px;
+	height: 50px;
+	text-align: center;
+}
+
+.mui-table-view .mui-media,
+.mui-table-view .mui-media-body {
+	overflow: visible;
+}
+
+.outputText1 {
+	margin-left: 80px;
+	width: 68%;
+	height: 60px;
+	text-align: left;
+	background-color: #EAEAEA;
+	border-top-left-radius: 2em;
+	border-top-right-radius: 2em;
+	border-bottom-right-radius: 2em;
+}
+
+.outputText2 {
+	/*起初设置margin-right不起作用 因为left的优先级大于right所以需要写margin-left: auto;*/
+	margin-right: 80px;
+	margin-left: auto;
+	width: 68%;
+	height:60px;
+	text-align: left;
+	background-color: #B69BE8;
+	border-top-left-radius: 2em;
+	border-top-right-radius: 2em;
+	border-bottom-left-radius: 2em;
+}
+
+.outputText1 p {
+	padding: 8px 8px 0px 24px;
+	color: #717171;
+	font-size: 16px;
+}
+
+.outputText2 p {
+	padding: 8px 8px 0px 24px;
+    color: #FFFFFF;
+    font-size: 16px;
+}
+
+.mui-table-view-cell:after {
+	background-color: transparent;
+}
+
+.mui-table-view:after {
+	background-color: transparent;
+}
+/*写伪类元素*/
+
+div[name]:after {
+	content: attr(name);
+	display: block;
+	position: absolute;
+	top: 100%;
+	color: #717171;
+	font-size: 14px;
+}
+.show-div{
+	float: left;
+}
+.word-show{
+	float: left;
+	width: 100%;
+}
+
+.word-float-left{
+	width: 32px;
+    float: left;
+    font-size: 32px;
+    color: #d2d2d2;
+    padding: 16px 12px 0 12px;
+    height: 66px;
+}
+.word-float-right{
+	padding:12px;
+	float: right;
+    width: 90%;
+}
+.word-float-right p:first-child{
+	color: #956cdc;
+}
+.word-float-right p:last-child{
+	font-size: 14px;
+    opacity: .65;
+}
+.desc-pic{
+	width: 30%;
+    margin: 2px;
+}
+.img-show{
+	padding-left: 12px;
+}
+/**
+ * **************************************词汇End**************************************
+ */

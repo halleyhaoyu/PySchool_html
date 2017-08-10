@@ -27,8 +27,8 @@
 					全部课程
 				</a>
 			</div>
-			<a class="mui-pull-right top-edit"
-			   id="action-2"> 编辑 </a>
+			<!--<a class="mui-pull-right top-edit"
+			   id="action-2"> 编辑 </a>-->
 		</header>
 		<nav id="main_bar" class="mui-bar mui-bar-tab">
 			<a class="mui-tab-item mui-active" href="courseAll.html">
@@ -57,10 +57,9 @@
 							<div class="mui-scroll">
 								<ul class="mui-table-view">									
 									<li class="mui-table-view-cell">
-										<div class="myh5_card" >
-											<a href="#" class="top sc_purple">
+										<div class="myh5_card" > 
+											<a id="11_2" href="#"  class="top sc_purple">
 												<img src="../images/school/cc_pic.png" class="photo" />
-							
 												<p class="title">Walking 上海</p>
 												<p href="#"  class="content1">“国际理解教育”</p>
 												<p class="content2">校本课程教材 试用本</p>
@@ -69,24 +68,22 @@
 									</li>
 									<li class="mui-table-view-cell">
 										<div class="myh5_card">
-											<a href="#" class="top sc_cyan">
+											<a id="11_2" href="#" class="top sc_cyan">
 												<img src="../images/school/cc_pic.png" class="photo" />
 												<p class="title">艺术摄影</p>
 												<p class="content1">班级：三 1 班</p>
 												<p class="content2">时间：周一</p>
 											</a>
-										</div>
-									</li>
+										</div></li>
 									<li class="mui-table-view-cell">
 										<div class="myh5_card">
-											<a href="#" class="top sc_orange">
+											<a id="102"  href="3" class="top sc_orange">
 												<img src="../images/school/cc_pic.png" class="photo" />
 												<p class="title">户外体育</p>
 												<p class="content1">班级：三 1 班</p>
 												<p class="content2">时间：周一</p>
 											</a>
-										</div>
-									</li>
+										</div></li>
 								</ul>
 							</div>
 						</div>
@@ -113,7 +110,7 @@
 								<ul class="mui-table-view">									
 									<li class="mui-table-view-cell">
 										<div class="myh5_card">
-											<a href="#" class="top sc_cyan">
+											<a id="11_2" href="1" class="top sc_cyan">
 												<img src="../images/school/cc_pic.png" class="photo" />
 												<img src="../images/school/sc_add.png" class="arrow" />
 												<p class="title">Walking 上海</p>
@@ -125,7 +122,7 @@
 																	
 									<li class="mui-table-view-cell">
 										<div class="myh5_card">
-											<a href="#" class="top sc_pink">
+											<a id="11_2" href="2" class="top sc_pink">
 												<img src="../images/school/cc_pic.png" class="photo" />
 												<img src="../images/school/sc_add.png" class="arrow" />
 												<p class="title">Walking 上海</p>
@@ -148,8 +145,21 @@
 	<script src="../js/mui.pullToRefresh.js"></script>
 	<script src="../js/mui.pullToRefresh.material.js"></script>
 	<script src="../js/app.js"></script>
+	<script src="../js/vue.min.js"></script>
 	<script type="text/javascript">
-        mui.init();
+		
+		// var courseDirPage = null;
+		var lastCourseId = ''; //最新新闻的id
+		var webview_course_dir_detail = null; //详情页webview
+		var courseList0=[];
+		var courseList1=[];
+		
+		//添加列表项的点击事件
+		 
+        mui.init({
+        	
+        });
+        
 //      document.getElementById('it1').addEventListener('tap',function(){
 //			$('#action-1').css('display','block');
 //			$('#action-2').css('display','block');
@@ -165,7 +175,12 @@
 		    var targetTab = this.getAttribute('href');
 		    window.location.href=targetTab;
 		});
- 
+		
+		 
+		 
+
+
+
         (function($) {
 				//阻尼系数
 				var deceleration = mui.os.ios?0.003:0.0009;
@@ -185,17 +200,23 @@
 									var self = this;
 									var userInfo = app.getState(); 
 									if(userInfo.manageId!=undefined && userInfo.manageId!=''){
-										app.getCourseAll(userInfo,5,1,function(data){
-											if(data.code==0){												
+										
+										pageIndex=1;
+										console.info(pageIndex);
+										app.getCourseAll(5,pageIndex,function(data){
+											if(data.code==0){
 												var ul = self.element.querySelector('.mui-table-view');
 												ul.innerHTML="";
-												ul.insertBefore(createFragment(index,ul, data.objectList), ul.firstChild);
-											 	 pageIndex=1;
+												ul.insertBefore(createFragment(index,ul, data), ul.firstChild);
+//												if(insex==0){
+//													courseList0=data.objectList;
+//												}esle{
+//													courseList1=data.objectList;
+//												}
 											}else{
 												mui.toast(data.msg);
 											}
-											
-												self.endPullDownToRefresh();
+											self.endPullDownToRefresh();
 										});
 									}else{
 										app.gotoLogin();
@@ -208,15 +229,21 @@
 									var aa = index;
 									var userInfo = app.getState(); 
 									if(userInfo.manageId!=undefined && userInfo.manageId!=''){
-										app.getCourseAll(userInfo,5,pageIndex+1,function(data){
-											if(data.code==0){												
+										pageIndex++;
+										console.info(pageIndex);
+										app.getCourseAll(5,pageIndex,function(data){
+											if(data.code==0){
 												var ul = self.element.querySelector('.mui-table-view'); 
-												ul.appendChild(createFragment(index,ul, data.objectList), ul.firstChild);
-											 	 pageIndex++;
+												ul.appendChild(createFragment(index,ul, data), ul.firstChild);
+//												if(insex==0){
+//													courseList0.concat(data.objectList);
+//												}esle{
+//													courseList1.concat(data.objectList);
+//												}
 											}else{
 												mui.toast(data.msg);
 											}
-											
+											//open_course_dir_detail(1);
 												self.endPullUpToRefresh();
 										});
 									}else{
@@ -226,10 +253,16 @@
 							}
 						});
 					});
-					var createFragment = function(index,ul, objectList) {
+					var createFragment = function(index,ul, data) {
 						var length = ul.querySelectorAll('li').length;
 						var fragment = document.createDocumentFragment();
 						var li;
+						var objectList=[];
+						if(index==0){
+							objectList=data.objectList1;
+						}else{
+							objectList=data.objectList;
+						}
 						for (var i = 0; i < objectList.length; i++) {
 							li = document.createElement('li');
 							li.className = 'mui-table-view-cell';
@@ -237,8 +270,8 @@
 							var colorIndex = Math.ceil(Math.random()*4)-1;
 							if(index==0){ //我的课程
 								insertHtml+="<div class=\"myh5_card\">";
-								insertHtml+="	<a href=\"#\" class=\"top "+color_css[colorIndex]+"\">";//	
-								insertHtml+="		<img src=\"../images/school/cc_pic.png\" class=\"photo\" />";
+								insertHtml+="	<a id=\""+objectList[i].tcId+"_"+objectList[i].rcId+"\" href=\"#\" class=\"top "+color_css[colorIndex]+"\">";//	
+								insertHtml+="		<img src=\""+objectList[i].rcLogo+"\" class=\"photo\" />";
 								insertHtml+="		<p class=\"title\">"+objectList[i].rcName+"</p>";
 								insertHtml+="		<p class=\"content1\">班级："+objectList[i].tcId+"</p>";
 								insertHtml+="		<p class=\"content2\">时间："+objectList[i].rcTime+"</p>";
@@ -246,8 +279,8 @@
 								insertHtml+="</div>";
 							}else if(index==1){//全部课程
 								insertHtml+="<div class=\"myh5_card\">";
-								insertHtml+="	<a href=\"#\" class=\"top "+color_css[colorIndex]+"\">";
-								insertHtml+="		<img src=\"../images/school/cc_pic.png\" class=\"photo\" />";
+								insertHtml+="	<a id=\""+objectList[i].tcId+"_"+objectList[i].rcId+"\" href=\"#\" class=\"top "+color_css[colorIndex]+"\">";
+								insertHtml+="		<img src=\""+objectList[i].rcLogo+"\" class=\"photo\" />";
 								insertHtml+="		<img src=\"../images/school/sc_add.png\" class=\"arrow\" />";
 								insertHtml+="		<p class=\"title\">"+objectList[i].rcName+"</p>";
 								insertHtml+="		<p class=\"content1\">班级："+objectList[i].tcId+"</p>";
@@ -262,6 +295,97 @@
 					};
 				});
 			})(mui);
+			
+		mui.plusReady(function() {
+			//预加载详情页
+			webview_course_dir_detail = mui.preload({
+				url: 'courseDir.html',
+				id: 'course_dir_detail',
+				styles: {
+					"render": "always",
+					"popGesture": "hide",
+					"bounce": "vertical" 
+				}
+			});
+			
+			
+			webview_select_course_detail = mui.preload({
+				url: 'selectCourse.html',
+				id: 'select_course_detail',
+				styles: {
+					"render": "always",
+					"popGesture": "hide",
+					"bounce": "vertical" 
+				}
+			});
+			
+			mui('#item1').on('tap','a',function(){
+				//console.info("this.href:  " + this.href);
+				var ids=this.id.split("_");
+				console.info(ids[0]);
+				console.info(ids[1]);
+				open_course_dir_detail(ids[0],ids[1]);
+			});
+			mui('#item2').on('tap','a',function(){
+				//console.info("this.href:  " + this.href);
+				var ids=this.id.split("_"); 
+				console.info(this.id);
+				console.info(ids[0]);
+				console.info(ids[1]);
+				open_select_course_detail(ids[1]);
+			});
+			
+			var backButtonPress = 0;
+			mui.back = function(event) {
+				backButtonPress++;
+				if (backButtonPress > 1) {
+					plus.runtime.quit();
+				} else {
+					plus.nativeUI.toast('再按一次退出应用');
+				}
+				setTimeout(function() {
+					backButtonPress = 0;
+				}, 1000);
+				return false;
+			}; 
+		});
+		
+		 /**
+		 * 打开目录详情
+		 * 
+		 * @param {Object} item 当前点击
+		 */
+		function open_course_dir_detail(classId,courseId) {			
+			//触发子窗口变更详情
+			mui.fire(webview_course_dir_detail, 'get_course_dir_detail', {
+				courseId: courseId,
+				classId:classId
+			});
+ 
+			setTimeout(function () {
+				webview_course_dir_detail.show("slide-in-right", 300);
+			},150);
+		}
+		
+		function open_select_course_detail(id) {			
+		 // 选课
+//		 var courseInfo={};
+//		 for(var i = 0;i<courseList0.length;i++){
+//		 	if(courseList0[i].id==id){
+//		 		courseInfo=courseList0[i];
+//		 		break;
+//		 	}
+//		 }
+		 
+			mui.fire(webview_select_course_detail, 'get_select_course_detail', {
+				courseId: id
+			});
+ 
+			setTimeout(function () {
+				webview_select_course_detail.show("slide-in-right", 300);
+			},150);
+		}
+
 	</script>
 
 </body>

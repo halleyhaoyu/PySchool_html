@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>课程内容</title>
     <script src="../js/mui.min.js"></script>
+	<script type="text/javascript" src="../js/vue.min.js"></script>
+	<script type="text/javascript" src="../js/app.js"></script>
     <link href="../css/mui.css" rel="stylesheet"/>
 	<link href="../css/icons-extra.css" rel="stylesheet"/>
 	<link href="../css/app.css" rel="stylesheet"/>
@@ -12,41 +14,95 @@
 	<link href="../css/dashboard.css" rel="stylesheet"/>
 	<link href="../css/top.css" rel="stylesheet"/>
 	<link href="../css/school/courseDetails.css" rel="stylesheet"/>
+	<style>
+		.course-detail-ui{margin: 0px; padding: 0px; margin-top: 74px;}
+		.course-detail-ui li{list-style: none;}		
+	</style>
 </head>
 <body>
-	<header class="mui-bar mui-bar-nav">
-		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		<img src="../images/head-dz.png" class="head-dz"/>
-		<h1 class="mui-title">第一章 摄影赏析</h1>
-		<a class="mui-icon mui-icon-forward mui-pull-right"></a>
-	</header>
-
+	
 	<div class="mui-content">
-		<div class="content-div">
-			<div class="content-title">1、生活照赏析</div>
-			<img class="content-img" src="../images/bigicon4.png">
-			
-			<p class="content-desc">照相机（简称：相机）是一种利用光学成像原理形成影像并使用底片记录影像的设备，是用于摄影的光学器械。在现代社会生活中有很多可以记录影像的设备，
-				它们都具备照相机的特征，比如医学成像设备、天文观测设备等。</p>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<img src="../images/head-dz.png" class="head-dz"/>
+			<h1 class="mui-title">{{title}}</h1>
+			<a class="mui-icon mui-icon-forward mui-pull-right"></a>
+		</header>
 
-		</div>
-
-
-
-		<div class="content-div">
-			<div class="content-title">2、艺术照赏析</div>
-			<img class="content-img" src="../images/bigicon4.png">
-
-			<p class="content-desc">照相机（简称：相机）是一种利用光学成像原理形成影像并使用底片记录影像的设备，是用于摄影的光学器械。在现代社会生活中有很多可以记录影像的设备，
-				它们都具备照相机的特征，比如医学成像设备、天文观测设备等。</p>
-
-		</div>
-
-
+		<ul id="list" class="course-detail-ui" >
+			<li v-for="item in courseDetails">
+				<div class="content-div">
+					<div class="content-title">{{item.chapClassName}}</div>
+					<img class="content-img" v-bind:src="item.chapFile"> 
+					<p class="content-desc">{{item.chapDesc}}</p> 
+				</div>
+			</li>
+			<li>				
+				<div class="content-div">
+					<div class="content-title">2、艺术照赏析</div>
+					<img class="content-img" src="../images/bigicon4.png"> 
+					<p class="content-desc">照相机（简称：相机）是一种利用光学成像原理形成影像并使用底片记录影像的设备，是用于摄影的光学器械。在现代社会生活中有很多可以记录影像的设备，
+						它们都具备照相机的特征，比如医学成像设备、天文观测设备等。</p> 
+				</div>				
+			</li>
+		</ul>
 	</div>
 	
 <script type="text/javascript" charset="UTF-8">
   	mui.init();
+  	var vm = new Vue({
+		el: '.mui-content',
+		data: {courseDetails:[]
+		,title:''
+		}
+//		,
+//		methods: {
+//			resetData: function() {//重置数据
+//				Object.assign(this.$data, getDefaultData());
+//			}
+//		}
+	});
+	
+	document.addEventListener('get_course_detail', function(event) {
+		courseId = event.detail.courseId;
+		chapId = event.detail.chapId;
+		classId = event.detail.classId;
+		if(!courseId || !chapId) {
+			return;
+		}
+		
+		//前页传入的数据，直接渲染，无需等待ajax请求详情后
+//		vm.courseDir = event.detail.cover; 
+//		vm.author = event.detail.author;
+//		vm.time = event.detail.time;
+		vm.title= event.detail.title;
+		//向服务端请求文章详情内容
+		console.info("courseId:  "+courseId);
+		app.getCourseDetail(chapId,courseId,classId,function(data){
+			console.log(data.code);
+			console.log(data.msg);
+			if(data.code==0){ 
+				console.log(data.objectList.length);				  
+				vm.courseDetails = data.objectList;
+			}
+			mui.toast(data.msg);
+		});
+			 
+	});
+	
+	mui.back = function() {
+		plus.webview.currentWebview().hide("auto", 300);
+	}
+	
+	//窗口隐藏时，重置页面数据
+	mui.plusReady(function () {
+		var self = plus.webview.currentWebview();
+		self.addEventListener("hide",function (e) {
+			window.scrollTo(0, 0);
+			//vm.resetData();
+		},false);
+		 
+	})
 </script>
 </body>
 </html>

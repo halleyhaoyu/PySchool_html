@@ -2025,7 +2025,7 @@ input[type='submit']:enabled:active, input[type='submit'].mui-active:enabled,
     right: 0;
     left: 0;
 
-    height: 1px;
+    height: 0px;
 
     content: '';
     -webkit-transform: scaleY(.5);
@@ -2040,7 +2040,7 @@ input[type='submit']:enabled:active, input[type='submit'].mui-active:enabled,
     bottom: 0;
     left: 15px;
 
-    height: 1px;
+    height: 0px;
 
     content: '';
     -webkit-transform: scaleY(.5);
@@ -2074,7 +2074,7 @@ input[type='submit']:enabled:active, input[type='submit'].mui-active:enabled,
     bottom: 0;
     left: 15px;
 
-    height: 1px;
+    height: 0px;
 
     content: '';
     -webkit-transform: scaleY(.5);
@@ -2490,7 +2490,7 @@ input[type='submit']:enabled:active, input[type='submit'].mui-active:enabled,
     bottom: 0;
     left: 30px;
 
-    height: 1px;
+    height: 0px;
 
     content: '';
     -webkit-transform: scaleY(.5);
@@ -3525,7 +3525,7 @@ select:focus
     bottom: 0;
     left: 0;
 
-    height: 1px;
+    height: 0px;
 
     content: '';
     -webkit-transform: scaleY(.5);

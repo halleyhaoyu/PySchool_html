@@ -1,0 +1,207 @@
+{
+	"login.html": {
+		"resources": [
+			"fonts/mui-icons-extra.ttf",
+			"images/login/bg.png",
+			"js/app.js",
+			"js/web_service.js",
+			"css/login.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/mui.enterfocus.js",
+			"css/icons-extra.css",
+			"images/login/sc_name@3x.png",
+			"images/login/bg@3x.png",
+			"school/courseAll.html"
+		],
+		"refer": [
+			"school/courseAll.html"
+		]
+	},
+	"school/courseAll.html": {
+		"resources": [
+			"css/school/courseAll.css",
+			"js/mui.pullToRefresh.js",
+			"css/top.css",
+			"css/school/pushCommon.css",
+			"js/mui.pullToRefresh.material.js",
+			"images/tabbar/tabbar-sl-1.png",
+			"css/dashboard.css",
+			"images/tabbar/tabbar-ns-2.png",
+			"images/tabbar/tabbar-ns-4.png",
+			"css/mui.css",
+			"images/head-dz.png",
+			"images/school/cc_pic.png",
+			"js/jquery-2.1.4.min.js",
+			"images/tabbar/tabbar-ns-3.png",
+			"images/school/sc_add.png",
+			"css/foot.css",
+			"school/activityList.html",
+			"js/app.js",
+			"js/mui.min.js",
+			"images/tabbar/tabbar-sl-3.png",
+			"school/scShowAll.html",
+			"school/personalCenter.html",
+			"images/tabbar/tabbar-ns-1.png",
+			"login.html",
+			"images/tabbar/tabbar-sl-2.png",
+			"js/vue.min.js"
+		],
+		"refer": [
+			"school/activityList.html",
+			"school/scShowAll.html",
+			"school/personalCenter.html",
+			"login.html",
+			"school/courseDir.html",
+			"school/selectCourse.html"
+		]
+	},
+	"school/activityList.html": {
+		"resources": [
+			"images/tabbar/tabbar-ns-1.png",
+			"css/school/pushCommon.css",
+			"css/top.css",
+			"css/app.css",
+			"images/tabbar/tabbar-sl-2.png",
+			"css/dashboard.css",
+			"css/school/activityList.css",
+			"css/foot.css",
+			"css/mui.css",
+			"css/icons-extra.css",
+			"school/scShowAll.html",
+			"js/mui.pullToRefresh.js",
+			"js/app.js",
+			"js/mui.min.js",
+			"js/mui.pullToRefresh.material.js",
+			"js/jquery-2.1.4.min.js",
+			"images/tabbar/tabbar-sl-1.png",
+			"school/courseAll.html",
+			"images/tabbar/tabbar-sl-3.png",
+			"login.html",
+			"js/vue.min.js",
+			"school/activityDetails.html"
+		],
+		"refer": [
+			"school/scShowAll.html",
+			"school/courseAll.html",
+			"school/personalCenter.html",
+			"login.html",
+			"school/activityDetails.html"
+		]
+	},
+	"school/scShowAll.html": {
+		"resources": [
+			"images/tabbar/tabbar-sl-3.png",
+			"images/tabbar/tabbar-ns-2.png",
+			"images/bigicon1.png",
+			"images/school/show-yes.png",
+			"images/school/show-no.png",
+			"images/school/head-pic.png",
+			"css/school/scShowAll.css",
+			"images/bigicon3.png",
+			"school/activityList.html",
+			"school/personalCenter.html",
+			"css/app.css",
+			"css/dashboard.css",
+			"css/mui.css",
+			"images/tabbar/tabbar-sl-4.png",
+			"js/mui.pullToRefresh.js",
+			"js/app.js",
+			"js/mui.min.js",
+			"js/mui.pullToRefresh.material.js",
+			"js/jquery-2.1.4.min.js",
+			"css/icons-extra.css",
+			"school/courseAll.html"
+		],
+		"refer": [
+			"school/activityList.html",
+			"school/personalCenter.html",
+			"school/courseAll.html"
+		]
+	},
+	"school/personalCenter.html": {
+		"resources": [
+			"images/school/honor-icon.png",
+			"images/school/foot-icon.png",
+			"css/school/courseAll.css",
+			"images/school/head-btm.png",
+			"school/activityList.html",
+			"images/school/psct_top.png",
+			"js/mui.min.js",
+			"images/school/ct-dianzhui.png",
+			"css/school/studentCenter.css",
+			"images/school/btm-round.png",
+			"css/mui.css",
+			"images/tabbar/tabbar-sl-4.png",
+			"images/school/head-pic.png",
+			"school/courseAll.html"
+		],
+		"refer": [
+			"school/activityList.html",
+			"school/courseAll.html"
+		]
+	},
+	"school/courseDir.html": {
+		"resources": [
+			"css/school/courseDir.css",
+			"css/app.css",
+			"css/dashboard.css",
+			"css/mui.css",
+			"js/mui.min.js",
+			"css/school/courseAll.css",
+			"css/top.css",
+			"css/foot.css",
+			"js/app.js",
+			"js/vue.min.js",
+			"fonts/mui.ttf",
+			"images/head-dz.png"
+		],
+		"refer": [
+			"school/courseDetails.html"
+		]
+	},
+	"school/selectCourse.html": {
+		"resources": [
+			"images/school/bk-icon.png",
+			"css/school/selectCourse.css",
+			"css/icons-extra.css",
+			"css/top.css",
+			"css/app.css",
+			"js/mui.min.js",
+			"css/dashboard.css",
+			"css/foot.css",
+			"css/mui.css"
+		],
+		"refer": []
+	},
+	"school/courseDetails.html": {
+		"resources": [
+			"css/top.css",
+			"css/school/courseDetails.css",
+			"css/app.css",
+			"js/mui.min.js",
+			"css/dashboard.css",
+			"css/foot.css",
+			"css/mui.css",
+			"css/icons-extra.css",
+			"images/bigicon4.png"
+		],
+		"refer": []
+	},
+	"school/activityDetails.html": {
+		"resources": [
+			"css/school/activityDetails.css",
+			"css/mui.css",
+			"images/bigicon3.png",
+			"css/app.css",
+			"js/mui.min.js",
+			"css/dashboard.css",
+			"js/vue.min.js",
+			"school/courseAll.html"
+		],
+		"refer": [
+			"school/courseAll.html"
+		]
+	}
+}

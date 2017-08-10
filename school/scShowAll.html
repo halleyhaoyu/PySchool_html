@@ -253,7 +253,7 @@
 						insertHtml+="<div class=\"works-desc\">";
 						insertHtml+="	<div class=\"works-desc-top\">";
 						insertHtml+="		<img src=\"../images/school/head-pic.png\" class=\"works-img\"/>";
-						insertHtml+="		<p class=\"works-username\">"+objectList[i].actOperName+"<label class=\"works-time\">1小时前</label></p>";
+						insertHtml+="		<p class=\"works-username\">"+objectList[i].actOperName+"<label class=\"works-time\">"+objectList[i].actTime+"</label></p>";
 						insertHtml+="		<p class=\"works-content\">"+objectList[i].actDesc+"</p>";
 						insertHtml+="		<div >";
 						insertHtml+="			<img src=\""+objectList[i].actFiles+"\" class=\"works-desc-pic\"/>";
@@ -270,7 +270,7 @@
 							
 							insertHtml+="		<div class=\"works-answer\">";
 							insertHtml+="			<img src=\"../images/bigicon1.png\" class=\"works-img\"/>";
-							insertHtml+="			<p class=\"works-username\">"+activityCommentList[h].actComReviewer+"<label class=\"works-time\">1小时前</label></p>";
+							insertHtml+="			<p class=\"works-username\">"+activityCommentList[h].actComReviewer+"<label class=\"works-time\">"+activityCommentList[h].actComTime+"</label></p>";
 							insertHtml+="			<p class=\"works-content\">"+activityCommentList[h].actComDesc+"</p>";
 							insertHtml+="		</div>";
 						}
@@ -288,7 +288,11 @@
 					}else if(actFine==1){//班级秀
 						insertHtml+="<div class=\"show-desc\">";
 						insertHtml+="	<div class=\"show-desc-right\">";
-						insertHtml+="		<img src=\"../images/school/show-yes.png\" class=\"show-icon\">";
+						if(objectList[i].hasPart==1){
+							insertHtml+="		<img src=\"../images/school/show-yes.png\" class=\"show-icon\">";
+						}else{
+							insertHtml+="		<img src=\"../images/school/show-no.png\" class=\"show-icon\">";
+						}
 						insertHtml+="		<p>已参加</p>";
 						insertHtml+="	</div>";
 						insertHtml+="	<div class=\"show-desc-left\">";
@@ -306,6 +310,22 @@
 		});
 	})(mui);
 	
+	mui.plusReady(function () {
+			var backButtonPress = 0;
+			mui.back = function(event) {
+				backButtonPress++;
+				if (backButtonPress > 1) {
+					plus.runtime.quit();
+				} else {
+					plus.nativeUI.toast('再按一次退出应用');
+				}
+				setTimeout(function() {
+					backButtonPress = 0;
+				}, 1000);
+				return false;
+			}; 
+			
+		})
 </script>
 </body>
 </html>

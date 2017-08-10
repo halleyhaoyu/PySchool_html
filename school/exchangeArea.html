@@ -6,6 +6,8 @@
     <title>交流区</title>
 	<script src="../js/jquery-2.1.4.min.js"></script>
     <script src="../js/mui.min.js"></script>
+	<script src="../js/app.js"></script>
+	<script src="../js/vue.min.js"></script>
     <link href="../css/mui.css" rel="stylesheet"/>
 	<link href="../css/icons-extra.css" rel="stylesheet"/>
 	<link href="../css/app.css" rel="stylesheet"/>
@@ -74,6 +76,51 @@
         $("#inputContent").css("width",$(window).width()-72);
     }
 
+	var vm = new Vue({
+		el: '.mui-content',
+		data: {			 	
+		}
+	});
+	
+	
+	document.addEventListener('get_activity_exchange_area', function(event) {
+		activityId = event.detail.activityId;
+//		if(!activityId) {
+//			return;
+//		} 
+//		console.info("activityId:  "+activityId);
+//		app.getActivityDetail(activityId,function(data){
+//			if(data.code==0){
+//				vm.courseInfo=data.object; 
+//				//vm.classList =  data.objectList;
+//			}
+//			mui.toast(data.msg);
+//		});
+//			 
+	});
+
+	//重写返回逻辑
+	mui.back = function() {
+		plus.webview.currentWebview().hide("auto", 300);
+	}
+	
+	//窗口隐藏时，重置页面数据
+	mui.plusReady(function () {
+		var self = plus.webview.currentWebview();
+		self.addEventListener("hide",function (e) {
+			window.scrollTo(0, 0);
+			//vm.resetData();
+		},false);
+		 
+		 
+	    mui('#main_bar').on('tap', 'a', function(e) {
+		    //获取目标子页的id
+		    var targetTab = this.getAttribute('href');
+		    window.location.href=targetTab;
+		});
+	})
+	
+	
 </script>
 </body>
 </html>

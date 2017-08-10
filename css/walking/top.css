@@ -1,0 +1,32 @@
+.mui-bar-nav,.besttone-head{
+	color: #fff !important;
+	height: 64px;
+	background:#4F416B;
+	-webkit-box-shadow: 0 1px 6px rgba(0,0,0,0.3);
+	box-shadow: 0 1px 6px rgba(0,0,0,0.3)
+}
+.head-dz{
+	width: 66px;
+	position: fixed;
+	right: 24px;
+}
+
+.mui-title {
+	font-size: 17px;
+	font-weight: 500;
+	line-height: 84px;
+	position: absolute;
+	display: block;
+	width: 100%;
+	margin: 0 -10px;
+	padding: 0;
+	text-align: center;
+	white-space: nowrap;
+	color: #000;
+}
+
+.mui-bar .mui-title{
+	color: #333;
+	opacity: .5;
+}
+
