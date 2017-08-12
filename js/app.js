@@ -11,7 +11,10 @@
 	//owner.hostname='http://api.course.com:8081/course-api';
 	
 	//owner.hostname='http://192.168.31.232:8081/course-api';
-	owner.hostname='http://192.168.0.185:8081/course-api';
+	//owner.hostname='http://192.168.0.185:8081/course-api';
+	owner.hostname='http://112.124.110.182:11008/course-api';
+	//owner.hostname='http://172.16.103.41:8081/course-api';
+	
 	
 	/**
 	 * 用户登录
@@ -20,9 +23,9 @@
 		//mui.toast('欢迎体验Hello MUI');
 		callback = callback || $.noop;
 		loginInfo = loginInfo || {};
-		loginInfo.account = loginInfo.account || '';
+		loginInfo.loginName = loginInfo.loginName || '';
 		loginInfo.password = loginInfo.password || '';
-		if (loginInfo.account.length < 4) {
+		if (loginInfo.loginName.length < 4) {
 			var msg={
 					code:-1,
 					msg:"账号最短为 4 个字符！"
@@ -40,19 +43,30 @@
 //		var authed = users.some(function(user) {
 //			return loginInfo.account == user.account && loginInfo.password == user.password;
 //		});
-//
-		mui.ajax( owner.hostname+'/view/login/loginView.shtml',{
-			data:{
-				loginName:loginInfo.account,
+		var url=owner.hostname+'/view/login/loginView.shtml';
+		console.info(url);
+		var loginData={
+				loginName:loginInfo.loginName,
 				loginPassword:loginInfo.password
+			}
+		console.info(loginData.loginName);
+		console.info(loginData.loginPassword);
+		mui.ajax( url,{
+			data:{
+				'loginName':loginInfo.loginName,
+				'loginPassword':loginInfo.password
 			},
 			crossDomain:true,
 			dataType:'json',//服务器返回json格式数据
 			type:'post',//HTTP请求类型
 			timeout:10000,//超时时间设置为10秒； 
-	        //contentType:"application/x-www-form-urlencoded; charset=utf-8", 
+	        //contentType:"application/json; charset=utf-8",
+			//headers:{'Content-Type':'application/json; charset=utf-8'},	              
 			headers:{'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},	              
-			success:function(data){
+			success:function(data){				
+				console.info(JSON.stringify(data) ); 
+				console.info(data.msg);
+				console.info(data.object.userInfo.roleType);
 				//服务器返回响应，根据响应结果，分析是否登录成功；
 				if(data.code=='0'){
 					owner.createState(data.object.userInfo);
@@ -67,7 +81,7 @@
 				
 				var msg={
 					code:-1,
-					msg:"用户名或密码错误"
+					msg:"服务器登陆错误！"
 				}
 					return callback(msg);
 			}
@@ -79,14 +93,15 @@
 		var state = owner.getState();
 		
 		
-		state.account = userInfo.loginName;
-		state.token = userInfo.id;
-		state.manageId = userInfo.manageId;
-		if(userInfo.roleType==3){
-			state.studentsDetail=userInfo.studentsDetail;
-		}else if(userInfo.roleType==2){
-			state.teacherDetail=userInfo.teacherDetail;
-		}
+		state  = userInfo ;
+//		state.token = userInfo.id;
+//		state.manageId = userInfo.manageId;
+//		state.roleType = userInfo.roleType;
+		// state = state || {};
+		state.studentsDetail=state.studentsDetail || {};
+	 
+		state.teacherDetail=state.teacherDetail || {} ;
+		 
 		owner.setState(state); 
 	};
 	/**
@@ -97,12 +112,14 @@
 		return JSON.parse(stateText);
 	};
 	owner.gotoLogin = function(){
-		var state = {} ;
-		owner.setState(state); 
-		window.location.href='../login.html'
-		
+		owner.logout();
+		window.location.href='../login.html';
 	}
 
+	owner.logout = function(){		
+		var state = {} ;
+		owner.setState(state); 
+	}
 	
 
 	/**
@@ -206,6 +223,7 @@
 	        contentType:"application/json; charset=utf-8",
 			headers:{'Content-Type':'application/json; charset=utf-8'},	              
 			success:function(data){
+				console.info(data);
 				return callback(data);
 			},
 			error:function(xhr,type,errorThrown){

@@ -133,8 +133,8 @@
 											if(data.code==0){												
 												var ul = self.element.querySelector('.mui-table-view');
 												ul.innerHTML="";
-												ul.insertBefore(createFragment(index,ul, data.objectList), ul.firstChild);
-												activityList=data.objectList;
+												ul.insertBefore(createFragment(index,ul, data.object.rows), ul.firstChild);
+												activityList=data.object.rows;
 											 	 pageIndex=1;
 											}else{
 												mui.toast(data.msg);
@@ -156,8 +156,8 @@
 										app.getActivityAll(userInfo,5,pageIndex+1,function(data){
 											if(data.code==0){												
 												var ul = self.element.querySelector('.mui-table-view'); 
-												ul.appendChild(createFragment(index,ul, data.objectList), ul.firstChild);
-												activityList.concat(data.objectList);
+												ul.appendChild(createFragment(index,ul, data.object.rows), ul.firstChild);
+												//activityList.concat(data.objectList); 
 											 	 pageIndex++;
 											}else{
 												mui.toast(data.msg);
@@ -176,6 +176,7 @@
 						var length = ul.querySelectorAll('li').length;
 						var fragment = document.createDocumentFragment();
 						var li;
+						objectList=objectList==undefined?[]:objectList;
 						for (var i = 0; i < objectList.length; i++) {
 							li = document.createElement('li');
 							li.className = 'mui-table-view-cell';
@@ -288,6 +289,7 @@
 				backButtonPress++;
 				if (backButtonPress > 1) {
 					plus.runtime.quit();
+					app.logout();
 				} else {
 					plus.nativeUI.toast('再按一次退出应用');
 				}
@@ -309,7 +311,7 @@
 				activityId: id
 			});
  
-			setTimeout(function () {
+		setTimeout(function () {
 				webview_activity_detail.show("slide-in-right", 300);
 		},150);
 	}
