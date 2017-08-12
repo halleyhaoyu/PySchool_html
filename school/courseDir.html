@@ -32,7 +32,7 @@
 		<ul id="list" class="course-dir-ui" >
 			<li v-for="item in courseDirList">
 				<div class="myh5_card">
-					<a href="javascript:;" :data-guid="citem.id"  @tap="open_course_detail(citem,citem)">
+					<a href="javascript:;" :data-guid="item.id"  @tap="open_course_detail(item,item)">
 					<div class="course-title-icon"></div>
 					<div class="course-title">{{item.text}}</div>
 					</a>

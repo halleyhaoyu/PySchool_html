@@ -6,24 +6,33 @@
     <title>学生个人中心</title>
     <script src="../js/mui.min.js"></script>
     <link href="../css/mui.css" rel="stylesheet"/>
+	<script src="../js/vue.min.js"></script>
+	<script src="../js/app.js"></script>
     <link href="../css/school/courseAll.css" rel="stylesheet"/>
   	<link href="../css/foot.css" rel="stylesheet"/>
 	<link href="../css/school/studentCenter.css" rel="stylesheet"/>
 </head>
 <body>
+	<div id="personal_center_content">
+		
+		
 	<header class="mui-bar mui-bar-nav" style="height: 260px;
     background: url(../images/school/psct_top.png);background-size: cover">
-		<a class="mui-icon mui-icon-compose mui-pull-right"></a>
+		<a href="#" id="personal_center_set_link" class="mui-icon mui-icon-compose mui-pull-right"></a>
 		<img src="../images/school/head-btm.png" class="head-pic-btm">
 		<img src="../images/school/ct-dianzhui.png" class="dz-icon">
 
-
-
 		<img src="../images/school/head-pic.png" class="head-pic">
-		<p class="user-name">多仔</p>
-		<p class="class-name">一年级1班</p>
-		<p class="school-name">学多多开放学校</p>
-
+		<p class="user-name">{{userInfo.realName}}</p>
+		<div v-if="userInfo.roleType==3" >
+			<p class="class-name">{{userInfo.studentsDetail.stdGradeName}}{{userInfo.studentsDetail.stdClassName}}</p>
+			<p class="school-name">{{userInfo.studentsDetail.stdSchoolName}}</p> 
+		</div>
+		<div v-if="userInfo.roleType==2">
+			<p class="class-name">{{thGenderName}}</p>
+		</div>
+		
+		
 	</header>
 	<nav id="main_bar" class="mui-bar mui-bar-tab">
 		<a class="mui-tab-item" href="courseAll.html">
@@ -44,48 +53,215 @@
 		</a>
 	</nav>
 	<div class="mui-content1">
-
-		<div class="myh5_card">
-			<a href="#" class="top psct_purple">
-				<img src="../images/school/btm-round.png" class="photo">
-				<img src="../images/school/foot-icon.png" class="photo1" />
-				<p class="title">成长足迹</p>
-			</a>
+		<div v-if="userInfo.roleType==3"  >			
+			<div class="myh5_card">
+				<a id="personal_student_time_line_link" href="#" class="top psct_purple">
+					<img src="../images/school/btm-round.png" class="photo">
+					<img src="../images/school/foot-icon.png" class="photo1" />
+					<p class="title">成长足迹</p>
+				</a>
+			</div>
+	
+			<div class="myh5_card">
+				<a id="personal_student_honor_link" href="#" class="top psct_purple">
+					<img src="../images/school/btm-round.png" class="photo">
+					<img src="../images/school/honor-icon.png" class="photo1" />
+					<p class="title">我的荣誉</p>
+				</a>
+			</div>
 		</div>
-
-		<div class="myh5_card">
-			<a href="#" class="top psct_purple">
-				<img src="../images/school/btm-round.png" class="photo">
-				<img src="../images/school/honor-icon.png" class="photo1" />
-				<p class="title">我的荣誉</p>
-			</a>
+		<div v-if="userInfo.roleType==2">			
+			<div id="personal_teacher_ranking_link" class="myh5_card myh5_card2">
+				<a href="#" class="top psct_purple">
+					<img src="../images/school/tc_02.png" class="photo1" />
+					<p class="title">学生点赞数排行榜</p>
+				</a>
+			</div>	
+			<div id="personal_activity_ranking_link" class="myh5_card myh5_card2">
+				<a href="#" class="top psct_purple">
+					<img src="../images/school/tc_01.png" class="photo1" />
+					<p class="title">活动点赞数排行榜</p>
+				</a>
+			</div>
 		</div>
-
-		<div class="myh5_card">
-			<a href="#" class="top psct_purple">
-				<img src="../images/school/btm-round.png" class="photo">
-				<img src="../images/school/honor-icon.png" class="photo1" />
-				<p class="title">学生点赞数排行榜</p>
-			</a>
-		</div>
-
-		<div class="myh5_card">
-			<a href="#" class="top psct_purple">
-				<img src="../images/school/btm-round.png" class="photo">
-				<img src="../images/school/honor-icon.png" class="photo1" />
-				<p class="title">活动点赞数排行榜</p>
-			</a>
-		</div>
-		
 	</div>
 	
+	</div>
 <script type="text/javascript" charset="UTF-8">
   	mui.init();
-    mui('#main_bar').on('tap', 'a', function(e) {
-	    //获取目标子页的id
-	    var targetTab = this.getAttribute('href');
-	    window.location.href=targetTab;
-	});
+ 	var webview_set_detail_student = null;
+	var webview_set_detail_teacher = null;
+	var webview_student_time_line = null;
+	var webview_student_honor = null;
+	
+	    var vm = new Vue({
+			el: '#personal_center_content',
+			data: {
+					userInfo:{
+					roleType:3,
+					realName:'姓名',
+					teacherDetail:{
+						thGender:'M',
+					},
+					studentsDetail:{
+						stdGender:'M',
+						stdGradeName:'1年级',
+						stdClassName:'2班',
+						stdSchoolName:'学多多学校',
+						}
+				}
+			},
+			computed: {
+			    // a computed getter
+			    thGenderName: function () { 
+			      return this.userInfo.teacherDetail.thGender=='M'?'男':'女';
+			    },
+			    stdGenderName: function () { 
+			      return this.userInfo.studentsDetail.stdGender=='M'?'男':'女';
+			    }
+			  }
+		}); 
+		
+		mui.plusReady(function () {
+			
+			var userInfo = app.getState(); 
+			console.info(userInfo.roleType);
+		    
+		    vm.userInfo=userInfo;
+		    
+			
+			webview_set_detail_student = mui.preload({
+				url: 'setStudentInfo.html',
+				id: 'set_student',
+				styles: {
+					"render": "always",
+					"popGesture": "hide",
+					"bounce": "vertical" 
+				}
+			});
+			
+			webview_set_detail_teacher = mui.preload({
+				url: 'setTeacherfo.html',
+				id: 'set_teacher',
+				styles: {
+					"render": "always",
+					"popGesture": "hide",
+					"bounce": "vertical" 
+				}
+			});
+			
+			mui('#personal_center_content').on('tap', '#personal_center_set_link', function(e) {
+			    //获取目标子页的id
+			   open_set_detail(userInfo);
+			});
+			
+			webview_student_time_line = mui.preload({
+				url: 'timeline.html',
+				id: 'time_line',
+				styles: {
+					"render": "always",
+					"popGesture": "hide",
+					"bounce": "vertical" 
+				}
+			});
+			
+			webview_student_honor = mui.preload({
+				url: 'myHonor.html',
+				id: 'my_honor',
+				styles: {
+					"render": "always",
+					"popGesture": "hide",
+					"bounce": "vertical" 
+				}
+			});
+			
+			mui('#personal_center_content').on('tap', '#personal_student_time_line_link', function(e) {
+			    //获取目标子页的id
+			   open_time_line_detail(userInfo);
+			});
+			mui('#personal_center_content').on('tap', '#personal_student_honor_link', function(e) {
+			    //获取目标子页的id
+			   open_student_honor_detail(userInfo);
+			});
+			
+			 
+			mui('#personal_center_content').on('tap', '#personal_teacher_ranking_link', function(e) {
+			    //获取目标子页的id
+			   //open_student_honor_detail(userInfo);
+			   plus.nativeUI.toast('敬请期待！');
+			});
+			mui('#personal_center_content').on('tap', '#personal_activity_ranking_link', function(e) {
+			    //获取目标子页的id
+			   //open_student_honor_detail(userInfo);
+			   plus.nativeUI.toast('敬请期待！');
+			});
+			
+			
+			
+			
+			
+			mui('#main_bar').on('tap', 'a', function(e) {
+			    //获取目标子页的id
+			    var targetTab = this.getAttribute('href');
+			    window.location.href=targetTab;
+			});
+			
+			
+//	var webview_student_time_line = null;
+//	var webview_student_honor = null;
+			
+//			
+			var backButtonPress = 0;
+			mui.back = function(event) {
+				backButtonPress++;
+				if (backButtonPress > 1) {
+					plus.runtime.quit();
+					app.logout();
+				} else {
+					plus.nativeUI.toast('再按一次退出应用');
+				}
+				setTimeout(function() {
+					backButtonPress = 0;
+				}, 1000);
+				return false;
+			}; 
+			
+		})
+		
+		function open_set_detail(userInfo){
+			
+			if(userInfo.roleType==2){
+				mui.fire(webview_set_detail_teacher, 'get_set_teacher', {
+					userInfo: userInfo
+				});	 
+				setTimeout(function () {
+						webview_set_detail_teacher.show("slide-in-right", 300);
+				},150);
+			}else{
+				mui.fire(webview_set_detail_student, 'get_set_student', {
+					userInfo: userInfo
+				});	 
+				setTimeout(function () {
+						webview_set_detail_student.show("slide-in-right", 300);
+				},150);
+			}
+		}
+		function  open_time_line_detail(userInfo){			
+			mui.fire(webview_student_time_line, 'get_time_line', {
+				userInfo: userInfo
+			});	 
+			setTimeout(function () {
+					webview_student_time_line.show("slide-in-right", 300);
+			},150);
+		}
+		function  open_student_honor_detail(userInfo){
+			mui.fire(webview_student_honor, 'get_my_honor', {
+				userInfo: userInfo
+			});	
+			setTimeout(function () {
+					webview_student_honor.show("slide-in-right", 300);
+			},150);
+		}
 </script>
 </body>
 </html>

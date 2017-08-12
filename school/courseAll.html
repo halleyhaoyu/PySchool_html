@@ -16,14 +16,14 @@
 		</style>
 </head>
 <body class="pagebg  bg_gradient">
-	<div >
+	<div id="course_all_content">
 		<header class="mui-bar mui-bar-nav">
 			<img src="../images/head-dz.png" class="head-dz"/>
 			<div  class="mui-segmented-control title-control">
 				<a class="mui-control-item mui-active call-btn" href="#item1" id="it1">
 					我的课程
 				</a>
-				<a class="mui-control-item guaji-btn" href="#item2" id="it2">
+				<a v-if="showAllBarFlag==1" class="mui-control-item guaji-btn" href="#item2" id="it2" >
 					全部课程
 				</a>
 			</div>
@@ -155,11 +155,16 @@
 		var courseList1=[];
 		
 		//添加列表项的点击事件
-		 
+		
         mui.init({
         	
         });
-        
+        var vm = new Vue({
+			el: '#course_all_content',
+			data: {
+				 showAllBarFlag:1
+			} 
+		}); 
 //      document.getElementById('it1').addEventListener('tap',function(){
 //			$('#action-1').css('display','block');
 //			$('#action-2').css('display','block');
@@ -170,11 +175,6 @@
 //			$('#action-2').css('display','none');
 //			$('.mui-bar-nav').css('box-shadow','none');
 //      }); 
-        mui('#main_bar').on('tap', 'a', function(e) {
-		    //获取目标子页的id
-		    var targetTab = this.getAttribute('href');
-		    window.location.href=targetTab;
-		});
 		
 		 
 		 
@@ -259,10 +259,11 @@
 						var li;
 						var objectList=[];
 						if(index==0){
-							objectList=data.objectList1;
+							objectList=data.object1.rows;
 						}else{
-							objectList=data.objectList;
+							objectList=data.object.rows;
 						}
+						objectList=  objectList==undefined ? []:objectList;
 						for (var i = 0; i < objectList.length; i++) {
 							li = document.createElement('li');
 							li.className = 'mui-table-view-cell';
@@ -297,6 +298,14 @@
 			})(mui);
 			
 		mui.plusReady(function() {
+			 var userInfo = app.getState(); 
+			 console.info(userInfo.roleType);
+		    if(userInfo.roleType==2){
+		    	vm.showAllBarFlag=0;
+		    }else{
+		    	vm.showAllBarFlag=1;
+		    }
+			     console.info(vm.showAllBarFlag);
 			//预加载详情页
 			webview_course_dir_detail = mui.preload({
 				url: 'courseDir.html',
@@ -319,6 +328,16 @@
 				}
 			});
 			
+			
+	        mui('#main_bar').on('tap', 'a', function(e) {
+			    //获取目标子页的id
+			    var targetTab = this.getAttribute('href');
+			    window.location.href=targetTab;
+			   
+			});
+			
+			
+			
 			mui('#item1').on('tap','a',function(){
 				//console.info("this.href:  " + this.href);
 				var ids=this.id.split("_");
@@ -340,6 +359,7 @@
 				backButtonPress++;
 				if (backButtonPress > 1) {
 					plus.runtime.quit();
+					app.logout();
 				} else {
 					plus.nativeUI.toast('再按一次退出应用');
 				}

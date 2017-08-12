@@ -38,6 +38,7 @@ body{
 	background-color: transparent;
 	padding-top: 260px !important;
 }
+
 .myh5_card {
 	margin: 10px 0;
 }
@@ -64,6 +65,21 @@ body{
 	margin-top: 15px;
 	margin-left:15px;
 	position: fixed;
+}
+
+.myh5_card2 .top .photo1 {
+	width: 80px;
+	height: 80px;
+	margin: 0;
+	position: fixed;
+}
+.myh5_card2 .top .title {
+	font-size: 18px;
+    color: #333;
+    font-weight: bold;
+    margin: 30px 0 0 80px;
+    text-align: center;
+    opacity: .65;
 }
 .head-pic-btm{
 	height: 140px;
