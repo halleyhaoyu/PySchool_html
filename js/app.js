@@ -49,13 +49,9 @@
 				loginName:loginInfo.loginName,
 				loginPassword:loginInfo.password
 			}
-		console.info(loginData.loginName);
-		console.info(loginData.loginPassword);
+		console.info(JSON.stringify(loginData) ); 
 		mui.ajax( url,{
-			data:{
-				'loginName':loginInfo.loginName,
-				'loginPassword':loginInfo.password
-			},
+			data:loginData,
 			crossDomain:true,
 			dataType:'json',//服务器返回json格式数据
 			type:'post',//HTTP请求类型
@@ -237,6 +233,49 @@
 		});
 	}
 
+
+
+	/*
+	  * 课程-选课提交
+	  */
+	owner.postSelectCourse=function(data,callback){
+		var userInfo = app.getState();
+		//view/teachingManage/join.shtml
+		var url=owner.hostname+'/view/teachingManage/join.shtml'; 
+		return owner.postCommon(url,data,callback); 
+	}
+	
+	/*
+	 * 业务功能
+	 * */
+	owner.postCommon=function(url,data,callback){
+			console.log(url);
+			console.log(JSON.stringify(data));
+		mui.ajax( url,{
+			data:data,
+			crossDomain:true,
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			timeout:10000,//超时时间设置为10秒； 
+	        //contentType:"application/json; charset=utf-8",
+			//headers:{'Content-Type':'application/json; charset=utf-8'},	              
+			headers:{'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
+			 
+			success:function(data){
+				console.info(JSON.stringify(data));
+				return callback(data);
+			},
+			error:function(xhr,type,errorThrown){
+				//异常处理；
+				var msg={
+					code:-1,
+					msg:"数据提交失败！"
+				}
+					return callback(msg);
+			}
+		});
+	}
+ 
 
 	/**
 	 * 新用户注册

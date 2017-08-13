@@ -46,14 +46,13 @@
 				<div v-for="item in classList" class="open-class-content">
 					{{item.tcName}}<label class="open-class-label">{{item.tcTeacherName}}</label>
 					<label class="open-class-label red">剩余{{item.tcApplicantsNums}}</label>/{{item.tcNums}}
-					<div class="add-info">加入</div>
+					<div v-if="item.hasJoin==0" @tap="post_select_course(item)" class="add-info">
+						 加入 
+					</div>
+					<div v-else @tap="post_select_course(item)" class="del-info">
+						 退出
+					</div>
 				</div>
-
-				<div class="open-class-content">
-					三年级一班<label class="open-class-label">王老师</label>
-					<label class="open-class-label red">剩余10</label>/30
-					<div class="del-info">退出</div>
-				</div> 
 			</div>
 		</div>
 
@@ -63,6 +62,7 @@
 	
 <script type="text/javascript" charset="UTF-8">
   	mui.init();
+  	var selectCourseId=0;
   	var vm = new Vue({
 		el: '.mui-content',
 		data: {
@@ -99,47 +99,21 @@
 						"tcStartTime": 1500739200000,
 						"tcEndTime": 1506614400000,
 						"hasJoin": "0"
-						},
-						{
-						"tcId": 5,
-						"tcName": "A班1",
-						"tcRcId": 2,
-						"tcSchoolId": 1,
-						"tcTime": "2017-07-15 17:39:24",
-						"tcAddress": "asdfasdf",
-						"tcTeacherId": 13,
-						"tcTeacherName": "test",
-						"tcOperId": 40,
-						"tcOperName": "dev",
-						"tcNums": 15,
-						"tcTmId": 1,
-						"tcApplicantsNums": 0,
-						"deleteFalg": 0,
-						"deleteTime": 1500111563000,
-						"tcStartTime": 1500912000000,
-						"tcEndTime": 1501776000000,
-						"hasJoin": "0"
-					}]
+						}]
 				
 		} 
 	});
 	
 	
 	document.addEventListener('get_select_course_detail', function(event) {
-		courseId = event.detail.courseId;
-		if(!courseId) {
+		selectCourseId = event.detail.courseId;
+		if(!selectCourseId) {
 			return;
-		} 
-		console.info("courseId:  "+courseId);
-		app.getCourseSelect(courseId,function(data){
-			if(data.code==0){
-				vm.courseInfo=data.object; 
-				vm.classList =  data.objectList;
-			}
-			mui.toast(data.msg);
-		});
-			 
+		}
+		console.info("selectCourseId:  "+selectCourseId);
+		getSelectSourseDetail(selectCourseId);
 	});
+
 
 	//重写返回逻辑
 	mui.back = function() {
@@ -155,6 +129,46 @@
 		},false);
 		 
 	})
+	
+	function getSelectSourseDetail(selectCourseId){
+	app.getCourseSelect(selectCourseId,function(data){
+			if(data.code==0){
+				vm.courseInfo=data.object; 
+				vm.classList =  data.objectList;
+			}
+			mui.toast(data.msg);
+		}); 
+	}
+	
+	function post_select_course(classInfo){
+		
+		var userInfo = app.getState();
+		var data={};
+		if(classInfo.hasJoin==0){
+			data={
+				manageId:userInfo.manageId,
+				actionType:'join',//  加入：join；  退出：signout
+				tsRcId:vm.courseInfo.rcId,
+				tsTcId:classInfo.tcId,
+				tsTmId:classInfo.tcTmId,
+				tsSelStdList:userInfo.studentsDetail.stdId
+			}
+		}else{
+			data={
+				manageId:userInfo.manageId,
+				actionType:'signout', //  加入：join；  退出：signout
+				tsId:classInfo.tcId 
+			}
+		}
+		
+		app.postSelectCourse(data,function(data){
+			if(data.code==0){
+				getSelectSourseDetail(selectCourseId);
+			}
+			mui.toast(data.msg);
+		});
+		 
+	}
 </script>
 </body>
 </html>

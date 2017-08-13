@@ -23,7 +23,7 @@
 				<a class="mui-control-item mui-active call-btn" href="#item1" id="it1">
 					我的课程
 				</a>
-				<a v-if="showAllBarFlag==1" class="mui-control-item guaji-btn" href="#item2" id="it2" >
+				<a  v-if="showAllBarFlag==1" class="mui-control-item guaji-btn" href="#item2" id="it2" >
 					全部课程
 				</a>
 			</div>
@@ -258,8 +258,15 @@
 						var fragment = document.createDocumentFragment();
 						var li;
 						var objectList=[];
+						
+						var userInfo = app.getState(); 
+						 
 						if(index==0){
-							objectList=data.object1.rows;
+							if(userInfo.roleType==3){
+								objectList=data.object1.rows;								
+							}else{
+								objectList=data.object.rows;
+							}
 						}else{
 							objectList=data.object.rows;
 						}
@@ -271,7 +278,7 @@
 							var colorIndex = Math.ceil(Math.random()*4)-1;
 							if(index==0){ //我的课程
 								insertHtml+="<div class=\"myh5_card\">";
-								insertHtml+="	<a id=\""+objectList[i].tcId+"_"+objectList[i].rcId+"\" href=\"#\" class=\"top "+color_css[colorIndex]+"\">";//	
+								insertHtml+="	<a id=\""+objectList[i].tcId+"_"+objectList[i].rcId+"\" href=\"#\" class=\"top "+color_css[i%4]+"\">";//	
 								insertHtml+="		<img src=\""+objectList[i].rcLogo+"\" class=\"photo\" />";
 								insertHtml+="		<p class=\"title\">"+objectList[i].rcName+"</p>";
 								insertHtml+="		<p class=\"content1\">班级："+objectList[i].tcId+"</p>";
@@ -280,7 +287,7 @@
 								insertHtml+="</div>";
 							}else if(index==1){//全部课程
 								insertHtml+="<div class=\"myh5_card\">";
-								insertHtml+="	<a id=\""+objectList[i].tcId+"_"+objectList[i].rcId+"\" href=\"#\" class=\"top "+color_css[colorIndex]+"\">";
+								insertHtml+="	<a id=\""+objectList[i].tcId+"_"+objectList[i].rcId+"\" href=\"#\" class=\"top "+color_css[i%4]+"\">";
 								insertHtml+="		<img src=\""+objectList[i].rcLogo+"\" class=\"photo\" />";
 								insertHtml+="		<img src=\"../images/school/sc_add.png\" class=\"arrow\" />";
 								insertHtml+="		<p class=\"title\">"+objectList[i].rcName+"</p>";

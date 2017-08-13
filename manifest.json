@@ -440,7 +440,9 @@
 					"js/mui.min.js",
 					"css/dashboard.css",
 					"css/foot.css",
-					"css/mui.css"
+					"css/mui.css",
+					"js/app.js",
+					"js/vue.min.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -558,7 +560,8 @@
 					"css/mui.picker.min.css",
 					"js/jquery-2.1.4.min.js",
 					"js/mui.min.js",
-					"css/mui.css"
+					"css/mui.css",
+					"js/common.js"
 				],
 				"refer": [],
 				"priority": 0
