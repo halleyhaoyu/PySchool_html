@@ -342,7 +342,11 @@
 					"images/tabbar/tabbar-sl-3.png",
 					"login.html",
 					"js/vue.min.js",
-					"school/activityDetails.html"
+					"school/activityDetails.html",
+					"js/mui.picker.js",
+					"js/mui.poppicker.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css"
 				],
 				"refer": [
 					"school/personalCenter.html",
@@ -440,7 +444,9 @@
 					"js/mui.min.js",
 					"css/dashboard.css",
 					"css/foot.css",
-					"css/mui.css"
+					"css/mui.css",
+					"js/app.js",
+					"js/vue.min.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -490,7 +496,17 @@
 					"images/school/addfile.png",
 					"images/bigicon1.png",
 					"css/school/exchangeArea.css",
-					"images/school/recording.png"
+					"images/school/recording.png",
+					"js/app.js",
+					"js/mui.min.js",
+					"js/vue.min.js",
+					"css/mui.css",
+					"js/jquery-2.1.4.min.js",
+					"css/app.css",
+					"css/dashboard.css",
+					"js/mui.pullToRefresh.js",
+					"css/school/pushCommon.css",
+					"js/mui.pullToRefresh.material.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -527,7 +543,13 @@
 					"js/mui.poppicker.js",
 					"css/mui.poppicker.css",
 					"css/mui.picker.min.css",
-					"js/jquery-2.1.4.min.js"
+					"js/jquery-2.1.4.min.js",
+					"js/app.js",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/dashboard.css",
+					"js/vue.min.js",
+					"css/mui.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -558,7 +580,8 @@
 					"css/mui.picker.min.css",
 					"js/jquery-2.1.4.min.js",
 					"js/mui.min.js",
-					"css/mui.css"
+					"css/mui.css",
+					"js/common.js"
 				],
 				"refer": [],
 				"priority": 0

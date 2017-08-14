@@ -49,13 +49,9 @@
 				loginName:loginInfo.loginName,
 				loginPassword:loginInfo.password
 			}
-		console.info(loginData.loginName);
-		console.info(loginData.loginPassword);
+		console.info(JSON.stringify(loginData) ); 
 		mui.ajax( url,{
-			data:{
-				'loginName':loginInfo.loginName,
-				'loginPassword':loginInfo.password
-			},
+			data:loginData,
 			crossDomain:true,
 			dataType:'json',//服务器返回json格式数据
 			type:'post',//HTTP请求类型
@@ -143,6 +139,17 @@
 		var url=owner.hostname+'/view/teachingManage/listData.shtml?manageId='+userInfo.manageId+'&pageSize='+pageSize+'&pageIndex='+pageIndex;
 		return owner.getCommon(url,callback);
 	}
+	/*
+	 * 课程-相关课程列表
+	 * */
+	owner.getCourseAllOption=function(callback){
+		//view/activity/courseClass.shtml
+		var userInfo = app.getState(); 
+		var url=owner.hostname+'/view/activity/courseClass.shtml?manageId='+userInfo.manageId;
+		return owner.getCommon(url,callback);
+	}
+	
+	
 	
 	/*
 	 * 课程-获取课程详情
@@ -198,6 +205,18 @@
 		return callback(msg);
 	}
 	
+		/*
+	  * 活动 -获取活动详情
+	  */
+	owner.getExchangeAreaList=function(classId,pageIndex,callback){
+		//view/activity/acAreaList.shtml&page=1 manageId   acaClassId 
+		var userInfo = app.getState();
+		var url=owner.hostname+'/view/activity/acAreaList.shtml?manageId='+userInfo.manageId+'&acaClassId='+classId+'&page='+pageIndex;
+		return owner.getCommon(url,callback);
+		return callback(msg);
+	}
+	
+	
 	
 	/*
 	  * 成果 -获取列表
@@ -223,7 +242,7 @@
 	        contentType:"application/json; charset=utf-8",
 			headers:{'Content-Type':'application/json; charset=utf-8'},	              
 			success:function(data){
-				console.info(data);
+				console.info(JSON.stringify(data));
 				return callback(data);
 			},
 			error:function(xhr,type,errorThrown){
@@ -238,6 +257,65 @@
 	}
 
 
+
+	/*
+	  * 课程-选课提交
+	  */
+	owner.postSelectCourse=function(data,callback){
+		var userInfo = app.getState();
+		//view/teachingManage/join.shtml
+		var url=owner.hostname+'/view/teachingManage/join.shtml';  
+	 	
+		return owner.postCommon(url,data,callback); 
+	}
+	
+	
+	/*
+	 * 业务功能
+	 * */
+	owner.postCommon=function(url,data,callback){
+			console.log(JSON.stringify(data));
+			url+=owner.getPramString(data);
+			console.log(url);
+		mui.ajax( url,{
+			data:data,
+			crossDomain:true,
+			dataType:'json',//服务器返回json格式数据
+			type:'post',//HTTP请求类型
+			timeout:10000,//超时时间设置为10秒； 
+	        //contentType:"application/json; charset=utf-8",
+	        contentType:"application/x-www-form-urlencoded; charset=utf-8",
+			//headers:{'Content-Type':'application/json; charset=utf-8'},	              
+			//headers:{'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
+			 
+			success:function(data){
+				console.info(JSON.stringify(data));
+				return callback(data);
+			},
+			error:function(xhr,type,errorThrown){
+				//异常处理；
+				var msg={
+					code:-1,
+					msg:"数据提交失败！"
+				}
+					return callback(msg);
+			}
+		});
+	}
+ 
+
+	owner.getPramString = function(data){
+		var pram='';
+		for (var prop in data){
+			if(pram.length>0){
+				pram= pram + '&'+prop+'='+data[prop];
+			}else{
+				pram='?'+prop+'='+data[prop];
+			}
+		}
+		console.info(pram);
+		return pram ;
+	}
 	/**
 	 * 新用户注册
 	 **/
