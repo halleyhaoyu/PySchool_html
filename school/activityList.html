@@ -6,6 +6,8 @@
     <title>活动</title>
     <script src="../js/mui.min.js"></script>
     <link href="../css/mui.css" rel="stylesheet"/>
+	<link href="../css/mui.picker.min.css" rel="stylesheet" />
+	<link href="../css/mui.poppicker.css" rel="stylesheet" />
 	<link href="../css/icons-extra.css" rel="stylesheet"/>
 	<link href="../css/app.css" rel="stylesheet"/>
   	<link href="../css/foot.css" rel="stylesheet"/>
@@ -53,8 +55,53 @@
 							<li class="mui-table-view-cell">
 								<a id="7" href="#">
 								<div class="show-desc">
-									<div class="show-desc-right">
+									<div class="show-desc-right"> 
 										<div class="ac-end">已结束</div>
+									</div>
+									<div class="show-desc-left">
+										<p class="show-desc-title">欢乐中国豫园行</p>
+										<p class="show-desc-content">发布人：赵先生</p>
+										<p class="show-desc-content">发布日期：2017-07-25</p>
+									</div>
+						
+								</div>
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a id="7" href="#">
+								<div class="show-desc">
+									<div class="show-desc-right">
+										<div class="ac-end-no">未结束</div>
+									</div>
+									<div class="show-desc-left">
+										<p class="show-desc-title">欢乐中国豫园行</p>
+										<p class="show-desc-content">发布人：赵先生</p>
+										<p class="show-desc-content">发布日期：2017-07-25</p>
+									</div>
+						
+								</div>
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a id="7" href="#">
+								<div class="show-desc">
+									<div class="show-desc-right">
+										<div class="ac-end-no">未结束</div>
+									</div>
+									<div class="show-desc-left">
+										<p class="show-desc-title">欢乐中国豫园行</p>
+										<p class="show-desc-content">发布人：赵先生</p>
+										<p class="show-desc-content">发布日期：2017-07-25</p>
+									</div>
+						
+								</div>
+								</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a id="7" href="#">
+								<div class="show-desc">
+									<div class="show-desc-right">
+										<div class="ac-end-no">未结束</div>
 									</div>
 									<div class="show-desc-left">
 										<p class="show-desc-title">欢乐中国豫园行</p>
@@ -95,6 +142,8 @@
 	<script src="../js/mui.pullToRefresh.material.js"></script>
 	<script src="../js/app.js"></script>
 	<script src="../js/vue.min.js"></script>
+	<script src="../js/mui.picker.js"></script>
+	<script src="../js/mui.poppicker.js"></script>
 	<script type="text/javascript" charset="UTF-8">
 	  	mui.init();
 	  	
@@ -104,6 +153,9 @@
 		var webview_activity_exchange_area = null; //交流区
 		var activityList=[];
 		
+		var userPicker = new mui.PopPicker();
+		
+					
 		
 	    mui('#main_bar').on('tap', 'a', function(e) {
 		    //获取目标子页的id
@@ -247,11 +299,7 @@
 			//console.info("this.href:  " + this.href);
 			open_activity_detail(this.id);
 		}); 
-		
-		
-		
-		
-		
+		 
 		mui(document.body).on('tap', '#activity_add_detail', function() {
 		    console.info("1");
 			//console.info("this.href:  " + this.href);
@@ -269,18 +317,7 @@
 		
 		 
 		mui(document.body).on('tap','#activity_exchange_area',function(){
-			//console.info("this.href:  " + this.href);
-			
-			console.info("21");
-			mui.fire(webview_activity_exchange_area, 'get_activity_exchange_area', {
-				//activityId: id
-			}); 
-			console.info("22");
-			setTimeout(function () {
-				webview_activity_exchange_area.show("slide-in-right", 300);
-			},150);
-			
-			console.info("23");
+			 op_exchange_area();
 		}); 
 		
 		
@@ -298,7 +335,49 @@
 				}, 1000);
 				return false;
 			}; 
+		
+		
+		//交流区信息准备 
+		var courseList=[];
+		var classOption = {value:0,	text:'--请选择班级--'};
+		courseList.push(classOption);
+		console.info(JSON.stringify(courseList));
+		userPicker.setData(courseList);
+		app.getCourseAllOption(function(data){
+			if(data.code==0){ 
+				if(data.objectList){
+					for(var i=0; i<data.objectList.length;i++){ 
+						courseList.push(
+							{
+								value:data.objectList[i].tcId,
+								text:data.objectList[i].tcName}
+							);
+					}
+				}
+				console.info(JSON.stringify(courseList));
+		 		userPicker.setData(courseList);
+			}
+		}); 
 	});
+	
+	
+	function op_exchange_area(){
+		userPicker.show(function(items) {
+			console.info('op_exchange_area>>>>>>>>item');
+			console.info(JSON.stringify(items));
+			if(items[0].value>0){
+				mui.fire(webview_activity_exchange_area, 'get_activity_exchange_area', {
+					classId: items[0].value
+				});
+				setTimeout(function () {
+					webview_activity_exchange_area.show("slide-in-right", 300);
+				},150); 
+			}else{
+				plus.nativeUI.toast('请选择班级！');
+			}
+		});
+		
+	}
 	
 	/**
 	 * 打开目录详情
@@ -310,7 +389,7 @@
 		mui.fire(webview_activity_detail, 'get_activity_detail', {
 				activityId: id
 			});
- 
+
 		setTimeout(function () {
 				webview_activity_detail.show("slide-in-right", 300);
 		},150);

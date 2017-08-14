@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>我的课程</title>
-
     <link href="../css/mui.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../css/school/courseAll.css" />
 	<link href="../css/dashboard.css" rel="stylesheet"/>
@@ -354,10 +353,7 @@
 			});
 			mui('#item2').on('tap','a',function(){
 				//console.info("this.href:  " + this.href);
-				var ids=this.id.split("_"); 
-				console.info(this.id);
-				console.info(ids[0]);
-				console.info(ids[1]);
+				var ids=this.id.split("_");
 				open_select_course_detail(ids[1]);
 			});
 			

@@ -4,17 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>交流区</title>
-	<script src="../js/jquery-2.1.4.min.js"></script>
-    <script src="../js/mui.min.js"></script>
-	<script src="../js/app.js"></script>
-	<script src="../js/vue.min.js"></script>
-    <link href="../css/mui.css" rel="stylesheet"/>
+    <link href="../css/mui.css" rel="stylesheet"/> 
 	<link href="../css/icons-extra.css" rel="stylesheet"/>
 	<link href="../css/app.css" rel="stylesheet"/>
   	<link href="../css/foot.css" rel="stylesheet"/>
 	<link href="../css/dashboard.css" rel="stylesheet"/>
 	<link href="../css/top.css" rel="stylesheet"/>
+	<link href="../css/school/activityList.css" rel="stylesheet"/>
 	<link href="../css/school/exchangeArea.css" rel="stylesheet"/>
+    <link href="../css/school/pushCommon.css" rel="stylesheet"/>
 </head>
 <body>
 	<header class="mui-bar mui-bar-nav">
@@ -22,42 +20,7 @@
 		<img src="../images/head-dz.png" class="head-dz"/>
 		<h1 class="mui-title">交流区</h1>
 	</header>
-	<div class="mui-content">
-
-		<div class="works-desc">
-			<div class="works-desc-top">
-
-
-
-				<div class="works-answer">
-					<img src="../images/bigicon1.png" class="works-img"/>
-					<p class="works-username">赵先生 <label class="works-time">1小时前</label></p>
-					<p class="works-content">太棒了，很不错。</p>
-					<img src="../images/bigicon3.png" class="works-desc-pic"/>
-					<img src="../images/bigicon3.png" class="works-desc-pic"/>
-					<img src="../images/bigicon3.png" class="works-desc-pic"/>
-				</div>
-				<div class="works-answer">
-					<img src="../images/bigicon1.png" class="works-img"/>
-					<p class="works-username">赵先生 <label class="works-time">1小时前</label></p>
-					<p class="works-content">太棒了，很不错。</p>
-				</div>
-				<div class="works-answer">
-					<img src="../images/bigicon1.png" class="works-img"/>
-					<p class="works-username">赵先生 <label class="works-time">1小时前</label></p>
-					<p class="works-content">摄影术的诞生是随着欧洲资本主义的发展应运而生的，150多年来，它经历了一个由简单到复杂。</p>
-					<img src="../images/bigicon3.png" class="works-desc-pic"/>
-				</div>
-
-			</div>
-
-		</div>
-
-
-
-
-	</div>
-
+	
 	<div class="bottom-div">
 		<img src="../images/school/recording.png"  class="bt-left"/>
 
@@ -66,39 +29,145 @@
 		<img src="../images/school/addfile.png"  class="bt-right"/>
 	</div>
 
-	
-<script type="text/javascript" charset="UTF-8">
-  	mui.init();
+ 
+	<div id="slider" class="mui-slider mui-content mui-fullscreen" style="top:0px;bottom: 40px; padding-bottom: 0px;">				
+		<div class="mui-slider-group">
+			<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+				<div id="scroll1" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul class="mui-table-view">									
+							<li  class="mui-table-view-cell" v-for="item in acAreaList">
+								 <div class="works-answer">
+									<img src="../images/bigicon1.png" class="works-img"/>
+									<p class="works-username">{{item.acaStudentName}} <label class="works-time">{{item.acaTime}}</label></p>
+									<p class="works-content">{{item.acaDesc}}</p> 
+									<img :src="item.acaFiles" class="works-desc-pic"/>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+			
 
-    onResizeWindow();
-    window.onresize = onResizeWindow;
-    function onResizeWindow(){
-        $("#inputContent").css("width",$(window).width()-72);
-    }
-
-	var vm = new Vue({
-		el: '.mui-content',
-		data: {			 	
-		}
-	});
-	
-	
+    <script src="../js/mui.min.js"></script>
+	<script src="../js/jquery-2.1.4.min.js"></script>
+	<script src="../js/mui.pullToRefresh.js"></script>
+	<script src="../js/mui.pullToRefresh.material.js"></script>
+	<script src="../js/app.js"></script>
+	<script src="../js/vue.min.js"></script>
+	<script type="text/javascript" charset="UTF-8">
+	  	mui.init();
+	  	
+	  	var vm_exchange_area = new Vue({
+			el: '.mui-content',
+			data: {
+				classId:0,
+				acAreaList:[
+//				{
+//              "acaId": 1,
+//              "acaTime": "2017-08-14 16:07:32",
+//              "acaStudentId": 24,
+//              "acaDesc": "测试交流区显示",
+//              "acaStudentName": "测试200",
+//              "acaFiles": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812190705_1105263d46aa434b923839281ac0a1fb.png",
+//              "acaClassId": 8,
+//              "acaOperType": 1,
+//              "showStudentPic": "http://112.124.110.182:11008/upload/studentPicture/20170812/B20170812184037_d0959b7a25b64a80ac9bbfa428b7110b.png"
+//          	}
+            ]
+			}
+		});
+		
+	  	onResizeWindow();
+	    window.onresize = onResizeWindow;
+	    function onResizeWindow(){
+	        $("#inputContent").css("width",$(window).width()-72);
+	    }
+	  	
+		var webview_activity_detail = null; //详情页webview
+		var webview_activity_add_detail = null; // 申请活动详情
+		var webview_activity_exchange_area = null; //交流区
+		var activityList=[];
+		 
+		(function($) {
+		//阻尼系数
+		var deceleration = mui.os.ios?0.003:0.0009;
+		var pageIndex = 1;
+		$('.mui-scroll-wrapper').scroll({
+			bounce: false,
+			indicators: true, //是否显示滚动条
+			deceleration:deceleration
+		});
+		$.ready(function() {
+			//循环初始化所有下拉刷新，上拉加载。
+			$.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
+				$(pullRefreshEl).pullToRefresh({
+					down: {
+						callback: function() {
+							var self = this;
+							var userInfo = app.getState(); 
+							if(userInfo.manageId!=undefined && userInfo.manageId!=''){
+								app.getExchangeAreaList(vm_exchange_area.classId,1,function(data){
+									console.info(JSON.stringify(data));
+									if(data.code==0){
+										if(data.object!=undefined){											
+											vm_exchange_area.acAreaList=data.object.rows;
+											console.info(JSON.stringify(vm_exchange_area.acAreaList));
+										}
+									 	pageIndex=1;
+									}
+									mui.toast(data.msg);
+									self.endPullDownToRefresh();
+								});
+							}else{
+								app.gotoLogin();
+							}
+						}
+					},
+					up: {
+						callback: function() {
+							var self = this;
+							var aa = index;
+							var userInfo = app.getState(); 
+							if(userInfo.manageId!=undefined && userInfo.manageId!=''){
+								app.getExchangeAreaList(vm_exchange_area.classId,pageIndex,function(data){
+									console.info(JSON.stringify(data));
+									var overFlag = false;
+									if(data.code==0){
+										if(data.object!=undefined && data.object.rows.length>0){
+											console.info(JSON.stringify(data.object.rows));
+											vm_exchange_area.acAreaList = vm_exchange_area.acAreaList.concat(data.object.rows);
+											
+											console.info(JSON.stringify(vm_exchange_area.acAreaList));
+										 	pageIndex++;
+										}else{
+											overFlag=true;
+										}
+									} 
+									mui.toast(data.msg);
+									self.endPullUpToRefresh(overFlag);
+								});
+							}else{
+								app.gotoLogin();
+							}
+						}
+					}
+				});
+			});
+			 
+		});
+	})(mui);
+			
+	  
 	document.addEventListener('get_activity_exchange_area', function(event) {
-		activityId = event.detail.activityId;
-//		if(!activityId) {
-//			return;
-//		} 
-//		console.info("activityId:  "+activityId);
-//		app.getActivityDetail(activityId,function(data){
-//			if(data.code==0){
-//				vm.courseInfo=data.object; 
-//				//vm.classList =  data.objectList;
-//			}
-//			mui.toast(data.msg);
-//		});
-//			 
+		vm_exchange_area.classId = event.detail.classId;
+ 		console.info(JSON.stringify(vm_exchange_area.classId));
+ 
 	});
-
 	//重写返回逻辑
 	mui.back = function() {
 		plus.webview.currentWebview().hide("auto", 300);
@@ -106,21 +175,14 @@
 	
 	//窗口隐藏时，重置页面数据
 	mui.plusReady(function () {
+		 
 		var self = plus.webview.currentWebview();
 		self.addEventListener("hide",function (e) {
 			window.scrollTo(0, 0);
 			//vm.resetData();
-		},false);
-		 
-		 
-	    mui('#main_bar').on('tap', 'a', function(e) {
-		    //获取目标子页的id
-		    var targetTab = this.getAttribute('href');
-		    window.location.href=targetTab;
-		});
+		},false);		 
+ 
 	})
-	
-	
-</script>
+	</script>
 </body>
 </html>
