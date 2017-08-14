@@ -56,7 +56,7 @@
 					<div id="scroll1" class="mui-scroll-wrapper">
 						<div class="mui-scroll">
 							<ul class="mui-table-view">									
-								<li class="mui-table-view-cell">
+								<!--<li class="mui-table-view-cell">
 									<div class="works-desc">
 										<div class="works-desc-top">
 											<img src="../images/school/head-pic.png" class="works-img"/>
@@ -113,7 +113,7 @@
 											</div>
 										</div>
 									</div>
-								</li>
+								</li>-->
 							</ul>
 						</div>
 					</div>
@@ -132,7 +132,7 @@
 						<div class="mui-scroll">
 							<ul class="mui-table-view">
 								
-								<li class="mui-table-view-cell">
+								<!--<li class="mui-table-view-cell">
 									<div class="show-desc">
 										<div class="show-desc-right">
 											<img src="../images/school/show-yes.png" class="show-icon">
@@ -157,7 +157,7 @@
 											<p class="show-desc-content">2017-07-25</p>
 										</div>
 									</div>
-								</li>
+								</li>-->
 								 
 							</ul>
 						</div>
@@ -253,13 +253,18 @@
 						
 						insertHtml+="<div class=\"works-desc\">";
 						insertHtml+="	<div class=\"works-desc-top\">";
-						insertHtml+="		<img src=\"../images/school/head-pic.png\" class=\"works-img\"/>";
+						if(objectList[i].actSponsorType==2){
+							insertHtml+="		<img src=\""+objectList[i].showTeacherPic+"\" class=\"works-img\"/>";
+						}else{
+							insertHtml+="		<img src=\""+objectList[i].showStudentPic+"\" class=\"works-img\"/>";
+						}
+						
 						insertHtml+="		<p class=\"works-username\">"+objectList[i].actOperName+"<label class=\"works-time\">"+objectList[i].actTime+"</label></p>";
 						insertHtml+="		<p class=\"works-content\">"+objectList[i].actDesc+"</p>";
 						insertHtml+="		<div >";
 						insertHtml+="			<img src=\""+objectList[i].actFiles+"\" class=\"works-desc-pic\"/>";
-						insertHtml+="			<img src=\"../images/bigicon3.png\" class=\"works-desc-pic\"/>";
-						insertHtml+="			<img src=\"../images/bigicon3.png\" class=\"works-desc-pic\"/>";
+						//insertHtml+="			<img src=\"../images/bigicon3.png\" class=\"works-desc-pic\"/>";
+						//insertHtml+="			<img src=\"../images/bigicon3.png\" class=\"works-desc-pic\"/>";
 						insertHtml+="		</div>";
 						insertHtml+="		<div class=\"icon-line\">";
 						insertHtml+="			<span class=\"mui-icon-extra mui-icon-extra-comment\">"+objectList[i].actFinePintNum+"</span>";
@@ -270,18 +275,23 @@
 						for(var h=0;h<activityCommentList.length;h++){
 							
 							insertHtml+="		<div class=\"works-answer\">";
-							insertHtml+="			<img src=\"../images/bigicon1.png\" class=\"works-img\"/>";
+							if(activityCommentList[h].actIsTeacher==2){
+								insertHtml+="			<img src=\""+activityCommentList[h].showStudentPic+"\" class=\"works-img\"/>";
+							}else{
+								insertHtml+="			<img src=\""+activityCommentList[h].showTeacherPic+"\" class=\"works-img\"/>";
+							}
+							
 							insertHtml+="			<p class=\"works-username\">"+activityCommentList[h].actComReviewer+"<label class=\"works-time\">"+activityCommentList[h].actComTime+"</label></p>";
 							insertHtml+="			<p class=\"works-content\">"+activityCommentList[h].actComDesc+"</p>";
 							insertHtml+="		</div>";
 						}
 						
 						// 可以注释掉部分 下
-						insertHtml+="		<div class=\"works-answer\">";
-						insertHtml+="			<img src=\"../images/bigicon1.png\" class=\"works-img\"/>";
-						insertHtml+="			<p class=\"works-username\">赵先生 <label class=\"works-time\">1小时前</label></p>";
-						insertHtml+="			<p class=\"works-content\">太棒了，很不错。</p>";
-						insertHtml+="		</div>";
+//						insertHtml+="		<div class=\"works-answer\">";
+//						insertHtml+="			<img src=\"../images/bigicon1.png\" class=\"works-img\"/>";
+//						insertHtml+="			<p class=\"works-username\">赵先生 <label class=\"works-time\">1小时前</label></p>";
+//						insertHtml+="			<p class=\"works-content\">太棒了，很不错。</p>";
+//						insertHtml+="		</div>";
 						//可以注释掉部分 上
 						
 						insertHtml+="	</div>";

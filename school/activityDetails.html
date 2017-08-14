@@ -51,7 +51,7 @@
 		<div class="show-desc">
 			<div class="show-desc-right">
 				<div class="ac-end-no">加入</div>
-				<p style="font-size: 12px !important;">剩余名额2人</p>
+				<p style="font-size: 12px !important;">剩余名额{{courseInfo.surplustCount}}人</p>
 			</div>
 			<div class="show-desc-left">
 				<p class="show-desc-title">{{courseInfo.actName}}</p>
@@ -72,7 +72,7 @@
 
 
 			<img :src="courseInfo.actFiles" class="desc-pic"/>
-			<img src="../images/bigicon3.png" class="desc-pic"/> 
+			<!--<img src="../images/bigicon3.png" class="desc-pic"/> -->
 		</div>
 
 
@@ -95,6 +95,7 @@
   	mui.init();
   	var webview_every_one_works = null // 大家作品
   	var webview_activity_reply_detail = null // 活动集锦
+  	var activityId=0;
   	var vm = new Vue({
 		el: '#actiity-detail-content',
 		data: {
@@ -180,7 +181,7 @@
 	function open_activity_reply_detail() {			
 		//触发子窗口变更详情
 		mui.fire(webview_activity_reply_detail, 'get_activity_reply_detail', {
-				//activityId: id
+				activityId: activityId
 			});
  
 			setTimeout(function () {
@@ -194,7 +195,7 @@
 	function open_every_one_works() {			
 		//触发子窗口变更详情
 		mui.fire(webview_every_one_works, 'get_every_one_works', {
-				//activityId: id
+				activityId: activityId
 			});
  
 			setTimeout(function () {

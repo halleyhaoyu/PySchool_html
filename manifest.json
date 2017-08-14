@@ -378,7 +378,8 @@
 					"js/jquery-2.1.4.min.js",
 					"css/icons-extra.css",
 					"school/courseAll.html",
-					"css/school/pushCommon.css"
+					"css/school/pushCommon.css",
+					"images/tabbar/tabbar-sl-2.png"
 				],
 				"refer": [],
 				"priority": 0
@@ -563,7 +564,10 @@
 					"js/vue.min.js",
 					"images/school/head-pic.png",
 					"css/school/everyoneWorks.css",
-					"css/mui.css"
+					"css/mui.css",
+					"images/bigicon3.png",
+					"js/mui.pullToRefresh.js",
+					"js/mui.pullToRefresh.material.js"
 				],
 				"refer": [],
 				"priority": 0

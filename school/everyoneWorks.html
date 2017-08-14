@@ -7,6 +7,8 @@
     <script src="../js/mui.min.js"></script>
 	<script src="../js/app.js"></script>
 	<script src="../js/vue.min.js"></script>
+	<script src="../js/mui.pullToRefresh.js"></script>
+	<script src="../js/mui.pullToRefresh.material.js"></script>
     <link href="../css/mui.css" rel="stylesheet"/>
 	<link href="../css/icons-extra.css" rel="stylesheet"/>
 	<link href="../css/app.css" rel="stylesheet"/>
@@ -14,6 +16,7 @@
 	<link href="../css/dashboard.css" rel="stylesheet"/>
 	<link href="../css/top.css" rel="stylesheet"/>
 	<link href="../css/school/everyoneWorks.css" rel="stylesheet"/>
+    <link href="../css/school/pushCommon.css" rel="stylesheet"/>
 </head>
 <body>
 	<header class="mui-bar mui-bar-nav">
@@ -23,106 +26,174 @@
 	</header>
 	<div class="mui-content">
 
-		<div class="works-desc">
-			<div class="works-desc-top">
-				<img src="../images/school/head-pic.png" class="works-img"/>
-				<p class="works-username">赵先生 <label class="works-time">1小时前</label></p>
-				<p class="works-content">摄影术的诞生是随着欧洲资本主义的发展应运而生的，150多年来，它经历了一个由简单到复杂。</p>
 
 
-				<div >
-					<img src="../images/bigicon3.png" class="works-desc-pic"/>
-					<img src="../images/bigicon3.png" class="works-desc-pic"/>
-					<img src="../images/bigicon3.png" class="works-desc-pic"/>
+<div id="slider" class="mui-slider mui-fullscreen" style="top:64px;padding-bottom: 0px;">				
+			<div class="mui-slider-group">
+				<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+					<div id="scroll1" class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<ul class="mui-table-view">									
+								<li v-for="item in workList" class="mui-table-view-cell" style="padding: 11px 0px;">
+									<div class="works-desc">
+										<div class="works-desc-top">
+											<img src="../images/school/head-pic.png" class="works-img"/>
+											<p class="works-username">{{item.aswStudentName}}<label class="works-time">{{item.aswTime}}</label></p>
+											<p class="works-content">{{item.aswDesc}}</p>
+							 
+											<div >
+												<img v-for="fileItem in item.activityStudentsWorksFilesList" :src="fileIten.aswfFiles" class="works-desc-pic"/>
+												 
+											</div>
+							
+											<div class="icon-line">
+												<span class="mui-icon-extra mui-icon-extra-comment"> {{item.aswCommentNum}}</span>
+												<span class="mui-icon-extra mui-icon-extra-like"> {{item.aswPointNum}}</span>
+											</div>
+							
+											<div class="works-answer">
+												<img src="../images/bigicon1.png" class="works-img"/>
+												<p class="works-username">赵先生 <label class="works-time">1小时前</label></p>
+												<p class="works-content">太棒了，很不错。</p>
+											</div>
+											<div class="works-answer">
+												<img src="../images/bigicon1.png" class="works-img"/>
+												<p class="works-username">赵先生 <label class="works-time">1小时前</label></p>
+												<p class="works-content">太棒了，很不错。</p>
+											</div>
+							
+										</div>
+							
+									</div>
+								</li><li class="mui-table-view-cell" style="padding: 11px 0px;">
+									<div class="works-desc">
+										<div class="works-desc-top">
+											<img src="../images/school/head-pic.png" class="works-img"/>
+											<p class="works-username">赵先生 <label class="works-time">1小时前</label></p>
+											<p class="works-content">摄影术的诞生是随着欧洲资本主义的发展应运而生的，150多年来，它经历了一个由简单到复杂。</p>
+							
+							
+											<div >
+												<img src="../images/bigicon3.png" class="works-desc-pic"/>
+												<img src="../images/bigicon3.png" class="works-desc-pic"/>
+												<img src="../images/bigicon3.png" class="works-desc-pic"/>
+											</div>
+							
+											<div class="icon-line">
+												<span class="mui-icon-extra mui-icon-extra-comment"> 24</span>
+												<span class="mui-icon-extra mui-icon-extra-like"> 111</span>
+											</div>
+							
+											<div class="works-answer">
+												<img src="../images/bigicon1.png" class="works-img"/>
+												<p class="works-username">赵先生 <label class="works-time">1小时前</label></p>
+												<p class="works-content">太棒了，很不错。</p>
+											</div>
+											<div class="works-answer">
+												<img src="../images/bigicon1.png" class="works-img"/>
+												<p class="works-username">赵先生 <label class="works-time">1小时前</label></p>
+												<p class="works-content">太棒了，很不错。</p>
+											</div>
+							
+										</div>
+							
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
 				</div>
-
-				<div class="icon-line">
-					<span class="mui-icon-extra mui-icon-extra-comment"> 24</span>
-					<span class="mui-icon-extra mui-icon-extra-like"> 111</span>
-				</div>
-
-				<div class="works-answer">
-					<img src="../images/bigicon1.png" class="works-img"/>
-					<p class="works-username">赵先生 <label class="works-time">1小时前</label></p>
-					<p class="works-content">太棒了，很不错。</p>
-				</div>
-				<div class="works-answer">
-					<img src="../images/bigicon1.png" class="works-img"/>
-					<p class="works-username">赵先生 <label class="works-time">1小时前</label></p>
-					<p class="works-content">太棒了，很不错。</p>
-				</div>
-
 			</div>
-
-		</div>
-
-
-
-
-
-		<div class="works-desc">
-			<div class="works-desc-top">
-				<img src="../images/school/head-pic.png" class="works-img"/>
-				<p class="works-username">赵先生 <label class="works-time">1小时前</label></p>
-				<p class="works-content">摄影术的诞生是随着欧洲资本主义的发展应运而生的，150多年来，它经历了一个由简单到复杂。</p>
-
-
-				<div >
-					<img src="../images/bigicon3.png" class="works-desc-pic"/>
-					<img src="../images/bigicon3.png" class="works-desc-pic"/>
-					<img src="../images/bigicon3.png" class="works-desc-pic"/>
-				</div>
-
-				<div class="icon-line">
-					<span class="mui-icon-extra mui-icon-extra-comment"> 24</span>
-					<span class="mui-icon-extra mui-icon-extra-like"> 111</span>
-				</div>
-
-				<div class="works-answer">
-					<img src="../images/bigicon1.png" class="works-img"/>
-					<p class="works-username">赵先生 <label class="works-time">1小时前</label></p>
-					<p class="works-content">太棒了，很不错。</p>
-				</div>
-				<div class="works-answer">
-					<img src="../images/bigicon1.png" class="works-img"/>
-					<p class="works-username">赵先生 <label class="works-time">1小时前</label></p>
-					<p class="works-content">太棒了，很不错。</p>
-				</div>
-
-			</div>
-
-		</div>
-
-
-
-
+									
+									
+		
+ 
 	</div>
 
 	
 <script type="text/javascript" charset="UTF-8">
   	mui.init();
   	
-  	var vm = new Vue({
+  	var vm_everyone_work = new Vue({
 		el: '.mui-content',
-		data: {			 	
-		} 
+		data: {	
+			activityId:0,
+			workList:[]
+		}
 	});
 	
+	(function($) {
+		//阻尼系数
+		var deceleration = mui.os.ios?0.003:0.0009;
+		var pageIndex = 1;
+		$('.mui-scroll-wrapper').scroll({
+			bounce: false,
+			indicators: true, //是否显示滚动条
+			deceleration:deceleration
+		});
+		$.ready(function() {
+			//循环初始化所有下拉刷新，上拉加载。
+			$.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
+				$(pullRefreshEl).pullToRefresh({
+					down: {
+						callback: function() {
+							var self = this;
+							var userInfo = app.getState(); 
+							if(userInfo.manageId!=undefined && userInfo.manageId!=''){
+								app.getEveryoneWorkList(vm_everyone_work.activityId,1,function(data){
+									console.info(JSON.stringify(data));
+									if(data.code==0){
+										if(data.object!=undefined){											
+											vm_everyone_work.workList=data.object.rows;
+											console.info(JSON.stringify(vm_everyone_work.workList));
+										}
+									 	pageIndex=1;
+									}
+									mui.toast(data.msg);
+									self.endPullDownToRefresh();
+								});
+							}else{
+								app.gotoLogin();
+							}
+						}
+					},
+					up: {
+						callback: function() {
+							var self = this;
+							var aa = index;
+							var userInfo = app.getState(); 
+							if(userInfo.manageId!=undefined && userInfo.manageId!=''){
+								app.getEveryoneWorkList(vm_everyone_work.classId,pageIndex,function(data){
+									console.info(JSON.stringify(data));
+									var overFlag = false;
+									if(data.code==0){
+										if(data.object!=undefined && data.object.rows.length>0){
+											console.info(JSON.stringify(data.object.rows));
+											vm_everyone_work.workList = vm_everyone_work.workList.concat(data.object.rows);
+											
+											console.info(JSON.stringify(vm_everyone_work.workList));
+										 	pageIndex++;
+										}else{
+											overFlag=true;
+										} 
+									} 
+									mui.toast(data.msg);
+									self.endPullUpToRefresh(overFlag);
+								});
+							}else{
+								app.gotoLogin();
+							}
+						}
+					}
+				});
+			});
+			 
+		});
+	})(mui);
 	
 	document.addEventListener('get_every_one_works', function(event) {
 		activityId = event.detail.activityId;
-//		if(!activityId) {
-//			return;
-//		} 
-//		console.info("activityId:  "+activityId);
-//		app.getActivityDetail(activityId,function(data){
-//			if(data.code==0){
-//				vm.courseInfo=data.object; 
-//				//vm.classList =  data.objectList;
-//			}
-//			mui.toast(data.msg);
-//		});
-//			 
+		vm_everyone_work.activityId=activityId;
 	});
 
 	//重写返回逻辑
@@ -132,18 +203,14 @@
 	
 	//窗口隐藏时，重置页面数据
 	mui.plusReady(function () {
+		 
 		var self = plus.webview.currentWebview();
 		self.addEventListener("hide",function (e) {
 			window.scrollTo(0, 0);
 			//vm.resetData();
 		},false);
 		 
-		 
-	    mui('#main_bar').on('tap', 'a', function(e) {
-		    //获取目标子页的id
-		    var targetTab = this.getAttribute('href');
-		    window.location.href=targetTab;
-		});
+		  
 	})
 	
 </script>

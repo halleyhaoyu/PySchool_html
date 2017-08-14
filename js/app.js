@@ -196,7 +196,8 @@
 	  */
 	owner.getActivityDetail=function(activityId,callback){
 		//view/activity/detailView.shtml?actId=1
-		var url=owner.hostname+'/view/activity/detailView.shtml?actId='+activityId;
+		var userInfo = app.getState();
+		var url=owner.hostname+'/view/activity/detailView.shtml?manageId='+userInfo.manageId+'&actId='+activityId;
 		return owner.getCommon(url,callback);
 //		var msg={
 //				code:-1,
@@ -216,6 +217,18 @@
 		return callback(msg);
 	}
 	
+	
+	
+		/*
+	  * 活动 -大家作品列表
+	  */
+	owner.getEveryoneWorkList=function(activityId,pageIndex,callback){
+		// view/activity/allStudentWork.shtml?manageId=76&page=1 aswActId
+		var userInfo = app.getState();
+		var url=owner.hostname+'/view/activity/allStudentWork.shtml?manageId='+userInfo.manageId+'&aswActId='+activityId+'&page='+pageIndex;
+		return owner.getCommon(url,callback); 
+		return callback(msg);
+	}
 	
 	
 	/*
