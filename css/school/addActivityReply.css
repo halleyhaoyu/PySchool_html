@@ -24,15 +24,13 @@ body, .mui-content {
 	height: 60px;
 }
 .buttonContianer{
-	position: fixed;
+	position: absolute;
 	background: url(../../images/school/add-icon.png);
 	background-size: cover;
-	top: 350px;;
-	z-index: 999;
 }
 .div-tips{
-	position: fixed;
-	top: 370px;
+	margin-top: 16px;
+	position: absolute;
 	left: 80px;
 }
 
@@ -83,7 +81,7 @@ body, .mui-content {
 }
 
 .label-desc{
-	position: fixed;
+	position: absolute;
 	margin-top: 6px;
 	margin-left: 12px;
 }
@@ -114,6 +112,10 @@ body, .mui-content {
 	left: 30px;
 	top: 70px;
 }
+.button5{
+	background:initial;
+}
+
 .show .button{
 	opacity: 1;
 }
@@ -122,10 +124,11 @@ body, .mui-content {
 	bottom: 0;
 	margin-bottom: 0;
 	border-radius: 0;
+	height: 48px;
 }
 
 .label-desc-min{
-	position: fixed;
+	position: absolute;
 	height: 32px;
 	line-height:32px;
 	padding:0 12px;
@@ -167,13 +170,13 @@ body, .mui-content {
 
 .plus-icon {
 	height: 24px;
-	position: fixed;
+	position: absolute;
 	margin-left: 110px;
 	margin-top: 3px;
 }
 .minus-icon{
 	height: 24px;
-	position: fixed;
+	position: absolute;
 	margin-left: 6px;
 	margin-top: 3px;
 }
