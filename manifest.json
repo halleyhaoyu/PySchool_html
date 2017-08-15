@@ -311,7 +311,8 @@
 					"images/tabbar/tabbar-ns-1.png",
 					"login.html",
 					"images/tabbar/tabbar-sl-2.png",
-					"js/vue.min.js"
+					"js/vue.min.js",
+					"images/tabbar/tabbar-sl-4.png"
 				],
 				"refer": [
 					"school/courseDir.html",
@@ -346,10 +347,11 @@
 					"js/mui.picker.js",
 					"js/mui.poppicker.js",
 					"css/mui.poppicker.css",
-					"css/mui.picker.min.css"
+					"css/mui.picker.min.css",
+					"school/personalCenter.html",
+					"images/tabbar/tabbar-ns-4.png"
 				],
 				"refer": [
-					"school/personalCenter.html",
 					"school/exchangeArea.html",
 					"school/addActivity.html"
 				],
@@ -378,7 +380,8 @@
 					"js/jquery-2.1.4.min.js",
 					"css/icons-extra.css",
 					"school/courseAll.html",
-					"css/school/pushCommon.css"
+					"css/school/pushCommon.css",
+					"images/tabbar/tabbar-sl-2.png"
 				],
 				"refer": [],
 				"priority": 0
@@ -404,7 +407,10 @@
 					"images/school/tc_02.png",
 					"js/app.js",
 					"js/vue.min.js",
-					"images/tabbar/tabbar-ns-1.png"
+					"images/tabbar/tabbar-ns-1.png",
+					"images/tabbar/tabbar-sl-3.png",
+					"images/tabbar/tabbar-ns-4.png",
+					"images/tabbar/tabbar-sl-2.png"
 				],
 				"refer": [
 					"school/setTeacherfo.html",
@@ -506,7 +512,8 @@
 					"css/dashboard.css",
 					"js/mui.pullToRefresh.js",
 					"css/school/pushCommon.css",
-					"js/mui.pullToRefresh.material.js"
+					"js/mui.pullToRefresh.material.js",
+					"css/school/activityList.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -563,7 +570,11 @@
 					"js/vue.min.js",
 					"images/school/head-pic.png",
 					"css/school/everyoneWorks.css",
-					"css/mui.css"
+					"css/mui.css",
+					"images/bigicon3.png",
+					"js/mui.pullToRefresh.js",
+					"js/mui.pullToRefresh.material.js",
+					"css/school/pushCommon.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -583,14 +594,18 @@
 					"css/mui.css",
 					"js/common.js"
 				],
-				"refer": [],
+				"refer": [
+					"school/setPassword.html"
+				],
 				"priority": 0
 			},
 			"school/timeline.html": {
 				"resources": [
 					"css/school/timeline.css",
 					"images/school/timeline-dz.png",
-					"images/school/timeline.png"
+					"images/school/timeline.png",
+					"js/app.js",
+					"js/vue.min.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -614,6 +629,19 @@
 					"css/dashboard.css",
 					"css/mui.poppicker.css",
 					"css/mui.picker.min.css",
+					"css/mui.css",
+					"js/jquery-2.1.4.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"school/setPassword.html": {
+				"resources": [
+					"js/mui.picker.js",
+					"css/app.css",
+					"js/mui.min.js",
+					"js/mui.poppicker.js",
+					"css/dashboard.css",
 					"css/mui.css",
 					"js/jquery-2.1.4.min.js"
 				],

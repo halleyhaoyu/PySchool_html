@@ -38,10 +38,11 @@
 						<ul class="mui-table-view">									
 							<li  class="mui-table-view-cell" v-for="item in acAreaList">
 								 <div class="works-answer">
-									<img src="../images/bigicon1.png" class="works-img"/>
+									<img v-if="item.showStudentPic!=''" :src="item.showStudentPic" class="works-img"/>
+									<img v-else src="../images/bigicon1.png" class="works-img"/>
 									<p class="works-username">{{item.acaStudentName}} <label class="works-time">{{item.acaTime}}</label></p>
 									<p class="works-content">{{item.acaDesc}}</p> 
-									<img :src="item.acaFiles" class="works-desc-pic"/>
+									<img v-if="item.acaFiles!=''" :src="item.acaFiles" class="works-desc-pic"/>
 								</div>
 							</li>
 						</ul>

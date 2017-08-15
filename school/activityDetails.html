@@ -50,8 +50,8 @@
 
 		<div class="show-desc">
 			<div class="show-desc-right">
-				<div class="ac-end-no">加入</div>
-				<p style="font-size: 12px !important;">剩余名额2人</p>
+				<div id="activity_detail_join" class="ac-end-join">加入</div>
+				<p style="font-size: 12px !important;">剩余名额{{courseInfo.surplustCount}}人</p>
 			</div>
 			<div class="show-desc-left">
 				<p class="show-desc-title">{{courseInfo.actName}}</p>
@@ -72,7 +72,7 @@
 
 
 			<img :src="courseInfo.actFiles" class="desc-pic"/>
-			<img src="../images/bigicon3.png" class="desc-pic"/> 
+			<!--<img src="../images/bigicon3.png" class="desc-pic"/> -->
 		</div>
 
 
@@ -95,12 +95,12 @@
   	mui.init();
   	var webview_every_one_works = null // 大家作品
   	var webview_activity_reply_detail = null // 活动集锦
-  	var vm = new Vue({
+  	var activityId=0;
+  	var vm_activity_detail = new Vue({
 		el: '#actiity-detail-content',
 		data: {
 			courseInfo:{ 
-		    }
-			,classList:[ ]
+		   } 
 				
 		} 
 	});
@@ -114,7 +114,7 @@
 		console.info("activityId:  "+activityId);
 		app.getActivityDetail(activityId,function(data){
 			if(data.code==0){
-				vm.courseInfo=data.object; 
+				vm_activity_detail.courseInfo=data.object; 
 				//vm.classList =  data.objectList;
 			}
 			mui.toast(data.msg);
@@ -172,6 +172,13 @@
 			//console.info("this.href:  " + this.href);
 			 open_activity_reply_detail();
 		}); 
+		
+		mui('#actiity-detail-content').on('tap','#activity_detail_join',function(){
+			//console.info("this.href:  " + this.href);
+			 post_activity_detail_join();
+		}); 
+		
+		
 	})
 	
 	/**
@@ -180,7 +187,7 @@
 	function open_activity_reply_detail() {			
 		//触发子窗口变更详情
 		mui.fire(webview_activity_reply_detail, 'get_activity_reply_detail', {
-				//activityId: id
+				activityId: activityId
 			});
  
 			setTimeout(function () {
@@ -194,7 +201,7 @@
 	function open_every_one_works() {			
 		//触发子窗口变更详情
 		mui.fire(webview_every_one_works, 'get_every_one_works', {
-				//activityId: id
+				activityId: activityId
 			});
  
 			setTimeout(function () {
@@ -202,6 +209,32 @@
 		},150);
 	}
 	
+	function post_activity_detail_join(){
+		var userInfo = app.getState();
+		var data={};
+		console.info(JSON.stringify(vm_activity_detail.courseInfo));
+		data={
+				manageId:userInfo.manageId,
+				actionType:'',//  加入：join；  退出：signout
+				asActId:vm_activity_detail.courseInfo.actId,
+				asGradeId:userInfo.studentsDetail.stdGrade,
+				asClassId:userInfo.studentsDetail.stdClass,
+				asTcId:vm_activity_detail.courseInfo.actTcId
+			}
+		if(vm_activity_detail.courseInfo.asId==undefined || vm_activity_detail.courseInfo.asId==0 ){
+			data.actionType="join";
+		}else{
+			data.actionType="signout" ;
+		}
+		
+		app.postActivityDetailJoin(data,function(data){
+			if(data.code==0){
+			}
+			mui.toast(data.msg);
+		});
+		 
+	}
+	 
 </script>
 </body>
 </html>

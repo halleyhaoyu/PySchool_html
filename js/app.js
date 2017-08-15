@@ -196,7 +196,8 @@
 	  */
 	owner.getActivityDetail=function(activityId,callback){
 		//view/activity/detailView.shtml?actId=1
-		var url=owner.hostname+'/view/activity/detailView.shtml?actId='+activityId;
+		var userInfo = app.getState();
+		var url=owner.hostname+'/view/activity/detailView.shtml?manageId='+userInfo.manageId+'&actId='+activityId;
 		return owner.getCommon(url,callback);
 //		var msg={
 //				code:-1,
@@ -218,12 +219,34 @@
 	
 	
 	
+		/*
+	  * 活动 -大家作品列表
+	  */
+	owner.getEveryoneWorkList=function(activityId,pageIndex,callback){
+		// view/activity/allStudentWork.shtml?manageId=76&page=1 aswActId
+		var userInfo = app.getState();
+		var url=owner.hostname+'/view/activity/allStudentWork.shtml?manageId='+userInfo.manageId+'&aswActId='+activityId+'&page='+pageIndex;
+		return owner.getCommon(url,callback); 
+		return callback(msg);
+	}
+	
+	
 	/*
 	  * 成果 -获取列表
 	  */
 	owner.getShowAll=function(userInfo,actFine,pageSize,pageIndex,callback){
 		//view/activity/activityShow.shtml?manageId=55&actFine=1
 		var url=owner.hostname+'/view/activity/activityShow.shtml?manageId='+userInfo.manageId+'&actFine='+actFine+'&pageSize='+pageSize+'&pageIndex='+pageIndex;
+		return owner.getCommon(url,callback); 
+	}
+	
+	/*
+	  * 我的 -学生-成长轨迹
+	  */
+	owner.getTimeLine=function(pageIndex,callback){
+		//view/student/growthTrack.shtml?manageId=76
+		var userInfo = app.getState();
+		var url=owner.hostname+'/view/student/growthTrack.shtml?manageId='+userInfo.manageId+'&page='+pageIndex;
 		return owner.getCommon(url,callback); 
 	}
 	
@@ -269,9 +292,19 @@
 		return owner.postCommon(url,data,callback); 
 	}
 	
+
+	/*
+	  * 活动-加入/退出活动
+	  */
+	owner.postActivityDetailJoin=function(data,callback){
+		var userInfo = app.getState();
+		//	view/activity/join.shtml
+		var url=owner.hostname+'/view/activity/join.shtml';
+		return owner.postCommon(url,data,callback); 
+	}
 	
 	/*
-	 * 业务功能
+	 * 业务功能 POST
 	 * */
 	owner.postCommon=function(url,data,callback){
 			console.log(JSON.stringify(data));

@@ -1,8 +1,13 @@
 .course-top-div{
-	background: -webkit-linear-gradient(right,#50edd1,#01cddd);
+	/*background: -webkit-linear-gradient(right,#50edd1,#01cddd);
 	background: -o-linear-gradient(right, #50edd1,#01cddd);
 	background: -moz-linear-gradient(right, #50edd1,#01cddd);
-	background: linear-gradient(to right,#50edd1,#01cddd);
+	background: linear-gradient(to right,#50edd1,#01cddd);*/
+	
+	background: -webkit-linear-gradient(right,#b94ebf,#83268b);
+	background: -o-linear-gradient(right, #b94ebf,#83268b);
+	background: -moz-linear-gradient(right, #b94ebf,#83268b);
+	background: linear-gradient(to right, #b94ebf,#83268b);
 	height: 100px;
 }
 .course-top-a{
