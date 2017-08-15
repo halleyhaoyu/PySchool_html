@@ -240,6 +240,16 @@
 		return owner.getCommon(url,callback); 
 	}
 	
+	/*
+	  * 我的 -学生-成长轨迹
+	  */
+	owner.getTimeLine=function(pageIndex,callback){
+		//view/student/growthTrack.shtml?manageId=76
+		var userInfo = app.getState();
+		var url=owner.hostname+'/view/student/growthTrack.shtml?manageId='+userInfo.manageId+'&page='+pageIndex;
+		return owner.getCommon(url,callback); 
+	}
+	
 	
 	
 		/*
@@ -282,9 +292,19 @@
 		return owner.postCommon(url,data,callback); 
 	}
 	
+
+	/*
+	  * 活动-加入/退出活动
+	  */
+	owner.postActivityDetailJoin=function(data,callback){
+		var userInfo = app.getState();
+		//	view/activity/join.shtml
+		var url=owner.hostname+'/view/activity/join.shtml';
+		return owner.postCommon(url,data,callback); 
+	}
 	
 	/*
-	 * 业务功能
+	 * 业务功能 POST
 	 * */
 	owner.postCommon=function(url,data,callback){
 			console.log(JSON.stringify(data));

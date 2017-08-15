@@ -37,7 +37,8 @@
 								<li v-for="item in workList" class="mui-table-view-cell" style="padding: 11px 0px;">
 									<div class="works-desc">
 										<div class="works-desc-top">
-											<img src="../images/school/head-pic.png" class="works-img"/>
+											<img v-if="item.showStudentPic!=''" :src="item.showStudentPic" class="works-img"/>
+											<img v-else src="../images/school/head-pic.png" class="works-img"/>
 											<p class="works-username">{{item.aswStudentName}}<label class="works-time">{{item.aswTime}}</label></p>
 											<p class="works-content">{{item.aswDesc}}</p>
 							 
@@ -51,21 +52,23 @@
 												<span class="mui-icon-extra mui-icon-extra-like"> {{item.aswPointNum}}</span>
 											</div>
 							
-											<div class="works-answer">
+											<div v-for="commentItem in itme.activityCommentList" class="works-answer">
+												<img v-if="commentItem.showStudentPic!=''" :src="commentItem.showStudentPic" class="works-img"/>
+												<img v-else src="../images/bigicon1.png" class="works-img"/>
+												<p class="works-username">{{commentItem.actComReviewer}}<label class="works-time">{{commentItem.actComTime}}</label></p>
+												<p class="works-content">{{commentItem.actComDesc}}</p>
+											</div>
+											<!--<div class="works-answer">
 												<img src="../images/bigicon1.png" class="works-img"/>
 												<p class="works-username">赵先生 <label class="works-time">1小时前</label></p>
 												<p class="works-content">太棒了，很不错。</p>
-											</div>
-											<div class="works-answer">
-												<img src="../images/bigicon1.png" class="works-img"/>
-												<p class="works-username">赵先生 <label class="works-time">1小时前</label></p>
-												<p class="works-content">太棒了，很不错。</p>
-											</div>
+											</div>-->
 							
 										</div>
 							
 									</div>
-								</li><li class="mui-table-view-cell" style="padding: 11px 0px;">
+								</li>
+								<!--<li class="mui-table-view-cell" style="padding: 11px 0px;">
 									<div class="works-desc">
 										<div class="works-desc-top">
 											<img src="../images/school/head-pic.png" class="works-img"/>
@@ -98,7 +101,7 @@
 										</div>
 							
 									</div>
-								</li>
+								</li>-->
 							</ul>
 						</div>
 					</div>
