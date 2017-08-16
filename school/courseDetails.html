@@ -21,7 +21,7 @@
 </head>
 <body>
 	
-	<div class="mui-content">
+	<div id="course_detail_content" class="mui-content">
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<img src="../images/head-dz.png" class="head-dz"/>
@@ -46,12 +46,19 @@
 				</div>				
 			</li>
 		</ul>
+		
+		<div style="padding:32px;background-color:#F7F7F7;">
+			<button id="btn_course_detail_exprience" type="button" class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn">学习体会</button>
+		</div>
 	</div>
 	
 <script type="text/javascript" charset="UTF-8">
   	mui.init();
+  	
+	var webview_course_experience = null; //详情页webview
+  	
   	var vm = new Vue({
-		el: '.mui-content',
+		el: '#course_detail_content',
 		data: {courseDetails:[]
 		,title:''
 		}
@@ -102,7 +109,30 @@
 			//vm.resetData();
 		},false);
 		 
+		webview_course_experience = mui.preload({
+			url: 'courseExperience.html',
+			id: 'course_experience',
+			styles: {
+				"render": "always",
+				"popGesture": "hide",
+				"bounce": "vertical" 
+			}
+		});
+		
+		mui("#course_detail_content").on('tap','#btn_course_detail_exprience',function(){
+			 open_course_detail_experience();
+		}); 
 	})
+	
+	function open_course_detail_experience(){
+		mui.fire(webview_course_experience, 'get_course_detail_exprience', {
+				 
+			});
+
+		setTimeout(function () {
+				webview_course_experience.show("slide-in-right", 300);
+		},150);
+	}
 </script>
 </body>
 </html>

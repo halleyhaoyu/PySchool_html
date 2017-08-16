@@ -308,7 +308,7 @@
 	 * */
 	owner.postCommon=function(url,data,callback){
 			console.log(JSON.stringify(data));
-			url+=owner.getPramString(data);
+			//url+=owner.getPramString(data);
 			console.log(url);
 		mui.ajax( url,{
 			data:data,
