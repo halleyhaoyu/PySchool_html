@@ -471,7 +471,9 @@
 					"js/app.js",
 					"js/vue.min.js"
 				],
-				"refer": [],
+				"refer": [
+					"school/courseExperience.html"
+				],
 				"priority": 0
 			},
 			"school/activityDetails.html": {
@@ -493,7 +495,8 @@
 				],
 				"refer": [
 					"school/activityReply.html",
-					"school/everyoneWorks.html"
+					"school/everyoneWorks.html",
+					"school/myWorks.html"
 				],
 				"priority": 0
 			},
@@ -538,7 +541,10 @@
 					"images/school/copy.png",
 					"js/app.js",
 					"css/app.css",
-					"css/dashboard.css"
+					"css/dashboard.css",
+					"js/H5Plus.js",
+					"js/common.js",
+					"js/immersed.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -644,6 +650,33 @@
 					"css/dashboard.css",
 					"css/mui.css",
 					"js/jquery-2.1.4.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"school/courseExperience.html": {
+				"resources": [
+					"css/school/myWorks.css",
+					"js/mui.picker.js",
+					"images/school/camera.png",
+					"images/school/voice.png",
+					"images/school/album.png",
+					"images/school/add-icon.png",
+					"js/mui.poppicker.js",
+					"css/mui.poppicker.css",
+					"css/mui.picker.min.css",
+					"js/jquery-2.1.4.min.js",
+					"images/school/copy.png",
+					"css/dashboard.css",
+					"css/mui.css",
+					"css/app.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"school/myWorks.html": {
+				"resources": [
+					"css/school/myWorks.css"
 				],
 				"refer": [],
 				"priority": 0

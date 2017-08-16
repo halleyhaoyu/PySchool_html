@@ -83,7 +83,14 @@
 			<p  class="content">{{courseInfo.actSendWord}}</p>
 
 		</div>
+		<div style="padding:32px;background-color:#F7F7F7;">
+			<button id="btn_activity_my_works" type="button" 
+				class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn">我的作品</button>
+			<button id="btn_activity_my_works_show" type="button" 
+				class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn">推荐学校秀</button>
+		</div>
 	</div>
+	
 </div>
 
 
@@ -95,6 +102,7 @@
   	mui.init();
   	var webview_every_one_works = null // 大家作品
   	var webview_activity_reply_detail = null // 活动集锦
+  	var webview_activity_my_works = null // 我的作品
   	var activityId=0;
   	var vm_activity_detail = new Vue({
 		el: '#actiity-detail-content',
@@ -112,16 +120,18 @@
 			return;
 		} 
 		console.info("activityId:  "+activityId);
-		app.getActivityDetail(activityId,function(data){
+		
+			activityDetailPage(); 
+	});
+ function activityDetailPage(){
+ 	app.getActivityDetail(activityId,function(data){
 			if(data.code==0){
 				vm_activity_detail.courseInfo=data.object; 
 				//vm.classList =  data.objectList;
 			}
 			mui.toast(data.msg);
 		});
-			 
-	});
-
+ }
 	//重写返回逻辑
 	mui.back = function() {
 		plus.webview.currentWebview().hide("auto", 300);
@@ -162,6 +172,21 @@
 			}
 		});
 		
+		webview_activity_my_works= mui.preload({
+			url: 'myWorks.html',
+			id: 'my_works',
+			styles: {"render": "always","popGesture": "hide","bounce": "vertical"}
+		});
+		
+		mui('#actiity-detail-content').on('tap','#btn_activity_my_works',function(){
+			//console.info("this.href:  " + this.href);
+			 open_activity_my_works();
+		}); 
+		
+		mui('#actiity-detail-content').on('tap','#btn_activity_my_works_show',function(){
+			//console.info("this.href:  " + this.href);
+			 post_activity_my_works_show();
+		}); 
 		
 		
 		mui('#actiity-detail-content').on('tap','#activity_every_one_work',function(){
@@ -209,6 +234,23 @@
 		},150);
 	}
 	
+	function open_activity_my_works() {			
+		//触发子窗口变更详情
+		mui.fire(webview_activity_my_works, 'get_activity_my_works', {
+				//activityId: activityId
+			});
+ 
+			setTimeout(function () {
+				webview_activity_my_works.show("slide-in-right", 300);
+		},150);
+	}
+	
+	
+	
+	function post_activity_my_works_show(){
+		mui.toast("推荐学校秀！");
+	}
+	
 	function post_activity_detail_join(){
 		var userInfo = app.getState();
 		var data={};
@@ -228,7 +270,8 @@
 		}
 		
 		app.postActivityDetailJoin(data,function(data){
-			if(data.code==0){
+			if(data.code==0){				
+				activityDetailPage(); 
 			}
 			mui.toast(data.msg);
 		});

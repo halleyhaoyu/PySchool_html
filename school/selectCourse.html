@@ -24,7 +24,7 @@
 	<div class="mui-content">
 		<div class="course-top-div">
 			<a class="course-top-a">
-				<img src="../images/school/cc_pic.png" class="course-cc-pic">
+				<img :src="courseInfo.rcLogo" class="course-cc-pic">
 				<p class="course-top-p">{{courseInfo.rcName}}</p>
 			</a>
 		</div>
@@ -76,7 +76,8 @@
 		        "rcClassForm": "走班制",
 		        "rcOperId": 3,
 		        "deleteFalg": 0,
-		        "deleteTime": 1499742828000
+		        "deleteTime": 1499742828000,
+		        "rcLogo":" "
 		    }
 			,classList:[{
 						"tcId": 1,
