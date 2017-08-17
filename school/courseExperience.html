@@ -15,6 +15,7 @@
 	<link href="../css/school/myWorks.css" rel="stylesheet"/>
 </head>
 <body>
+	<div  id="course_experience_content" >
 	<header class="mui-bar mui-bar-nav">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 		<img src="../images/head-dz.png" class="head-dz"/>
@@ -29,25 +30,23 @@
 			<div class="button button4"></div>
 		</div>
 		<div class="div-tips">附件上限为10个。</div>
-
-
-
+ 
 		<form > 
 			<div class="out-div">
 				<label class="label-desc-cg">学习体会 </label>
-				<textarea id="textarea" rows="3" placeholder="请输入学习体会" class="text-content"></textarea>
-			</div>
-
-
-		</form>
-
-
+				<textarea id="textarea" v-model="experienceInfo.cceDesc" rows="3" placeholder="请输入学习体会" class="text-content"></textarea>
+			</div> 
+		</form> 
 	</div>
 
-	<button  type="button" class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn"> 保 存 </button>
+	<button id="btn_course_exprience_post" type="button" class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn"> 保 存 </button>
+</div>
 <script type="text/javascript" src="../js/mui.picker.js" ></script>
 <script type="text/javascript" src="../js/mui.poppicker.js" ></script>
+	<script src="../js/app.js"></script>
+	<script src="../js/vue.min.js"></script>
 <script type="text/javascript" charset="UTF-8">
+    mui.init();
     var count = 0
     $(".buttonContianer").on('tap',function(){
         count ++
@@ -63,6 +62,58 @@
             })
         }
     })
+    var vm_course_exprience = new Vue({
+		el: '#course_detail_content',
+		data: {
+			experienceInfo:{				
+				cceDesc:'',
+				cceOperId:0,
+				cceOperName:'',
+				cceOperType:0,
+				cceRcId:0,
+				cceChapId:0,
+				cceChapClassId:0,
+				cceFiles:'',
+				cceTmId:0,
+				cceTcId:0
+			}
+		}
+	});
+    document.addEventListener('get_course_detail_exprience', function(event) {
+		vm_course_exprience.experienceInfo.cceRcId = event.detail.courseId;
+		vm_course_exprience.experienceInfo.cceChapId = event.detail.chapId;
+		vm_course_exprience.experienceInfo.cceChapClassId = event.detail.classId;
+		console.info(vm_course_exprience.experienceInfo.cceRcId);
+	});
+    
+    mui.plusReady(function(){
+    	mui('#course_experience_content').on('tap','#btn_course_exprience_post',function(){
+			var userInfo = app.getState();
+			var data={};
+			data=vm_course_exprience.experienceInfo;
+			if(userInfo.roleType==3){
+				data.cceOperId=userInfo.studentsDetail.stdId;
+				data.cceOperName=userInfo.studentsDetail.stdRealName;
+				data.cceOperType=1;
+			}else{
+				data.cceOperId=userInfo.teacherDetail.thId;
+				data.cceOperName=userInfo.teacherDetail.thName;
+				data.cceOperType=2;
+			}
+			console.info(JSON.stringify(data));
+			app.postCourseExperience(data,function(data){
+				if(data.code==0){				
+					mui.back(); 
+				}
+				mui.toast(data.msg);
+			});
+			 
+		}); 
+    })
+     
+    mui.back = function() {
+		plus.webview.currentWebview().hide("auto", 300);
+	}
 </script>
 </body>
 </html>

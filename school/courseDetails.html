@@ -59,33 +59,28 @@
   	
   	var vm = new Vue({
 		el: '#course_detail_content',
-		data: {courseDetails:[]
-		,title:''
+		data: {
+			courseDetails:[]
+			,title:''
+			,courseId:0
+			,chapId:0
+			,classId:0
 		}
-//		,
-//		methods: {
-//			resetData: function() {//重置数据
-//				Object.assign(this.$data, getDefaultData());
-//			}
-//		}
 	});
 	
 	document.addEventListener('get_course_detail', function(event) {
-		courseId = event.detail.courseId;
-		chapId = event.detail.chapId;
-		classId = event.detail.classId;
-		if(!courseId || !chapId) {
+		vm.courseId = event.detail.courseId;
+		vm.chapId = event.detail.chapId;
+		vm.classId = event.detail.classId;
+		if(!vm.courseId || !vm.chapId) {
 			return;
 		}
-		
-		//前页传入的数据，直接渲染，无需等待ajax请求详情后
-//		vm.courseDir = event.detail.cover; 
-//		vm.author = event.detail.author;
-//		vm.time = event.detail.time;
+		 
 		vm.title= event.detail.title;
+		 
 		//向服务端请求文章详情内容
-		console.info("courseId:  "+courseId);
-		app.getCourseDetail(chapId,courseId,classId,function(data){
+		console.info("courseId:  "+vm.courseId);
+		app.getCourseDetail(vm.chapId,vm.courseId,vm.classId,function(data){
 			console.log(data.code);
 			console.log(data.msg);
 			if(data.code==0){ 
@@ -126,8 +121,10 @@
 	
 	function open_course_detail_experience(){
 		mui.fire(webview_course_experience, 'get_course_detail_exprience', {
-				 
-			});
+			courseId:vm.courseId,
+			chapId:vm.chapId,
+			classId:vm.classId
+		});
 
 		setTimeout(function () {
 				webview_course_experience.show("slide-in-right", 300);
