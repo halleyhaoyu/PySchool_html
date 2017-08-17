@@ -669,7 +669,8 @@
 					"images/school/copy.png",
 					"css/dashboard.css",
 					"css/mui.css",
-					"css/app.css"
+					"css/app.css",
+					"js/mui.min.js"
 				],
 				"refer": [],
 				"priority": 0

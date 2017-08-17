@@ -123,15 +123,16 @@
 		
 			activityDetailPage(); 
 	});
- function activityDetailPage(){
- 	app.getActivityDetail(activityId,function(data){
+	
+	 function activityDetailPage(){
+	 	app.getActivityDetail(activityId,function(data){
 			if(data.code==0){
 				vm_activity_detail.courseInfo=data.object; 
 				//vm.classList =  data.objectList;
 			}
 			mui.toast(data.msg);
 		});
- }
+ 	}
 	//重写返回逻辑
 	mui.back = function() {
 		plus.webview.currentWebview().hide("auto", 300);

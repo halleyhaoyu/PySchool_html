@@ -11,8 +11,8 @@
 	//owner.hostname='http://api.course.com:8081/course-api';
 	
 	//owner.hostname='http://192.168.31.232:8081/course-api';
-	//owner.hostname='http://192.168.0.185:8081/course-api';
-	owner.hostname='http://112.124.110.182:11008/course-api';
+	owner.hostname='http://192.168.0.185:8081/course-api';
+	//owner.hostname='http://112.124.110.182:11008/course-api';
 	//owner.hostname='http://172.16.103.41:8081/course-api';
 	
 	
@@ -292,6 +292,15 @@
 		return owner.postCommon(url,data,callback); 
 	}
 	
+	/*
+	  * 课程-课程体会
+	  */
+	owner.postCourseExperience=function(data,callback){
+		//view/teachingManage/join.shtml
+		var url=owner.hostname+'/view/teachingManage/experience.shtml';	 	
+		return owner.postCommon(url,data,callback); 
+	}
+
 
 	/*
 	  * 活动-加入/退出活动
@@ -302,6 +311,22 @@
 		var url=owner.hostname+'/view/activity/join.shtml';
 		return owner.postCommon(url,data,callback); 
 	}
+	
+	
+	/*
+	  * 活动-我的作品
+	  */
+	owner.postMyWorks=function(data,callback){
+		var userInfo = app.getState();
+		//	view/activity/activityStudentWork.shtml
+		var url=owner.hostname+'/view/activity/activityStudentWork.shtml';
+		return owner.postCommon(url,data,callback); 
+	}
+	
+	
+	
+	
+	
 	
 	/*
 	 * 业务功能 POST
