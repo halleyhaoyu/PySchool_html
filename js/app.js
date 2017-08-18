@@ -11,9 +11,9 @@
 	//owner.hostname='http://api.course.com:8081/course-api';
 	
 	//owner.hostname='http://192.168.31.232:8081/course-api';
-	owner.hostname='http://192.168.0.185:8081/course-api';
+	//owner.hostname='http://192.168.0.185:8081/course-api';
 	//owner.hostname='http://112.124.110.182:11008/course-api';
-	//owner.hostname='http://172.16.103.41:8081/course-api';
+	owner.hostname='http://172.16.103.41:8081/course-api';
 	
 	
 	/**
@@ -250,8 +250,38 @@
 		return owner.getCommon(url,callback); 
 	}
 	
+	/*
+	  * 我的 -学生-我的荣誉
+	  */
+	owner.getMyHonor=function(callback){
+		//view/activity/honorData.shtml?manageId=76
+		var userInfo = app.getState();
+		var url=owner.hostname+'/view/activity/honorData.shtml?manageId='+userInfo.manageId ;
+		return owner.getCommon(url,callback); 
+	}
 	
 	
+	
+	
+	/*
+	  * 我的 -老师-学生排行榜
+	  */
+	owner.getStudentPraiseRankingList=function(callback){
+		//view/student/praiseRankingListData.shtml?manageId=55&page=1
+		var userInfo = app.getState();
+		var url=owner.hostname+'/view/student/praiseRankingListData.shtml?manageId='+userInfo.manageId+'&page=1' ;
+		return owner.getCommon(url,callback); 
+	}
+	
+	/*
+  		* 我的 -老师-活动点赞
+  	*/
+	owner.getActivityPraiseRankingList=function(callback){
+		//view/activity/praiseRankingListData.shtml?manageId=55&page=1
+		var userInfo = app.getState();
+		var url=owner.hostname+'/view/activity/praiseRankingListData.shtml?manageId='+userInfo.manageId +'&page=1';
+		return owner.getCommon(url,callback); 
+	}
 		/*
 	 * 业务功能
 	 * */
@@ -280,7 +310,9 @@
 	}
 
 
-
+///////////////////////////////////////////////////////
+///// POST 
+/////////////////////////////////////////////////////////////////////////
 	/*
 	  * 课程-选课提交
 	  */
@@ -323,11 +355,67 @@
 		return owner.postCommon(url,data,callback); 
 	}
 	
+	/*
+	  * 活动-活动申请
+	  */
+	owner.postAddActivity=function(data,callback){
+		//	view/activity/activityEdit.shtml
+		var url=owner.hostname+'/view/activity/activityEdit.shtml';
+		return owner.postCommon(url,data,callback);
+	}
+	
+	/*
+	  * 活动-活动申请
+	  */
+	owner.postActivityReply=function(data,callback){
+		//	view/activity/highlights.shtml
+		var url=owner.hostname+'view/activity/highlights.shtml';
+		return owner.postCommon(url,data,callback);
+	}
 	
 	
 	
 	
+
+	/*
+	  * 评论-提交
+	  */
+	owner.postComment=function(data,callback){
+		//	view/activity/comment.shtml
+		var url=owner.hostname+'/view/activity/comment.shtml';
+		return owner.postCommon(url,data,callback);
+	}
 	
+	/*
+	  * 我的-学生-修改个人信息
+	  */
+	owner.postSetStudentInfo=function(data,callback){
+		//	view/student/save.shtml
+		var url=owner.hostname+'/view/student/save.shtml';
+		return owner.postCommon(url,data,callback);
+	}	
+	
+	/*
+	  * 我的-老师-修改个人信息
+	  */
+	owner.postSetTeacherInfo=function(data,callback){
+		//	view/teacher/teachersDetail.shtml
+		var url=owner.hostname+'/view/teacher/teachersDetail.shtml';
+		return owner.postCommon(url,data,callback);
+	}	
+	
+	/*
+	  * 我的-老师-修改个人信息
+	  */
+	owner.postModifyPassword=function(data,callback){
+		//	view/login/modifyPassword.shtml
+		var url=owner.hostname+'/view/login/modifyPassword.shtml';
+		return owner.postCommon(url,data,callback);
+	}	
+	
+	
+	
+
 	/*
 	 * 业务功能 POST
 	 * */

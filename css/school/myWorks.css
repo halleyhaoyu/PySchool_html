@@ -24,15 +24,13 @@ body, .mui-content {
 	height: 60px;
 }
 .buttonContianer{
-	position: fixed;
+	position: absolute;
 	background: url(../../images/school/add-icon.png);
 	background-size: cover;
-	top: 260px;;
-	z-index: 999;
 }
 .div-tips{
-	position: fixed;
-	top: 280px;
+	margin-top: 16px;
+	position: absolute;
 	left: 80px;
 }
 
@@ -83,7 +81,7 @@ body, .mui-content {
 }
 
 .label-desc{
-	position: fixed;
+	position: absolute;
 	margin-top: 6px;
 	margin-left: 12px;
 }

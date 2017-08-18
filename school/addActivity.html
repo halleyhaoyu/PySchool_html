@@ -7,6 +7,7 @@
     <script src="../js/jquery-2.1.4.min.js"></script>
     <script src="../js/mui.min.js"></script>
 	<script src="../js/app.js"></script>
+	<script type="text/javascript" src="../js/vue.min.js"></script>
     <link href="../css/mui.css" rel="stylesheet"/>
 	<link href="../css/app.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../css/mui.picker.min.css" />
@@ -14,163 +15,43 @@
 	<link href="../css/dashboard.css" rel="stylesheet"/>
 	<link href="../css/top.css" rel="stylesheet"/>
 	<link href="../css/school/addActivityReply.css" rel="stylesheet"/>
-	<style type="text/css">
-		.rp {
-			width: 100%;
-			height: 100%;
-			display: none;
-			text-align: center;
-			position: fixed;
-			top: 0;
-			background: rgba(0,0,0,0.8);
-			z-index: 9999;
-			overflow: hidden;
-		}
-		.aname {
-			font-size: 16px;
-		}
-		.ainf {
-			font-size: 12px;
-		}
-		.rtime {
-			font-size: 22px;
-			color: #FF0000;
-		}
-		.ptime {
-			margin-top: 40%;
-			font-size: 22px;
-			color: #FFFFFF;
-		}
-		.rprogress {
-			background: url(../images/arecord.png) no-repeat center center;
-			background-size: 32px 32px;
-		}
-		.rschedule {
-		    background-color: rgba(0,0,0,0);
-		    border: 5px solid rgba(0,183,229,0.9);
-		    opacity: .9;
-		    border-left: 5px solid rgba(0,0,0,0);
-		    border-right: 5px solid rgba(0,0,0,0);
-		    border-radius: 50px;
-		    box-shadow: 0 0 15px #2187e7;
-		    width: 36px;
-		    height: 36px;
-		    margin: 0 auto;
-		    -webkit-animation: spin 1s infinite linear;
-		    animation: spin 1s infinite linear;
-		}
-		@-webkit-keyframes spin {
-		    0% {
-		        -webkit-transform: rotate(0deg);
-		    }
-		    100% {
-		        -webkit-transform: rotate(360deg);
-		    }
-		}
-		@keyframes spin {
-		    0% {
-		        transform: rotate(0deg);
-		    }
-		    100% {
-		        transform: rotate(360deg);
-		    }
-		}
-		.progress {
-		  width: 90%;
-		  background-color: #666;
-		  margin: 0 5%;
-		  border: 1px solid #222;
-		  -webkit-border-radius: 5px;
-		  border-radius: 5px;
-		}
-		.schedule {
-		  width: 8px;
-		  height: 8px;
-		  margin: 1px 0;
-		  background-color: #FFCC33;
-		  -webkit-border-radius: 4px;
-		  border-radius: 4px;
-		  -webkit-transition: all 1s linear;
-		  transition: all 1s linear;
-		}
-		.stop {
-			width: 72px;
-			height: 72px;
-			background: url(../images/astop.png) center center;
-			background-size: 72px 72px;
-			margin: auto;
-			-webkit-border-radius: 72px;
-			border-radius: 72px;
-		}
-		.stop:active{
-		  	-webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5) inset;
-			box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5) inset;
-		}
-		.iplay {
-			display: block;
-			-ms-touch-action: auto;
-		}
-		.mui-icon-close{
-			float: right;
-		    color: #333;
-		    opacity: .65;
-		}
-		li {
-			list-style-type:none;
-			border: 1px solid #ddd;
-    			padding: 6px 12px;
-    			border-radius: 6px;	
-    			margin-top:6px;
-		}
-	</style>
+	<link href="../css/H5MediaFile.css" rel="stylesheet"/>
+	
 </head>
 <body>
+	<div id="add_activity_content">
+		
 	<header class="mui-bar mui-bar-nav">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 		<img src="../images/head-dz.png" class="head-dz"/>
 		<h1 class="mui-title">新活动申请</h1>
 	</header>
 	<div class="mui-content">
-
-		
-
-
 		<form >
-
 			<div>
-
 				<label class="label-desc">活动主题 </label>
-				<input type="text" class="input-content" data-input-password="3" placeholder="请输入活动主题">
+				<input type="text" v-model="activityInfo.actName" class="input-content" data-input-password="3" placeholder="请输入活动主题">
 			</div>
-
-
 			<div>
-
 				<div class="label-desc-min">最大人数 </div>
-				<img src="../images/school/plus.png" class="plus-icon"/>
-				<input type="text" class="input-content input-content-min" data-input-password="3" placeholder="请选择参与人">
-				<img src="../images/school/minus.png" class="minus-icon"/>
+				<img id="number_plus" src="../images/school/plus.png" class="plus-icon"/>
+				<input type="text" v-model="activityInfo.actNum"  data-input-password="3" 
+					style="height: 32px !important;
+	line-height: 32px !important;margin-left: 150px;width: 80px;padding: 0 10px;">
+				<img id="number_minus"  src="../images/school/minus.png" class="minus-icon"/>
 			</div>
-
-
 			<div>
-
 				<label class="label-desc">参与人 </label>
-				<input type="text" class="input-content" data-input-password="3" placeholder="请选择参与人">
+				<input type="text" v-model="activityInfo.actParticipant" class="input-content" data-input-password="3" placeholder="请选择参与人">
 			</div>
-
-
 			<div class="out-div">
 				<label class="label-desc-cg">个人成果 </label>
-				<textarea id="textarea" rows="3" placeholder="请输入活动体会" class="text-content"></textarea>
+				<textarea id="textarea" v-model="activityInfo.actDesc" rows="3" placeholder="请输入活动体会" class="text-content"></textarea>
 			</div>
-			
-			
 			
 			<ul id="history" class="dlist" style="text-align:left;padding:0;">
 				
 			</ul>
-			
 			
 			<div class="button buttonContianer">
 				<div class="button button1" id="addAudio"></div>
@@ -180,17 +61,11 @@
 				<div class="button button5"></div>
 			</div>
 			<div class="div-tips">附件上限为10个。</div>
-
-
 		</form>
-
-
 	</div>
 	<div style="height:180px;"></div>
 	
-	<button  type="button" class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn"> 保 存 </button>
-	
-	
+	<button  id="btn_add_activity_post" type="button" class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn"> 保 存 </button>	
 	
 	<div id="play" class="rp">
 		<div id="ptime" class="ptime">00:00:00/00:00:00</div><br/>
@@ -207,6 +82,7 @@
 	</div>
 	
 	
+	</div>
 	<script type="text/javascript" src="../js/mui.picker.js" ></script>
 	<script type="text/javascript" src="../js/mui.poppicker.js" ></script>
 	<script type="text/javascript" src="../js/H5Plus.js" ></script>
@@ -230,26 +106,27 @@
 	            })
 	        }
 	    })
-	    
-	   
+	     
+
+	   	var vm_add_activity = new Vue({
+			el: '#add_activity_content',
+			data: {
+				activityInfo:{					
+					manageId:0,
+					actName:'',
+					actDesc:'',
+					actNum:0,//  最大参与人数          必填
+					actStatus:1,//  1:待审核；2：审核通过；3：审核未通过
+					actParticipant:'',//  活动参与人
+					actFiles:'' //  活动附件 
+				}
+			}
+		});
 		
-		
-		document.addEventListener('get_activity_add_detail', function(event) {
-			activityId = event.detail.activityId;
-	//		if(!activityId) {
-	//			return;
-	//		} 
-	//		console.info("activityId:  "+activityId);
-	//		app.getActivityDetail(activityId,function(data){
-	//			if(data.code==0){
-	//				vm.courseInfo=data.object; 
-	//				//vm.classList =  data.objectList;
-	//			}
-	//			mui.toast(data.msg);
-	//		});
-	//			 
+		document.addEventListener('get_activity_add_detail', function(event) { 
 		});
 	
+		
 		//重写返回逻辑
 		mui.back = function() {
 			plus.webview.currentWebview().hide("auto", 300);
@@ -264,10 +141,15 @@
 			},false);
 			 
 			 
-		    mui('#main_bar').on('tap', 'a', function(e) {
-			    //获取目标子页的id
-			    var targetTab = this.getAttribute('href');
-			    window.location.href=targetTab;
+			mui("#add_activity_content").on('tap','#number_plus',function(){
+				 vm_add_activity.activityInfo.actNum=vm_add_activity.activityInfo.actNum+1;
+			}); 
+		
+			mui("#add_activity_content").on('tap','#number_minus',function(){
+				 vm_add_activity.activityInfo.actNum= vm_add_activity.activityInfo.actNum>0?vm_add_activity.activityInfo.actNum-1:0;
+			});
+			mui("#add_activity_content").on('tap','#btn_add_activity_post',function(){
+				post_add_activity();
 			});
 		})
 		
@@ -289,6 +171,20 @@
 	    document.getElementById('addImages').addEventListener('tap', function() {
 	    		albumAndUpload(0);
 	    });
+	    
+	    function post_add_activity(){
+	    	var userInfo = app.getState();
+			var data={};
+			data=vm_add_activity.activityInfo;
+			data.manageId=userInfo.manageId
+			console.info(JSON.stringify(data));
+			app.postAddActivity(data,function(data){
+				if(data.code==0){
+					mui.back(); 
+				}
+				mui.toast(data.msg);
+			});
+	    }
 	</script>
 </body>
 </html>
