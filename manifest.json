@@ -416,7 +416,8 @@
 					"school/setTeacherfo.html",
 					"school/setStudentInfo.html",
 					"school/timeline.html",
-					"school/myHonor.html"
+					"school/myHonor.html",
+					"school/rankingList.html"
 				],
 				"priority": 0
 			},
@@ -544,7 +545,8 @@
 					"css/dashboard.css",
 					"js/H5Plus.js",
 					"js/common.js",
-					"js/immersed.js"
+					"js/immersed.js",
+					"css/H5MediaFile.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -562,7 +564,11 @@
 					"js/mui.min.js",
 					"css/dashboard.css",
 					"js/vue.min.js",
-					"css/mui.css"
+					"css/mui.css",
+					"js/H5Plus.js",
+					"js/common.js",
+					"css/H5MediaFile.css",
+					"js/immersed.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -651,7 +657,9 @@
 					"js/mui.poppicker.js",
 					"css/dashboard.css",
 					"css/mui.css",
-					"js/jquery-2.1.4.min.js"
+					"js/jquery-2.1.4.min.js",
+					"js/app.js",
+					"js/vue.min.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -672,7 +680,13 @@
 					"css/dashboard.css",
 					"css/mui.css",
 					"css/app.css",
-					"js/mui.min.js"
+					"js/mui.min.js",
+					"js/H5Plus.js",
+					"css/H5MediaFile.css",
+					"js/immersed.js",
+					"js/common.js",
+					"js/app.js",
+					"js/vue.min.js"
 				],
 				"refer": [],
 				"priority": 0
@@ -680,6 +694,21 @@
 			"school/myWorks.html": {
 				"resources": [
 					"css/school/myWorks.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"school/rankingList.html": {
+				"resources": [
+					"images/school/good_black.png",
+					"css/school/rankingList.css",
+					"images/school/bronze-medal.png",
+					"js/app.js",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/dashboard.css",
+					"js/vue.min.js",
+					"css/mui.css"
 				],
 				"refer": [],
 				"priority": 0

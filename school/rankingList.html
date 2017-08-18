@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js"></script>
+		<script src="../js/vue.min.js"></script>
+		<link href="../css/mui.css" rel="stylesheet"/>
+		<link href="../css/app.css" rel="stylesheet"/>
+		<link href="../css/top.css" rel="stylesheet"/>
+		<link href="../css/dashboard.css" rel="stylesheet"/>
+		<link href="../css/school/rankingList.css" rel="stylesheet"/>
+		<title>排行榜</title>
+	</head>
+	<body>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<img src="../images/head-dz.png" class="head-dz"/>
+		<h1 class="mui-title">排行榜</h1>
+	</header>
+ 
+		<div id="ranking_list_content" class="mui-content">
+			<ul class="mui-table-view">
+				<li v-if="showType==1" v-for=" (item,index)  in studentRanking" class="mui-table-view-cell mui-media">
+					<a href="javascript:;">						
+						<img v-if="index==0" class="mui-pull-left medal-img" src="../images/school/gold-medal.png">
+						 <img v-else-if="index==1" class="mui-pull-left medal-img" src="../images/school/silver-medal.png">
+						<img v-else-if="index==2" class="mui-pull-left medal-img" src="../images/school/bronze-medal.png">
+						<span v-else-if="index>2" class="ranking-num mui-pull-left">{{index+1}}</span>
+						
+						<img class="mui-media-object mui-pull-left" src="../images/school/head-pic.png">
+						<div class="mui-media-body">{{item.showActName}}
+							<span class="mui-pull-right  ranking-span" style="width: 90px;"> {{item.showActTime}}
+							</span>
+						</div>
+					</a>
+				</li>				
+				<li v-if="showType==2" v-for="(item, index) in activityRanking" class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<img v-if="index==0" class="mui-pull-left medal-img" src="../images/school/gold-medal.png">
+						<img v-else-if="index==1" class="mui-pull-left medal-img" src="../images/school/silver-medal.png">
+						<img v-else-if="index==2" class="mui-pull-left medal-img" src="../images/school/bronze-medal.png">
+						<span v-else-if="index>2" class="ranking-num mui-pull-left">{{index+1}}</span>
+						
+						<img class="mui-media-object mui-pull-left" src="../images/school/head-pic.png">
+						<div class="mui-media-body">
+							 {{item.actName}}
+							<span class="mui-pull-right  ranking-span">
+								<img class="good_black" src="../images/school/good_black.png">{{item.showTotalPointNum}}
+							</span>
+						</div>						
+					</a>
+				</li>
+<!--				
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<img class="mui-pull-left medal-img" src="../images/school/silver-medal.png">
+						<img class="mui-media-object mui-pull-left" src="../images/school/head-pic.png">
+						<div class="mui-media-body">
+							木屋 
+							<span class="mui-pull-right  ranking-span">
+								<img class="good_black" src="../images/school/good_black.png"> 999
+							</span>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<img class="mui-pull-left medal-img" src="../images/school/bronze-medal.png">
+						<img class="mui-media-object mui-pull-left" src="../images/school/head-pic.png">
+						<div class="mui-media-body">
+							CBD 
+							<span class="mui-pull-right ranking-span">
+								<img class="good_black" src="../images/school/good_black.png"> 888
+							</span>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<span class="ranking-num mui-pull-left">4</span>
+						<img class="mui-media-object mui-pull-left" src="../images/school/head-pic.png">
+						<div class="mui-media-body">
+							木屋 
+							<span class="mui-pull-right  ranking-span">
+								<img class="good_black" src="../images/school/good_black.png"> 777
+							</span>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<span class="ranking-num mui-pull-left">5</span>
+						<img class="mui-media-object mui-pull-left" src="../images/school/head-pic.png">
+						<div class="mui-media-body">
+							CBD 
+							<span class="mui-pull-right ranking-span">
+								<img class="good_black" src="../images/school/good_black.png"> 666
+							</span>
+						</div>
+					</a>
+				</li>-->
+			</ul> 
+			
+		</div> 
+		<script type="text/javascript" charset="UTF-8">
+			mui.init();
+			
+			var vm_ranking_list = new Vue({
+				el: '#ranking_list_content',
+				data: {
+					showType:2,
+					studentRanking:[
+					 {showActName:'123a',showActTime:'2017-08-08'}
+					,{showActName:'123b',showActTime:'2017-08-08'}
+					,{showActName:'123c',showActTime:'2017-08-08'}
+					,{showActName:'123d',showActTime:'2017-08-08'}
+					,{showActName:'123e',showActTime:'2017-08-08'}
+					],
+					activityRanking:[
+					 {actName:'456',showTotalPointNum:78}
+					,{actName:'456a',showTotalPointNum:79}
+					,{actName:'456b',showTotalPointNum:789}
+					,{actName:'456c',showTotalPointNum:72}
+					,{actName:'456d',showTotalPointNum:738}
+					]
+				} 
+			});
+			  		
+			  		
+			  		//重写返回逻辑
+			mui.back = function() {
+				plus.webview.currentWebview().hide("auto", 300);
+			}
+			
+			document.addEventListener('get_ranking_list', function(event) {
+				vm_ranking_list.showType=event.detail.showType;
+				getRankingList(vm_ranking_list.showType); 
+			});
+			
+			mui.plusReady(function(){
+				
+			})
+			function  getRankingList(showType){
+				if(showType==1){
+					app.getStudentPraiseRankingList(function(data){
+						if(data.code==0){
+							vm_ranking_list.studentRanking=data.object.rows;  
+						}
+						mui.toast(data.msg);
+					});
+				}else{
+					app.getActivityPraiseRankingList(function(data){
+						if(data.code==0){
+							vm_ranking_list.activityRanking=data.object.rows; 
+							console.info(JSON.stringify(data.object.rows));
+						}
+						mui.toast(data.msg);
+					});
+				}
+			}
+	  	</script>
+	  	
+	</body>
+</html>

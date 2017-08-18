@@ -93,6 +93,7 @@
 	var webview_set_detail_teacher = null;
 	var webview_student_time_line = null;
 	var webview_student_honor = null;
+	var webview_ranking_list = null;
 	
 	    var vm = new Vue({
 			el: '#personal_center_content',
@@ -126,7 +127,7 @@
 			    	if(this.userInfo.roleType==3 && this.userInfo.studentsDetail.stdPic!=undefined && this.userInfo.studentsDetail.stdPic!=''){
 			    		pic=this.userInfo.studentsDetail.stdPic;
 			    	}
-			    	else if(this.userInfo.roleType==3 && this.userInfo.teacherDetail!=undefined && this.userInfo.teacherDetail.thPic!=''){
+			    	else if(this.userInfo.roleType==2 && this.userInfo.teacherDetail!=undefined && this.userInfo.teacherDetail.thPic!=''){
 			    		pic=this.userInfo.teacherDetail.thPic;
 			    	}
 			    	return pic;
@@ -187,6 +188,19 @@
 				}
 			});
 			
+			webview_ranking_list = mui.preload({
+				url: 'rankingList.html',
+				id: 'ranking_list',
+				styles: {
+					"render": "always",
+					"popGesture": "hide",
+					"bounce": "vertical" 
+				}
+			});
+			
+			
+			
+			
 			mui('#personal_center_content').on('tap', '#personal_student_time_line_link', function(e) {
 			    //获取目标子页的id
 			   open_time_line_detail(userInfo);
@@ -197,15 +211,11 @@
 			});
 			
 			 
-			mui('#personal_center_content').on('tap', '#personal_teacher_ranking_link', function(e) {
-			    //获取目标子页的id
-			   //open_student_honor_detail(userInfo);
-			   plus.nativeUI.toast('敬请期待！');
+			mui('#personal_center_content').on('tap', '#personal_teacher_ranking_link', function(e) { 
+			   open_ranking_list(1); 
 			});
-			mui('#personal_center_content').on('tap', '#personal_activity_ranking_link', function(e) {
-			    //获取目标子页的id
-			   //open_student_honor_detail(userInfo);
-			   plus.nativeUI.toast('敬请期待！');
+			mui('#personal_center_content').on('tap', '#personal_activity_ranking_link', function(e) { 
+			   open_ranking_list(2);
 			});
 			
 			
@@ -240,18 +250,17 @@
 			
 		})
 		
-		function open_set_detail(userInfo){
-			
+		function open_set_detail(userInfo){			
 			if(userInfo.roleType==2){
 				mui.fire(webview_set_detail_teacher, 'get_set_teacher', {
-					userInfo: userInfo
+					teacherInfo: userInfo.teacherDetail
 				});	 
 				setTimeout(function () {
 						webview_set_detail_teacher.show("slide-in-right", 300);
 				},150);
 			}else{
 				mui.fire(webview_set_detail_student, 'get_set_student', {
-					userInfo: userInfo
+					studentInfo: userInfo.studentsDetail
 				});	 
 				setTimeout(function () {
 						webview_set_detail_student.show("slide-in-right", 300);
@@ -272,6 +281,15 @@
 			});	
 			setTimeout(function () {
 					webview_student_honor.show("slide-in-right", 300);
+			},150);
+		}
+		
+		function open_ranking_list(showType){			
+			mui.fire(webview_ranking_list, 'get_ranking_list', {
+				showType: showType
+			});	
+			setTimeout(function () {
+					webview_ranking_list.show("slide-in-right", 300);
 			},150);
 		}
 </script>

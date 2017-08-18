@@ -86,7 +86,7 @@
 		<div style="padding:32px;background-color:#F7F7F7;">
 			<button id="btn_activity_my_works" type="button" 
 				class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn">我的作品</button>
-			<button id="btn_activity_my_works_show" type="button" 
+			<button v-if="userInfo.roleType==2" id="btn_activity_my_works_show" type="button" 
 				class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn">推荐学校秀</button>
 		</div>
 	</div>
@@ -107,7 +107,8 @@
   	var vm_activity_detail = new Vue({
 		el: '#actiity-detail-content',
 		data: {
-			courseInfo:{ 
+			userInfo:{roleType:2},
+			courseInfo:{
 		   } 
 				
 		} 
@@ -120,7 +121,7 @@
 			return;
 		} 
 		console.info("activityId:  "+activityId);
-		
+		vm_activity_detail.userInfo=app.getState();
 			activityDetailPage(); 
 	});
 	
@@ -213,7 +214,7 @@
 	function open_activity_reply_detail() {			
 		//触发子窗口变更详情
 		mui.fire(webview_activity_reply_detail, 'get_activity_reply_detail', {
-				activityId: activityId
+				activityInfo: vm_activity_detail.courseInfo
 			});
  
 			setTimeout(function () {

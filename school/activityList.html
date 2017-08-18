@@ -166,6 +166,11 @@
 												var ul = self.element.querySelector('.mui-table-view'); 
 												ul.appendChild(createFragment(index,ul, data.object.rows), ul.firstChild);
 												//activityList.concat(data.objectList); 
+												
+												mui('#item1mobile').on('tap','a',function(){
+													//console.info("this.href:  " + this.href);
+													open_activity_detail(this.id);
+												}); 
 											 	 pageIndex++;
 											}else{
 												mui.toast(data.msg);

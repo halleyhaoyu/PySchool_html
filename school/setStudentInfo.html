@@ -28,40 +28,40 @@
 	<div class="mui-content">
 		<form class="mui-input-group">
 			<div class="head-div">
-				<img src="../images/school/head-pic.png" class="head-pic" id="headImage">
+				<img  :src="headPic" class="head-pic" id="headImage">
 				<p style="font-size: 12px !important;margin-bottom: 12px;opacity: .5;">点击图片，上传新头像。</p>
 			</div>
 
 
 			<div class="mui-input-row">
 				<label>学生姓名 <span style="color:red;"> *</span></label>
-				<input type="text" placeholder="学生姓名"/>
+				<input type="text" v-model="studentInfo.stdRealName"   placeholder="学生姓名"/>
 			</div>
 
 
 			<div class="mui-input-row">
 				<label>性别 <span style="color:red;"> *</span></label>
-				<input type="text" placeholder="性别"/>
+				<input type="text" v-model="stdGenderName" placeholder="性别"/>
 			</div>
 
 			<div class="mui-input-row">
 				<label>年级 <span style="color:red;"> *</span></label>
-				<input type="text" placeholder="年级"/>
+				<input type="text" v-model="studentInfo.stdGradeName"  placeholder="年级"/>
 			</div>
 			<div class="mui-input-row">
 				<label>班级 <span style="color:red;"> *</span></label>
-				<input type="text" placeholder="班级"/>
+				<input type="text" v-model="studentInfo.stdClassName"  placeholder="班级"/>
 			</div>
 
 			<div class="mui-input-row">
 				<label>详细地址 <span style="color:red;"> *</span></label>
-				<input type="text" placeholder="详细地址"/>
+				<input type="text" v-model="studentInfo.stdAddress"  placeholder="详细地址"/>
 			</div>
 
 
 		</form>
 		<div style="padding:32px;background-color:#F7F7F7;">
-			<button  type="button" class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn">确定</button>
+			<button id="btn_set_student_post" type="button" class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn">确定</button>
 		</div>
 	</div>
 	
@@ -85,7 +85,46 @@
   	 document.getElementById('headImage').addEventListener('tap', function() { 
      	cameraAndAlbum('修改用户头像',1);
      }); 
-  	
+  	 
+  	var vm_set_student = new Vue({
+		el: '#student_info_content',
+		data: {
+			studentInfo:{
+				 stdGender:'M',
+				 stdRealName:'测试200',
+				stdGradeName:'1年级',
+				stdClassName:'2班',
+				stdAddress:'XX路XX弄',
+				stdPic:'http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png'
+			}
+		},
+		computed: {
+		    headPic:function(){
+		    	var pic='../images/school/head-pic.png';
+		    	if( this.studentInfo.stdPic!=undefined && this.studentInfo.stdPic!=''){
+		    		pic=this.studentInfo.stdPic;
+		    	}
+		    	return pic;
+		    },
+		    stdGenderName:  {
+		        get: function () {
+			    	 return this.studentInfo.stdGender=='M'?'男':'女';
+			    },
+			    set: function (newValue) {
+			    	if(newValue=='男'){
+			    		this.studentInfo.stdGender='M';
+			    	}else{
+			    		this.studentInfo.stdGender='F';
+			    	}
+			    }
+		    }
+		}
+	});
+	
+  	document.addEventListener('get_set_student', function(event) {
+		vm_set_student.studentInfo = event.detail.studentInfo;
+	});
+	
   	mui.plusReady(function(){
   			webview_set_password = mui.preload({
 				url: 'setPassword.html',
@@ -97,6 +136,9 @@
 				}
 			});
 			
+		mui('#student_info_content').on('tap', '#btn_set_student_post', function(e) {
+			  post_set_student_info();
+			});
 			
   		mui('#student_info_content').on('tap', '#modify_password', function(e) {
 			  mui.fire(webview_set_password, 'get_set_teacher', {
@@ -107,11 +149,24 @@
 				},150);
 			});
   	})
+  	function post_set_student_info(){ 
+			var data={};
+			data=vm_set_student.studentInfo; 
+			console.info(JSON.stringify(data));
+			app.postSetStudentInfo(data,function(data){
+				if(data.code==0){
+					
+				}
+				mui.toast(data.msg);
+			});
+			 
+  	}
+  	
   	//重写返回逻辑
 	mui.back = function() {
 		plus.webview.currentWebview().hide("auto", 300);
 	}
-  	 
+  	
 </script>
 </body>
 </html>
