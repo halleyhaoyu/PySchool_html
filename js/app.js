@@ -11,9 +11,9 @@
 	//owner.hostname='http://api.course.com:8081/course-api';
 	
 	//owner.hostname='http://192.168.31.232:8081/course-api';
-	owner.hostname='http://192.168.0.185:8081/course-api';
+	//owner.hostname='http://192.168.0.185:8081/course-api';
 	//owner.hostname='http://112.124.110.182:11008/course-api';
-	//owner.hostname='http://172.16.103.41:8081/course-api';
+	owner.hostname='http://172.16.103.41:8081/course-api';
 	
 	
 	/**
@@ -247,6 +247,16 @@
 		//view/student/growthTrack.shtml?manageId=76
 		var userInfo = app.getState();
 		var url=owner.hostname+'/view/student/growthTrack.shtml?manageId='+userInfo.manageId+'&page='+pageIndex;
+		return owner.getCommon(url,callback); 
+	}
+	
+	/*
+	  * 我的 -学生-我的荣誉
+	  */
+	owner.getMyHonor=function(callback){
+		//view/activity/honorData.shtml?manageId=76
+		var userInfo = app.getState();
+		var url=owner.hostname+'/view/activity/honorData.shtml?manageId='+userInfo.manageId ;
 		return owner.getCommon(url,callback); 
 	}
 	

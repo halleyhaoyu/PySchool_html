@@ -598,7 +598,9 @@
 					"js/jquery-2.1.4.min.js",
 					"js/mui.min.js",
 					"css/mui.css",
-					"js/common.js"
+					"js/common.js",
+					"js/app.js",
+					"js/vue.min.js"
 				],
 				"refer": [
 					"school/setPassword.html"

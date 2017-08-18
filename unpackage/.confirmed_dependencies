@@ -135,11 +135,18 @@
 			"css/mui.css",
 			"images/tabbar/tabbar-sl-4.png",
 			"images/school/head-pic.png",
-			"school/courseAll.html"
+			"school/courseAll.html",
+			"images/school/tc_02.png",
+			"images/school/tc_01.png",
+			"images/tabbar/tabbar-ns-1.png"
 		],
 		"refer": [
 			"school/activityList.html",
-			"school/courseAll.html"
+			"school/courseAll.html",
+			"school/setTeacherfo.html",
+			"school/setStudentInfo.html",
+			"school/timeline.html",
+			"school/myHonor.html"
 		]
 	},
 	"school/courseDir.html": {
@@ -187,7 +194,9 @@
 			"css/icons-extra.css",
 			"images/bigicon4.png"
 		],
-		"refer": []
+		"refer": [
+			"school/courseExperience.html"
+		]
 	},
 	"school/activityDetails.html": {
 		"resources": [
@@ -202,6 +211,69 @@
 		],
 		"refer": [
 			"school/courseAll.html"
+		]
+	},
+	"school/courseExperience.html": {
+		"resources": [
+			"js/mui.picker.js",
+			"images/school/camera.png",
+			"images/school/add-icon.png",
+			"css/dashboard.css",
+			"css/mui.css",
+			"js/jquery-2.1.4.min.js",
+			"css/school/myWorks.css",
+			"css/app.css",
+			"images/school/voice.png",
+			"js/mui.poppicker.js",
+			"images/school/album.png",
+			"css/mui.picker.min.css",
+			"css/mui.poppicker.css",
+			"images/school/copy.png"
+		]
+	},
+	"school/timeline.html": {
+		"resources": [
+			"css/school/timeline.css",
+			"images/school/timeline-dz.png",
+			"images/school/timeline.png"
+		]
+	},
+	"school/setPassword.html": {
+		"resources": [
+			"js/mui.picker.js",
+			"css/app.css",
+			"js/mui.min.js",
+			"js/mui.poppicker.js",
+			"css/dashboard.css",
+			"css/mui.css",
+			"js/jquery-2.1.4.min.js"
+		]
+	},
+	"school/setStudentInfo.html": {
+		"resources": [
+			"js/mui.picker.js",
+			"css/school/setMsgInfo.css",
+			"js/app.js",
+			"js/common.js",
+			"css/app.css",
+			"js/mui.min.js",
+			"js/mui.poppicker.js",
+			"css/dashboard.css",
+			"js/vue.min.js",
+			"css/mui.poppicker.css",
+			"css/mui.picker.min.css",
+			"css/mui.css",
+			"js/jquery-2.1.4.min.js"
+		],
+		"refer": [
+			"school/setPassword.html"
+		]
+	},
+	"school/myHonor.html": {
+		"resources": [
+			"images/school/silver-medal.png",
+			"images/school/gold-medal.png",
+			"css/school/myHonor.css"
 		]
 	}
 }

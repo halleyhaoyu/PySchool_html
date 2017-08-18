@@ -131,47 +131,28 @@
 		<h1 class="mui-title">新活动申请</h1>
 	</header>
 	<div class="mui-content">
-
-		
-
-
 		<form >
-
 			<div>
-
 				<label class="label-desc">活动主题 </label>
 				<input type="text" class="input-content" data-input-password="3" placeholder="请输入活动主题">
 			</div>
-
-
 			<div>
-
 				<div class="label-desc-min">最大人数 </div>
 				<img src="../images/school/plus.png" class="plus-icon"/>
 				<input type="text" class="input-content input-content-min" data-input-password="3" placeholder="请选择参与人">
 				<img src="../images/school/minus.png" class="minus-icon"/>
 			</div>
-
-
 			<div>
-
 				<label class="label-desc">参与人 </label>
 				<input type="text" class="input-content" data-input-password="3" placeholder="请选择参与人">
 			</div>
-
-
 			<div class="out-div">
 				<label class="label-desc-cg">个人成果 </label>
 				<textarea id="textarea" rows="3" placeholder="请输入活动体会" class="text-content"></textarea>
 			</div>
-			
-			
-			
 			<ul id="history" class="dlist" style="text-align:left;padding:0;">
 				
 			</ul>
-			
-			
 			<div class="button buttonContianer">
 				<div class="button button1" id="addAudio"></div>
 				<div class="button button2" id="addCameraImages"></div>
@@ -180,11 +161,7 @@
 				<div class="button button5"></div>
 			</div>
 			<div class="div-tips">附件上限为10个。</div>
-
-
 		</form>
-
-
 	</div>
 	<div style="height:180px;"></div>
 	
@@ -235,19 +212,7 @@
 		
 		
 		document.addEventListener('get_activity_add_detail', function(event) {
-			activityId = event.detail.activityId;
-	//		if(!activityId) {
-	//			return;
-	//		} 
-	//		console.info("activityId:  "+activityId);
-	//		app.getActivityDetail(activityId,function(data){
-	//			if(data.code==0){
-	//				vm.courseInfo=data.object; 
-	//				//vm.classList =  data.objectList;
-	//			}
-	//			mui.toast(data.msg);
-	//		});
-	//			 
+			//activityId = event.detail.activityId;  
 		});
 	
 		//重写返回逻辑
@@ -262,13 +227,7 @@
 				window.scrollTo(0, 0);
 				//vm.resetData();
 			},false);
-			 
-			 
-		    mui('#main_bar').on('tap', 'a', function(e) {
-			    //获取目标子页的id
-			    var targetTab = this.getAttribute('href');
-			    window.location.href=targetTab;
-			});
+			  
 		})
 		
 		//录音

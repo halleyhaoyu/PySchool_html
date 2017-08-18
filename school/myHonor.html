@@ -3,7 +3,9 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<script src="../js/mui.min.js"></script>
+		<script src="../js/mui.min.js"></script> 
+		<script src="../js/app.js"></script>
+		<script src="../js/vue.min.js"></script>
 		<link href="../css/mui.css" rel="stylesheet"/>
 		<link href="../css/app.css" rel="stylesheet"/>
 		<link href="../css/top.css" rel="stylesheet"/>
@@ -19,25 +21,20 @@
 	</header>
 
 
-		<div class="mui-content">
+		<div id="my-honor-content" class="mui-content">
 			<p class="ranking-title">荣获奖</p>
 			<div class="win-rec">
 				<div class="win-div">
 					<div class="glb-desc">金牌</div>
 					<div class="glb-show">
-						<img src="../images/school/gold-medal.png" class="gold-medal"/>
-						<img src="../images/school/gold-medal.png" class="gold-medal"/>
-						<img src="../images/school/gold-medal.png" class="gold-medal"/>
-						<img src="../images/school/gold-medal.png" class="gold-medal"/>
+						<img v-for="n in honorInfo.goldMedalCount" src="../images/school/gold-medal.png" class="gold-medal"/>
 					</div>
 				</div>
 				
 				<div class="win-div">
 					<div class="slb-desc">银牌</div>
 					<div class="glb-show">
-						<img src="../images/school/silver-medal.png" class="silver-medal"/>
-						<img src="../images/school/silver-medal.png" class="silver-medal"/>
-						<img src="../images/school/silver-medal.png" class="silver-medal"/>
+						<img v-for="n in honorInfo.silverMedalCount" src="../images/school/silver-medal.png" class="silver-medal"/> 
 					</div>
 				</div>
 			</div>
@@ -45,9 +42,50 @@
 			<p class="ranking-title">点赞排名</p>
 			<div class="dz-ranking">
 				<p class="rk-p1">班级排名</p>
-				<p class="rk-p2">第三名</p>
+				<p v-if="honorInfo.pointNumber>0" class="rk-p2">第{{honorInfo.pointNumber}}名</p>
+				<p v-else class="rk-p2">未上榜</p>
 			</div>
 			
 		</div>
+		
+		
+		<script type="text/javascript" charset="UTF-8">
+	mui.init();
+	var vm_my_honor = new Vue({
+		el: '#my-honor-content',
+		data: {
+			userInfo:{},
+			honorInfo:{
+		        "pointNumber": 2,
+		        "goldMedalCount": 2,
+		        "silverMedalCount": 4
+		    }				
+		} 
+	});
+	  		
+	  		
+	  		//重写返回逻辑
+	mui.back = function() {
+		plus.webview.currentWebview().hide("auto", 300);
+	}
+	
+	document.addEventListener('get_my_honor', function(event) {
+		vm_my_honor.userInfo=event.detail.userInfo;
+			getMyHonor(); 
+	});
+	
+	mui.plusReady(function(){
+		
+	})
+	function  getMyHonor(){
+		app.getMyHonor(function(data){
+			if(data.code==0){
+				vm_my_honor.honorInfo=data.object; 
+				//vm.classList =  data.objectList;
+			}
+			mui.toast(data.msg);
+		});
+	}
+	  	</script>
 	</body>
 </html>

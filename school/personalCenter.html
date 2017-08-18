@@ -102,12 +102,14 @@
 					realName:'姓名',
 					teacherDetail:{
 						thGender:'M',
+						thPic:'http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png'
 					},
 					studentsDetail:{
 						stdGender:'M',
 						stdGradeName:'1年级',
 						stdClassName:'2班',
 						showSchoolName:'学多多学校',
+						stdPic:'http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png'
 						}
 				}
 			},
@@ -124,7 +126,9 @@
 			    	if(this.userInfo.roleType==3 && this.userInfo.studentsDetail.stdPic!=undefined && this.userInfo.studentsDetail.stdPic!=''){
 			    		pic=this.userInfo.studentsDetail.stdPic;
 			    	}
-			    	//else if(this.userInfo.roleType==3 && this.userInfo.teacherDetail)
+			    	else if(this.userInfo.roleType==3 && this.userInfo.teacherDetail!=undefined && this.userInfo.teacherDetail.thPic!=''){
+			    		pic=this.userInfo.teacherDetail.thPic;
+			    	}
 			    	return pic;
 			    }
 			  }
