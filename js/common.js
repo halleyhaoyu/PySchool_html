@@ -312,7 +312,7 @@ function pushUploadFileList(fileList,type){
 		createItem(fileList[i],type);
 		uploadFileList.push(fileList[i]);
 	}
-//	taskUpload(uploadFileList)
+	taskUpload(uploadFileList)
 }
 
 //从uploadFileList中移除指定uploadFile
