@@ -9,11 +9,11 @@
 	 * owner.hostname：API 服务器域名
 	 */
 	//owner.hostname='http://api.course.com:8081/course-api';
-	
+	owner.hostname='http://121.41.112.94:8090/course-api';
 	//owner.hostname='http://192.168.31.232:8081/course-api';
 	//owner.hostname='http://192.168.0.185:8081/course-api';
 	//owner.hostname='http://112.124.110.182:11008/course-api';
-	owner.hostname='http://172.16.103.41:8081/course-api';
+	//owner.hostname='http://172.16.103.41:8081/course-api';
 	
 	
 	/**
@@ -136,7 +136,7 @@
 	 * */
 	owner.getCourseAll=function(pageSize,pageIndex,callback){
 		var userInfo = app.getState(); 
-		var url=owner.hostname+'/view/teachingManage/listData.shtml?manageId='+userInfo.manageId+'&pageSize='+pageSize+'&pageIndex='+pageIndex;
+		var url=owner.hostname+'/view/teachingManage/listData.shtml?manageId='+userInfo.manageId+'&page='+pageIndex;
 		return owner.getCommon(url,callback);
 	}
 	/*
@@ -187,7 +187,7 @@
 	  * 活动 -获取活动列表
 	  */
 	owner.getActivityAll=function(userInfo,pageSize,pageIndex,callback){		
-		var url=owner.hostname+'/view/activity/listData.shtml?manageId='+userInfo.manageId+'&pageSize='+pageSize+'&pageIndex='+pageIndex;
+		var url=owner.hostname+'/view/activity/listData.shtml?manageId='+userInfo.manageId+'&page='+pageIndex;
 		return owner.getCommon(url,callback);
 	}
 	
@@ -236,7 +236,7 @@
 	  */
 	owner.getShowAll=function(userInfo,actFine,pageSize,pageIndex,callback){
 		//view/activity/activityShow.shtml?manageId=55&actFine=1
-		var url=owner.hostname+'/view/activity/activityShow.shtml?manageId='+userInfo.manageId+'&actFine='+actFine+'&pageSize='+pageSize+'&pageIndex='+pageIndex;
+		var url=owner.hostname+'/view/activity/activityShow.shtml?manageId='+userInfo.manageId+'&actFine='+actFine+'&page='+pageIndex;
 		return owner.getCommon(url,callback); 
 	}
 	
