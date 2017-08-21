@@ -381,7 +381,8 @@
 					"css/icons-extra.css",
 					"school/courseAll.html",
 					"css/school/pushCommon.css",
-					"images/tabbar/tabbar-sl-2.png"
+					"images/tabbar/tabbar-sl-2.png",
+					"images/tabbar/tabbar-ns-1.png"
 				],
 				"refer": [],
 				"priority": 0
@@ -586,7 +587,8 @@
 					"images/bigicon3.png",
 					"js/mui.pullToRefresh.js",
 					"js/mui.pullToRefresh.material.js",
-					"css/school/pushCommon.css"
+					"css/school/pushCommon.css",
+					"images/bigicon1.png"
 				],
 				"refer": [],
 				"priority": 0
@@ -693,7 +695,10 @@
 			},
 			"school/myWorks.html": {
 				"resources": [
-					"css/school/myWorks.css"
+					"css/school/myWorks.css",
+					"css/app.css",
+					"css/dashboard.css",
+					"css/mui.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -708,7 +713,8 @@
 					"js/mui.min.js",
 					"css/dashboard.css",
 					"js/vue.min.js",
-					"css/mui.css"
+					"css/mui.css",
+					"images/school/head-pic.png"
 				],
 				"refer": [],
 				"priority": 0

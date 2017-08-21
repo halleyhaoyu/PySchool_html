@@ -44,7 +44,6 @@
 		<a class="mui-tab-item " href="personalCenter.html">
 			<span class="mui-icon tabbar-ns-4 foot-icon"></span>
 			<span class="mui-tab-label">我的</span>
-			
 		</a>
 	</nav>
 
@@ -55,7 +54,7 @@
 				<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
 					<div id="scroll1" class="mui-scroll-wrapper">
 						<div class="mui-scroll">
-							<ul class="mui-table-view">									
+							<ul id="sc_show_school_list" class="mui-table-view">									
 								<!--<li class="mui-table-view-cell">
 									<div class="works-desc">
 										<div class="works-desc-top">
@@ -86,34 +85,7 @@
 										</div>
 									</div>
 								</li>-->
-								<li class="mui-table-view-cell">
-									<div class="works-desc">
-										<div class="works-desc-top">
-											<img src="../images/school/head-pic.png" class="works-img"/>
-											<p class="works-username">赵先生 <label class="works-time">1小时前</label></p>
-											<p class="works-content">摄影术的诞生是随着欧洲资本主义的发展应运而生的，150多年来，它经历了一个由简单到复杂。</p>
-											<div >
-												<img src="../images/bigicon3.png" class="works-desc-pic"/>
-												<img src="../images/bigicon3.png" class="works-desc-pic"/>
-												<img src="../images/bigicon3.png" class="works-desc-pic"/>
-											</div>
-											<div class="icon-line">
-												<span class="mui-icon-extra mui-icon-extra-comment"> 24</span>
-												<span class="mui-icon-extra mui-icon-extra-like"> 111</span>
-											</div>
-											<div class="works-answer">
-												<img src="../images/bigicon1.png" class="works-img"/>
-												<p class="works-username">赵先生 <label class="works-time">1小时前</label></p>
-												<p class="works-content">太棒了，很不错。</p>
-											</div>
-											<div class="works-answer">
-												<img src="../images/bigicon1.png" class="works-img"/>
-												<p class="works-username">赵先生 <label class="works-time">1小时前</label></p>
-												<p class="works-content">太棒了，很不错。</p>
-											</div>
-										</div>
-									</div>
-								</li>
+								 
 							</ul>
 						</div>
 					</div>
@@ -130,21 +102,8 @@
 				<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
 					<div id="scroll1" class="mui-scroll-wrapper">
 						<div class="mui-scroll">
-							<ul class="mui-table-view">
-								
-								<li class="mui-table-view-cell">
-									<div class="show-desc">
-										<div class="show-desc-right">
-											<img src="../images/school/show-yes.png" class="show-icon">
-											<p>已参加</p>
-										</div>
-										<div class="show-desc-left">
-											<p class="show-desc-title">欢乐中国豫园行</p>
-											<p class="show-desc-content">发布人：赵先生</p>
-											<p class="show-desc-content">2017-07-25</p>
-										</div>
-									</div>
-								</li>
+							<ul id="sc_show_class_list"  class="mui-table-view">
+								 
 								<!--<li class="mui-table-view-cell">
 									<div class="show-desc">
 										<div class="show-desc-right">
@@ -173,7 +132,10 @@
 <script src="../js/mui.pullToRefresh.material.js"></script>
 <script src="../js/app.js"></script>
 <script type="text/javascript" charset="UTF-8">
-  	mui.init();
+  	mui.init();  	
+	var pageIndexSchool = 1;
+	var pageIndexClass= 1;
+  	
     mui('#main_bar').on('tap', 'a', function(e) {
 	    //获取目标子页的id
 	    var targetTab = this.getAttribute('href');
@@ -182,8 +144,7 @@
 	(function($) {
 		//阻尼系数
 		var deceleration = mui.os.ios?0.003:0.0009;
-		var pageIndex = 1;
-		var color_css = new Array("sc_purple","sc_cyan","sc_orange","sc_pink")
+		var color_css = new Array("sc_purple","sc_cyan","sc_orange","sc_pink");
 		$('.mui-scroll-wrapper').scroll({
 			bounce: false,
 			indicators: true, //是否显示滚动条
@@ -192,134 +153,164 @@
 		$.ready(function() {
 			//循环初始化所有下拉刷新，上拉加载。
 			$.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
-				var actFine = index==0?2:1; // 2：学校秀，1：班级秀
+				
 				$(pullRefreshEl).pullToRefresh({
 					down: {
 						callback: function() {
 							var self = this;
-							var userInfo = app.getState();
-							if(userInfo.manageId!=undefined && userInfo.manageId!=''){
-								app.getShowAll(userInfo,actFine,5,1,function(data){
-									if(data.code==0){												
-										var ul = self.element.querySelector('.mui-table-view');
-										ul.innerHTML="";
-										ul.insertBefore(createFragment(actFine,ul, data.object.rows), ul.firstChild);
-									 	 pageIndex=1;
-									}else{
-										mui.toast(data.msg);
-									}
-									
-										self.endPullDownToRefresh();
-								});
-							}else{
-								app.gotoLogin();
-							}
+							pushScShowAllDown(self,index,false);
 						}
 					},
 					up: {
 						callback: function() {
 							var self = this;
-							var aa = index;
-							var userInfo = app.getState(); 
-							if(userInfo.manageId!=undefined && userInfo.manageId!=''){
-								app.getShowAll(userInfo,actFine,5,pageIndex+1,function(data){
-									if(data.code==0){												
-										var ul = self.element.querySelector('.mui-table-view'); 
-										ul.appendChild(createFragment(actFine,ul, data.object.rows), ul.firstChild);
-									 	 pageIndex++;
-									}else{
-										mui.toast(data.msg);
-									}
-									
-										self.endPullUpToRefresh();
-								});
-							}else{
-								app.gotoLogin();
-							}
+							pushScShowAllUp(self,index);
 						}
 					}
 				});
 			});
-			var createFragment = function(actFine,ul, objectList) {
-				var length = ul.querySelectorAll('li').length;
-				var fragment = document.createDocumentFragment();
-				var li;
-				objectList=objectList==undefined?[]:objectList;
-				for (var i = 0; i < objectList.length; i++) {
-					li = document.createElement('li');
-					li.className = 'mui-table-view-cell';
-					var insertHtml="";
-					if(actFine==2){ //学校秀
-						
-						insertHtml+="<div class=\"works-desc\">";
-						insertHtml+="	<div class=\"works-desc-top\">";
-						if(objectList[i].actSponsorType==2){
-							insertHtml+="		<img src=\""+objectList[i].showTeacherPic+"\" class=\"works-img\"/>";
-						}else{
-							insertHtml+="		<img src=\""+objectList[i].showStudentPic+"\" class=\"works-img\"/>";
-						}
-						
-						insertHtml+="		<p class=\"works-username\">"+objectList[i].actOperName+"<label class=\"works-time\">"+objectList[i].actTime+"</label></p>";
-						insertHtml+="		<p class=\"works-content\">"+objectList[i].actDesc+"</p>";
-						insertHtml+="		<div >";
-						insertHtml+="			<img src=\""+objectList[i].actFiles+"\" class=\"works-desc-pic\"/>";
-						//insertHtml+="			<img src=\"../images/bigicon3.png\" class=\"works-desc-pic\"/>";
-						//insertHtml+="			<img src=\"../images/bigicon3.png\" class=\"works-desc-pic\"/>";
-						insertHtml+="		</div>";
-						insertHtml+="		<div class=\"icon-line\">";
-						insertHtml+="			<span class=\"mui-icon-extra mui-icon-extra-comment\">"+objectList[i].actFinePintNum+"</span>";
-						insertHtml+="			<span class=\"mui-icon-extra mui-icon-extra-like\">"+objectList[i].actFineCommentNum+"</span>";
-						insertHtml+="		</div>";
-						
-						var activityCommentList = objectList[i].activityCommentList;
-						for(var h=0;h<activityCommentList.length;h++){
-							
-							insertHtml+="		<div class=\"works-answer\">";
-							if(activityCommentList[h].actIsTeacher==2){
-								insertHtml+="			<img src=\""+activityCommentList[h].showStudentPic+"\" class=\"works-img\"/>";
-							}else{
-								insertHtml+="			<img src=\""+activityCommentList[h].showTeacherPic+"\" class=\"works-img\"/>";
-							}
-							
-							insertHtml+="			<p class=\"works-username\">"+activityCommentList[h].actComReviewer+"<label class=\"works-time\">"+activityCommentList[h].actComTime+"</label></p>";
-							insertHtml+="			<p class=\"works-content\">"+activityCommentList[h].actComDesc+"</p>";
-							insertHtml+="		</div>";
-						}
-						
-						// 可以注释掉部分 下
+			
+		});
+	})(mui);
+	
+	
+	function pushScShowAllUp(self,index){
+		var userInfo = app.getState(); 
+		var actFine = index==0?2:1; // 2：学校秀，1：班级秀
+		
+		var pageIndex=1;	
+		if(userInfo.manageId!=undefined && userInfo.manageId!=''){
+			app.getShowAll(userInfo,actFine,5,pageIndex+1,function(data){
+				if(data.code==0){
+					var ul =index==0?document.querySelector('#sc_show_school_list'):document.querySelector('#sc_show_class_list'); 
+					ul.appendChild(createScShowFragment(actFine,ul, data.object.rows), ul.firstChild);
+				 	 
+					if(index==0){
+						pageIndexSchool++;
+						pageIndex=pageIndexSchool;
+					}else{
+						pageIndexClass++;
+						pageIndex=pageIndexClass;
+					}	
+				}else{
+					mui.toast(data.msg);
+				}
+				self.endPullUpToRefresh();
+			});
+		}else{
+			app.gotoLogin();
+		}
+	}
+	
+	function pushScShowAllDown(self,index,autoFlag){
+		var pageIndex=1;
+		if(index==0){
+			pageIndexSchool=1;
+			pageIndex=pageIndexSchool;
+		}else{
+			pageIndexClass=1;
+			pageIndex=pageIndexClass;
+		}
+		var userInfo = app.getState();
+		var actFine = index==0?2:1; // 2：学校秀，1：班级秀
+		if(userInfo.manageId!=undefined && userInfo.manageId!=''){
+			app.getShowAll(userInfo,actFine,5,1,function(data){
+				if(data.code==0){
+					var ul =index==0?document.querySelector('#sc_show_school_list'):document.querySelector('#sc_show_class_list'); 
+					ul.innerHTML="";
+					ul.insertBefore(createScShowFragment(actFine,ul, data.object.rows), ul.firstChild);
+				 	
+				}else{
+					mui.toast(data.msg);
+				}
+				if(!autoFlag){
+					self.endPullDownToRefresh();
+				}
+			});
+		}else{
+			app.gotoLogin();
+		}
+	}
+	
+	var createScShowFragment = function(actFine,ul, objectList) {
+		var length = ul.querySelectorAll('li').length;
+		var fragment = document.createDocumentFragment();
+		var li;
+		objectList=objectList==undefined?[]:objectList;
+		for (var i = 0; i < objectList.length; i++) {
+			li = document.createElement('li');
+			li.className = 'mui-table-view-cell';
+			var insertHtml="";
+			if(actFine==2){ //学校秀
+				
+				insertHtml+="<div class=\"works-desc\">";
+				insertHtml+="	<div class=\"works-desc-top\">";
+				if(objectList[i].actSponsorType==2){
+					insertHtml+="		<img src=\""+objectList[i].showTeacherPic+"\" class=\"works-img\"/>";
+				}else{
+					insertHtml+="		<img src=\""+objectList[i].showStudentPic+"\" class=\"works-img\"/>";
+				}
+				
+				insertHtml+="		<p class=\"works-username\">"+objectList[i].actOperName+"<label class=\"works-time\">"+objectList[i].actTime+"</label></p>";
+				insertHtml+="		<p class=\"works-content\">"+objectList[i].actDesc+"</p>";
+				insertHtml+="		<div >";
+				insertHtml+="			<img src=\""+objectList[i].actFiles+"\" class=\"works-desc-pic\"/>";
+				//insertHtml+="			<img src=\"../images/bigicon3.png\" class=\"works-desc-pic\"/>";
+				//insertHtml+="			<img src=\"../images/bigicon3.png\" class=\"works-desc-pic\"/>";
+				insertHtml+="		</div>";
+				insertHtml+="		<div class=\"icon-line\">";
+				insertHtml+="			<span class=\"mui-icon-extra mui-icon-extra-comment\">"+objectList[i].actFinePintNum+"</span>";
+				insertHtml+="			<span class=\"mui-icon-extra mui-icon-extra-like\">"+objectList[i].actFineCommentNum+"</span>";
+				insertHtml+="		</div>";
+				
+				var activityCommentList = objectList[i].activityCommentList;
+				for(var h=0;h<activityCommentList.length;h++){
+					
+					insertHtml+="		<div class=\"works-answer\">";
+					if(activityCommentList[h].actIsTeacher==2){
+						insertHtml+="			<img src=\""+activityCommentList[h].showStudentPic+"\" class=\"works-img\"/>";
+					}else{
+						insertHtml+="			<img src=\""+activityCommentList[h].showTeacherPic+"\" class=\"works-img\"/>";
+					}
+					
+					insertHtml+="			<p class=\"works-username\">"+activityCommentList[h].actComReviewer+"<label class=\"works-time\">"+activityCommentList[h].actComTime+"</label></p>";
+					insertHtml+="			<p class=\"works-content\">"+activityCommentList[h].actComDesc+"</p>";
+					insertHtml+="		</div>";
+				}
+				
+				// 可以注释掉部分 下
 //						insertHtml+="		<div class=\"works-answer\">";
 //						insertHtml+="			<img src=\"../images/bigicon1.png\" class=\"works-img\"/>";
 //						insertHtml+="			<p class=\"works-username\">赵先生 <label class=\"works-time\">1小时前</label></p>";
 //						insertHtml+="			<p class=\"works-content\">太棒了，很不错。</p>";
 //						insertHtml+="		</div>";
-						//可以注释掉部分 上
-						
-						insertHtml+="	</div>";
-						insertHtml+="</div>";
-					}else if(actFine==1){//班级秀
-						insertHtml+="<div class=\"show-desc\">";
-						insertHtml+="	<div class=\"show-desc-right\">";
-						if(objectList[i].hasPart==1){
-							insertHtml+="		<img src=\"../images/school/show-yes.png\" class=\"show-icon\">";
-						}else{
-							insertHtml+="		<img src=\"../images/school/show-no.png\" class=\"show-icon\">";
-						}
-						insertHtml+="		<p>已参加</p>";
-						insertHtml+="	</div>";
-						insertHtml+="	<div class=\"show-desc-left\">";
-						insertHtml+="		<p class=\"show-desc-title\">"+objectList[i].actName+"</p>";
-						insertHtml+="		<p class=\"show-desc-content\">发布人："+objectList[i].actOperName+"</p>";
-						insertHtml+="		<p class=\"show-desc-content\">"+objectList[i].actTime+"</p>";
-						insertHtml+="	</div>";
-						insertHtml+="</div>";						 
-					}
-					li.innerHTML = insertHtml;
-					fragment.appendChild(li);
+				//可以注释掉部分 上
+				
+				insertHtml+="	</div>";
+				insertHtml+="</div>";
+			}else if(actFine==1){//班级秀
+				insertHtml+="<div class=\"show-desc\">";
+				insertHtml+="	<div class=\"show-desc-right\">";
+				if(objectList[i].hasPart==1){
+					insertHtml+="		<img src=\"../images/school/show-yes.png\" class=\"show-icon\">";
+				}else{
+					insertHtml+="		<img src=\"../images/school/show-no.png\" class=\"show-icon\">";
 				}
-				return fragment;
-			};
-		});
-	})(mui);
+				insertHtml+="		<p>已参加</p>";
+				insertHtml+="	</div>";
+				insertHtml+="	<div class=\"show-desc-left\">";
+				insertHtml+="		<p class=\"show-desc-title\">"+objectList[i].actName+"</p>";
+				insertHtml+="		<p class=\"show-desc-content\">发布人："+objectList[i].actOperName+"</p>";
+				insertHtml+="		<p class=\"show-desc-content\">"+objectList[i].actTime+"</p>";
+				insertHtml+="	</div>";
+				insertHtml+="</div>";						 
+			}
+			li.innerHTML = insertHtml;
+			fragment.appendChild(li);
+		}
+		return fragment;
+	};
+	
 	
 	mui.plusReady(function () {
 			var backButtonPress = 0;
@@ -336,6 +327,9 @@
 				}, 1000);
 				return false;
 			}; 
+			
+			pushScShowAllDown('',0,true);
+			pushScShowAllDown('',1,true);
 			
 		})
 </script>

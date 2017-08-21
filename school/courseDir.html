@@ -45,26 +45,7 @@
 					</ul>
 				</div>
 			</li>
-			<li>	
-				<div class="myh5_card">
-					<div class="course-title-icon"></div>
-					<div class="course-title">第一章 摄影赏析</div>
-					<a id="2" title="1. 生活照赏析" href="#">
-						<p class="course-desc">1. 生活照赏析</p>
-					</a>
-					<a id="2" title="2. 艺术照赏析" href="#">
-						<p class="course-desc">2. 艺术照赏析</p>
-					</a>
-				</div>
-			</li>
-			<li>
-				<div class="myh5_card">
-					<div class="course-title-icon"></div>
-					<div class="course-title">第一章 摄影赏析</div>
-					<p class="course-desc">1. 生活照赏析</p>
-					<p class="course-desc">2. 艺术照赏析</p>
-				</div>
-			</li>
+			 
 		</ul>
 	</div>
 <script type="text/javascript" charset="UTF-8">
@@ -127,30 +108,30 @@
 //					}(i));
 //				}
 				 
-				vm.courseDirList = // data.objectList; // 目前没数据先模拟数据。
-				[{
-		            "id": "1",
-		            "text": "第一章、摄影赏析",
-		            "state": "closed",
-		            "checked": false,
-					"rcId": "2",
-		            "children":[
-				        {
-				            "id": "2",
-				            "text": "1、生活照赏析",
-				            "state": "open",
-				            "checked": false,
-							"rcId": "2"
-				        },
-				        {
-				            "id": "3",
-				            "text": "2、艺术照赏析",
-				            "state": "open",
-				            "checked": false,
-							"rcId": "2"
-				        }
-				    ]
-		        }] 
+				vm.courseDirList = data.objectList; // 目前没数据先模拟数据。
+//				[{
+//		            "id": "1",
+//		            "text": "第一章、摄影赏析",
+//		            "state": "closed",
+//		            "checked": false,
+//					"rcId": "2",
+//		            "children":[
+//				        {
+//				            "id": "2",
+//				            "text": "1、生活照赏析",
+//				            "state": "open",
+//				            "checked": false,
+//							"rcId": "2"
+//				        },
+//				        {
+//				            "id": "3",
+//				            "text": "2、艺术照赏析",
+//				            "state": "open",
+//				            "checked": false,
+//							"rcId": "2"
+//				        }
+//				    ]
+//		        }] 
 			 	pageIndex=1;
 			}
 			mui.toast(data.msg);

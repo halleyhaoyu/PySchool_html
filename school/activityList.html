@@ -51,37 +51,7 @@
 			<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
 				<div id="scroll1" class="mui-scroll-wrapper">
 					<div class="mui-scroll">
-						<ul class="mui-table-view">									
-							<!--<li class="mui-table-view-cell">
-								<a id="7" href="#">
-								<div class="show-desc">
-									<div class="show-desc-right"> 
-										<div class="ac-end">已结束</div>
-									</div>
-									<div class="show-desc-left">
-										<p class="show-desc-title">欢乐中国豫园行</p>
-										<p class="show-desc-content">发布人：赵先生</p>
-										<p class="show-desc-content">发布日期：2017-07-25</p>
-									</div>
-						
-								</div>
-								</a>
-							</li>
-							<li class="mui-table-view-cell">
-								<a id="7" href="#">
-								<div class="show-desc">
-									<div class="show-desc-right">
-										<div class="ac-end-no">未结束</div>
-									</div>
-									<div class="show-desc-left">
-										<p class="show-desc-title">欢乐中国豫园行</p>
-										<p class="show-desc-content">发布人：赵先生</p>
-										<p class="show-desc-content">发布日期：2017-07-25</p>
-									</div>
-						
-								</div>
-								</a>
-							</li>-->
+						<ul id="activity_list_list" class="mui-table-view">
 							 
 						</ul>
 					</div>
@@ -103,6 +73,7 @@
 	<script type="text/javascript" charset="UTF-8">
 	  	mui.init();
 	  	
+		var pageIndex = 1;
 	  	
 		var webview_activity_detail = null; //详情页webview
 		var webview_activity_add_detail = null; // 申请活动详情
@@ -122,7 +93,6 @@
 		(function($) {
 				//阻尼系数
 				var deceleration = mui.os.ios?0.003:0.0009;
-				var pageIndex = 1;
 				$('.mui-scroll-wrapper').scroll({
 					bounce: false,
 					indicators: true, //是否显示滚动条
@@ -135,93 +105,101 @@
 							down: {
 								callback: function() {
 									var self = this;
-									var userInfo = app.getState(); 
-									if(userInfo.manageId!=undefined && userInfo.manageId!=''){
-										app.getActivityAll(userInfo,5,1,function(data){
-											if(data.code==0){												
-												var ul = self.element.querySelector('.mui-table-view');
-												ul.innerHTML="";
-												ul.insertBefore(createFragment(index,ul, data.object.rows), ul.firstChild);
-												activityList=data.object.rows;
-											 	 pageIndex=1;
-											}else{
-												mui.toast(data.msg);
-											}
-											
-												self.endPullDownToRefresh();
-										});
-									}else{
-										app.gotoLogin();
-									}
+									pushActivityListDown(self,index,false);
 								}
 							},
 							up: {
 								callback: function() {
-									var self = this;
-									var aa = index;
-									var userInfo = app.getState(); 
-									if(userInfo.manageId!=undefined && userInfo.manageId!=''){
-										app.getActivityAll(userInfo,5,pageIndex+1,function(data){
-											if(data.code==0){												
-												var ul = self.element.querySelector('.mui-table-view'); 
-												ul.appendChild(createFragment(index,ul, data.object.rows), ul.firstChild);
-												//activityList.concat(data.objectList); 
-												
-												mui('#item1mobile').on('tap','a',function(){
-													//console.info("this.href:  " + this.href);
-													open_activity_detail(this.id);
-												}); 
-											 	 pageIndex++;
-											}else{
-												mui.toast(data.msg);
-											}
-											
-												self.endPullUpToRefresh();
-										});
-									}else{
-										app.gotoLogin();
-									}
+									var self = this; 
+									pushActivityListUp(self,index);
 								}
 							}
 						});
 					});
-					var createFragment = function(index,ul, objectList) {
-						var length = ul.querySelectorAll('li').length;
-						var fragment = document.createDocumentFragment();
-						var li;
-						objectList=objectList==undefined?[]:objectList;
-						for (var i = 0; i < objectList.length; i++) {
-							li = document.createElement('li');
-							li.className = 'mui-table-view-cell';
-							var insertHtml="";
-							if(index==0){ //我的课程
-								insertHtml+="<a id=\""+objectList[i].actId+"\" href=\"#\">";
-								insertHtml+="<div class=\"show-desc\">";
-								insertHtml+="	<div class=\"show-desc-right\">";
-								if(objectList[i].actId==2){
-									insertHtml+="		<div class=\"ac-end\">已结束</div>";
-								}else{
-									insertHtml+="		<div class=\"ac-end-no\">未结束</div>";
-								}
-								insertHtml+="	</div>";
-								insertHtml+="	<div class=\"show-desc-left\">";
-								insertHtml+="		<p class=\"show-desc-title\">"+objectList[i].actName+"</p>";
-								insertHtml+="		<p class=\"show-desc-content\">发布人："+objectList[i].actOperName+"</p>";
-								insertHtml+="		<p class=\"show-desc-content\">发布日期："+objectList[i].actTime+"</p>";
-								insertHtml+="	</div>";
-								insertHtml+="</div>";
-								insertHtml+="</a>";
-							}
-							li.innerHTML = insertHtml;
-							fragment.appendChild(li);
-						}
-						return fragment;
-					};
+					
 				});
 			})(mui);
+	
+	function pushActivityListDown(self,index,autoFlag){
+		var userInfo = app.getState(); 
+		if(userInfo.manageId!=undefined && userInfo.manageId!=''){
+			app.getActivityAll(userInfo,5,1,function(data){
+				if(data.code==0){												
+					var ul = document.querySelector('#activity_list_list');
+					ul.innerHTML="";
+					ul.insertBefore(createActivityListFragment(index,ul, data.object.rows), ul.firstChild);
+					activityList=data.object.rows;
+				 	 pageIndex=1;
+				}else{
+					mui.toast(data.msg);
+				}
+				if(!autoFlag){
+					self.endPullDownToRefresh();
+				}
+			});
+		}else{
+			app.gotoLogin();
+		}
+	}
+	
+	function pushActivityListUp(self,index){
+		var userInfo = app.getState(); 
+		if(userInfo.manageId!=undefined && userInfo.manageId!=''){
+			app.getActivityAll(userInfo,5,pageIndex+1,function(data){
+				if(data.code==0){												
+					var ul = document.querySelector('.mui-table-view'); 
+					ul.appendChild(createActivityListFragment(index,ul, data.object.rows), ul.firstChild);
+					//activityList.concat(data.objectList); 
+					
+					mui('#item1mobile').on('tap','a',function(){
+						//console.info("this.href:  " + this.href);
+						open_activity_detail(this.id);
+					}); 
+				 	 pageIndex++;
+				}else{
+					mui.toast(data.msg);
+				}
+				self.endPullUpToRefresh();
+			});
+		}else{
+			app.gotoLogin();
+		}
+	}
 			
-			
-
+	var createActivityListFragment = function(index,ul, objectList) {
+		var length = ul.querySelectorAll('li').length;
+		var fragment = document.createDocumentFragment();
+		var li;
+		objectList=objectList==undefined?[]:objectList;
+		for (var i = 0; i < objectList.length; i++) {
+			li = document.createElement('li');
+			li.className = 'mui-table-view-cell';
+			var insertHtml="";
+			if(index==0){ //我的课程
+				insertHtml+="<a id=\""+objectList[i].actId+"\" href=\"#\">";
+				insertHtml+="<div class=\"show-desc\">";
+				insertHtml+="	<div class=\"show-desc-right\">";
+				if(objectList[i].actId==2){
+					insertHtml+="		<div class=\"ac-end\">已结束</div>";
+				}else{
+					insertHtml+="		<div class=\"ac-end-no\">未结束</div>";
+				}
+				insertHtml+="	</div>";
+				insertHtml+="	<div class=\"show-desc-left\">";
+				insertHtml+="		<p class=\"show-desc-title\">"+objectList[i].actName+"</p>";
+				insertHtml+="		<p class=\"show-desc-content\">发布人："+objectList[i].actOperName+"</p>";
+				insertHtml+="		<p class=\"show-desc-content\">发布日期："+objectList[i].actTime+"</p>";
+				insertHtml+="	</div>";
+				insertHtml+="</div>";
+				insertHtml+="</a>";
+			}
+			li.innerHTML = insertHtml;
+			fragment.appendChild(li);
+		}
+		return fragment;
+	};
+	
+	
 	mui.plusReady(function() {
 		//预加载详情页
 		webview_activity_detail = mui.preload({
@@ -319,6 +297,8 @@
 		 		userPicker.setData(courseList);
 			}
 		}); 
+		
+		pushActivityListDown('',0,true);
 	});
 	
 	
