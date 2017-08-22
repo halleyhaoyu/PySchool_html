@@ -128,7 +128,7 @@
 							var aa = index;
 							var userInfo = app.getState(); 
 							if(userInfo.manageId!=undefined && userInfo.manageId!=''){
-								app.getEveryoneWorkList(vm_everyone_work.classId,pageIndex,function(data){
+								app.getEveryoneWorkList(vm_everyone_work.activityId,pageIndex,function(data){
 									console.info(JSON.stringify(data));
 									var overFlag = false;
 									if(data.code==0){
@@ -158,6 +158,7 @@
 	
 	document.addEventListener('get_every_one_works', function(event) {
 		activityId = event.detail.activityId;
+		console.info(activityId);
 		vm_everyone_work.activityId=activityId;
 	});
 

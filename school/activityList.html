@@ -48,7 +48,7 @@
  
 	<div id="slider" class="mui-slider mui-content mui-fullscreen">				
 		<div class="mui-slider-group">
-			<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+			<div id="item_activity_list" class="mui-slider-item mui-control-content mui-active">
 				<div id="scroll1" class="mui-scroll-wrapper">
 					<div class="mui-scroll">
 						<ul id="activity_list_list" class="mui-table-view">
@@ -106,6 +106,7 @@
 								callback: function() {
 									var self = this;
 									pushActivityListDown(self,index,false);
+									
 								}
 							},
 							up: {
@@ -129,6 +130,10 @@
 					ul.innerHTML="";
 					ul.insertBefore(createActivityListFragment(index,ul, data.object.rows), ul.firstChild);
 					activityList=data.object.rows;
+//					mui('#item_activity_list').on('tap','a',function(){
+//						//console.info("this.href:  " + this.href);
+//						open_activity_detail(this.id);
+//					}); 
 				 	 pageIndex=1;
 				}else{
 					mui.toast(data.msg);
@@ -150,11 +155,14 @@
 					var ul = document.querySelector('.mui-table-view'); 
 					ul.appendChild(createActivityListFragment(index,ul, data.object.rows), ul.firstChild);
 					//activityList.concat(data.objectList); 
-					
-					mui('#item1mobile').on('tap','a',function(){
-						//console.info("this.href:  " + this.href);
-						open_activity_detail(this.id);
-					}); 
+//					 mui('#item_activity_list').off('tap','a',function(){
+//						//console.info("this.href:  " + this.href);
+//						open_activity_detail(this.id);
+//					}); 
+//					 mui('#item_activity_list').on('tap','a',function(){
+//						//console.info("this.href:  " + this.href);
+//						open_activity_detail(this.id);
+//					}); 
 				 	 pageIndex++;
 				}else{
 					mui.toast(data.msg);
@@ -179,7 +187,7 @@
 				insertHtml+="<a id=\""+objectList[i].actId+"\" href=\"#\">";
 				insertHtml+="<div class=\"show-desc\">";
 				insertHtml+="	<div class=\"show-desc-right\">";
-				if(objectList[i].actId==2){
+				if(objectList[i].actEnd==2){
 					insertHtml+="		<div class=\"ac-end\">已结束</div>";
 				}else{
 					insertHtml+="		<div class=\"ac-end-no\">未结束</div>";
@@ -234,7 +242,7 @@
 		
 		
 		 
-		mui('#item1mobile').on('tap','a',function(){
+		mui('#item_activity_list').on('tap','a',function(){
 			//console.info("this.href:  " + this.href);
 			open_activity_detail(this.id);
 		}); 

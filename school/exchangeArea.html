@@ -63,6 +63,7 @@
 	<script type="text/javascript" charset="UTF-8">
 	  	mui.init();
 	  	
+		var pageIndex = 1;
 	  	var vm_exchange_area = new Vue({
 			el: '.mui-content',
 			data: {
@@ -97,7 +98,6 @@
 		(function($) {
 		//阻尼系数
 		var deceleration = mui.os.ios?0.003:0.0009;
-		var pageIndex = 1;
 		$('.mui-scroll-wrapper').scroll({
 			bounce: false,
 			indicators: true, //是否显示滚动条
@@ -136,14 +136,12 @@
 							var userInfo = app.getState(); 
 							if(userInfo.manageId!=undefined && userInfo.manageId!=''){
 								app.getExchangeAreaList(vm_exchange_area.classId,pageIndex,function(data){
-									console.info(JSON.stringify(data));
 									var overFlag = false;
 									if(data.code==0){
 										if(data.object!=undefined && data.object.rows.length>0){
 											console.info(JSON.stringify(data.object.rows));
 											vm_exchange_area.acAreaList = vm_exchange_area.acAreaList.concat(data.object.rows);
-											
-											console.info(JSON.stringify(vm_exchange_area.acAreaList));
+											 
 										 	pageIndex++;
 										}else{
 											overFlag=true;

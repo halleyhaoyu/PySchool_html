@@ -65,15 +65,15 @@
 			</div>
 		</div>
  
-		<div id="item2" class="item-call mui-content mui-control-content mui-fullscreen" style="top:64px;bottom: 50px;">
+		<div id="item2" class="item-call mui-content mui-control-content mui-fullscreen" style="top:27px;bottom: 50px;">
 			<div id="slider" class="mui-slider mui-fullscreen" style="top:0px;">
 				<div class="mui-segmented-control desc-control">
 					<a class="mui-control-item mui-active " href="#item11"><span>全部</span></a>
-					<a class="mui-control-item " href="#item12"><span>自然</span></a>
+					<!--<a class="mui-control-item " href="#item12"><span>自然</span></a>
 					<a class="mui-control-item " href="#item13"><span>体育</span></a>
 					<a class="mui-control-item " href="#item14"><span>美术</span></a>
-					<a class="mui-control-item " href="#item15"><span>音乐</span></a>
-					<a class="mui-control-item " href="#item16"><span>历史</span></a>
+					<a class="mui-control-item " href="#item15"><span>音乐</span></a> 
+					<a class="mui-control-item " href="#item16"><span>历史</span></a>-->
 				</div>
 				<div class="mui-slider-group mui-fullscreen" style="top:37px;bottom: 0px;">
 					<div id="item11" class="mui-slider-item mui-control-content mui-active" style="margin-top:0px;">
@@ -166,11 +166,8 @@
 	
 	function pushCourseAllUp(self,index){
 		var userInfo = app.getState(); 
-		if(userInfo.manageId!=undefined && userInfo.manageId!=''){
-			var pageIndex=1;
-			
-			console.info(pageIndex);
-			app.getCourseAll(5,pageIndex+1,function(data){
+		if(userInfo.manageId!=undefined && userInfo.manageId!=''){ 
+			app.getCourseAll(5, (index==0?pageIndexMy:pageIndexAll)+1 ,function(data){
 				if(data.code==0){
 					var ul =index==0? document.querySelector("#course_all_my"):document.querySelector("#course_all_all");// self.element.querySelector('.mui-table-view'); 
 					ul.appendChild(createCourseAllFragment(index,ul, data), ul.firstChild);
@@ -180,11 +177,9 @@
 //													courseList1.concat(data.objectList);
 //												}
 					if(index==0){
-						pageIndexMy++;
-						pageIndex=pageIndexMy;
+						pageIndexMy++; 
 					}else{
-						pageIndexAll++;
-						pageIndex=pageIndexAll;
+						pageIndexAll++; 
 					} 
 				}else{
 					mui.toast(data.msg);
