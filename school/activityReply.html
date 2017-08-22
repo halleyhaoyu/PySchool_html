@@ -76,7 +76,7 @@
 	<script type="text/javascript" src="../js/immersed.js" ></script>
 	<script type="text/javascript" charset="UTF-8">
 		mui.init();
-		var count = 0
+		var count = 0;
 
 
  
@@ -100,11 +100,6 @@
 			vm_activity_reply.activityInfo = event.detail.activityInfo;
  			vm_activity_reply.commentInfo.ahActId = vm_activity_reply.activityInfo.actId;
 		});
-
-		//重写返回逻辑
-		mui.back = function() {
-			plus.webview.currentWebview().hide("auto", 300);
-		}
 
 		//窗口隐藏时，重置页面数据
 		mui.plusReady(function () {
@@ -173,6 +168,11 @@
 				 
 	  	}
 
+
+		//重写返回逻辑
+		mui.back = function() {
+			plus.webview.currentWebview().hide("auto", 300);
+		}
 
 
 	</script>

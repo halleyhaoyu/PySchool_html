@@ -36,11 +36,17 @@
 
 			</ul>
 		
-		<div class="button buttonContianer">
+		<div class="button buttonContianer"><!--
 			<div class="button button1"></div>
 			<div class="button button2"></div>
 			<div class="button button3"></div>
-			<div class="button button4"></div>
+			<div class="button button4"></div>-->
+			<div class="button button1" id="addAudio"></div>
+			<div class="button button2" id="addCameraImages"></div>
+			<div class="button button3" id="addVideos"></div>
+			<div class="button button4" id="addImages"></div>
+			<div class="button button5"></div>
+				
 		</div>
 		<div class="div-tips">附件上限为10个。</div>
  
@@ -72,20 +78,6 @@
 <script type="text/javascript" charset="UTF-8">
     mui.init();
     var count = 0
-    $(".buttonContianer").on('tap',function(){
-        count ++
-        if(count % 2 == 1){
-            $(this).addClass('show')
-            $(this).children().animate({
-                opacity: 1
-            })
-        }else{
-            $(this).removeClass('show')
-            $(this).children().animate({
-                opacity: 0
-            })
-        }
-    })
     var vm_course_exprience = new Vue({
 		el: '#course_detail_content',
 		data: {
@@ -111,6 +103,13 @@
 	});
     
     mui.plusReady(function(){
+    	 
+		var self = plus.webview.currentWebview();
+		self.addEventListener("hide",function (e) {
+			window.scrollTo(0, 0);
+			//vm.resetData();
+		},false);
+		
     	mui('#course_experience_content').on('tap','#btn_course_exprience_post',function(){
 			var userInfo = app.getState();
 			var data={};
@@ -133,6 +132,44 @@
 			});
 			 
 		}); 
+		
+		
+		
+		
+		$(".buttonContianer").on('tap',function(){
+		    count ++
+		    if(count % 2 == 1){
+		        $(this).addClass('show')
+		        $(this).children().animate({
+		            opacity: 1
+		        })
+		    }else{
+		        $(this).removeClass('show')
+		        $(this).children().animate({
+		            opacity: 0
+		        })
+		    }
+		}) 
+
+
+        //录音
+        document.getElementById('addAudio').addEventListener('tap', function() {
+            startRecord();
+        });
+
+        //拍照上传
+        document.getElementById('addCameraImages').addEventListener('tap', function() {
+            cameraAndUpload();
+        });
+        //拍视频上传
+        document.getElementById('addVideos').addEventListener('tap', function() {
+            videoAndUpload();
+        });
+
+        //相册选择照片上传
+        document.getElementById('addImages').addEventListener('tap', function() {
+            albumAndUpload(0);
+        });
     })
      
     mui.back = function() {

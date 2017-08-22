@@ -246,10 +246,10 @@
 		console.info("open_activity_my_works");
 		//触发子窗口变更详情
 		mui.fire(webview_activity_my_works, 'get_activity_my_works', {
-				//activityId: activityId
+				activityId: activityId
 			});
  
-			setTimeout(function () {
+		setTimeout(function () {
 				webview_activity_my_works.show("slide-in-right", 300);
 		},150);
 	}

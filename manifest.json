@@ -349,7 +349,8 @@
 					"css/mui.poppicker.css",
 					"css/mui.picker.min.css",
 					"school/personalCenter.html",
-					"images/tabbar/tabbar-ns-4.png"
+					"images/tabbar/tabbar-ns-4.png",
+					"images/tabbar/tabbar-ns-2.png"
 				],
 				"refer": [
 					"school/exchangeArea.html",
@@ -699,7 +700,10 @@
 					"js/app.js",
 					"js/vue.min.js"
 				],
-				"refer": [],
+				"refer": [
+					"school/showImage.html",
+					"school/showVideo.html"
+				],
 				"priority": 0
 			},
 			"school/myWorks.html": {
@@ -707,9 +711,22 @@
 					"css/school/myWorks.css",
 					"css/app.css",
 					"css/dashboard.css",
-					"css/mui.css"
+					"css/mui.css",
+					"js/H5Plus.js",
+					"js/common.js",
+					"js/jquery-2.1.4.min.js",
+					"js/mui.picker.js",
+					"js/app.js",
+					"js/mui.min.js",
+					"js/mui.poppicker.js",
+					"js/vue.min.js",
+					"js/immersed.js",
+					"images/astop.png",
+					"images/arecord.png"
 				],
-				"refer": [],
+				"refer": [
+					"school/showImage.html"
+				],
 				"priority": 0
 			},
 			"school/rankingList.html": {
@@ -726,6 +743,22 @@
 					"images/school/head-pic.png",
 					"images/school/silver-medal.png",
 					"images/school/gold-medal.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"school/showImage.html": {
+				"resources": [
+					"css/H5Plus.css",
+					"js/H5Plus.js",
+					"js/H5Plus-quit.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"school/showVideo.html": {
+				"resources": [
+					"css/H5Plus.css"
 				],
 				"refer": [],
 				"priority": 0

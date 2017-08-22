@@ -87,16 +87,8 @@
 	<script type="text/javascript" src="../js/immersed.js" ></script>
 	<script type="text/javascript" charset="UTF-8">
 		mui.init();
-		var count = 0
-		
-	
-
-//private String aswDesc;//  个人成果 必填
-//private Integer aswActId;//  与t_activity表的act_id关联  活动Id 必填
-//      private List<ActivityStudentsWorksFiles> activityStudentsWorksFilesList;//作品活动附件列表（图片、录音、视屏）  
-
-
-
+		var count = 0;
+		 
      var vm_my_works = new Vue({
 		el: '#my_works_content',
 		data: {
@@ -113,7 +105,13 @@
 	});
     
     mui.plusReady(function(){
-    	
+    	 
+		var self = plus.webview.currentWebview();
+		self.addEventListener("hide",function (e) {
+			window.scrollTo(0, 0);
+			//vm.resetData();
+		},false);
+		
     	$(".buttonContianer").on('tap',function(){
 			count ++
 			if(count % 2 == 1){
