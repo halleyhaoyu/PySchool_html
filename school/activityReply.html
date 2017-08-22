@@ -77,20 +77,6 @@
 	<script type="text/javascript" charset="UTF-8">
 		mui.init();
 		var count = 0
-		$(".buttonContianer").on('tap',function(){
-			count ++
-			if(count % 2 == 1){
-				$(this).addClass('show')
-				$(this).children().animate({
-					opacity: 1
-				})
-			}else{
-				$(this).removeClass('show')
-				$(this).children().animate({
-					opacity: 0
-				})
-			}
-		})
 
 
  
@@ -129,9 +115,44 @@
 			},false);
 
  
+		$(".buttonContianer").on('tap',function(){
+			count ++
+			if(count % 2 == 1){
+				$(this).addClass('show')
+				$(this).children().animate({
+					opacity: 1
+				})
+			}else{
+				$(this).removeClass('show')
+				$(this).children().animate({
+					opacity: 0
+				})
+			}
+		})
 			mui('#activity_reply_content').on('tap', '#btn_activity_reply_post', function(e) {
 			  post_activity_reply();
 			});
+			
+			
+	        //录音
+	        document.getElementById('addAudio').addEventListener('tap', function() {
+	            startRecord();
+	        });
+	
+	        //拍照上传
+	        document.getElementById('addCameraImages').addEventListener('tap', function() {
+	            cameraAndUpload();
+	        });
+	        //拍视频上传
+	        document.getElementById('addVideos').addEventListener('tap', function() {
+	            videoAndUpload();
+	        });
+	
+	        //相册选择照片上传
+	        document.getElementById('addImages').addEventListener('tap', function() {
+	            albumAndUpload(0);
+	        });
+	        
 		})
 		
 	 	function post_activity_reply(){
@@ -153,24 +174,6 @@
 	  	}
 
 
-        //录音
-        document.getElementById('addAudio').addEventListener('tap', function() {
-            startRecord();
-        });
-
-        //拍照上传
-        document.getElementById('addCameraImages').addEventListener('tap', function() {
-            cameraAndUpload();
-        });
-        //拍视频上传
-        document.getElementById('addVideos').addEventListener('tap', function() {
-            videoAndUpload();
-        });
-
-        //相册选择照片上传
-        document.getElementById('addImages').addEventListener('tap', function() {
-            albumAndUpload(0);
-        });
 
 	</script>
 </body>

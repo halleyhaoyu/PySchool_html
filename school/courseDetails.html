@@ -23,7 +23,7 @@
 	
 	<div id="course_detail_content" class="mui-content">
 		<header class="mui-bar mui-bar-nav">
-			<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<img src="../images/head-dz.png" class="head-dz"/>
 			<h1 class="mui-title">{{title}}</h1>
 			<!--<a class="mui-icon mui-icon-forward mui-pull-right"></a>-->
@@ -80,12 +80,15 @@
 		 
 		//向服务端请求文章详情内容
 		console.info("courseId:  "+vm.courseId);
+		console.info("chapId:  "+vm.chapId);
 		app.getCourseDetail(vm.chapId,vm.courseId,vm.classId,function(data){
 			console.log(data.code);
 			console.log(data.msg);
 			if(data.code==0){ 
 				console.log(data.objectList.length);				  
 				vm.courseDetails = data.objectList;
+			}else{
+				vm.courseDetails=[];
 			}
 			mui.toast(data.msg);
 		});

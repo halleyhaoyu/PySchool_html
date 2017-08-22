@@ -86,8 +86,35 @@
 	<script type="text/javascript" src="../js/common.js" ></script>
 	<script type="text/javascript" src="../js/immersed.js" ></script>
 	<script type="text/javascript" charset="UTF-8">
+		mui.init();
 		var count = 0
-		$(".buttonContianer").on('tap',function(){
+		
+	
+
+//private String aswDesc;//  个人成果 必填
+//private Integer aswActId;//  与t_activity表的act_id关联  活动Id 必填
+//      private List<ActivityStudentsWorksFiles> activityStudentsWorksFilesList;//作品活动附件列表（图片、录音、视屏）  
+
+
+
+     var vm_my_works = new Vue({
+		el: '#my_works_content',
+		data: {
+			myWorksInfo:{
+				manageId:0,
+				aswDesc:'',
+				aswActId:0,
+				activityStudentsWorksFilesList:[]
+			}
+		}
+	});
+    document.addEventListener('get_activity_my_works', function(event) {
+ 		vm_my_works.myWorksInfo.aswActId = event.detail.activityId; 
+	});
+    
+    mui.plusReady(function(){
+    	
+    	$(".buttonContianer").on('tap',function(){
 			count ++
 			if(count % 2 == 1){
 				$(this).addClass('show')
@@ -121,30 +148,7 @@
         document.getElementById('addImages').addEventListener('tap', function() {
             albumAndUpload(0);
         });
-	
-
-//private String aswDesc;//  个人成果 必填
-//private Integer aswActId;//  与t_activity表的act_id关联  活动Id 必填
-//      private List<ActivityStudentsWorksFiles> activityStudentsWorksFilesList;//作品活动附件列表（图片、录音、视屏）  
-
-
-
-     var vm_my_works = new Vue({
-		el: '#my_works_content',
-		data: {
-			myWorksInfo:{
-				manageId:0,
-				aswDesc:'',
-				aswActId:0,
-				activityStudentsWorksFilesList:[]
-			}
-		}
-	});
-    document.addEventListener('get_activity_my_works', function(event) {
- 		vm_my_works.myWorksInfo.aswActId = event.detail.activityId; 
-	});
-    
-    mui.plusReady(function(){
+    	
     	mui('#my_works_content').on('tap','#btn_my_works_post',function(){
 			var userInfo = app.getState();
 			var data={};

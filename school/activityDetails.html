@@ -23,7 +23,7 @@
 		<img src="../images/head-dz.png" class="head-dz"/>
 		<h1 class="mui-title">活动详情</h1>
 		<a id="activity_every_one_work" class="mui-pull-right top-edit">大家作品</a>
-		<a id="activity_reply_detail" href="#"  class="mui-pull-right top-edit" style="left:50px; right:250px">活动集锦</a>
+		<a id="activity_reply_detail"   class="mui-pull-right top-edit" style="left:50px; right:250px">活动集锦</a>
 	</header>
 
 	<!--<nav id="main_bar" class="mui-bar mui-bar-tab">
@@ -85,7 +85,7 @@
 
 		</div>
 		<div style="padding:32px;background-color:#F7F7F7;">
-			<button  v-if="courseInfo.hasPart==1"  id="btn_activity_my_works" type="button" 
+			<button  v-if="courseInfo.hasPart==1" @tap="open_activity_my_works()" id="btn_activity_my_works" type="button" 
 				class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn">我的作品</button>
 			<button v-if="userInfo.roleType==2" id="btn_activity_my_works_show" type="button" 
 				class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn">推荐学校秀</button>
@@ -181,10 +181,10 @@
 			styles: {"render": "always","popGesture": "hide","bounce": "vertical"}
 		});
 		
-		mui('#actiity-detail-content').on('tap','#btn_activity_my_works',function(){
-			//console.info("this.href:  " + this.href);
-			 open_activity_my_works();
-		}); 
+//		mui('#actiity-detail-content').on('tap','#btn_activity_my_works',function(){
+//			//console.info("this.href:  " + this.href);
+//			 open_activity_my_works();
+//		}); 
 		
 		mui('#actiity-detail-content').on('tap','#btn_activity_my_works_show',function(){
 			//console.info("this.href:  " + this.href);
@@ -242,7 +242,8 @@
 		},150);
 	}
 	
-	function open_activity_my_works() {			
+	function open_activity_my_works() {
+		console.info("open_activity_my_works");
 		//触发子窗口变更详情
 		mui.fire(webview_activity_my_works, 'get_activity_my_works', {
 				//activityId: activityId

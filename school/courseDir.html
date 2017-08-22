@@ -69,7 +69,7 @@
 		data: getDefaultData(),
 		methods: {
 			resetData: function() {//重置数据
-				Object.assign(this.$data, getDefaultData());
+				//Object.assign(this.$data, getDefaultData());
 			}
 		}
 	});
@@ -204,7 +204,7 @@
 			console.log(citem.text);
 			//触发子窗口变更新闻详情
 		mui.fire(webview_course_detail, 'get_course_detail', {
-				chapId: pitem.id,
+				chapId: citem.id,
 				courseId:courseId,
 				title:pitem.text,
 				classId:classId
