@@ -698,7 +698,9 @@
 					"js/immersed.js",
 					"js/common.js",
 					"js/app.js",
-					"js/vue.min.js"
+					"js/vue.min.js",
+					"images/astop.png",
+					"images/arecord.png"
 				],
 				"refer": [
 					"school/showImage.html",
@@ -722,7 +724,8 @@
 					"js/vue.min.js",
 					"js/immersed.js",
 					"images/astop.png",
-					"images/arecord.png"
+					"images/arecord.png",
+					"css/H5MediaFile.css"
 				],
 				"refer": [
 					"school/showImage.html"

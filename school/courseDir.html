@@ -38,7 +38,7 @@
 					</a>
 					<ul id="clist" class="course-dir-ui" >
 						<li v-for="citem in item.children" >
-							<a href="javascript:;" :data-guid="citem.id"  @tap="open_course_detail(citem,item)">
+							<a href="javascript:;" :data-guid="citem.id"  @tap="open_course_detail(citem,citem)">
 								<p class="course-desc">{{citem.text}}</p>
 							</a>
 						</li>

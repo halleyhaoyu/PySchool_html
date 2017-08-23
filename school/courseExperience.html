@@ -33,7 +33,16 @@
 			</div> 
 		
 			<ul id="history" class="dlist" style="text-align:left;padding:0;">
-
+				<li v-for="item in selectFileList">
+					<span v-if="item.type==1" class='iplay'>
+						<font class='aname'   @tap='displayFile(item.patch)'>{{ getFileName(item)}}</font> 
+					 	<span class='mui-icon mui-icon-close'   @tap='delUploadFileList(item.patch)'></span>
+					</span>
+					<span v-else class='iplay'>
+						<font class='aname'  @tap='playAudio(item.patch)'>{{ getFileName(item)}}</font> 
+						<span class='mui-icon mui-icon-close'  @tap='delUploadFileList(item.patch)'></span>
+					</span>
+				</li>
 			</ul>
 		
 		<div class="button buttonContianer"><!--
@@ -48,7 +57,7 @@
 			<div class="button button5"></div>
 				
 		</div>
-		<div class="div-tips">附件上限为10个。</div>
+		<div class="div-tips">附件上限为1个。</div>
  
 		</form> 
 	</div>
@@ -79,7 +88,7 @@
     mui.init();
     var count = 0
     var vm_course_exprience = new Vue({
-		el: '#course_detail_content',
+		el: '#course_experience_content',
 		data: {
 			experienceInfo:{
 				cceDesc:'',
@@ -92,6 +101,12 @@
 				cceFiles:'',
 				cceTmId:0,
 				cceTcId:0
+			},
+			selectFileList:[]
+		},
+		methods:{
+			getFileName:function(item){
+				return item.patch.substr(item.patch.lastIndexOf('/')+1);
 			}
 		}
 	});
@@ -151,30 +166,68 @@
 		    }
 		}) 
 
-
         //录音
         document.getElementById('addAudio').addEventListener('tap', function() {
-            startRecord();
+        	 if(vm_course_exprience.selectFileList.length>=1){
+        	 	mui.toast('只可以上传一个附件！');
+        	 }
+        	 else{
+           	 	startRecord(courseExperienceCallback); 
+        	 }
         });
 
         //拍照上传
         document.getElementById('addCameraImages').addEventListener('tap', function() {
-            cameraAndUpload();
+             if(vm_course_exprience.selectFileList.length>=1){
+        	 	mui.toast('只可以上传一个附件！');
+        	 }
+        	 else{
+        	 	cameraAndUpload(courseExperienceCallback);
+        	 }
         });
         //拍视频上传
         document.getElementById('addVideos').addEventListener('tap', function() {
-            videoAndUpload();
+             if(vm_course_exprience.selectFileList.length>=1){
+        	 	mui.toast('只可以上传一个附件！');
+        	 }
+        	 else{
+        	 	
+	            videoAndUpload(courseExperienceCallback);
+	           }
         });
 
         //相册选择照片上传
         document.getElementById('addImages').addEventListener('tap', function() {
-            albumAndUpload(0);
+             if(vm_course_exprience.selectFileList.length>=1){
+        	 	mui.toast('只可以上传一个附件！');
+        	 }
+        	 else{
+        	 	
+	            albumAndUpload(1,courseExperienceCallback);
+	           }
         });
     })
      
     mui.back = function() {
 		plus.webview.currentWebview().hide("auto", 300);
 	}
+    
+    // 回调
+    var courseExperienceCallback = function(data){
+    	if(data.code==0){
+    		console.info(JSON.stringify(data));
+    		if(data.code==0){
+        		vm_course_exprience.experienceInfo.cceFiles=data.objectList[0].pathAll;
+				vm_course_exprience.selectFileList=selectFileList;
+				if(vm_course_exprience.selectFileList.length>1){
+					vm_course_exprience.selectFileList.splice(1,vm_course_exprience.selectFileList.length-1);
+					mui.toast('只可以上传一个附件！');
+				}
+    		}
+    	}
+		mui.toast(data.msg);
+    }
+    
 </script>
 </body>
 </html>

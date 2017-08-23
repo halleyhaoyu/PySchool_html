@@ -115,7 +115,7 @@
 								app.getExchangeAreaList(vm_exchange_area.classId,1,function(data){
 									console.info(JSON.stringify(data));
 									if(data.code==0){
-										if(data.object!=undefined){											
+										if(data.object!=undefined){
 											vm_exchange_area.acAreaList=data.object.rows;
 											console.info(JSON.stringify(vm_exchange_area.acAreaList));
 										}
@@ -135,7 +135,7 @@
 							var aa = index;
 							var userInfo = app.getState(); 
 							if(userInfo.manageId!=undefined && userInfo.manageId!=''){
-								app.getExchangeAreaList(vm_exchange_area.classId,pageIndex,function(data){
+								app.getExchangeAreaList(vm_exchange_area.classId,pageIndex+1,function(data){
 									var overFlag = false;
 									if(data.code==0){
 										if(data.object!=undefined && data.object.rows.length>0){
@@ -181,6 +181,19 @@
 			//vm.resetData();
 		},false);		 
  
+ 
+	 	app.getExchangeAreaList(vm_exchange_area.classId,1,function(data){
+			console.info(JSON.stringify(data));
+			if(data.code==0){
+				if(data.object!=undefined){
+					vm_exchange_area.acAreaList=data.object.rows;
+					console.info(JSON.stringify(vm_exchange_area.acAreaList));
+				}
+			}
+			mui.toast(data.msg); 
+		});
+								
+								
 	})
 	</script>
 </body>

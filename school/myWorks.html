@@ -42,8 +42,18 @@
 			</div>
 
 
+			
 			<ul id="history" class="dlist" style="text-align:left;padding:0;">
-
+				<li v-for="item in selectFileList">
+					<span v-if="item.type==1" class='iplay'>
+						<font class='aname'   @tap='displayFile(item.patch)'>{{ getFileName(item)}}</font> 
+					 	<span class='mui-icon mui-icon-close'   @tap='delUploadFileList(item.patch)'></span>
+					</span>
+					<span v-else class='iplay'>
+						<font class='aname'  @tap='playAudio(item.patch)'>{{ getFileName(item)}}</font> 
+						<span class='mui-icon mui-icon-close'  @tap='delUploadFileList(item.patch)'></span>
+					</span>
+				</li>
 			</ul>
 
 
@@ -64,7 +74,7 @@
 	</div>
 
 	<div style="height:180px;"></div>
-	<button  type="button" class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn"> 保 存 </button>
+	<button  type="button" id="btn_my_works_post" class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn"> 保 存 </button>
 
 	<div id="play" class="rp">
 		<div id="ptime" class="ptime">00:00:00/00:00:00</div><br/>
@@ -97,8 +107,14 @@
 				aswDesc:'',
 				aswActId:0,
 				activityStudentsWorksFilesList:[]
+			},
+			selectFileList:[]
+		},
+			methods:{
+				getFileName:function(item){
+					return item.patch.substr(item.patch.lastIndexOf('/')+1);
+				}
 			}
-		}
 	});
     document.addEventListener('get_activity_my_works', function(event) {
  		vm_my_works.myWorksInfo.aswActId = event.detail.activityId; 
@@ -130,21 +146,37 @@
 
         //录音
         document.getElementById('addAudio').addEventListener('tap', function() {
-            startRecord();
+        	if(vm_my_works.selectFileList.length>=9){
+        		mui.toast('只可以上传9个附件！');
+        	}else{
+            	startRecord(myWorksCallback);
+            }
         });
 
         //拍照上传
         document.getElementById('addCameraImages').addEventListener('tap', function() {
-            cameraAndUpload();
+        	if(vm_my_works.selectFileList.length>=9){
+        		mui.toast('只可以上传9个附件！');
+        	}else{
+            	cameraAndUpload(myWorksCallback);
+            }
         });
         //拍视频上传
         document.getElementById('addVideos').addEventListener('tap', function() {
-            videoAndUpload();
+        	if(vm_my_works.selectFileList.length>=9){
+        		mui.toast('只可以上传9个附件！');
+        	}else{
+            	videoAndUpload(myWorksCallback);
+            }
         });
 
         //相册选择照片上传
         document.getElementById('addImages').addEventListener('tap', function() {
-            albumAndUpload(0);
+        	if(vm_my_works.selectFileList.length>=9){
+        		mui.toast('只可以上传9个附件！');
+        	}else{
+            	albumAndUpload(0,myWorksCallback);
+            }
         });
     	
     	mui('#my_works_content').on('tap','#btn_my_works_post',function(){
@@ -165,6 +197,35 @@
     mui.back = function() {
 		plus.webview.currentWebview().hide("auto", 300);
 	}
+    
+    function getMyWorksFileList(fileList){ 
+			var activityStudentsWorksFilesList = [];
+			for(var i in fileList){
+				activityStudentsWorksFilesList.push({aswfFiles:fileList[i].pathAll,aswfActId:vm_my_works.myWorksInfo.aswActId});				
+			}
+			return activityStudentsWorksFilesList;
+		}
+    
+    // 回调
+	    var myWorksCallback = function(data){
+	    	if(data.code==0){
+	    		console.info(JSON.stringify(data));
+	    		if(data.code==0){
+					vm_my_works.selectFileList=selectFileList;
+					if(vm_my_works.selectFileList.length>9){
+						vm_my_works.selectFileList.splice(9,vm_my_works.selectFileList.length-9);
+						mui.toast('只可以上传9个附件！');
+					}
+					console.info(JSON.stringify(data.objectList ));
+					var activityStudentsWorksFilesList = getMyWorksFileList(data.objectList);
+					console.info(JSON.stringify(activityStudentsWorksFilesList));
+					vm_my_works.myWorksInfo.activityStudentsWorksFilesList=activityStudentsWorksFilesList;
+					
+	    		}
+	    	}
+			mui.toast(data.msg);
+	    }
+    
 </script>
 
 </body>

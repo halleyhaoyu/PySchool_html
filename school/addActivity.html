@@ -50,7 +50,16 @@
 			</div>
 			
 			<ul id="history" class="dlist" style="text-align:left;padding:0;">
-				
+				<li v-for="item in selectFileList">
+					<span v-if="item.type==1" class='iplay'>
+						<font class='aname'   @tap='displayFile(item.patch)'>{{ getFileName(item)}}</font> 
+					 	<span class='mui-icon mui-icon-close'   @tap='delUploadFileList(item.patch)'></span>
+					</span>
+					<span v-else class='iplay'>
+						<font class='aname'  @tap='playAudio(item.patch)'>{{ getFileName(item)}}</font> 
+						<span class='mui-icon mui-icon-close'  @tap='delUploadFileList(item.patch)'></span>
+					</span>
+				</li>
 			</ul>
 			
 			<div class="button buttonContianer">
@@ -91,21 +100,7 @@
 	<script type="text/javascript" charset="UTF-8">
 	    mui.init();
 	    var count = 0
-	    $(".buttonContianer").on('tap',function(){
-	        count ++
-	        if(count % 2 == 1){
-	            $(this).addClass('show')
-	            $(this).children().animate({
-	                opacity: 1
-	            })
-	            $()
-	        }else{
-	            $(this).removeClass('show')
-	            $(this).children().animate({
-	                opacity: 0
-	            })
-	        }
-	    })
+	    
 	     
 
 	   	var vm_add_activity = new Vue({
@@ -119,6 +114,12 @@
 					actStatus:1,//  1:待审核；2：审核通过；3：审核未通过
 					actParticipant:'',//  活动参与人
 					actFiles:'' //  活动附件 
+				},
+				selectFileList:[]
+			},
+			methods:{
+				getFileName:function(item){
+					return item.patch.substr(item.patch.lastIndexOf('/')+1);
 				}
 			}
 		});
@@ -140,6 +141,56 @@
 				//vm.resetData();
 			},false);
 			 
+			$(".buttonContianer").on('tap',function(){
+		        count ++
+		        if(count % 2 == 1){
+		            $(this).addClass('show')
+		            $(this).children().animate({
+		                opacity: 1
+		            })
+		            $()
+		        }else{
+		            $(this).removeClass('show')
+		            $(this).children().animate({
+		                opacity: 0
+		            })
+		        }
+		    })
+			 
+			 //录音
+	        document.getElementById('addAudio').addEventListener('tap', function() {
+	        	if(vm_add_activity.selectFileList.length>=1){
+	        		mui.toast('只可以上传一个附件！');
+	        	}else{
+	            	startRecord(addActivityCallback);
+	            }
+	        });
+	        
+	    		//拍照上传
+		    document.getElementById('addCameraImages').addEventListener('tap', function() {
+	        	if(vm_add_activity.selectFileList.length>=1){
+	        		mui.toast('只可以上传一个附件！');
+	        	}else{
+		    		cameraAndUpload(addActivityCallback);
+	            }
+		    });
+	    		//拍视频上传
+	        document.getElementById('addVideos').addEventListener('tap', function() {
+	        	if(vm_add_activity.selectFileList.length>=1){
+	        		mui.toast('只可以上传一个附件！');
+	        	}else{
+	            	videoAndUpload(addActivityCallback);
+	            }
+	        });
+			
+			//相册选择照片上传
+		    document.getElementById('addImages').addEventListener('tap', function() {
+	        	if(vm_add_activity.selectFileList.length>=1){
+	        		mui.toast('只可以上传一个附件！');
+	        	}else{
+		    		albumAndUpload(0,addActivityCallback);
+	            }
+		    });
 			 
 			mui("#add_activity_content").on('tap','#number_plus',function(){
 				 vm_add_activity.activityInfo.actNum=vm_add_activity.activityInfo.actNum+1;
@@ -153,24 +204,21 @@
 			});
 		})
 		
-		//录音
-        document.getElementById('addAudio').addEventListener('tap', function() {
-            startRecord();
-        });
-        
-    		//拍照上传
-	    document.getElementById('addCameraImages').addEventListener('tap', function() {
-	    		cameraAndUpload();
-	    });
-    		//拍视频上传
-        document.getElementById('addVideos').addEventListener('tap', function() {
-            videoAndUpload();
-        });
-		
-		//相册选择照片上传
-	    document.getElementById('addImages').addEventListener('tap', function() {
-	    		albumAndUpload(0);
-	    });
+		// 回调
+	    var addActivityCallback = function(data){
+	    	if(data.code==0){
+	    		console.info(JSON.stringify(data));
+	    		if(data.code==0){
+	        		vm_add_activity.activityInfo.actFiles=data.objectList[0].pathAll;
+					vm_add_activity.selectFileList=selectFileList;
+					if(vm_add_activity.selectFileList.length>1){
+						vm_add_activity.selectFileList.splice(1,vm_add_activity.selectFileList.length-1);
+						mui.toast('只可以上传一个附件！');
+					}
+	    		}
+	    	}
+			mui.toast(data.msg);
+	    }
 	    
 	    function post_add_activity(){
 	    	var userInfo = app.getState();

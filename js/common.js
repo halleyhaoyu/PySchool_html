@@ -51,19 +51,26 @@ function cameraAndAlbum(title,num){
 }
 
 //相册选择照片上传
-function albumAndUpload(num){
+function albumAndUpload(num,callback){
+	var msg={code:0,msg:'',objectList:[]};
+	callback = callback || $.noop;
 	if(num==0)num=filesNum;
 	if(num==0){
-		mui.toast('上传文件已超出了限制数量。');
+		msg.code=-1;
+		msg.msg='上传文件已超出了限制数量。';  
+		callback(msg);
 	}else{
 		plus.gallery.pick(
         function(paths){
 //      		paths.files所选择图片路径
 //          taskUpload(paths.files);
-            pushUploadFileList(paths.files,1);
+            pushUploadFileList(paths.files,1,callback);
         },
         function(e){
-        		mui.toast('取消了选择');
+			msg.code=-1;
+			msg.msg='取消了选择';  
+			callback(msg);
+        		//mui.toast('取消了选择');
         },
         {
         		multiple:true,
@@ -73,9 +80,13 @@ function albumAndUpload(num){
 	}
 }
 //拍照上传
-function cameraAndUpload(){
+function cameraAndUpload(callback){
+	var msg={code:0,msg:'',objectList:[]};
+	callback = callback || $.noop;
 	if(filesNum==0){
-		mui.toast('上传文件已超出了限制数量。');
+		msg.code=-1;
+		msg.msg='上传文件已超出了限制数量。';  
+		callback(msg);
 	}else{
 		var c = plus.camera.getCamera();
 	    c.captureImage(function(e) {
@@ -85,9 +96,12 @@ function cameraAndUpload(){
 	            paths.push(entry.toLocalURL())
 	            console.log(paths[0]);
 //	          	taskUpload(paths);
-	            pushUploadFileList(paths,1);
+	            pushUploadFileList(paths,1,callback);
 	        }, function(e) {
-	            console.log("读取拍照文件错误：" + e.message);
+				msg.code=-1;
+				msg.msg="读取拍照文件错误：" + e.message;  
+				callback(msg);
+	            //console.log("读取拍照文件错误：" + e.message);
 	        });
 	    }, function(s) {
 	        console.log("error" + s);
@@ -98,9 +112,14 @@ function cameraAndUpload(){
 }
 
 // 录像并上传
-function videoAndUpload(){
+function videoAndUpload(callback){
+	var msg={code:0,msg:'',objectList:[]};
+	callback = callback || $.noop;
 	if(filesNum==0){
-		mui.toast('上传文件已超出了限制数量。');
+		msg.code=-1;
+		msg.msg='上传文件已超出了限制数量。';  
+		callback(msg);
+		//mui.toast('上传文件已超出了限制数量。');
 	}else{
 		console.log('开始录像...');
 		var cmr = plus.camera.getCamera();
@@ -112,12 +131,18 @@ function videoAndUpload(){
 	            paths.push(entry.toLocalURL())
 	            console.log(paths[0]);
 //	            taskUpload(paths);
-	            pushUploadFileList(paths,1);
+	            pushUploadFileList(paths,1,callback);
 			}, function(e){
-				console.log('读取录像文件错误：'+e.message);
+				msg.code=-1;
+				msg.msg='读取录像文件错误：'+e.message;  
+				callback(msg);
+				//console.log('读取录像文件错误：'+e.message);
 			} );
 		}, function(e){
-			console.log('失败：'+e.message);
+			msg.code=-1;
+			msg.msg='失败：'+e.message;  
+			callback(msg);
+			//console.log('失败：'+e.message);
 		}, {filename:'_doc/camera/',index:indexNum});
 	}
 }
@@ -126,15 +151,22 @@ function videoAndUpload(){
 
 // 开始录音
 var r=null,t=0,ri=null,rt=null;
-function startRecord(){
+function startRecord( callback ){
+	
+	callback = callback || $.noop;
+	var msg={code:0,msg:'',objectList:[]};
+	
 	if(filesNum==0){
-		mui.toast('上传文件已超出了限制数量。');
+		msg.code=-1;
+		msg.msg='上传文件已超出了限制数量。'; 
 	}else{
 		console.log('开始录音：');
 		r = plus.audio.getRecorder();
 		if ( r == null ) {
+			msg.code=-1;
+			msg.msg='录音对象未获取'; 
 			console.log('录音对象未获取');
-			return;
+			return callback(msg);
 		}
 		r.record({filename:'_doc/audio/'}, function(p){
 			console.log('录音完成：'+p);
@@ -144,7 +176,7 @@ function startRecord(){
 	            paths.push(entry.toLocalURL())
 	            console.log(paths[0]);
 //	            taskUpload(paths);
-				pushUploadFileList(paths,2);
+				pushUploadFileList(paths,2,callback);
 			}, function(e){
 				console.log('读取录音文件错误：'+e.message);
 			});
@@ -158,6 +190,7 @@ function startRecord(){
 			rt.innerText = timeToStr(t);
 		}, 1000);
 	}
+	return callback(msg);
 }
 // 停止录音
 function stopRecord(){
@@ -174,12 +207,12 @@ function stopRecord(){
 
 // 播放音频文件
 function playAudio(obj){
-	if(!obj || !obj.mediaFile){
+	if(!obj ){
 		console.log('无效的音频文件');
 		return;
 	}
-	console.log('播放音频文件：'+obj.mediaFile);
-	startPlay(obj.mediaFile);
+	console.log('播放音频文件：'+obj);
+	startPlay(obj);
 }
 // 播放文件相关对象
 var p=null,pt=null,pp=null,ps=null,pi=null;
@@ -262,11 +295,11 @@ function displayFile(obj){
 		console.log('重复点击！');
 		return;
 	}
-	if(!obj||!obj.mediaFile){
+	if(!obj){
 		console.log('无效的媒体文件');
 		return;
 	}
-	var name = obj.mediaFile.substr(obj.mediaFile.lastIndexOf('/')+1);
+	var name = obj.substr(obj.lastIndexOf('/')+1);
 	var suffix = name.substr(name.lastIndexOf('.'));
 	var url = '';
 	if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
@@ -276,7 +309,7 @@ function displayFile(obj){
 	}
 	w=plus.webview.create(url,url,{hardwareAccelerated:true,scrollIndicator:'none',scalable:true,bounce:'all'});
 	w.addEventListener('loaded', function(){
-		w.evalJS('loadMedia("'+obj.mediaFile+'")');
+		w.evalJS('loadMedia("'+obj+'")');
 	}, false );
 	w.addEventListener('close', function(){
 		w = null;
@@ -286,7 +319,7 @@ function displayFile(obj){
 
 // 添加预览、播放项
 function createItem(mediaFile,type){
-	filesNum--;
+	
 	var li = document.createElement('li');
 	var fileName=mediaFile.substr(mediaFile.lastIndexOf('/')+1);
 	li.className = 'ditem';
@@ -306,22 +339,31 @@ function createItem(mediaFile,type){
 
 //上传文件集合
 var uploadFileList = new Array();
+var selectFileList = new Array();
 //添加image至需要上传的uploadFileList
-function pushUploadFileList(fileList,type){
+function pushUploadFileList(fileList,type,callback){
 	for(var i in fileList){
-		createItem(fileList[i],type);
+		filesNum--;
+		//createItem(fileList[i],type);
+		selectFileList.push({patch:fileList[i],type:type});
 		uploadFileList.push(fileList[i]);
 	}
-	taskUpload(uploadFileList)
+
+	
+	//uploadFileList.concat(fileList);
+	
+	taskUpload(uploadFileList,callback)
 }
 
 //从uploadFileList中移除指定uploadFile
 function delUploadFileList(obj){
-	for(var i in uploadFileList){
-		if(uploadFileList[i]==obj.mediaFile){
-			console.log(obj.mediaFile);
-			$(obj).parent().parent().remove();
-			uploadFileList.splice(i,1);
+	console.info(obj);
+	console.info(JSON.stringify(selectFileList));
+	for(var i in selectFileList){
+		if(selectFileList[i].patch==obj){
+			console.log(obj);
+			//$(obj).parent().parent().remove();
+			selectFileList.splice(i,1);
 			filesNum++;
 		}
 	}
@@ -329,21 +371,28 @@ function delUploadFileList(obj){
 
 
 //创建上传任务
-function taskUpload(fileList){
+function taskUpload(fileList, callback){
 	plus.nativeUI.showWaiting();
+	var filePathList=[];
 	var task = null;
 	task = plus.uploader.createUpload(
     		'http://112.124.110.182:11008/course-api/uploadCommonApp.shtml',
     		{ method:"POST",priority:100},
     		function (t,status){
+    			//console.info(t);
+    			//console.info(JSON.stringify(t));
         		plus.nativeUI.closeWaiting();
         		t.responseText = JSON.parse(t.responseText);//首次转换数据
-        		console.log(t.responseText);
+        		//console.log(t.responseText);
         		var objStr = JSON.parse(t.responseText);//需再次转换
-        		for(var k in objStr.objectList){
-        			console.log(objStr.objectList[k].pathAll);//上传完成的图片全路径
-        		}
-        		mui.toast('上传成功！');
+//      		for(var k in objStr.objectList){
+//      			console.log(objStr.objectList[k].pathAll);//上传完成的图片全路径
+//      		}
+        		//mui.toast('上传成功！');
+        		var msg=objStr;
+        		console.info(JSON.stringify(msg));
+        		callback(msg);
+        		uploadFileList.splice(0,uploadFileList.length);
     		}
 	);
 	for(var i in fileList){

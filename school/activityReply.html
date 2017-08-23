@@ -37,8 +37,18 @@
 			</div>
 
 			<ul id="history" class="dlist" style="text-align:left;padding:0;">
-
+				<li v-for="item in selectFileList">
+					<span v-if="item.type==1" class='iplay'>
+						<font class='aname'   @tap='displayFile(item.patch)'>{{ getFileName(item)}}</font> 
+					 	<span class='mui-icon mui-icon-close'   @tap='delUploadFileList(item.patch)'></span>
+					</span>
+					<span v-else class='iplay'>
+						<font class='aname'  @tap='playAudio(item.patch)'>{{ getFileName(item)}}</font> 
+						<span class='mui-icon mui-icon-close'  @tap='delUploadFileList(item.patch)'></span>
+					</span>
+				</li>
 			</ul>
+			
 			<div class="button buttonContianer">
 				<div class="button button1" id="addAudio"></div>
 				<div class="button button2" id="addCameraImages"></div>
@@ -46,7 +56,7 @@
 				<div class="button button4" id="addImages"></div>
 				<div class="button button5"></div>
 			</div>
-			<div class="div-tips">附件上限为10个。</div>
+			<div class="div-tips">附件上限为9个。</div>
 
 		</form>
 	</div>
@@ -91,8 +101,14 @@
 				ahSponsorType:'',//  活动发起者类型：1：学生；2：教师
 				activityHighlightsFilesList:[]  //活动集锦附件
 			},
-			activityInfo:{actName:''}
-		}
+			activityInfo:{actName:''},
+			selectFileList:[]
+		},
+			methods:{
+				getFileName:function(item){
+					return item.patch.substr(item.patch.lastIndexOf('/')+1);
+				}
+			}
 	});
 	 
 
@@ -131,21 +147,37 @@
 			
 	        //录音
 	        document.getElementById('addAudio').addEventListener('tap', function() {
-	            startRecord();
+	        	if(vm_activity_reply.selectFileList.length>=9){
+	        		mui.toast('只可以上传9个附件！');
+	        	}else{
+	            	startRecord(activityReplyCallback);
+	            }
 	        });
 	
 	        //拍照上传
 	        document.getElementById('addCameraImages').addEventListener('tap', function() {
-	            cameraAndUpload();
+	        	if(vm_activity_reply.selectFileList.length>=9){
+	        		mui.toast('只可以上传9个附件！');
+	        	}else{
+	            	cameraAndUpload(activityReplyCallback);
+	            }
 	        });
 	        //拍视频上传
 	        document.getElementById('addVideos').addEventListener('tap', function() {
-	            videoAndUpload();
+	        	if(vm_activity_reply.selectFileList.length>=9){
+	        		mui.toast('只可以上传9个附件！');
+	        	}else{
+	            	videoAndUpload(activityReplyCallback);
+	            }
 	        });
 	
 	        //相册选择照片上传
 	        document.getElementById('addImages').addEventListener('tap', function() {
-	            albumAndUpload(0);
+	        	if(vm_activity_reply.selectFileList.length>=9){
+	        		mui.toast('只可以上传9个附件！');
+	        	}else{
+	            	albumAndUpload(9,activityReplyCallback);
+	            }
 	        });
 	        
 		})
@@ -155,8 +187,7 @@
 				data=vm_activity_reply.commentInfo;			
 				var userInfo = app.getState(); 
 				data.ahStudentId=userInfo.manageId 
-				data.ahSponsorType=userInfo.roleType==2?2:1;
-				
+				data.ahSponsorType=userInfo.roleType==2?2:1; 
 				
 				console.info(JSON.stringify(data));
 				app.postActivityReply(data,function(data){
@@ -168,12 +199,38 @@
 				 
 	  	}
 
+		function getActivityReplyFileList(fileList){ 
+			var activityHighlightsFilesList = [];
+			for(var i in fileList){
+				activityHighlightsFilesList.push({aswfFiles:fileList[i].pathAll,aswfActId:vm_activity_reply.commentInfo.ahActId});				
+			}
+			return activityHighlightsFilesList;
+		}
 
 		//重写返回逻辑
 		mui.back = function() {
 			plus.webview.currentWebview().hide("auto", 300);
 		}
-
+		
+		// 回调
+	    var activityReplyCallback = function(data){
+	    	if(data.code==0){
+	    		console.info(JSON.stringify(data));
+	    		if(data.code==0){
+					vm_activity_reply.selectFileList=selectFileList;
+					if(vm_activity_reply.selectFileList.length>9){
+						vm_activity_reply.selectFileList.splice(9,vm_activity_reply.selectFileList.length-9);
+						mui.toast('只可以上传9个附件！');
+					}
+					console.info(JSON.stringify(data.objectList ));
+					var activityHighlightsFilesList = getActivityReplyFileList(data.objectList);
+					console.info(JSON.stringify(activityHighlightsFilesList));
+					vm_activity_reply.commentInfo.activityHighlightsFilesList=activityHighlightsFilesList;
+					
+	    		}
+	    	}
+			mui.toast(data.msg);
+	    }
 
 	</script>
 </body>
