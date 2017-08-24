@@ -246,7 +246,8 @@
 		console.info("open_activity_my_works");
 		//触发子窗口变更详情
 		mui.fire(webview_activity_my_works, 'get_activity_my_works', {
-				activityId: activityId
+				activityId: activityId,
+				actName:vm_activity_detail.courseInfo.actName
 			});
  
 		setTimeout(function () {
@@ -270,7 +271,8 @@
 				asActId:vm_activity_detail.courseInfo.actId,
 				asGradeId:userInfo.studentsDetail.stdGrade,
 				asClassId:userInfo.studentsDetail.stdClass,
-				asTcId:vm_activity_detail.courseInfo.actTcId
+				asTcId:vm_activity_detail.courseInfo.actTcId,
+				asId:vm_activity_detail.courseInfo.asId
 			}
 		if(vm_activity_detail.courseInfo.hasPart==1 ){
 			data.actionType="signout" ;

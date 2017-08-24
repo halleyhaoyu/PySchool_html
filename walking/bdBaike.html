@@ -10,6 +10,9 @@
 	<link href="../css/walking/dashboard.css" rel="stylesheet"/>
 	
     <style type="text/css">
+    		html,body,iframe{
+    			overflow: hidden;
+    		}
     		.mui-bar .mui-icon {
 		    font-size: 24px;
 		    position: relative;
@@ -27,16 +30,9 @@
 <body class="pagebg  bg_gradient">
 	<header class="mui-bar mui-bar-nav">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		<h1 class="mui-title">上海中心大厦</h1>
+		<h1 class="mui-title"></h1>
 	</header>
-	<iframe src="https://wapbaike.baidu.com/item/上海中心大厦" style="height: 800px;margin-top: 64px;width: 100%;">
-		
-	</iframe>
-	
-	
-	
-	
-	
+	<iframe src="#"  id="iframeStr" style="height: 800px;margin-top: 64px;width: 100%;"></iframe>
 	<script src="../js/jquery-2.1.4.min.js"></script>
 	<script src="../js/mui.min.js"></script>
 	
@@ -46,6 +42,13 @@
 	function onResizeWindow(){
 		$("body").css("height",$(window).height());
 	}
+	mui.plusReady(function () {
+		var self = plus.webview.currentWebview();
+		console.log(self.targetName)
+		$('.mui-title').append(self.targetName);
+		$('#iframeStr').attr("src","https://wapbaike.baidu.com/item/"+self.targetName);
+	});
+	
 	</script>
 
 </body>

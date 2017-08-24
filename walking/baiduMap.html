@@ -34,12 +34,11 @@
 <body class="pagebg  bg_gradient">
 	<header class="mui-bar mui-bar-nav">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		<h1 class="mui-title">上海中心大厦</h1>
+		<h1 class="mui-title"></h1>
 	</header>
 	<!--百度地图容器-->
   	<div style="width:100%;margin-top:64px;" id="myMap"></div>
 		
-	<input type="hidden" id="custAdr" value="浦东新区"/>
 	<script src="../js/jquery-2.1.4.min.js"></script>
 	<script src="../js/mui.min.js"></script>
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=IyzyBvtFDeolBwAEMiEhS33N"></script>
@@ -48,7 +47,6 @@
     mui.init();
 	
 	jQuery(document).ready(function() {
-		localSearch();
 		onResizeWindow();
 	});
 	window.onresize = onResizeWindow;
@@ -71,8 +69,7 @@
 	    map.enableInertialDragging(); // 开启惯性拖拽效果  
 		map.setMapStyle({style:'bluish'});//百度地图主题
 		
-		address = '上海市浦东新区陆家嘴银城中路501号';
-		
+		console.log(address);
 		myGeo.getPoint(address, function(point){   
       		if (point) {
 		        map.centerAndZoom(point, 17);
@@ -105,7 +102,12 @@
 		marker = new BMap.Marker(point,{icon:icon});
 		map.addOverlay(marker); 
 	}
-	
+	mui.plusReady(function () {
+		var self = plus.webview.currentWebview();
+		address = self.addr;
+		$('.mui-title').append(self.targetName);
+		localSearch();
+	});
 	
 	</script>
 

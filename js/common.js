@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function(){
  * @param {Object} title 弹窗显示的标题
  * @param {Object} num 选择图片的数量
  */
-function cameraAndAlbum(title,num){
+function cameraAndAlbum(title,num,callback){
 	if (mui.os.plus) { 
         var a = [{ 
             title: "拍照" 
@@ -38,10 +38,10 @@ function cameraAndAlbum(title,num){
                 case 0: 
                     break; 
                 case 1: 
-                    cameraAndUpload();
+                    cameraAndUpload(callback);
                     break; 
                 case 2: 
-                    albumAndUpload(num);
+                    albumAndUpload(num,callback);
                     break; 
                 default: 
                     break; 

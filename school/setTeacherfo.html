@@ -28,7 +28,7 @@
 	<div class="mui-content">
 		<form class="mui-input-group">
 			<div class="head-div">
-				<img :src="headPic" class="head-pic" id="headImage">
+				<img :src="headPic" @tap="setTeacherHeadImage()"  class="head-pic" id="headImage">
 				<p style="font-size: 12px !important;margin-bottom: 12px;opacity: .5;">点击图片，上传新头像。</p>
 			</div> 
 			<div class="mui-input-row">
@@ -138,7 +138,7 @@
   	})
   	function post_set_teacher_info(){ 
 			var data={};
-			data=vm_set_student.studentInfo; 
+			data=vm_set_teacher.teacherInfo; 
 			console.info(JSON.stringify(data));
 			app.postSetTeacherInfo(data,function(data){
 				if(data.code==0){
@@ -148,7 +148,23 @@
 			});
 			 
   	}
+  	
+  	 function setTeacherHeadImage() {
+     	cameraAndAlbum('修改用户头像',1, setTeacherImageCallback);
+     }
   	 
+  	 // 回调
+    var setTeacherImageCallback = function(data){
+    	if(data.code==0){
+    		console.info(JSON.stringify(data));
+    		if(data.code==0){
+        		vm_set_teacher.teacherInfo.thPic=data.objectList[0].pathAll; 
+    		}
+    	}
+		mui.toast(data.msg);
+    }
+    
+    
   	//重写返回逻辑
 	mui.back = function() {
 		plus.webview.currentWebview().hide("auto", 300);

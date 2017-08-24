@@ -163,9 +163,20 @@
   	}
   	
   	function setStudentHeadImage() {
-     	cameraAndAlbum('修改用户头像',1);
+     	cameraAndAlbum('修改用户头像',1, setStudentImageCallback);
      }
   	
+  	
+  	// 回调
+    var setStudentImageCallback = function(data){
+    	if(data.code==0){
+    		console.info(JSON.stringify(data));
+    		if(data.code==0){
+        		vm_set_student.studentInfo.stdPic=data.objectList[0].pathAll; 
+    		}
+    	}
+		mui.toast(data.msg);
+    }
   	//重写返回逻辑
 	mui.back = function() {
 		plus.webview.currentWebview().hide("auto", 300);

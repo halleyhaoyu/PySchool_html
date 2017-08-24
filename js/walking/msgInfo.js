@@ -55,4 +55,142 @@ $.fn.autotype = function() {
 	// 延迟1s开始
 	setTimeout(printer, 1000);
 };
-$("#autotype").autotype();
+
+
+
+
+
+
+mui.plusReady(function () {
+	var self = plus.webview.currentWebview();
+	for(var i in msgArr){
+		if(self.targetName==msgArr[i].pinName){
+			var topPicArr = msgArr[i].topPicArr,dialogueArr = msgArr[i].dialogue;
+			var wordsAttr = msgArr[i].words,adoutAllArr = msgArr[i].adoutAll;
+			var seeWorldArr = msgArr[i].seeWorld;
+			var str1='',str2='',str3='',str4='',str5='',str6='';
+			for(var j in topPicArr){//轮播图片
+				str1 += '<div class="swiper-slide" style="background-image:url('+topPicArr[j].picUrl+')"></div>';
+			}
+			$('.swiper-wrapper').append(str1);
+			//轮播图片为1张时隐藏播放按钮
+			if(topPicArr.length==1)$('.playStop').css('display','none');
+			$('.introText h1').html(msgArr[i].name);
+			$('.introText small').html(msgArr[i].subText);
+			$('.local p').html(msgArr[i].addr);
+			$('.local p').attr("onclick","openBaiduMap('"+msgArr[i].name+"','"+msgArr[i].addr+"')");
+			$('.text-desc').html(msgArr[i].desc);
+			$('.balazi').html(msgArr[i].balazi);
+			for(var k in dialogueArr){//对话
+				str2 += '<li class="mui-table-view-cell mui-media">';
+				if(dialogueArr[k].name=='Pingping'){
+					str2 += '<div class="name1 mui-pull-left" name="Pingping">'+
+						'<img src="../images/walking/boy.png">';
+				}else{
+					str2 += '<div class="name2 mui-pull-right" name="Yangyang">'+
+						'<img src="../images/walking/girl.png">';
+				}
+				str2 += '</div>'	;
+				if(dialogueArr[k].name=='Pingping'){
+					str2 += '<div class="outputText1">';
+				}else{
+					str2 += '<div class="outputText2">';
+				}
+				str2 += 
+				'<p>'+dialogueArr[k].speak+'</p>'+
+				'</div>'	+
+				'</li>';
+			}
+			$('.mui-table-view').append(str2);
+			$("#autotype").autotype();//执行打字机效果
+			for(var m in wordsAttr){//词汇
+				var num = parseInt(m)+1;
+				str3 += 
+				'<div class="word-show">'+
+					'<div class="word-float-left">'+num+'</div>'+
+					'<div class="word-float-right">'+
+						'<p>'+wordsAttr[m].enStr+'</p>'+
+						'<p>'+wordsAttr[m].textStr+'</p>'+
+					'</div>'+
+				'</div>';
+			}
+			$('.words-content').append(str3);
+			for(var n in adoutAllArr){//关于
+				str4 += 
+				'<div class="show-div">'+
+				'<div class="msg-title">'+
+					'<p>'+adoutAllArr[n].title+'</p>'+
+				'</div>';
+				var contentArr = adoutAllArr[n].contentArr,aboutPicArr = adoutAllArr[n].aboutPic
+				for(var sn in contentArr){
+					var num = parseInt(sn)+1;
+					str4 +=
+					'<div class="word-show">'+
+						'<div class="word-float-left">'+num+'</div>'+
+						'<div class="word-float-right">'+
+							'<p onclick="searchBdBaike(\''+contentArr[sn].name+'\')">'+contentArr[sn].name+'</p>'+
+							'<p>'+contentArr[sn].desc+'</p>'+
+						'</div>'+
+					'</div>';
+				}
+				if(aboutPicArr.length>0){
+					str4 += '<div class="img-show">';
+					for(var x in aboutPicArr){//图片
+						str4 += '<img src="'+aboutPicArr[x].picUrl+'" class="desc-pic">';
+					}
+					str4 += '</div>';
+				}
+				
+				str4 += '</div>';
+			}
+			$('#item3').append(str4);
+			
+			for(var y in seeWorldArr){//放眼世界
+				str6 += 
+				'<div class="show-div">'+
+				'<div class="msg-title">'+
+					'<p>'+seeWorldArr[y].title+'</p>'+
+				'</div>';
+				var contentArr = seeWorldArr[y].contentArr;
+				for(var sy in contentArr){
+					var num = parseInt(sy)+1;
+					str6 +=
+					'<div class="word-show">'+
+						'<div class="word-float-left">'+num+'</div>'+
+						'<div class="word-float-right">'+
+							'<p onclick="searchBdBaike(\''+contentArr[sy].name+'\')">'+contentArr[sy].name+'</p>'+
+							'<p></p>'+
+						'</div>'+
+					'</div>';
+				}
+				str6 += '</div>';
+			}
+			$('#item3').append(str6);
+		}
+	}
+})
+
+
+
+
+function searchBdBaike(targetName){
+	var baseUrl = 'bdBaike.html';
+	var url = mui.os.plus?baseUrl:baseUrl+'?targetName='+targetName;  
+	mui.openWindow({
+	    url: url,
+	    extras: {
+	        targetName: targetName
+	    }
+	})
+}
+function openBaiduMap(targetName,addr){
+	var baseUrl = 'baiduMap.html';
+	var url = mui.os.plus?baseUrl:baseUrl+'?targetName='+targetName;  
+	mui.openWindow({
+	    url: url,
+	    extras: {
+	        targetName: targetName,
+	        addr:addr
+	    }
+	})
+}

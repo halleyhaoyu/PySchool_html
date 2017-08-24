@@ -32,13 +32,13 @@
 			<div>
 
 				<label class="label-desc">活动主题 </label>
-				<input type="text" class="input-content" data-input-password="3" placeholder="请输入活动主题">
+				<input type="text" v-model="myWorksInfo.aswName" class="input-content" data-input-password="3" placeholder="请输入活动主题">
 			</div>
 
 
 			<div class="out-div">
 				<label class="label-desc-cg">个人成果 </label>
-				<textarea id="textarea" rows="3" placeholder="请输入活动体会" class="text-content"></textarea>
+				<textarea v-model="myWorksInfo.aswDesc" id="textarea" rows="3" placeholder="请输入活动体会" class="text-content"></textarea>
 			</div>
 
 
@@ -103,13 +103,11 @@
 		el: '#my_works_content',
 		data: {
 			myWorksInfo:{
+				aswName:'',
 				manageId:0,
 				aswDesc:'',
 				aswActId:0,
-				activityStudentsWorksFilesList:[{
-		"aswfFiles": "http://112.124.110.182:11008/upload/TaskExecPicture/20170824//Screenshot_2017-08-23-23-53-24-042_io.dcloud.HBuilder.png20170824142214_48997ee6519e458db6dcc342e1e43732.png",
-		"aswfActId": "3"
-	}]
+				activityStudentsWorksFilesList:[]
 			},
 			selectFileList:[]
 		},
@@ -121,6 +119,7 @@
 	});
     document.addEventListener('get_activity_my_works', function(event) {
  		vm_my_works.myWorksInfo.aswActId = event.detail.activityId; 
+ 		vm_my_works.myWorksInfo.aswName = event.detail.actName; 
 	});
     
     mui.plusReady(function(){

@@ -350,7 +350,8 @@
 					"css/mui.picker.min.css",
 					"school/personalCenter.html",
 					"images/tabbar/tabbar-ns-4.png",
-					"images/tabbar/tabbar-ns-2.png"
+					"images/tabbar/tabbar-ns-2.png",
+					"images/tabbar/tabbar-sl-4.png"
 				],
 				"refer": [
 					"school/exchangeArea.html",
@@ -383,7 +384,8 @@
 					"school/courseAll.html",
 					"css/school/pushCommon.css",
 					"images/tabbar/tabbar-sl-2.png",
-					"images/tabbar/tabbar-ns-1.png"
+					"images/tabbar/tabbar-ns-1.png",
+					"images/tabbar/tabbar-sl-1.png"
 				],
 				"refer": [],
 				"priority": 0
