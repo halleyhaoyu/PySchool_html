@@ -9,11 +9,11 @@
 	 * owner.hostname：API 服务器域名
 	 */
 	//owner.hostname='http://api.course.com:8081/course-api';
-	owner.hostname='http://121.41.112.94:8090/course-api';
+	//owner.hostname='http://121.41.112.94:8090/course-api';
 	//owner.hostname='http://192.168.31.232:8081/course-api';
 	//owner.hostname='http://192.168.0.185:8081/course-api';
 	//owner.hostname='http://112.124.110.182:11008/course-api';
-	//owner.hostname='http://172.16.103.41:8081/course-api';
+	owner.hostname='http://172.16.103.41:8081/course-api';
 	
 	
 	/**
@@ -429,11 +429,12 @@
 			dataType:'json',//服务器返回json格式数据
 			type:'post',//HTTP请求类型
 			timeout:10000,//超时时间设置为10秒； 
-	        contentType:"application/json; charset=utf-8",
+	        //contentType:"application/json; charset=utf-8",
 	        //contentType:"application/x-www-form-urlencoded; charset=utf-8",
+	        headers:{'Content-Type':'application/json'},
 			//headers:{'Content-Type':'application/json; charset=utf-8'},	              
 			//headers:{'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
-			 
+			processData:false,
 			success:function(data){
 				console.info(JSON.stringify(data));
 				return callback(data);
