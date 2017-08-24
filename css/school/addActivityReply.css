@@ -132,7 +132,7 @@ body, .mui-content {
 	height: 32px;
 	line-height:32px;
 	padding:0 12px;
-	border: 1px solid #ddd !important;
+	border: 0px solid #ddd !important;
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
 	border-radius: 6px;

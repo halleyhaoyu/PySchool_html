@@ -29,23 +29,22 @@
 	<div class="mui-content">
 		<form >
 			<div>
-				<label class="label-desc">活动主题 </label>
+				<label class="label-desc">活动主题 :</label>
 				<input type="text" v-model="activityInfo.actName" class="input-content" data-input-password="3" placeholder="请输入活动主题">
 			</div>
 			<div>
-				<div class="label-desc-min">最大人数 </div>
+				<div class="label-desc-min">最大人数 :</div>
 				<img id="number_plus" src="../images/school/plus.png" class="plus-icon"/>
 				<input type="text" v-model="activityInfo.actNum"  data-input-password="3" 
-					style="height: 32px !important;
-	line-height: 32px !important;margin-left: 150px;width: 80px;padding: 0 10px;">
+					style="height: 32px !important; line-height: 32px !important;margin-left: 150px;width: 80px;padding: 0 10px;">
 				<img id="number_minus"  src="../images/school/minus.png" class="minus-icon"/>
 			</div>
-			<div>
+			<!--<div>
 				<label class="label-desc">参与人 </label>
 				<input type="text" v-model="activityInfo.actParticipant" class="input-content" data-input-password="3" placeholder="请选择参与人">
-			</div>
+			</div>-->
 			<div class="out-div">
-				<label class="label-desc-cg">个人成果 </label>
+				<label class="label-desc-cg">个人成果: </label>
 				<textarea id="textarea" v-model="activityInfo.actDesc" rows="3" placeholder="请输入活动体会" class="text-content"></textarea>
 			</div>
 			
@@ -69,7 +68,7 @@
 				<div class="button button4" id="addImages"></div>
 				<div class="button button5"></div>
 			</div>
-			<div class="div-tips">附件上限为10个。</div>
+			<div class="div-tips">附件上限为1个。</div>
 		</form>
 	</div>
 	<div style="height:180px;"></div>
@@ -193,11 +192,11 @@
 		    });
 			 
 			mui("#add_activity_content").on('tap','#number_plus',function(){
-				 vm_add_activity.activityInfo.actNum=vm_add_activity.activityInfo.actNum+1;
+				 vm_add_activity.activityInfo.actNum=parseInt(vm_add_activity.activityInfo.actNum) +1;
 			}); 
 		
 			mui("#add_activity_content").on('tap','#number_minus',function(){
-				 vm_add_activity.activityInfo.actNum= vm_add_activity.activityInfo.actNum>0?vm_add_activity.activityInfo.actNum-1:0;
+				 vm_add_activity.activityInfo.actNum= vm_add_activity.activityInfo.actNum>0?parseInt(vm_add_activity.activityInfo.actNum) -1:0;
 			});
 			mui("#add_activity_content").on('tap','#btn_add_activity_post',function(){
 				post_add_activity();

@@ -65,6 +65,8 @@
 			,courseId:0
 			,chapId:0
 			,classId:0
+			,rcId:0
+			,tmId:0
 		}
 	});
 	
@@ -87,6 +89,9 @@
 			if(data.code==0){ 
 				console.log(data.objectList.length);				  
 				vm.courseDetails = data.objectList;
+				vm.rcId=data.object.rcId;
+				vm.tcId=data.object.tcId;
+				vm.tmId=data.object.tmId;
 			}else{
 				vm.courseDetails=[];
 			}
@@ -126,7 +131,10 @@
 		mui.fire(webview_course_experience, 'get_course_detail_exprience', {
 			courseId:vm.courseId,
 			chapId:vm.chapId,
-			classId:vm.classId
+			classId:vm.classId,
+			rcId:vm.rcId,
+			tcId:vm.tcId,
+			tmId:vm.tmId
 		});
 		setTimeout(function () {
 				webview_course_experience.show("slide-in-right", 300);

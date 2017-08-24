@@ -1,4 +1,4 @@
-var indexNum=1,filesNum=3,w=null;
+var indexNum=1,filesNum=9,w=null;
 var gentry=null,hl=null,le=null;
 var er=null,ep=null;
 var bUpdated=false; //用于兼容可能提前注入导致DOM未解析完更新的问题

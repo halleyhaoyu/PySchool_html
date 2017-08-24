@@ -91,6 +91,7 @@
 		el: '#course_experience_content',
 		data: {
 			experienceInfo:{
+				manageId:0,
 				cceDesc:'',
 				cceOperId:0,
 				cceOperName:'',
@@ -111,9 +112,12 @@
 		}
 	});
     document.addEventListener('get_course_detail_exprience', function(event) {
-		vm_course_exprience.experienceInfo.cceRcId = event.detail.courseId;
+		vm_course_exprience.experienceInfo.cceRcId = event.detail.rcId;
 		vm_course_exprience.experienceInfo.cceChapId = event.detail.chapId;
 		vm_course_exprience.experienceInfo.cceChapClassId = event.detail.classId;
+		vm_course_exprience.experienceInfo.cceTmId = event.detail.tmId;
+		vm_course_exprience.experienceInfo.cceTcId = event.detail.tcId;
+		
 		console.info(vm_course_exprience.experienceInfo.cceRcId);
 	});
     
@@ -129,6 +133,7 @@
 			var userInfo = app.getState();
 			var data={};
 			data=vm_course_exprience.experienceInfo;
+			data.manageId=userInfo.manageId;
 			if(userInfo.roleType==3){
 				data.cceOperId=userInfo.studentsDetail.stdId;
 				data.cceOperName=userInfo.studentsDetail.stdRealName;

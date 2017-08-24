@@ -64,7 +64,7 @@
 				<div class="button button4" id="addImages"></div>
 				<div class="button button5"></div>
 			</div>
-			<div class="div-tips">附件上限为10个。</div>
+			<div class="div-tips">附件上限为9个。</div>
 
 
 
@@ -106,7 +106,10 @@
 				manageId:0,
 				aswDesc:'',
 				aswActId:0,
-				activityStudentsWorksFilesList:[]
+				activityStudentsWorksFilesList:[{
+		"aswfFiles": "http://112.124.110.182:11008/upload/TaskExecPicture/20170824//Screenshot_2017-08-23-23-53-24-042_io.dcloud.HBuilder.png20170824142214_48997ee6519e458db6dcc342e1e43732.png",
+		"aswfActId": "3"
+	}]
 			},
 			selectFileList:[]
 		},
@@ -184,7 +187,7 @@
 			var data={};
 			data=vm_my_works.myWorksInfo;
 			data.manageId=userInfo.manageId
-			console.info(JSON.stringify(data));
+			//console.info(JSON.stringify(data));
 			app.postMyWorks(data,function(data){
 				if(data.code==0){
 					mui.back(); 
@@ -216,10 +219,10 @@
 						vm_my_works.selectFileList.splice(9,vm_my_works.selectFileList.length-9);
 						mui.toast('只可以上传9个附件！');
 					}
-					console.info(JSON.stringify(data.objectList ));
+					//console.info(JSON.stringify(data.objectList ));
 					var activityStudentsWorksFilesList = getMyWorksFileList(data.objectList);
-					console.info(JSON.stringify(activityStudentsWorksFilesList));
-					vm_my_works.myWorksInfo.activityStudentsWorksFilesList=activityStudentsWorksFilesList;
+					//console.info(JSON.stringify(activityStudentsWorksFilesList));
+					vm_my_works.myWorksInfo.activityStudentsWorksFilesList=vm_my_works.myWorksInfo.activityStudentsWorksFilesList.concat(activityStudentsWorksFilesList);
 					
 	    		}
 	    	}

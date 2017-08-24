@@ -189,7 +189,7 @@
 				data.ahStudentId=userInfo.manageId 
 				data.ahSponsorType=userInfo.roleType==2?2:1; 
 				
-				console.info(JSON.stringify(data));
+				//onsole.info(JSON.stringify(data));
 				app.postActivityReply(data,function(data){
 					if(data.code==0){
 						mui.back();
@@ -222,10 +222,10 @@
 						vm_activity_reply.selectFileList.splice(9,vm_activity_reply.selectFileList.length-9);
 						mui.toast('只可以上传9个附件！');
 					}
-					console.info(JSON.stringify(data.objectList ));
+					//console.info(JSON.stringify(data.objectList ));
 					var activityHighlightsFilesList = getActivityReplyFileList(data.objectList);
-					console.info(JSON.stringify(activityHighlightsFilesList));
-					vm_activity_reply.commentInfo.activityHighlightsFilesList=activityHighlightsFilesList;
+					//console.info(JSON.stringify(activityHighlightsFilesList));
+					vm_activity_reply.commentInfo.activityHighlightsFilesList=vm_activity_reply.commentInfo.activityHighlightsFilesList.concat(activityHighlightsFilesList);
 					
 	    		}
 	    	}
