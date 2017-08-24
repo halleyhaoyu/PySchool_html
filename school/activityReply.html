@@ -192,6 +192,7 @@
 				//onsole.info(JSON.stringify(data));
 				app.postActivityReply(data,function(data){
 					if(data.code==0){
+						selectFileList.splice(0,selectFileList.length);
 						mui.back();
 					}
 					mui.toast(data.msg);

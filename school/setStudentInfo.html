@@ -154,8 +154,8 @@
 			data=vm_set_student.studentInfo; 
 			console.info(JSON.stringify(data));
 			app.postSetStudentInfo(data,function(data){
-				if(data.code==0){
-					
+				if(data.code==0){ 
+					selectFileList.splice(0,selectFileList.length);	
 				}
 				mui.toast(data.msg);
 			});

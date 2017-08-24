@@ -32,7 +32,7 @@
 			<div>
 
 				<label class="label-desc">活动主题 </label>
-				<input type="text" v-model="myWorksInfo.aswName" class="input-content" data-input-password="3" placeholder="请输入活动主题">
+				<input type="text" v-model="aswName" class="input-content" data-input-password="3" placeholder="请输入活动主题">
 			</div>
 
 
@@ -102,8 +102,8 @@
      var vm_my_works = new Vue({
 		el: '#my_works_content',
 		data: {
-			myWorksInfo:{
 				aswName:'',
+			myWorksInfo:{
 				manageId:0,
 				aswDesc:'',
 				aswActId:0,
@@ -119,7 +119,7 @@
 	});
     document.addEventListener('get_activity_my_works', function(event) {
  		vm_my_works.myWorksInfo.aswActId = event.detail.activityId; 
- 		vm_my_works.myWorksInfo.aswName = event.detail.actName; 
+ 		vm_my_works.aswName = event.detail.actName; 
 	});
     
     mui.plusReady(function(){
@@ -189,6 +189,7 @@
 			//console.info(JSON.stringify(data));
 			app.postMyWorks(data,function(data){
 				if(data.code==0){
+					selectFileList.splice(0,selectFileList.length);
 					mui.back(); 
 				}
 				mui.toast(data.msg);
