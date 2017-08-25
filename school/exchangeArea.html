@@ -13,6 +13,7 @@
 	<link href="../css/school/activityList.css" rel="stylesheet"/>
 	<link href="../css/school/exchangeArea.css" rel="stylesheet"/>
     <link href="../css/school/pushCommon.css" rel="stylesheet"/>
+    <link href="../css/H5MediaFile.css" rel="stylesheet"/>
 </head>
 <body>
 	<div id="exchange_area_content">
@@ -23,14 +24,37 @@
 	</header>
 	
 	<div class="bottom-div">
-		<img src="../images/school/recording.png"  class="bt-left"/>
+		<!--<img src="../images/school/recording.png"  class="bt-left" id="addAudio"/>-->
 
-		<input type="text" id="inputContent"/>
+		<input type="text" v-model="commentInfo.acaDesc" id="inputContent" style=""/>
 
-		<img src="../images/school/addfile.png"  class="bt-right"/>
+		<img src="../images/school/addfile.png"  class="bt-right" id="mediaFile"/>
+		<button id="btn_exchange_area_post" type="button" class="mui-btn send-button"> 发送 </button>	
 	</div>
-
- 
+	
+ 	<ul id="history" class="dlist" style="text-align:left;padding:0; position: absolute; bottom: 40px;z-index: 100;">
+		 
+		<li v-for="item in selectFileList" :class="getShowStyle(item)" >
+			<span v-if="1==getShowType(item)" class='iplay'>
+				<font class='aname'   @tap='displayFile(item.patch)'>{{ getFileName(item)}}</font> 
+				<img class='file-icon' src='../images/school/video-icon.png' @tap='displayFile(item.patch)'/>
+			 	<span class='mui-icon mui-icon-close close-color3'   @tap='delUploadFileList(item.patch)'></span>
+			</span>
+			<span v-else-if="2==getShowType(item)" class='iplay'>
+				<font class='aname'  @tap='displayFile(item.patch)'>{{ getFileName(item)}}</font> 
+				<img class='file-icon' src='../images/school/photo-icon.png' @tap='displayFile(item.patch)'/>
+				<span class='mui-icon mui-icon-close close-color1'  @tap='delUploadFileList(item.patch)'></span>
+			</span>
+			<span v-else class='iplay'>
+				<font class='aname'  @tap='playAudio(item.patch)'>{{ getFileName(item)}}</font>
+				<img class='file-icon' src='../images/school/record-icon.png' @tap='playAudio(item.patch)'/>
+				<span class='mui-icon mui-icon-close close-color2'  @tap='delUploadFileList(item.patch)'></span>
+			</span>
+		</li>
+	</ul>
+	
+	
+	
 	<div id="slider" class="mui-slider mui-content mui-fullscreen" style="top:0px;bottom: 40px; padding-bottom: 0px;">				
 		<div class="mui-slider-group">
 			<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
@@ -53,14 +77,33 @@
 			
 		</div>
 	</div>
-			
-</div>
+	<!--<ul id="history" class="dlist" style="text-align:left;padding:0;display: none;"></ul>-->
+	
+	
+	<div id="play" class="rp">
+		<div id="ptime" class="ptime">00:00:00/00:00:00</div><br/>
+		<div id="progress" class="progress"><div id="schedule" class="schedule"></div></div>
+		<br/>
+		<div class="stop" onclick="stopPlay()"></div>
+	</div>
+	<div id="record" class="rp">
+		<div style="width:100%;height:20%;"></div>
+		<div class="rprogress"><div class="rschedule"></div></div>
+		<br/>
+		<div id="rtime" class="rtime">00:00:00</div><br/>
+		<div class="stop" onclick="stopRecord()"></div>
+	</div>
+	
+	
     <script src="../js/mui.min.js"></script>
 	<script src="../js/jquery-2.1.4.min.js"></script>
 	<script src="../js/mui.pullToRefresh.js"></script>
 	<script src="../js/mui.pullToRefresh.material.js"></script>
 	<script src="../js/app.js"></script>
 	<script src="../js/vue.min.js"></script>
+	<script type="text/javascript" src="../js/H5Plus.js" ></script>
+	<script type="text/javascript" src="../js/common.js" ></script>
+	<script type="text/javascript" src="../js/immersed.js" ></script>
 	<script type="text/javascript" charset="UTF-8">
 	  	mui.init();
 	  	
@@ -81,26 +124,63 @@
 				},
 				acAreaList:[
 				{
-	                "acaId": 1,
-	                "acaTime": "2017-08-14 16:07:32",
-	                "acaStudentId": 24,
-	                "acaDesc": "测试交流区显示",
-	                "acaStudentName": "测试200",
-	                "acaFiles": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812190705_1105263d46aa434b923839281ac0a1fb.png",
-	                "acaClassId": 8,
-	                "acaOperType": 1,
-	                "showStudentPic": "http://112.124.110.182:11008/upload/studentPicture/20170812/B20170812184037_d0959b7a25b64a80ac9bbfa428b7110b.png"
+//	                "acaId": 1,
+//	                "acaTime": "2017-08-14 16:07:32",
+//	                "acaStudentId": 24,
+//	                "acaDesc": "测试交流区显示",
+//	                "acaStudentName": "测试200",
+//	                "acaFiles": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812190705_1105263d46aa434b923839281ac0a1fb.png",
+//	                "acaClassId": 8,
+//	                "acaOperType": 1,
+//	                "showStudentPic": "http://112.124.110.182:11008/upload/studentPicture/20170812/B20170812184037_d0959b7a25b64a80ac9bbfa428b7110b.png"
 	            }
-            	]
+            ],
+			selectFileList:[]
+			},
+			methods:{
+				getFileName:function(item){
+					return item.patch.substr(item.patch.lastIndexOf('/')+1);
+				},
+				getShowType:function(item){
+					var type=0;
+					console.info(JSON.stringify(item));
+					var suffix = item.patch.substr(item.patch.lastIndexOf('.'));
+					if(item.type==1){
+						if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
+							type=1;
+						}else{
+							type=2;
+						}
+					}else{
+						type=3;
+					}
+					console.info(type);
+					return type;
+				},
+				getShowStyle:function(item){
+					var cssStyle="";
+					var suffix = item.patch.substr(item.patch.lastIndexOf('.'));
+					if(item.type==1){
+						if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
+							cssStyle="ditem file-color3";
+						}else{
+							cssStyle="ditem file-color1";
+						}
+					}else{
+						cssStyle="ditem file-color2";
+					}
+					console.info(cssStyle);
+					return cssStyle;
+				}
 			}
 		});
 		
 	  	onResizeWindow();
 	    window.onresize = onResizeWindow;
 	    function onResizeWindow(){
-	        $("#inputContent").css("width",$(window).width()-72);
+	        $("#inputContent").css("width",$(window).width()-116);
 	    }
-	  	 
+	  	
 		var activityList=[];
 		 
 		(function($) {
@@ -123,7 +203,7 @@
 								app.getExchangeAreaList(vm_exchange_area.classId,1,function(data){
 									console.info(JSON.stringify(data));
 									if(data.code==0){
-										if(data.object!=undefined){
+										if(data.object!=undefined){											
 											vm_exchange_area.acAreaList=data.object.rows;
 											console.info(JSON.stringify(vm_exchange_area.acAreaList));
 										}
@@ -149,7 +229,7 @@
 										if(data.object!=undefined && data.object.rows.length>0){
 											console.info(JSON.stringify(data.object.rows));
 											vm_exchange_area.acAreaList = vm_exchange_area.acAreaList.concat(data.object.rows);
-											 
+											
 										 	pageIndex++;
 										}else{
 											overFlag=true;
@@ -189,7 +269,7 @@
 			//vm.resetData();
 		},false);		 
  
- 
+	
 	 	app.getExchangeAreaList(vm_exchange_area.classId,1,function(data){
 			console.info(JSON.stringify(data));
 			if(data.code==0){
@@ -199,25 +279,94 @@
 				}
 			}
 			mui.toast(data.msg); 
-		});
-								
-		mui('#exchange_area_content').on('tap','#btn_my_works_post',function(){
+     	}); 
+	
+		mui('#exchange_area_content').on('tap','#btn_exchange_area_post',function(){
 			var userInfo = app.getState();
 			var data={};
 			data=vm_exchange_area.commentInfo;
-			data.manageId=userInfo.manageId
+			data.manageId=userInfo.manageId;
+			data.acaClassId=vm_exchange_area.classId;
 			//console.info(JSON.stringify(data));
 			data.acaOperType=userInfo.roleType==2?2:1;
-			app.postMyWorks(data,function(data){
+			app.postExchangeArea(data,function(data){
 				if(data.code==0){
 					mui.back(); 
+					selectFileList.splice(0,selectFileList.length);
+					vm_exchange_area.selectFileList.splice(0,vm_exchange_area.selectFileList.length);
+					vm_exchange_area.commentInfo={};
 				}
 				mui.toast(data.msg);
 			});
 		}); 
 	})
 	
-	
+	document.getElementById('mediaFile').addEventListener('tap', function() { 
+     	mediaFile('交流区上传媒体文件',0);
+    }); 
+     
+      // 回调
+    var exchangeAreaCallback = function(data){
+    	if(data.code==0){
+    		console.info(JSON.stringify(data));
+    		if(data.code==0){
+        		vm_exchange_area.commentInfo.acaFiles=data.objectList[0].pathAll;
+				vm_exchange_area.selectFileList=selectFileList;
+				if(vm_exchange_area.selectFileList.length>1){
+					vm_exchange_area.selectFileList.splice(1,vm_exchange_area.selectFileList.length-1);
+					mui.toast('只可以上传一个附件！');
+				}
+				console.info(JSON.stringify(vm_exchange_area.selectFileList));
+    		}
+    	}
+		mui.toast(data.msg);
+    }
+     
+	/**
+	 * @param {Object} title 弹窗显示的标题
+	 * @param {Object} num 选择图片的数量，为0时num=filesNum
+	 */
+	function mediaFile(title,num){
+		if (mui.os.plus) { 
+	        var a = [{ 
+	            title: "拍照" 
+	        }, { 
+	            title: "拍视频" 
+	        }, { 
+	            title: "从手机相册选择" 
+	        }, { 
+	            title: "录音" 
+	        }]; 
+	        plus.nativeUI.actionSheet({ 
+	            title: title, 
+	            cancel: "取消", 
+	            buttons: a 
+	        }, function(b) {
+	        	if(vm_exchange_area.selectFileList.length>=1){
+	        		mui.toast('只可以上传1个附件！');
+	        	}else{
+		            switch (b.index) { 
+		                case 0: 
+		                    break; 
+		                case 1:
+		                    cameraAndUpload(exchangeAreaCallback);
+		                    break; 
+		                case 2: 
+		                    videoAndUpload(exchangeAreaCallback);
+		                    break;
+		                case 3: 
+			                albumAndUpload(num,exchangeAreaCallback);
+			                break; 
+		                case 4: 
+			                startRecord(exchangeAreaCallback);
+			                break; 
+		                default: 
+		                    break; 
+		            } 
+	            }
+	        }) 
+	    } 
+	}
  
 	</script>
 </body>

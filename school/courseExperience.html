@@ -31,16 +31,24 @@
 				<label class="label-desc-cg">学习体会 </label>
 				<textarea id="textarea" v-model="experienceInfo.cceDesc" rows="3" placeholder="请输入学习体会" class="text-content"></textarea>
 			</div> 
-		
+ 
+		 
 			<ul id="history" class="dlist" style="text-align:left;padding:0;">
-				<li v-for="item in selectFileList">
-					<span v-if="item.type==1" class='iplay'>
+				<li v-for="item in selectFileList" :class="getShowStyle(item)" >
+					<span v-if="getShowType(item)==1" class='iplay'>
 						<font class='aname'   @tap='displayFile(item.patch)'>{{ getFileName(item)}}</font> 
-					 	<span class='mui-icon mui-icon-close'   @tap='delUploadFileList(item.patch)'></span>
+						<img class='file-icon' src='../images/school/video-icon.png' @tap='displayFile(item.patch)'/>
+					 	<span class='mui-icon mui-icon-close close-color3'   @tap='delUploadFileList(item.patch)'></span>
+					</span>
+					<span v-else-if="getShowType(item)==2" class='iplay'>
+						<font class='aname'  @tap='playAudio(item.patch)'>{{ getFileName(item)}}</font> 
+						<img class='file-icon' src='../images/school/photo-icon.png' @tap='playAudio(item.patch)'/>
+						<span class='mui-icon mui-icon-close close-color1'  @tap='delUploadFileList(item.patch)'></span>
 					</span>
 					<span v-else class='iplay'>
-						<font class='aname'  @tap='playAudio(item.patch)'>{{ getFileName(item)}}</font> 
-						<span class='mui-icon mui-icon-close'  @tap='delUploadFileList(item.patch)'></span>
+						<font class='aname'  @tap='playAudio(item.patch)'>{{ getFileName(item)}}</font>
+						<img class='file-icon' src='../images/school/record-icon.png' @tap='playAudio(item.patch)'/>
+						<span class='mui-icon mui-icon-close close-color2'  @tap='delUploadFileList(item.patch)'></span>
 					</span>
 				</li>
 			</ul>
@@ -108,6 +116,38 @@
 		methods:{
 			getFileName:function(item){
 				return item.patch.substr(item.patch.lastIndexOf('/')+1);
+			},
+			getFileSuffix:function(item){
+				var suffix = item.patch.substr(item.patch.lastIndexOf('.'));
+				return suffix;
+			},
+			getShowType:function(item){
+				var type=0;
+				var suffix = item.patch.substr(item.patch.lastIndexOf('.'));
+				if(item.type==1){
+					if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
+						type=1;
+					}else{
+						type=2;
+					}
+				}else{
+					type=3;
+				}
+				return type;
+			},
+			getShowStyle:function(item){
+				var cssStyle="";
+				var suffix = item.patch.substr(item.patch.lastIndexOf('.'));
+				if(item.type==1){
+					if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
+						cssStyle="ditem file-color3";
+					}else{
+						cssStyle="ditem file-color1";
+					}
+				}else{
+					cssStyle="ditem file-color2";
+				}
+				return cssStyle;
 			}
 		}
 	});

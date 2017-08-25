@@ -140,50 +140,50 @@
 				//vm.resetData();
 			},false);
 			 
-			$(".buttonContianer").on('tap',function(){
-		        count ++
-		        if(count % 2 == 1){
-		            $(this).addClass('show')
-		            $(this).children().animate({
-		                opacity: 1
-		            })
-		            $()
-		        }else{
-		            $(this).removeClass('show')
-		            $(this).children().animate({
-		                opacity: 0
-		            })
-		        }
-		    })
-			 
-			 //录音
-	        document.getElementById('addAudio').addEventListener('tap', function() {
+	    $(".buttonContianer").on('tap',function(){
+	        count ++
+	        if(count % 2 == 1){
+	            $(this).addClass('show')
+	            $(this).children().animate({
+	                opacity: 1
+	            })
+	            $()
+	        }else{
+	            $(this).removeClass('show')
+	            $(this).children().animate({
+	                opacity: 0
+	            })
+	        }
+	    })
+		
+		//录音
+        document.getElementById('addAudio').addEventListener('tap', function() {
 	        	if(vm_add_activity.selectFileList.length>=1){
 	        		mui.toast('只可以上传一个附件！');
 	        	}else{
 	            	startRecord(addActivityCallback);
 	            }
-	        });
-	        
-	    		//拍照上传
-		    document.getElementById('addCameraImages').addEventListener('tap', function() {
+        });
+        
+    		//拍照上传
+	    document.getElementById('addCameraImages').addEventListener('tap', function() {
 	        	if(vm_add_activity.selectFileList.length>=1){
 	        		mui.toast('只可以上传一个附件！');
 	        	}else{
 		    		cameraAndUpload(addActivityCallback);
 	            }
-		    });
-	    		//拍视频上传
-	        document.getElementById('addVideos').addEventListener('tap', function() {
+	    });
+    		//拍视频上传
+        document.getElementById('addVideos').addEventListener('tap', function() {
 	        	if(vm_add_activity.selectFileList.length>=1){
 	        		mui.toast('只可以上传一个附件！');
 	        	}else{
 	            	videoAndUpload(addActivityCallback);
 	            }
-	        });
-			
-			//相册选择照片上传
-		    document.getElementById('addImages').addEventListener('tap', function() {
+        });
+		
+		//相册选择照片上传
+	    document.getElementById('addImages').addEventListener('tap', function() {
 	        	if(vm_add_activity.selectFileList.length>=1){
 	        		mui.toast('只可以上传一个附件！');
 	        	}else{
@@ -193,8 +193,8 @@
 			 
 			mui("#add_activity_content").on('tap','#number_plus',function(){
 				 vm_add_activity.activityInfo.actNum=parseInt(vm_add_activity.activityInfo.actNum) +1;
-			}); 
-		
+	    });
+	    
 			mui("#add_activity_content").on('tap','#number_minus',function(){
 				 vm_add_activity.activityInfo.actNum= vm_add_activity.activityInfo.actNum>0?parseInt(vm_add_activity.activityInfo.actNum) -1:0;
 			});

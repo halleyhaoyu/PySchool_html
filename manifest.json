@@ -521,7 +521,16 @@
 					"js/mui.pullToRefresh.js",
 					"css/school/pushCommon.css",
 					"js/mui.pullToRefresh.material.js",
-					"css/school/activityList.css"
+					"css/school/activityList.css",
+					"js/H5Plus.js",
+					"js/common.js",
+					"css/H5MediaFile.css",
+					"js/immersed.js",
+					"images/astop.png",
+					"images/arecord.png",
+					"images/school/photo-icon.png",
+					"images/school/record-icon.png",
+					"images/school/video-icon.png"
 				],
 				"refer": [],
 				"priority": 0
@@ -552,7 +561,9 @@
 					"js/immersed.js",
 					"css/H5MediaFile.css"
 				],
-				"refer": [],
+				"refer": [
+					"school/showImage.html"
+				],
 				"priority": 0
 			},
 			"school/activityReply.html": {
@@ -702,7 +713,10 @@
 					"js/app.js",
 					"js/vue.min.js",
 					"images/astop.png",
-					"images/arecord.png"
+					"images/arecord.png",
+					"images/school/record-icon.png",
+					"images/school/video-icon.png",
+					"images/school/photo-icon.png"
 				],
 				"refer": [
 					"school/showImage.html",

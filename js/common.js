@@ -319,21 +319,33 @@ function displayFile(obj){
 
 // 添加预览、播放项
 function createItem(mediaFile,type){
-	
+	filesNum--;
 	var li = document.createElement('li');
 	var fileName=mediaFile.substr(mediaFile.lastIndexOf('/')+1);
-	li.className = 'ditem';
+	var suffix = fileName.substr(fileName.lastIndexOf('.'));
 	if(type==1){
-		li.innerHTML = "<span class='iplay'><font class='aname' onclick='displayFile(this)'></font>"+
-		"<span class='mui-icon mui-icon-close' onclick='delUploadFileList(this)'></span></span>";
+		if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
+			li.className = 'ditem file-color3';
+			li.innerHTML = "<span class='iplay'><font class='aname'></font>"+
+			"<img class='file-icon' src='../images/school/video-icon.png' onclick='displayFile(this)'/>"+
+			"<span class='mui-icon mui-icon-close close-color3' onclick='delUploadFileList(this)'></span></span>";
+		}else{
+			li.className = 'ditem file-color1';
+			li.innerHTML = "<span class='iplay'><font class='aname' onclick='displayFile(this)'></font>"+
+			"<img class='file-icon' src='../images/school/photo-icon.png' onclick='displayFile(this)'/>"+
+			"<span class='mui-icon mui-icon-close close-color1' onclick='delUploadFileList(this)'></span></span>";
+		}
+		
 	}else{
+		li.className = 'ditem file-color2';
 		li.innerHTML = "<span class='iplay'><font class='aname' onclick='playAudio(this)'></font>"+
-		"<span class='mui-icon mui-icon-close' onclick='delUploadFileList(this)'></span></span>";
+		"<img class='file-icon' src='../images/school/record-icon.png' onclick='displayFile(this)'/>"+
+		"<span class='mui-icon mui-icon-close close-color2' onclick='delUploadFileList(this)'></span></span>";
 	}
 	hl.append( li);
 	
 	li.querySelector('.aname').innerText = fileName;
-	li.querySelector('.aname').mediaFile = mediaFile;
+	li.querySelector('.file-icon').mediaFile = mediaFile;
 	li.querySelector('.mui-icon-close').mediaFile = mediaFile;
 }
 
@@ -346,6 +358,7 @@ function pushUploadFileList(fileList,type,callback){
 		filesNum--;
 		//createItem(fileList[i],type);
 		selectFileList.push({patch:fileList[i],type:type});
+		console.info(JSON.stringify({patch:fileList[i],type:type}));
 		uploadFileList.push(fileList[i]);
 	}
 
@@ -403,6 +416,34 @@ function taskUpload(fileList, callback){
 //	执行上传任务
 	task.start();
 }
+
+
+/**
+ * 检测当前网络状态
+ */
+mui.plusReady(function(){
+    document.addEventListener("netchange", function(){
+        var connectionStatus = plus.networkinfo.getCurrentType();
+        switch ( connectionStatus ) {
+            case plus.networkinfo.CONNECTION_ETHERNET:
+            case plus.networkinfo.CONNECTION_WIFI:
+            mui.toast('当前使用Wifi网络！');
+            break; 
+            case plus.networkinfo.CONNECTION_CELL2G:
+            mui.toast('当前使用2G网络！');
+            break; 
+            case plus.networkinfo.CONNECTION_CELL3G:
+            mui.toast('当前使用3G网络！');
+            break; 
+            case plus.networkinfo.CONNECTION_CELL4G:
+            mui.toast('当前使用4G网络！');
+            break; 
+            default:
+            mui.toast('当前无网络！');
+            break; 
+        }
+    }, false );
+});
 
 
 
