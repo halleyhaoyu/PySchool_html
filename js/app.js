@@ -378,7 +378,7 @@
 	  */
 	owner.postExchangeArea=function(data,callback){
 		//	view/activity/acArea.shtml
-		var url=owner.hostname+'view/activity/acArea.shtml';
+		var url=owner.hostname+'/view/activity/acArea.shtml';
 		return owner.postCommon(url,data,callback);
 	}
 	
