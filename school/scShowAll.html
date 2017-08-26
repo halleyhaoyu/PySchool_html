@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>学校秀、班级秀</title>
     <script src="../js/mui.min.js"></script>
+	<script src="../js/vue.min.js"></script>
     <link href="../css/mui.css" rel="stylesheet"/>
 	<link href="../css/icons-extra.css" rel="stylesheet"/>
 	<link href="../css/app.css" rel="stylesheet"/>
@@ -13,8 +14,26 @@
 	<link href="../css/top.css" rel="stylesheet"/>
 	<link href="../css/school/scShowAll.css" rel="stylesheet"/>
     <link href="../css/school/pushCommon.css" rel="stylesheet"/>
+    <style>
+    	
+	.slide-fade-enter-active {
+	  transition: all .5s ease;
+	}
+	.slide-fade-leave-active {
+	  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+	}
+	.slide-fade-enter, .slide-fade-leave-to
+	 {
+	  transform: translateX(0px);
+	  opacity: 0;
+	}
+ 
+	
+    </style>
 </head>
 <body>
+	<div id="sc_show_content">
+		
 	<header class="mui-bar mui-bar-nav">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 		<img src="../images/head-dz.png" class="head-dz"/>
@@ -28,6 +47,14 @@
 		</div>
 	</header>
 
+	<transition name="slide-fade">
+		<div v-if="showInputFlag" class="bottom-div" style="z-index: 100;"> 
+			<input type="text" v-model="commentInfo.actComDesc" id="inputContent" style=""/>
+	 
+			<button id="btn_show_all_post" @tap="scShowAllCommentPost()" type="button" class="mui-btn send-button"> 发送 </button>	
+		</div> 
+	</transition>
+	
 	<nav id="main_bar" class="mui-bar mui-bar-tab">
 		<a class="mui-tab-item" href="courseAll.html">
 			<span class="mui-icon tabbar-ns-1 foot-icon"></span>
@@ -46,7 +73,6 @@
 			<span class="mui-tab-label">我的</span>
 		</a>
 	</nav>
-
  
 	<div id="item1" class="item-call mui-content mui-control-content mui-fullscreen mui-active" style="top:64px;bottom: 50px;">
 		<div id="slider" class="mui-slider mui-fullscreen">				
@@ -54,37 +80,35 @@
 				<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
 					<div id="scroll1" class="mui-scroll-wrapper">
 						<div class="mui-scroll">
-							<ul id="sc_show_school_list" class="mui-table-view">									
-								<!--<li class="mui-table-view-cell">
+							<ul id="sc_show_school_list" class="mui-table-view">	
+								
+								<li v-for="item in schoolShowList" class="mui-table-view-cell">
 									<div class="works-desc">
 										<div class="works-desc-top">
-											<img src="../images/school/head-pic.png" class="works-img"/>
-											<p class="works-username">赵先生 <label class="works-time">1小时前</label></p>
-											<p class="works-content">摄影术的诞生是随着欧洲资本主义的发展应运而生的，150多年来，它经历了一个由简单到复杂。</p>
+											<img :src="getImage(item)" class="works-img"/> 
+											<p class="works-username">{{item.actOperName}} <label class="works-time">{{item.actTime}}</label></p>
+											<p class="works-content">{{item.actDesc}}</p>
 											<div >
-												<img src="../images/bigicon3.png" class="works-desc-pic"/>
-												<img src="../images/bigicon3.png" class="works-desc-pic"/>
-												<img src="../images/bigicon3.png" class="works-desc-pic"/>
-												<img src="../images/bigicon3.png" class="works-desc-pic"/>
-												<img src="../images/bigicon3.png" class="works-desc-pic"/> 
+												<img :src="item.actFiles" class="works-desc-pic"/> 
 											</div>
 											<div class="icon-line">
-												<span class="mui-icon-extra mui-icon-extra-comment"> 24</span>
-												<span class="mui-icon-extra mui-icon-extra-like"> 111</span>
+												<div :id="'sc_show_c_'+item.actId" @tap="scShowAllComment(item)" style=" float: right; text-align: center;">
+													<span   class="mui-icon-extra mui-icon-extra-comment" style="margin-right: 10px;"> {{item.actFineCommentNum}}</span>
+												
+												</div :id="'sc_show_p_'+item.actId" >
+												<div  @tap="scShowAllPintPost(item)"  style="  float: right; text-align: center;">
+													<span  class="mui-icon-extra mui-icon-extra-like" style="margin-right: 25px;"> {{item.actFinePintNum}} </span>
+											
+												</div> 
 											</div>
-											<div class="works-answer">
-												<img src="../images/bigicon1.png" class="works-img"/>
-												<p class="works-username">赵先生 <label class="works-time">1小时前</label></p>
-												<p class="works-content">太棒了，很不错。</p>
-											</div>
-											<div class="works-answer">
-												<img src="../images/bigicon1.png" class="works-img"/>
-												<p class="works-username">赵先生 <label class="works-time">1小时前</label></p>
-												<p class="works-content">太棒了，很不错。</p>
-											</div>
+											<div v-for="citem in item.activityCommentList" class="works-answer">
+												<img :src="getCImage(citem)" class="works-img"/>
+												<p class="works-username">{{citem.actComReviewer}} <label class="works-time">{{citem.actComTime}}</label></p>
+												<p class="works-content">{{citem.actComDesc}}</p>
+											</div> 
 										</div>
 									</div>
-								</li>-->
+								</li>
 								 
 							</ul>
 						</div>
@@ -103,20 +127,23 @@
 					<div id="scroll1" class="mui-scroll-wrapper">
 						<div class="mui-scroll">
 							<ul id="sc_show_class_list"  class="mui-table-view">
-								 
-								<!--<li class="mui-table-view-cell">
+								
+								<!---->
+								<li v-for="item in classShowList" class="mui-table-view-cell">
 									<div class="show-desc">
 										<div class="show-desc-right">
-											<img src="../images/school/show-no.png" class="show-icon">
-											<p>未参加</p>
+											<img v-if="item.hasPart==1" src="../images/school/show-yes.png" class="show-icon">
+											<img v-else src="../images/school/show-no.png" class="show-icon">
+											<p v-if="item.hasPart==1">已参加</p>
+											<p  v-else>未参加</p>
 										</div>
 										<div class="show-desc-left">
-											<p class="show-desc-title">欢乐中国豫园行</p>
-											<p class="show-desc-content">发布人：赵先生</p>
-											<p class="show-desc-content">2017-07-25</p>
+											<p class="show-desc-title">{{item.actName}}</p>
+											<p class="show-desc-content">发布人：{{item.actOperName}}</p>
+											<p class="show-desc-content">{{item.actTime}}</p>
 										</div>
 									</div>
-								</li>-->
+								</li>
 								 
 							</ul>
 						</div>
@@ -125,9 +152,9 @@
 			</div>
 		</div>
 	</div>
-
+	
+</div>
 <script src="../js/jquery-2.1.4.min.js"></script>
-<script src="../js/mui.min.js"></script>
 <script src="../js/mui.pullToRefresh.js"></script>
 <script src="../js/mui.pullToRefresh.material.js"></script>
 <script src="../js/app.js"></script>
@@ -136,11 +163,121 @@
 	var pageIndexSchool = 1;
 	var pageIndexClass= 1;
   	
+  	
+  	
+  	onResizeWindow();
+	    window.onresize = onResizeWindow;
+	    function onResizeWindow(){
+	        $("#inputContent").css("width",$(window).width()-92);
+	    }
+  	 
+  	var vm_show_all = new Vue({
+		el: '#sc_show_content',
+		data: {
+			classId:0,
+			showInputFlag:false,
+			commentInfo:{
+				manageId:0,
+				actComDesc:'',//  评论内容
+				actComActId:0,//  与t_activity表的act_id关联
+				actComType:1,//  1：学校秀；2：班级秀 3： 普通作品
+				actComIsPoint:0,//  1：点赞；2：评论
+				actObject:0//点赞或者评论的对象（1:针对活动；2:针对作品） 
+			},
+			schoolShowList:[
+//			{
+//              "actId": 1,
+//              "actName": "外滩行活动",
+//              "actSchoolId": 1,
+//              "actTime": "2017-08-12 18:48:24",
+//              "actDesc": "测试活动发布",
+//              "actNum": 8,
+//              "actTeacherId": 7,
+//              "actStatus": 2,
+//              "actOperId": 7,
+//              "actOperName": "李四",
+//              "actFiles": "http://112.124.110.182:11008/upload/taskPicture/20170812/P20170812184815_1867cef31c5a41c198ebbc5d026dc2ca.png",
+//              "actSendWord": "好好学习",
+//              "actFine": 1,
+//              "actFinePintNum": 0,
+//              "actFineCommentNum": 0,
+//              "actRcId": 2,
+//              "actTmId": 1,
+//              "actTcId": 1,
+//              "actClassPointNum": 0,
+//              "actClassCommentNum": 0,
+//              "actSponsorType": 2,
+//              "actEnd": "2",
+//              "hasPart": "1",
+//              "deleteFalg": 0,
+//              "deleteTime": 1502535504000,
+//              "showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png",
+//              "activityCommentList": []
+//          }
+			],
+			classShowList:[
+//			{
+//              "actId": 2,
+//              "actName": "外滩行活动02",
+//              "actSchoolId": 1,
+//              "actTime": "2017-08-16 18:48:24",
+//              "actDesc": "测试活动发布",
+//              "actNum": 9,
+//              "actTeacherId": 7,
+//              "actStatus": 2,
+//              "actOperId": 24,
+//              "actOperName": "测试200",
+//              "actFiles": "http://112.124.110.182:11008/upload/taskPicture/20170812/P20170812184815_1867cef31c5a41c198ebbc5d026dc2ca.png",
+//              "actSendWord": "好好学习",
+//              "actFine": 2,
+//              "actFinePintNum": 0,
+//              "actFineCommentNum": 0,
+//              "actRcId": 2,
+//              "actTmId": 1,
+//              "actTcId": 1,
+//              "actClassPointNum": 2,
+//              "actClassCommentNum": 0,
+//              "actSponsorType": 1,
+//              "actEnd": "2",
+//              "hasPart": "1",
+//              "deleteFalg": 0,
+//              "deleteTime": 1503476057000,
+//              "showStudentPic": "http://112.124.110.182:11008/upload/studentPicture/20170812/B20170812184037_d0959b7a25b64a80ac9bbfa428b7110b.png",
+//              "activityCommentList": []
+//          }
+			]
+		},
+		methods:{ 
+				getImage:function(item){
+					var imageFile="../images/school/head-pic.png";
+					if(item.actSponsorType==2 &&　item.showTeacherPic!=undefined && item.showTeacherPic!=''){
+						imageFile=item.showTeacherPic;
+					}else if(item.actSponsorType==1 &&　item.showStudentPic!=undefined && item.showStudentPic!=''){
+						imageFile=item.showStudentPic;
+					}
+					return imageFile;
+				},
+				getCImage:function(item){
+					var imageFile="../images/school/head-pic.png";
+					if(item.actIsTeacher==1 &&　item.showTeacherPic!=undefined && item.showTeacherPic!=''){
+						imageFile=item.showTeacherPic;
+					}else if(item.actIsTeacher==2 &&　item.showStudentPic!=undefined && item.showStudentPic!=''){
+						imageFile=item.showStudentPic;
+					}
+					return imageFile;
+				}
+		}
+	});
+ 
+  	
+  	
+  	
     mui('#main_bar').on('tap', 'a', function(e) {
 	    //获取目标子页的id
 	    var targetTab = this.getAttribute('href');
 	    window.location.href=targetTab;
 	});
+	
 	(function($) {
 		//阻尼系数
 		var deceleration = mui.os.ios?0.003:0.0009;
@@ -182,16 +319,18 @@
 		if(userInfo.manageId!=undefined && userInfo.manageId!=''){
 			app.getShowAll(userInfo,actFine,5,pageIndex+1,function(data){
 				if(data.code==0){
-					var ul =index==0?document.querySelector('#sc_show_school_list'):document.querySelector('#sc_show_class_list'); 
-					ul.appendChild(createScShowFragment(actFine,ul, data.object.rows), ul.firstChild);
-				 	 
+//					var ul =index==0?document.querySelector('#sc_show_school_list'):document.querySelector('#sc_show_class_list'); 
+//					ul.appendChild(createScShowFragment(actFine,ul, data.object.rows), ul.firstChild);
+   
 					if(index==0){
+						vm_show_all.schoolShowList=vm_show_all.schoolShowList.concat(data.object.rows);
 						pageIndexSchool++;
 						pageIndex=pageIndexSchool;
 					}else{
+						vm_show_all.classShowList=vm_show_all.classShowList.concat(data.object.rows);
 						pageIndexClass++;
 						pageIndex=pageIndexClass;
-					}	
+					}
 				}else{
 					mui.toast(data.msg);
 				}
@@ -216,100 +355,104 @@
 		if(userInfo.manageId!=undefined && userInfo.manageId!=''){
 			app.getShowAll(userInfo,actFine,5,1,function(data){
 				if(data.code==0){
-					var ul =index==0?document.querySelector('#sc_show_school_list'):document.querySelector('#sc_show_class_list'); 
-					ul.innerHTML="";
-					ul.insertBefore(createScShowFragment(actFine,ul, data.object.rows), ul.firstChild);
-				 	
+					//var ul =index==0?document.querySelector('#sc_show_school_list'):document.querySelector('#sc_show_class_list'); 
+					//ul.innerHTML="";
+					//ul.insertBefore(createScShowFragment(actFine,ul, data.object.rows), ul.firstChild);
+					if(index==0){
+						vm_show_all.schoolShowList=data.object.rows;
+					}else{
+						vm_show_all.classShowList=data.object.rows;
+					}
 				}else{
 					mui.toast(data.msg);
 				}
 				if(!autoFlag){
 					self.endPullDownToRefresh();
-				}
+				} 
 			});
 		}else{
 			app.gotoLogin();
 		}
 	}
 	
-	var createScShowFragment = function(actFine,ul, objectList) {
-		var length = ul.querySelectorAll('li').length;
-		var fragment = document.createDocumentFragment();
-		var li;
-		objectList=objectList==undefined?[]:objectList;
-		for (var i = 0; i < objectList.length; i++) {
-			li = document.createElement('li');
-			li.className = 'mui-table-view-cell';
-			var insertHtml="";
-			if(actFine==2){ //学校秀
-				
-				insertHtml+="<div class=\"works-desc\">";
-				insertHtml+="	<div class=\"works-desc-top\">";
-				if(objectList[i].actSponsorType==2){
-					insertHtml+="		<img src=\""+objectList[i].showTeacherPic+"\" class=\"works-img\"/>";
-				}else{
-					insertHtml+="		<img src=\""+objectList[i].showStudentPic+"\" class=\"works-img\"/>";
-				}
-				
-				insertHtml+="		<p class=\"works-username\">"+objectList[i].actOperName+"<label class=\"works-time\">"+objectList[i].actTime+"</label></p>";
-				insertHtml+="		<p class=\"works-content\">"+objectList[i].actDesc+"</p>";
-				insertHtml+="		<div >";
-				insertHtml+="			<img src=\""+objectList[i].actFiles+"\" class=\"works-desc-pic\"/>";
-				//insertHtml+="			<img src=\"../images/bigicon3.png\" class=\"works-desc-pic\"/>";
-				//insertHtml+="			<img src=\"../images/bigicon3.png\" class=\"works-desc-pic\"/>";
-				insertHtml+="		</div>";
-				insertHtml+="		<div class=\"icon-line\">";
-				insertHtml+="			<span class=\"mui-icon-extra mui-icon-extra-comment\">"+objectList[i].actFinePintNum+"</span>";
-				insertHtml+="			<span class=\"mui-icon-extra mui-icon-extra-like\">"+objectList[i].actFineCommentNum+"</span>";
-				insertHtml+="		</div>";
-				
-				var activityCommentList = objectList[i].activityCommentList;
-				for(var h=0;h<activityCommentList.length;h++){
-					
-					insertHtml+="		<div class=\"works-answer\">";
-					if(activityCommentList[h].actIsTeacher==2){
-						insertHtml+="			<img src=\""+activityCommentList[h].showStudentPic+"\" class=\"works-img\"/>";
-					}else{
-						insertHtml+="			<img src=\""+activityCommentList[h].showTeacherPic+"\" class=\"works-img\"/>";
-					}
-					
-					insertHtml+="			<p class=\"works-username\">"+activityCommentList[h].actComReviewer+"<label class=\"works-time\">"+activityCommentList[h].actComTime+"</label></p>";
-					insertHtml+="			<p class=\"works-content\">"+activityCommentList[h].actComDesc+"</p>";
-					insertHtml+="		</div>";
-				}
-				
-				// 可以注释掉部分 下
-//						insertHtml+="		<div class=\"works-answer\">";
-//						insertHtml+="			<img src=\"../images/bigicon1.png\" class=\"works-img\"/>";
-//						insertHtml+="			<p class=\"works-username\">赵先生 <label class=\"works-time\">1小时前</label></p>";
-//						insertHtml+="			<p class=\"works-content\">太棒了，很不错。</p>";
-//						insertHtml+="		</div>";
-				//可以注释掉部分 上
-				
-				insertHtml+="	</div>";
-				insertHtml+="</div>";
-			}else if(actFine==1){//班级秀
-				insertHtml+="<div class=\"show-desc\">";
-				insertHtml+="	<div class=\"show-desc-right\">";
-				if(objectList[i].hasPart==1){
-					insertHtml+="		<img src=\"../images/school/show-yes.png\" class=\"show-icon\">";
-				}else{
-					insertHtml+="		<img src=\"../images/school/show-no.png\" class=\"show-icon\">";
-				}
-				insertHtml+="		<p>已参加</p>";
-				insertHtml+="	</div>";
-				insertHtml+="	<div class=\"show-desc-left\">";
-				insertHtml+="		<p class=\"show-desc-title\">"+objectList[i].actName+"</p>";
-				insertHtml+="		<p class=\"show-desc-content\">发布人："+objectList[i].actOperName+"</p>";
-				insertHtml+="		<p class=\"show-desc-content\">"+objectList[i].actTime+"</p>";
-				insertHtml+="	</div>";
-				insertHtml+="</div>";						 
-			}
-			li.innerHTML = insertHtml;
-			fragment.appendChild(li);
-		}
-		return fragment;
-	};
+//	var createScShowFragment = function(actFine,ul, objectList) {
+//		var length = ul.querySelectorAll('li').length;
+//		var fragment = document.createDocumentFragment();
+//		var li;
+//		objectList=objectList==undefined?[]:objectList;
+//		for (var i = 0; i < objectList.length; i++) {
+//			li = document.createElement('li');
+//			li.className = 'mui-table-view-cell';
+//			var insertHtml="";
+//			if(actFine==2){ //学校秀
+//				
+//				insertHtml+="<div class=\"works-desc\">";
+//				insertHtml+="	<div class=\"works-desc-top\">";
+//				if(objectList[i].actSponsorType==2){
+//					insertHtml+="		<img src=\""+objectList[i].showTeacherPic+"\" class=\"works-img\"/>";
+//				}else{
+//					insertHtml+="		<img src=\""+objectList[i].showStudentPic+"\" class=\"works-img\"/>";
+//				}
+//				
+//				insertHtml+="		<p class=\"works-username\">"+objectList[i].actOperName+"<label class=\"works-time\">"+objectList[i].actTime+"</label></p>";
+//				insertHtml+="		<p class=\"works-content\">"+objectList[i].actDesc+"</p>";
+//				insertHtml+="		<div >";
+//				insertHtml+="			<img src=\""+objectList[i].actFiles+"\" class=\"works-desc-pic\"/>";
+//				//insertHtml+="			<img src=\"../images/bigicon3.png\" class=\"works-desc-pic\"/>";
+//				//insertHtml+="			<img src=\"../images/bigicon3.png\" class=\"works-desc-pic\"/>";
+//				insertHtml+="		</div>";
+//				insertHtml+="		<div class=\"icon-line\">";
+//				insertHtml+="			<span class=\"mui-icon-extra mui-icon-extra-comment\">"+objectList[i].actFinePintNum+"</span>";
+//				insertHtml+="			<span class=\"mui-icon-extra mui-icon-extra-like\">"+objectList[i].actFineCommentNum+"</span>";
+//				insertHtml+="		</div>";
+//				
+//				var activityCommentList = objectList[i].activityCommentList;
+//				for(var h=0;h<activityCommentList.length;h++){
+//					
+//					insertHtml+="		<div class=\"works-answer\">";
+//					if(activityCommentList[h].actIsTeacher==2){
+//						insertHtml+="			<img src=\""+activityCommentList[h].showStudentPic+"\" class=\"works-img\"/>";
+//					}else{
+//						insertHtml+="			<img src=\""+activityCommentList[h].showTeacherPic+"\" class=\"works-img\"/>";
+//					}
+//					
+//					insertHtml+="			<p class=\"works-username\">"+activityCommentList[h].actComReviewer+"<label class=\"works-time\">"+activityCommentList[h].actComTime+"</label></p>";
+//					insertHtml+="			<p class=\"works-content\">"+activityCommentList[h].actComDesc+"</p>";
+//					insertHtml+="		</div>";
+//				}
+//				
+//				// 可以注释掉部分 下
+////						insertHtml+="		<div class=\"works-answer\">";
+////						insertHtml+="			<img src=\"../images/bigicon1.png\" class=\"works-img\"/>";
+////						insertHtml+="			<p class=\"works-username\">赵先生 <label class=\"works-time\">1小时前</label></p>";
+////						insertHtml+="			<p class=\"works-content\">太棒了，很不错。</p>";
+////						insertHtml+="		</div>";
+//				//可以注释掉部分 上
+//				
+//				insertHtml+="	</div>";
+//				insertHtml+="</div>";
+//			}else if(actFine==1){//班级秀
+//				insertHtml+="<div class=\"show-desc\">";
+//				insertHtml+="	<div class=\"show-desc-right\">";
+//				if(objectList[i].hasPart==1){
+//					insertHtml+="		<img src=\"../images/school/show-yes.png\" class=\"show-icon\">";
+//				}else{
+//					insertHtml+="		<img src=\"../images/school/show-no.png\" class=\"show-icon\">";
+//				}
+//				insertHtml+="		<p>已参加</p>";
+//				insertHtml+="	</div>";
+//				insertHtml+="	<div class=\"show-desc-left\">";
+//				insertHtml+="		<p class=\"show-desc-title\">"+objectList[i].actName+"</p>";
+//				insertHtml+="		<p class=\"show-desc-content\">发布人："+objectList[i].actOperName+"</p>";
+//				insertHtml+="		<p class=\"show-desc-content\">"+objectList[i].actTime+"</p>";
+//				insertHtml+="	</div>";
+//				insertHtml+="</div>";						 
+//			}
+//			li.innerHTML = insertHtml;
+//			fragment.appendChild(li);
+//		}
+//		return fragment;
+//	};
 	
 	
 	mui.plusReady(function () {
@@ -331,7 +474,62 @@
 			pushScShowAllDown('',0,true);
 			pushScShowAllDown('',1,true);
 			
+			 
+//			mui('#sc_show_content').on('tap','#btn_show_all_post',function(){
+//				refurbishFlag=true;
+//				exchangeAreaPost();
+//			});  
 		})
+	
+	function scShowAllPintPost(item){
+		
+		console.info("scShowAllPintPost");
+		 		 
+		var userInfo = app.getState();
+		var data={};
+		data=vm_show_all.commentInfo;
+		data.manageId=userInfo.manageId;
+		data.actComActId=item.actId;//  1：学校秀；2：班级秀 3： 普通作品
+		data.actComType=1;//  1：学校秀；2：班级秀 3： 普通作品
+		data.actComIsPoint=1;//  1：点赞；2：评论
+		data.actObject=1;
+		  
+		app.postComment(data,function(data){
+			if(data.code==0){
+				//mui.back(); 
+				vm_show_all.commentInfo={};  
+				item.actFinePintNum++;
+			}
+			mui.toast(data.msg);
+		});
+	}
+	
+	function scShowAllComment(item){
+		console.info("scShowAllComment");
+		vm_show_all.commentInfo.actComActId=item.actId;
+		vm_show_all.showInputFlag=true;
+	}
+	
+	function scShowAllCommentPost(){
+		var userInfo = app.getState();
+		var data={};
+		data=vm_show_all.commentInfo;
+		data.manageId=userInfo.manageId;
+		data.actComType=1;//  1：学校秀；2：班级秀 3： 普通作品
+		data.actComIsPoint=2;//  1：点赞；2：评论
+		data.actObject=1;
+		  
+		app.postComment(data,function(data){
+			if(data.code==0){
+				//mui.back(); 
+				vm_show_all.commentInfo={}; 
+				vm_show_all.showInputFlag=false;
+				pushScShowAllDown('',0,true); 
+			}
+			mui.toast(data.msg);
+		});
+	}
+	
 </script>
 </body>
 </html>

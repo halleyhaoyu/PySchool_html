@@ -385,7 +385,8 @@
 					"css/school/pushCommon.css",
 					"images/tabbar/tabbar-sl-2.png",
 					"images/tabbar/tabbar-ns-1.png",
-					"images/tabbar/tabbar-sl-1.png"
+					"images/tabbar/tabbar-sl-1.png",
+					"js/vue.min.js"
 				],
 				"refer": [],
 				"priority": 0
