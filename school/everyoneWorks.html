@@ -160,6 +160,17 @@
 		activityId = event.detail.activityId;
 		console.info(activityId);
 		vm_everyone_work.activityId=activityId;
+		
+		app.getEveryoneWorkList(vm_everyone_work.activityId,1,function(data){
+			console.info(JSON.stringify(data));
+			if(data.code==0){
+				if(data.object!=undefined){											
+					vm_everyone_work.workList=data.object.rows;
+					console.info(JSON.stringify(vm_everyone_work.workList));
+				} 
+			}
+			mui.toast(data.msg); 
+		});
 	});
 
 	//重写返回逻辑
@@ -175,18 +186,7 @@
 			window.scrollTo(0, 0);
 			//vm.resetData();
 		},false);
-		 
-		app.getEveryoneWorkList(vm_everyone_work.activityId,1,function(data){
-			console.info(JSON.stringify(data));
-			if(data.code==0){
-				if(data.object!=undefined){											
-					vm_everyone_work.workList=data.object.rows;
-					console.info(JSON.stringify(vm_everyone_work.workList));
-				} 
-			}
-			mui.toast(data.msg); 
-		});
-  
+		  
 	})
 	
 </script>

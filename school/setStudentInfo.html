@@ -91,6 +91,7 @@
 		data: {
 			studentInfo:{
 				 stdGender:'M',
+				manageId:0,
 //				 stdRealName:'测试200',
 //				stdGradeName:'1年级',
 //				stdClassName:'2班',
@@ -152,6 +153,7 @@
   	function post_set_student_info(){ 
 			var data={};
 			data=vm_set_student.studentInfo; 
+			data.manageId=userInfo.manageId;
 			console.info(JSON.stringify(data));
 			app.postSetStudentInfo(data,function(data){
 				if(data.code==0){ 

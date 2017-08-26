@@ -365,11 +365,11 @@
 	}
 	
 	/*
-	  * 活动-活动申请
+	  * 活动-活动集锦
 	  */
 	owner.postActivityReply=function(data,callback){
 		//	view/activity/highlights.shtml
-		var url=owner.hostname+'view/activity/highlights.shtml';
+		var url=owner.hostname+'/view/activity/highlights.shtml';
 		return owner.postCommon(url,data,callback);
 	}
 	

@@ -109,6 +109,7 @@
 	  	
 
 		var pageIndex = 1;
+		var refurbishFlag=false;
 	  	var vm_exchange_area = new Vue({
 			el: '#exchange_area_content',
 			data: {
@@ -198,49 +199,13 @@
 					down: {
 						callback: function() {
 							var self = this;
-							var userInfo = app.getState(); 
-							if(userInfo.manageId!=undefined && userInfo.manageId!=''){
-								app.getExchangeAreaList(vm_exchange_area.classId,1,function(data){
-									console.info(JSON.stringify(data));
-									if(data.code==0){
-										if(data.object!=undefined){											
-											vm_exchange_area.acAreaList=data.object.rows;
-											console.info(JSON.stringify(vm_exchange_area.acAreaList));
-										}
-									 	pageIndex=1;
-									}
-									mui.toast(data.msg);
-									self.endPullDownToRefresh();
-								});
-							}else{
-								app.gotoLogin();
-							}
+							pushExchangeAreaDown(self,false);
 						}
 					},
 					up: {
 						callback: function() {
-							var self = this;
-							var aa = index;
-							var userInfo = app.getState(); 
-							if(userInfo.manageId!=undefined && userInfo.manageId!=''){
-								app.getExchangeAreaList(vm_exchange_area.classId,pageIndex+1,function(data){
-									var overFlag = false;
-									if(data.code==0){
-										if(data.object!=undefined && data.object.rows.length>0){
-											console.info(JSON.stringify(data.object.rows));
-											vm_exchange_area.acAreaList = vm_exchange_area.acAreaList.concat(data.object.rows);
-											
-										 	pageIndex++;
-										}else{
-											overFlag=true;
-										}
-									} 
-									mui.toast(data.msg);
-									self.endPullUpToRefresh(overFlag);
-								});
-							}else{
-								app.gotoLogin();
-							}
+							var self = this; 
+							pushExchangeAreaUp(self);
 						}
 					}
 				});
@@ -254,6 +219,7 @@
 		vm_exchange_area.classId = event.detail.classId;
  		console.info(JSON.stringify(vm_exchange_area.classId));
  
+		pushExchangeAreaDown("",true);
 	});
 	//重写返回逻辑
 	mui.back = function() {
@@ -268,21 +234,67 @@
 			window.scrollTo(0, 0);
 			//vm.resetData();
 		},false);		 
- 
-	
-	 	app.getExchangeAreaList(vm_exchange_area.classId,1,function(data){
-			console.info(JSON.stringify(data));
-			if(data.code==0){
-				if(data.object!=undefined){
-					vm_exchange_area.acAreaList=data.object.rows;
-					console.info(JSON.stringify(vm_exchange_area.acAreaList));
-				}
-			}
-			mui.toast(data.msg); 
-     	}); 
-	
+  
 		mui('#exchange_area_content').on('tap','#btn_exchange_area_post',function(){
-			var userInfo = app.getState();
+			refurbishFlag=true;
+			exchangeAreaPost();
+		}); 
+		
+	})
+	
+	document.getElementById('mediaFile').addEventListener('tap', function() { 
+     	mediaFile('交流区上传媒体文件',0);
+    }); 
+     
+    function pushExchangeAreaDown(self,autoFlag){
+    	var userInfo = app.getState(); 
+		if(userInfo.manageId!=undefined && userInfo.manageId!=''){
+			app.getExchangeAreaList(vm_exchange_area.classId,1,function(data){
+				console.info(JSON.stringify(data));
+				if(data.code==0){
+					if(data.object!=undefined){											
+						vm_exchange_area.acAreaList=data.object.rows;
+						console.info(JSON.stringify(vm_exchange_area.acAreaList));
+					}
+				 	pageIndex=1;
+				}
+				mui.toast(data.msg);
+				if(!autoFlag){
+					self.endPullDownToRefresh();
+				}
+			});
+		}else{
+			app.gotoLogin();
+		}
+    }
+    
+    function pushExchangeAreaUp(self){
+    	var userInfo = app.getState(); 
+		if(userInfo.manageId!=undefined && userInfo.manageId!=''){
+			app.getExchangeAreaList(vm_exchange_area.classId,pageIndex+1,function(data){
+				var overFlag = false;
+				if(data.code==0){
+					if(data.object!=undefined && data.object.rows.length>0){
+						console.info(JSON.stringify(data.object.rows));
+						vm_exchange_area.acAreaList = vm_exchange_area.acAreaList.concat(data.object.rows);
+						
+					 	pageIndex++;
+					}else{
+						overFlag=true;
+					}
+					
+				} 
+				mui.toast(data.msg);
+				self.endPullUpToRefresh(overFlag);
+							
+			});
+		}else{
+			app.gotoLogin();
+		}
+    }
+    
+    function exchangeAreaPost(){
+    	var userInfo = app.getState();
 			var data={};
 			data=vm_exchange_area.commentInfo;
 			data.manageId=userInfo.manageId;
@@ -291,32 +303,41 @@
 			data.acaOperType=userInfo.roleType==2?2:1;
 			app.postExchangeArea(data,function(data){
 				if(data.code==0){
-					mui.back(); 
-					selectFileList.splice(0,selectFileList.length);
-					vm_exchange_area.selectFileList.splice(0,vm_exchange_area.selectFileList.length);
+					//mui.back(); 
 					vm_exchange_area.commentInfo={};
+					if(refurbishFlag){
+						refurbishFlag=false;
+						pushExchangeAreaDown("",true);
+					}
 				}
 				mui.toast(data.msg);
 			});
-		}); 
-	})
-	
-	document.getElementById('mediaFile').addEventListener('tap', function() { 
-     	mediaFile('交流区上传媒体文件',0);
-    }); 
-     
+    }
+ 
       // 回调
     var exchangeAreaCallback = function(data){
     	if(data.code==0){
     		console.info(JSON.stringify(data));
     		if(data.code==0){
-        		vm_exchange_area.commentInfo.acaFiles=data.objectList[0].pathAll;
-				vm_exchange_area.selectFileList=selectFileList;
-				if(vm_exchange_area.selectFileList.length>1){
-					vm_exchange_area.selectFileList.splice(1,vm_exchange_area.selectFileList.length-1);
-					mui.toast('只可以上传一个附件！');
+        		//vm_exchange_area.commentInfo.acaFiles=data.objectList[0].pathAll;
+        		
+				//vm_exchange_area.selectFileList=selectFileList;
+				if(selectFileList.length>9){
+					selectFileList.splice(9,vm_exchange_area.selectFileList.length-9);
+					data.objectList.splice(9,data.objectList._length-9)
+					mui.toast('只可以上传九个附件！');
 				}
-				console.info(JSON.stringify(vm_exchange_area.selectFileList));
+				console.info(JSON.stringify(data.objectList));
+				selectFileList.splice(0,selectFileList.length);
+				for(var i in data.objectList){
+					vm_exchange_area.commentInfo.acaFiles=data.objectList[i].pathAll;
+					if(i>=data.objectList-1){
+						refurbishFlag=true;
+					}
+					exchangeAreaPost();
+				}
+				pushExchangeAreaDown("",true);
+					//vm_exchange_area.selectFileList.splice(0,vm_exchange_area.selectFileList.length);
     		}
     	}
 		mui.toast(data.msg);
@@ -342,8 +363,8 @@
 	            cancel: "取消", 
 	            buttons: a 
 	        }, function(b) {
-	        	if(vm_exchange_area.selectFileList.length>=1){
-	        		mui.toast('只可以上传1个附件！');
+	        	if(vm_exchange_area.selectFileList.length>=9){
+	        		mui.toast('只可以上传9个附件！');
 	        	}else{
 		            switch (b.index) { 
 		                case 0: 

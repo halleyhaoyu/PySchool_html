@@ -94,6 +94,7 @@
 		el: '#activity_reply_content',
 		data: {
 			commentInfo:{
+				manageId:0,
 				ahStudentId:0,//  学生id／教师ID
 				ahDesc:'',//  活动集锦   必填
 				ahStudentName:'',//  学生姓名
@@ -186,7 +187,8 @@
 				var data={};
 				data=vm_activity_reply.commentInfo;			
 				var userInfo = app.getState(); 
-				data.ahStudentId=userInfo.manageId 
+				data.manageId=userInfo.manageId;
+				//data.ahStudentId=userInfo.manageId 
 				data.ahSponsorType=userInfo.roleType==2?2:1; 
 				
 				//onsole.info(JSON.stringify(data));

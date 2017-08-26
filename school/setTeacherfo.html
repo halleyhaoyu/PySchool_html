@@ -76,6 +76,7 @@
 		el: '#teacher_info_content',
 		data: {
 			teacherInfo:{
+				manageId:0,
 //				thName:'李四',
 //				thPhs:'1393223333',
 		 		thGender:'M',
@@ -139,6 +140,7 @@
   	function post_set_teacher_info(){ 
 			var data={};
 			data=vm_set_teacher.teacherInfo; 
+			data.manageId=userInfo.manageId;
 			console.info(JSON.stringify(data));
 			app.postSetTeacherInfo(data,function(data){
 				if(data.code==0){ 
