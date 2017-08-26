@@ -199,11 +199,7 @@
 		var userInfo = app.getState();
 		var url=owner.hostname+'/view/activity/detailView.shtml?manageId='+userInfo.manageId+'&actId='+activityId;
 		return owner.getCommon(url,callback);
-//		var msg={
-//				code:-1,
-//				msg:"获取数据失败！"
-//			}
-		return callback(msg);
+ 
 	}
 	
 		/*
@@ -214,7 +210,7 @@
 		var userInfo = app.getState();
 		var url=owner.hostname+'/view/activity/acAreaList.shtml?manageId='+userInfo.manageId+'&acaClassId='+classId+'&page='+pageIndex;
 		return owner.getCommon(url,callback);
-		return callback(msg);
+		
 	}
 	
 	
@@ -227,7 +223,7 @@
 		var userInfo = app.getState();
 		var url=owner.hostname+'/view/activity/allStudentWork.shtml?manageId='+userInfo.manageId+'&aswActId='+activityId+'&page='+pageIndex;
 		return owner.getCommon(url,callback); 
-		return callback(msg);
+		
 	}
 	
 	

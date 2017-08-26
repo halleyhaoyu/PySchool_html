@@ -603,7 +603,8 @@
 					"js/mui.pullToRefresh.js",
 					"js/mui.pullToRefresh.material.js",
 					"css/school/pushCommon.css",
-					"images/bigicon1.png"
+					"images/bigicon1.png",
+					"js/jquery-2.1.4.min.js"
 				],
 				"refer": [],
 				"priority": 0
