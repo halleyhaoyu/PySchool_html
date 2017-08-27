@@ -67,7 +67,19 @@
 									<img v-else src="../images/bigicon1.png" class="works-img"/>
 									<p class="works-username">{{item.acaStudentName}} <label class="works-time">{{item.acaTime}}</label></p>
 									<p class="works-content">{{item.acaDesc}}</p> 
-									<img v-if="item.acaFiles!=''" :src="item.acaFiles" class="works-desc-pic"/>
+									
+									<img v-if="2==getDisplayType(item.acaFiles)" :src="item.acaFiles"  @tap='displayFile(item.acaFiles)' class="works-desc-pic"/>
+									
+									<!--<img v-if="1==getDisplayType(item.acaFiles)" src="../images/school/video-icon.png"  @tap='displayFile(item.acaFiles)' class="works-desc-pic"/>
+									-->
+									<video  v-if="1==getDisplayType(item.acaFiles)" :src="item.acaFiles" controls="controls" class="works-desc-video">
+										 不支持的文件格式。
+									</video>
+									<!--<img v-if="3==getDisplayType(item.acaFiles)" src="../images/school/record-icon.png"  @tap='playAudio(item.acaFiles)' class="works-desc-pic"/>
+									-->
+									<audio v-if="3==getDisplayType(item.acaFiles)"  :src="item.acaFiles" controls="controls" class="works-desc-audio">
+										不支持的文件格式。
+									</audio>
 								</div>
 							</li>
 						</ul>
@@ -141,6 +153,22 @@
 			methods:{
 				getFileName:function(item){
 					return item.patch.substr(item.patch.lastIndexOf('/')+1);
+				},
+				getDisplayType:function(patch){
+					var type=0;
+					console.info(patch);
+					if(patch){
+						var suffix = patch.substr(patch.lastIndexOf('.'));
+						if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
+							type=1;
+						}else if( suffix=='.amr' ||  suffix=='.mp3' || suffix=='.m4a' ){
+							type=3;
+						}
+					 	else  if( suffix=='.jpg' ||  suffix=='.png' || suffix=='.gif' ){
+							type=2;
+						}
+					}
+					return type;
 				},
 				getShowType:function(item){
 					var type=0;

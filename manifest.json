@@ -386,9 +386,15 @@
 					"images/tabbar/tabbar-sl-2.png",
 					"images/tabbar/tabbar-ns-1.png",
 					"images/tabbar/tabbar-sl-1.png",
-					"js/vue.min.js"
+					"js/vue.min.js",
+					"css/H5MediaFile.css",
+					"js/H5Plus.js",
+					"js/immersed.js",
+					"js/common.js"
 				],
-				"refer": [],
+				"refer": [
+					"school/showImage.html"
+				],
 				"priority": 0
 			},
 			"school/personalCenter.html": {
@@ -533,7 +539,10 @@
 					"images/school/record-icon.png",
 					"images/school/video-icon.png"
 				],
-				"refer": [],
+				"refer": [
+					"school/showImage.html",
+					"school/showVideo.html"
+				],
 				"priority": 0
 			},
 			"school/addActivity.html": {
@@ -560,7 +569,8 @@
 					"js/H5Plus.js",
 					"js/common.js",
 					"js/immersed.js",
-					"css/H5MediaFile.css"
+					"css/H5MediaFile.css",
+					"images/school/video-icon.png"
 				],
 				"refer": [
 					"school/showImage.html"
@@ -584,7 +594,12 @@
 					"js/H5Plus.js",
 					"js/common.js",
 					"css/H5MediaFile.css",
-					"js/immersed.js"
+					"js/immersed.js",
+					"images/school/photo-icon.png",
+					"images/school/record-icon.png",
+					"images/astop.png",
+					"images/arecord.png",
+					"images/school/video-icon.png"
 				],
 				"refer": [],
 				"priority": 0
@@ -779,7 +794,9 @@
 			},
 			"school/showVideo.html": {
 				"resources": [
-					"css/H5Plus.css"
+					"css/H5Plus.css",
+					"js/H5Plus.js",
+					"js/H5Plus-quit.js"
 				],
 				"refer": [],
 				"priority": 0

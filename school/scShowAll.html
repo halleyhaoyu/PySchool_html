@@ -14,6 +14,7 @@
 	<link href="../css/top.css" rel="stylesheet"/>
 	<link href="../css/school/scShowAll.css" rel="stylesheet"/>
     <link href="../css/school/pushCommon.css" rel="stylesheet"/>
+    <link href="../css/H5MediaFile.css" rel="stylesheet"/>
     <style>
     	
 	.slide-fade-enter-active {
@@ -89,7 +90,18 @@
 											<p class="works-username">{{item.actOperName}} <label class="works-time">{{item.actTime}}</label></p>
 											<p class="works-content">{{item.actDesc}}</p>
 											<div >
-												<img :src="item.actFiles" class="works-desc-pic"/> 
+												<!--<img :src="item.actFiles" class="works-desc-pic"/> -->
+												
+												<img v-if="2==getDisplayType(item.actFiles)" :src="item.actFiles"  @tap='displayFile(item.actFiles)' class="works-desc-pic"/>
+									  			<video  v-if="1==getDisplayType(item.actFiles)" :src="item.actFiles" controls="controls" class="works-desc-video">
+													 不支持的文件格式。
+												</video> 
+												<audio v-if="3==getDisplayType(item.actFiles)"  :src="item.actFiles" controls="controls" class="works-desc-audio">
+													不支持的文件格式。
+												</audio>
+									
+									
+									
 											</div>
 											<div class="icon-line">
 												<div :id="'sc_show_c_'+item.actId" @tap="scShowAllComment(item)" style=" float: right; text-align: center;">
@@ -158,6 +170,9 @@
 <script src="../js/mui.pullToRefresh.js"></script>
 <script src="../js/mui.pullToRefresh.material.js"></script>
 <script src="../js/app.js"></script>
+	<script type="text/javascript" src="../js/H5Plus.js" ></script>
+	<script type="text/javascript" src="../js/common.js" ></script>
+	<script type="text/javascript" src="../js/immersed.js" ></script>
 <script type="text/javascript" charset="UTF-8">
   	mui.init();  	
 	var pageIndexSchool = 1;
@@ -185,35 +200,35 @@
 				actObject:0//点赞或者评论的对象（1:针对活动；2:针对作品） 
 			},
 			schoolShowList:[
-//			{
-//              "actId": 1,
-//              "actName": "外滩行活动",
-//              "actSchoolId": 1,
-//              "actTime": "2017-08-12 18:48:24",
-//              "actDesc": "测试活动发布",
-//              "actNum": 8,
-//              "actTeacherId": 7,
-//              "actStatus": 2,
-//              "actOperId": 7,
-//              "actOperName": "李四",
-//              "actFiles": "http://112.124.110.182:11008/upload/taskPicture/20170812/P20170812184815_1867cef31c5a41c198ebbc5d026dc2ca.png",
-//              "actSendWord": "好好学习",
-//              "actFine": 1,
-//              "actFinePintNum": 0,
-//              "actFineCommentNum": 0,
-//              "actRcId": 2,
-//              "actTmId": 1,
-//              "actTcId": 1,
-//              "actClassPointNum": 0,
-//              "actClassCommentNum": 0,
-//              "actSponsorType": 2,
-//              "actEnd": "2",
-//              "hasPart": "1",
-//              "deleteFalg": 0,
-//              "deleteTime": 1502535504000,
-//              "showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png",
-//              "activityCommentList": []
-//          }
+			{
+                "actId": 1,
+                "actName": "外滩行活动",
+                "actSchoolId": 1,
+                "actTime": "2017-08-12 18:48:24",
+                "actDesc": "测试活动发布",
+                "actNum": 8,
+                "actTeacherId": 7,
+                "actStatus": 2,
+                "actOperId": 7,
+                "actOperName": "李四",
+                "actFiles": "http://112.124.110.182:11008/upload/taskPicture/20170812/P20170812184815_1867cef31c5a41c198ebbc5d026dc2ca.png",
+                "actSendWord": "好好学习",
+                "actFine": 1,
+                "actFinePintNum": 0,
+                "actFineCommentNum": 0,
+                "actRcId": 2,
+                "actTmId": 1,
+                "actTcId": 1,
+                "actClassPointNum": 0,
+                "actClassCommentNum": 0,
+                "actSponsorType": 2,
+                "actEnd": "2",
+                "hasPart": "1",
+                "deleteFalg": 0,
+                "deleteTime": 1502535504000,
+                "showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png",
+                "activityCommentList": []
+            }
 			],
 			classShowList:[
 //			{
@@ -248,6 +263,23 @@
 			]
 		},
 		methods:{ 
+				
+				getDisplayType:function(patch){
+					var type=0;
+					console.info(patch);
+					if(patch){
+						var suffix = patch.substr(patch.lastIndexOf('.'));
+						if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
+							type=1;
+						}else if( suffix=='.amr' ||  suffix=='.mp3' || suffix=='.m4a' ){
+							type=3;
+						}
+					 	else  if( suffix=='.jpg' ||  suffix=='.png' || suffix=='.gif' ){
+							type=2;
+						}
+					}
+					return type;
+				},
 				getImage:function(item){
 					var imageFile="../images/school/head-pic.png";
 					if(item.actSponsorType==2 &&　item.showTeacherPic!=undefined && item.showTeacherPic!=''){

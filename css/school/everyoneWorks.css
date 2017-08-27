@@ -29,9 +29,19 @@
 }
 
 .works-desc-pic{
-	width: 30%;
-	margin: 2px;
+	width: 100%;
+	margin: 5px;
 }
+.works-desc-video{
+	width: 100%;
+	margin: 5px;
+}
+.works-desc-audio{
+	width: 100%;
+	margin: 5px;
+}
+
+
 .works-answer{
 	margin: 12px 0;
 	border-bottom: 1px solid #eee;

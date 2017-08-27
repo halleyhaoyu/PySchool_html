@@ -110,3 +110,30 @@ body, .mui-content {
 	padding: 6px 12px;
 }
 
+.file-icon{
+	height: 22px;
+	vertical-align: bottom;
+	margin-left:6px;
+}
+
+.file-color1{
+	border: 1px solid #7993F7;
+	color: #7993F7;
+}
+.close-color1{
+	color: #7993F7 !important;
+}
+.file-color2{
+	border: 1px solid #45C5FD;
+	color: #45C5FD;
+}
+.close-color2{
+	color: #45C5FD !important;
+}
+.file-color3{
+	border:1px solid #DD90F8;
+	color:#DD90F8;
+}
+.close-color3{
+	color:#DD90F8 !important;
+}

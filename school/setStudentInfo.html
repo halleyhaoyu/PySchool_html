@@ -150,7 +150,8 @@
 				},150);
 			});
   	})
-  	function post_set_student_info(){ 
+  	function post_set_student_info(){
+  			var userInfo = app.getState();
 			var data={};
 			data=vm_set_student.studentInfo; 
 			data.manageId=userInfo.manageId;

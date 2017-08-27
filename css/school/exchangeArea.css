@@ -38,6 +38,14 @@ body{
 	width: 30%;
 	margin: 2px;
 }
+.works-desc-video{
+	width: 70%;
+	margin: 2px;
+}
+.works-desc-audio{
+	width: 70%;
+	margin: 2px;
+}
 .works-answer{
 	margin: 0px 0;
 	border-bottom: 1px solid #eee;
