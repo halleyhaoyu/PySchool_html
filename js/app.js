@@ -226,6 +226,16 @@
 		
 	}
 	
+	/*
+	  * 活动 -我的作品查询
+	  */
+	owner.getMyWorkInfo=function(aswId,callback){
+		// view/activity/studentWork.shtml?manageId=76
+		var userInfo = app.getState();
+		var url=owner.hostname+'/view/activity/studentWork.shtml?manageId='+userInfo.manageId+'&aswId='+aswId ;
+		return owner.getCommon(url,callback); 
+		
+	} 
 	
 	/*
 	  * 成果 -获取列表

@@ -104,6 +104,7 @@
 		data: {
 				aswName:'',
 			myWorksInfo:{
+				aswId:0,
 				manageId:0,
 				aswDesc:'',
 				aswActId:0,
@@ -120,6 +121,9 @@
     document.addEventListener('get_activity_my_works', function(event) {
  		vm_my_works.myWorksInfo.aswActId = event.detail.activityId; 
  		vm_my_works.aswName = event.detail.actName; 
+ 		vm_my_works.myWorksInfo.aswId = event.detail.aswId; 
+ 		
+ 		getMyWorksInfo();
 	});
     
     mui.plusReady(function(){
@@ -210,24 +214,34 @@
 		}
     
     // 回调
-	    var myWorksCallback = function(data){
-	    	if(data.code==0){
-	    		console.info(JSON.stringify(data));
-	    		if(data.code==0){
-					vm_my_works.selectFileList=selectFileList;
-					if(vm_my_works.selectFileList.length>9){
-						vm_my_works.selectFileList.splice(9,vm_my_works.selectFileList.length-9);
-						mui.toast('只可以上传9个附件！');
-					}
-					//console.info(JSON.stringify(data.objectList ));
-					var activityStudentsWorksFilesList = getMyWorksFileList(data.objectList);
-					//console.info(JSON.stringify(activityStudentsWorksFilesList));
-					vm_my_works.myWorksInfo.activityStudentsWorksFilesList=vm_my_works.myWorksInfo.activityStudentsWorksFilesList.concat(activityStudentsWorksFilesList);
-					
-	    		}
-	    	}
+    var myWorksCallback = function(data){
+    	if(data.code==0){
+    		console.info(JSON.stringify(data));
+    		if(data.code==0){
+				vm_my_works.selectFileList=selectFileList;
+				if(vm_my_works.selectFileList.length>9){
+					vm_my_works.selectFileList.splice(9,vm_my_works.selectFileList.length-9);
+					mui.toast('只可以上传9个附件！');
+				}
+				//console.info(JSON.stringify(data.objectList ));
+				var activityStudentsWorksFilesList = getMyWorksFileList(data.objectList);
+				//console.info(JSON.stringify(activityStudentsWorksFilesList));
+				vm_my_works.myWorksInfo.activityStudentsWorksFilesList=vm_my_works.myWorksInfo.activityStudentsWorksFilesList.concat(activityStudentsWorksFilesList);
+				
+    		}
+    	}
+		mui.toast(data.msg);
+    }
+    
+    function getMyWorksInfo(){
+    	app.getMyWorkInfo(vm_my_works.myWorksInfo.aswId,function(data){
+			if(data.code==0){
+				vm_my_works.myWorksInfo=data.object; 
+				//vm.classList =  data.objectList;
+			}
 			mui.toast(data.msg);
-	    }
+		});
+    }
     
 </script>
 
