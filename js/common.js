@@ -123,6 +123,8 @@ function videoAndUpload(callback){
 	}else{
 		console.log('开始录像...');
 		var cmr = plus.camera.getCamera();
+		var fmt = cmr.supportedVideoFormats;
+		console.log('支持录制的视频格式'+fmt);
 		cmr.startVideoCapture(function(p){
 			console.log('成功：'+p);
 			plus.io.resolveLocalFileSystemURL(p, function(entry){
@@ -143,7 +145,7 @@ function videoAndUpload(callback){
 			msg.msg='失败：'+e.message;  
 			callback(msg);
 			//console.log('失败：'+e.message);
-		}, {filename:'_doc/camera/',index:indexNum});
+		}, {filename:'_doc/camera/',format:fmt,index:indexNum});
 	}
 }
 
@@ -168,7 +170,7 @@ function startRecord( callback ){
 			console.log('录音对象未获取');
 			return callback(msg);
 		}
-		r.record({filename:'_doc/audio/'}, function(p){
+		r.record({filename:'_doc/audio/',format:'amr'}, function(p){
 			console.log('录音完成：'+p);
 			plus.io.resolveLocalFileSystemURL(p, function(entry){
 //				entry.toLocalURL()录音文件路径
