@@ -8,5 +8,6 @@ PySchool_html
 web app 需要和API 配置在相同域名下。
 
 fork 说明变更223：
-fork 说明 更新：
+
+fork 说明 更新2：
  
