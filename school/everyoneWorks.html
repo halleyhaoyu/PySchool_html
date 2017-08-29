@@ -63,7 +63,7 @@
 										<img v-if="item.showStudentPic!=''" :src="item.showStudentPic" class="works-img"/>
 										<img v-else src="../images/school/head-pic.png" class="works-img"/>
 										<p class="works-username">{{item.aswStudentName}}<label class="works-time">{{item.aswTime}}</label></p>
-										<p class="works-content">{{item.aswDesc}}</p>
+										<p class="works-content">{{item.aswDesc}}&nbsp;.</p>
 						 
 										<div >
 											<div  v-for="fileItem in item.activityStudentsWorksFilesList" :style="getDisplayStyle(fileItem.aswfFiles)"> 
@@ -196,7 +196,7 @@
 //                      "aswfActId": 3,
 //                      "aswfAsId": 5,
 //                      "aswfAswId": 3
-//                  } 
+//                  }
 //              ],
 //              "activityCommentList": []
 //          }
@@ -225,9 +225,9 @@
 				if(patch){
 					var suffix = patch.substr(patch.lastIndexOf('.'));
 					if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
-						type="width: 70%; margin: 2px;float:left;";
+						type="width: 30%; margin: 2px;float:left;";
 					}else if( suffix=='.amr' ||  suffix=='.mp3' || suffix=='.m4a' ){
-						type="width: 70%; margin: 2px;float:left;";
+						type="width: 30%; margin: 2px;float:left;";
 					}
 				 	else  if( suffix=='.jpg' ||  suffix=='.png' || suffix=='.gif' ){
 						type="width: 30%; margin: 2px;float:left;";

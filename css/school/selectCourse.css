@@ -105,3 +105,14 @@
 	color: #fff;
 	margin-top: 6px;
 }
+.end-info{
+	height: 36px;
+	line-height: 36px;
+	width: 50px;
+	float: right;
+	text-align: center;
+	border: 1px solid #666666;
+	background: #999999;
+	color: #fff;
+	margin-top: 6px;
+}
