@@ -54,13 +54,13 @@
 	</ul>
 	
 	
-	
-	<div id="slider" class="mui-slider mui-content mui-fullscreen" style="top:0px;bottom: 40px; padding-bottom: 0px;">				
+	<div id="item1" class="item-call mui-content mui-control-content mui-fullscreen mui-active" style="top:64px;bottom: 50px;background: #eee;">
+	<div id="slider" class="mui-slider mui-fullscreen">					
 		<div class="mui-slider-group">
 			<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
 				<div id="scroll1" class="mui-scroll-wrapper">
 					<div class="mui-scroll">
-						<ul class="mui-table-view">									
+						<ul class="mui-table-view">
 							<li  class="mui-table-view-cell" v-for="item in acAreaList">
 								 <div class="works-answer">
 									<img v-if="item.showStudentPic!=''" :src="item.showStudentPic" class="works-img"/>
@@ -88,6 +88,7 @@
 			</div>
 			
 		</div>
+	</div>
 	</div>
 	<!--<ul id="history" class="dlist" style="text-align:left;padding:0;display: none;"></ul>-->
 	
@@ -156,7 +157,7 @@
 				},
 				getDisplayType:function(patch){
 					var type=0;
-					console.info(patch);
+					//console.info(patch);
 					if(patch){
 						var suffix = patch.substr(patch.lastIndexOf('.'));
 						if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
@@ -172,7 +173,7 @@
 				},
 				getShowType:function(item){
 					var type=0;
-					console.info(JSON.stringify(item));
+					//console.info(JSON.stringify(item));
 					var suffix = item.patch.substr(item.patch.lastIndexOf('.'));
 					if(item.type==1){
 						if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
@@ -198,7 +199,7 @@
 					}else{
 						cssStyle="ditem file-color2";
 					}
-					console.info(cssStyle);
+					//console.info(cssStyle);
 					return cssStyle;
 				}
 			}
@@ -278,11 +279,12 @@
     	var userInfo = app.getState(); 
 		if(userInfo.manageId!=undefined && userInfo.manageId!=''){
 			app.getExchangeAreaList(vm_exchange_area.classId,1,function(data){
-				console.info(JSON.stringify(data));
+				//console.info(JSON.stringify(data));
 				if(data.code==0){
-					if(data.object!=undefined){											
-						vm_exchange_area.acAreaList=data.object.rows;
-						console.info(JSON.stringify(vm_exchange_area.acAreaList));
+					if(data.object!=undefined){
+						vm_exchange_area.acAreaList.splice(0,vm_exchange_area.acAreaList.length);
+						vm_exchange_area.acAreaList=vm_exchange_area.acAreaList.concat(data.object.rows);
+						//console.info(JSON.stringify(vm_exchange_area.acAreaList));
 					}
 				 	pageIndex=1;
 				}
@@ -338,6 +340,7 @@
 						pushExchangeAreaDown("",true);
 					}
 				}
+				if(refurbishFlag)
 				mui.toast(data.msg);
 			});
     }

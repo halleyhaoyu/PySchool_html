@@ -108,7 +108,8 @@
 	}); 
     
     document.addEventListener('get_set_teacher', function(event) {
-		vm_set_teacher.teacherInfo = event.detail.teacherInfo;
+    	var userInfo = app.getState();
+		vm_set_teacher.teacherInfo = userInfo.teacherDetail;
 	});
 	
   	mui.plusReady(function(){
@@ -145,6 +146,10 @@
 			app.postSetTeacherInfo(data,function(data){
 				if(data.code==0){ 
 					selectFileList.splice(0,selectFileList.length);	
+			    	var userInfo = app.getState();
+					userInfo.teacherDetail = vm_set_teacher.teacherInfo  ;
+					userInfo.realName=vm_set_teacher.teacherInfo.thName;
+					app.setState(userInfo);
 				}
 				mui.toast(data.msg);
 			});

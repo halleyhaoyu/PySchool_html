@@ -139,7 +139,8 @@
 	});
 	
   	document.addEventListener('get_set_student', function(event) {
-		vm_set_student.studentInfo = event.detail.studentInfo;
+  		var userInfo = app.getState(); 
+		vm_set_student.studentInfo = userInfo.studentsDetail;
 	});
 	
   	mui.plusReady(function(){
@@ -175,6 +176,10 @@
 			app.postSetStudentInfo(data,function(data){
 				if(data.code==0){ 
 					selectFileList.splice(0,selectFileList.length);	
+					var userInfo = app.getState();
+					userInfo.studentsDetail=vm_set_student.studentInfo;
+					userInfo.realName=vm_set_student.studentInfo.stdRealName;
+					app.setState(userInfo);
 				}
 				mui.toast(data.msg);
 			});

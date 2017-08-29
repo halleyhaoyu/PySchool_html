@@ -390,8 +390,10 @@ function taskUpload(fileList, callback){
 	plus.nativeUI.showWaiting();
 	var filePathList=[];
 	var task = null;
+	//console.info(JSON.stringify(app.hostname))
 	task = plus.uploader.createUpload(
-    		'http://112.124.110.182:11008/course-api/uploadCommonApp.shtml',
+    		//'http://112.124.110.182:11008/course-api/uploadCommonApp.shtml',
+    		app.hostname+'/uploadCommonApp.shtml' ,
     		{ method:"POST",priority:100},
     		function (t,status){
     			//console.info(t);
@@ -407,6 +409,8 @@ function taskUpload(fileList, callback){
         		var msg=objStr;
         		console.info(JSON.stringify(msg));
         		callback(msg);
+        		filesNum=filesNum+uploadFileList.length;
+        		filesNum=filesNum>9?9:filesNum;
         		uploadFileList.splice(0,uploadFileList.length);
     		}
 	);

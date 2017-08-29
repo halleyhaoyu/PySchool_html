@@ -29,31 +29,31 @@
 		<form > 
 			<div class="out-div">
 				<label class="label-desc-cg">学习体会 </label>
-				<textarea id="textarea" v-model="experienceInfo.cceDesc" rows="3" placeholder="请输入学习体会" class="text-content"></textarea>
+				<textarea :readonly="experienceInfo.aswId>0" id="textarea" v-model="experienceInfo.cceDesc" rows="3" placeholder="请输入学习体会" class="text-content"></textarea>
 			</div> 
  
 		 
 			<ul id="history" class="dlist" style="text-align:left;padding:0;">
 				<li v-for="item in selectFileList" :class="getShowStyle(item)" >
-					<span v-if="getShowType(item)==1" class='iplay'>
+					<span v-if="getDisplayType(item.patch)==1" class='iplay'>
 						<font class='aname'   @tap='displayFile(item.patch)'>{{ getFileName(item)}}</font> 
 						<img class='file-icon' src='../images/school/video-icon.png' @tap='displayFile(item.patch)'/>
-					 	<span class='mui-icon mui-icon-close close-color3'   @tap='delUploadFileList(item.patch)'></span>
+					 	<span v-if="experienceInfo.aswId==0" class='mui-icon mui-icon-close close-color3'   @tap='delUploadFileList(item.patch)'></span>
 					</span>
-					<span v-else-if="getShowType(item)==2" class='iplay'>
-						<font class='aname'  @tap='playAudio(item.patch)'>{{ getFileName(item)}}</font> 
-						<img class='file-icon' src='../images/school/photo-icon.png' @tap='playAudio(item.patch)'/>
-						<span class='mui-icon mui-icon-close close-color1'  @tap='delUploadFileList(item.patch)'></span>
+					<span v-else-if="getDisplayType(item.patch)==2" class='iplay'>
+						<font class='aname'  @tap='displayFile(item.patch)'>{{ getFileName(item)}}</font> 
+						<img class='file-icon' src='../images/school/photo-icon.png' @tap='displayFile(item.patch)'/>
+						<span v-if="experienceInfo.aswId==0" class='mui-icon mui-icon-close close-color1'  @tap='delUploadFileList(item.patch)'></span>
 					</span>
 					<span v-else class='iplay'>
 						<font class='aname'  @tap='playAudio(item.patch)'>{{ getFileName(item)}}</font>
 						<img class='file-icon' src='../images/school/record-icon.png' @tap='playAudio(item.patch)'/>
-						<span class='mui-icon mui-icon-close close-color2'  @tap='delUploadFileList(item.patch)'></span>
+						<span v-if="experienceInfo.aswId==0" class='mui-icon mui-icon-close close-color2'  @tap='delUploadFileList(item.patch)'></span>
 					</span>
 				</li>
 			</ul>
 		
-		<div class="button buttonContianer"><!--
+		<div v-if="experienceInfo.cceId==0" class="button buttonContianer"><!--
 			<div class="button button1"></div>
 			<div class="button button2"></div>
 			<div class="button button3"></div>
@@ -65,12 +65,12 @@
 			<div class="button button5"></div>
 				
 		</div>
-		<div class="div-tips">附件上限为1个。</div>
+		<div v-if="experienceInfo.cceId==0" class="div-tips">附件上限为1个。</div>
  
 		</form> 
 	</div>
 
-	<button id="btn_course_exprience_post" type="button" class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn"> 保 存 </button>
+	<button v-if="experienceInfo.cceId==0" id="btn_course_exprience_post" type="button" class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn"> 保 存 </button>
 	
 	<div id="play" class="rp">
 		<div id="ptime" class="ptime">00:00:00/00:00:00</div><br/>
@@ -99,6 +99,7 @@
 		el: '#course_experience_content',
 		data: {
 			experienceInfo:{
+				cceId:0,
 				manageId:0,
 				cceDesc:'',
 				cceOperId:0,
@@ -114,27 +115,29 @@
 			selectFileList:[]
 		},
 		methods:{
+			getDisplayType:function(patch){
+					var type=0;
+					console.info(patch);
+					if(patch){
+						var suffix = patch.substr(patch.lastIndexOf('.'));
+						if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
+							type=1;
+						}else if( suffix=='.amr' ||  suffix=='.mp3' || suffix=='.m4a' ){
+							type=3;
+						}
+					 	else  if( suffix=='.jpg' ||  suffix=='.png' || suffix=='.gif' ){
+							type=2;
+						}
+					}
+					return type;
+			},
 			getFileName:function(item){
 				return item.patch.substr(item.patch.lastIndexOf('/')+1);
 			},
 			getFileSuffix:function(item){
 				var suffix = item.patch.substr(item.patch.lastIndexOf('.'));
 				return suffix;
-			},
-			getShowType:function(item){
-				var type=0;
-				var suffix = item.patch.substr(item.patch.lastIndexOf('.'));
-				if(item.type==1){
-					if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
-						type=1;
-					}else{
-						type=2;
-					}
-				}else{
-					type=3;
-				}
-				return type;
-			},
+			}, 
 			getShowStyle:function(item){
 				var cssStyle="";
 				var suffix = item.patch.substr(item.patch.lastIndexOf('.'));
@@ -157,9 +160,32 @@
 		vm_course_exprience.experienceInfo.cceChapClassId = event.detail.classId;
 		vm_course_exprience.experienceInfo.cceTmId = event.detail.tmId;
 		vm_course_exprience.experienceInfo.cceTcId = event.detail.tcId;
+		getCourseExperience();
+		console.info(JSON.stringify(vm_course_exprience.experienceInfo));
 		
-		console.info(vm_course_exprience.experienceInfo.cceRcId);
 	});
+    
+    function getCourseExperience(){
+    	
+	 	app.getCourseExperience(vm_course_exprience.experienceInfo.cceChapClassId,function(data){
+			if(data.code==0){
+				if(data.object &&　data.object.cceId>0)
+				{
+					vm_course_exprience.experienceInfo=data.object;  
+					vm_course_exprience.selectFileList.splice(0,vm_course_exprience.selectFileList.length);
+					vm_course_exprience.selectFileList.push(
+						{
+							patch:vm_course_exprience.experienceInfo.cceFiles,
+							type:vm_course_exprience.getDisplayType(vm_course_exprience.experienceInfo.cceFiles)
+						}
+					);
+					
+					console.info(JSON.stringify(vm_course_exprience.selectFileList));
+				}
+			}
+			mui.toast(data.msg);
+		});
+    }
     
     mui.plusReady(function(){
     	 

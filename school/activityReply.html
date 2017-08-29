@@ -29,47 +29,47 @@
 		<form >
 			<div>
 				<label class="label-desc">活动主题 </label>
-				<input type="text" v-model="activityInfo.actName" class="input-content" data-input-password="3" placeholder="请输入活动主题">
+				<input type="text" v-model="activityInfo.actName" readonly="readonly" class="input-content" data-input-password="3" placeholder="请输入活动主题">
 			</div>
 			<div class="out-div">
-				<label class="label-desc-cg">个人成果 </label>
-				<textarea id="textarea" rows="3" v-model="commentInfo.ahDesc" placeholder="请输入活动体会" class="text-content"></textarea>
+				<label class="label-desc-cg">活动集锦 </label>
+				<textarea :readonly="commentInfo.ahId>0" id="textarea" rows="3" v-model="commentInfo.ahDesc" placeholder="请输入活动体会" class="text-content"></textarea>
 			</div>
 
 			<ul id="history" class="dlist" style="text-align:left;padding:0;">
-				<li v-for="item in selectFileList" :class="getShowStyle(item)">
+				<li v-for="item in selectFileList"  :class="getShowStyle(item)">
 					
-					<span v-if="getShowType(item)==1" class='iplay'>
+					<span v-if="getDisplayType(item.patch)==1" class='iplay'>
 						<font class='aname'   @tap='displayFile(item.patch)'>{{ getFileName(item)}}</font> 
 						<img class='file-icon' src='../images/school/video-icon.png' @tap='displayFile(item.patch)'/>
-					 	<span class='mui-icon mui-icon-close close-color3'   @tap='delUploadFileList(item.patch)'></span>
+					 	<span v-if="commentInfo.ahId==0" class='mui-icon mui-icon-close close-color3'   @tap='delUploadFileList(item.patch)'></span>
 					</span>
-					<span v-else-if="getShowType(item)==2" class='iplay'>
+					<span v-else-if="getDisplayType(item.patch)==2" class='iplay'>
 						<font class='aname'  @tap='displayFile(item.patch)'>{{ getFileName(item)}}</font> 
 						<img class='file-icon' src='../images/school/photo-icon.png' @tap='displayFile(item.patch)'/>
-						<span class='mui-icon mui-icon-close close-color1'  @tap='delUploadFileList(item.patch)'></span>
+						<span v-if="commentInfo.ahId==0" class='mui-icon mui-icon-close close-color1'  @tap='delUploadFileList(item.patch)'></span>
 					</span>
 					<span v-else class='iplay'>
 						<font class='aname'  @tap='playAudio(item.patch)'>{{ getFileName(item)}}</font>
 						<img class='file-icon' src='../images/school/record-icon.png' @tap='playAudio(item.patch)'/>
-						<span class='mui-icon mui-icon-close close-color2'  @tap='delUploadFileList(item.patch)'></span>
-					</span> 
+						<span v-if="commentInfo.ahId==0" class='mui-icon mui-icon-close close-color2'  @tap='delUploadFileList(item.patch)'></span>
+					</span>
 				</li>
 			</ul>
 			
-			<div class="button buttonContianer">
+			<div v-if="commentInfo.ahId==0" class="button buttonContianer">
 				<div class="button button1" id="addAudio"></div>
 				<div class="button button2" id="addCameraImages"></div>
 				<div class="button button3" id="addVideos"></div>
 				<div class="button button4" id="addImages"></div>
 				<div class="button button5"></div>
 			</div>
-			<div class="div-tips">附件上限为9个。</div>
+			<div v-if="commentInfo.ahId==0" class="div-tips">附件上限为9个。</div>
 
 		</form>
 	</div>
 	<div style="height:180px;"></div>
-	<button id="btn_activity_reply_post"  type="button" class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn"> 保 存 </button>
+	<button v-if="commentInfo.ahId==0" id="btn_activity_reply_post"  type="button" class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn"> 保 存 </button>
 
 	<div id="play" class="rp">
 		<div id="ptime" class="ptime">00:00:00/00:00:00</div><br/>
@@ -102,34 +102,38 @@
 		el: '#activity_reply_content',
 		data: {
 			commentInfo:{
+				ahId:0,
 				manageId:0,
 				ahStudentId:0,//  学生id／教师ID
 				ahDesc:'',//  活动集锦   必填
 				ahStudentName:'',//  学生姓名
-				ahActId:'',//  与t_activity表的act_id关联 必填
+				ahActId:0,//  与t_activity表的act_id关联 必填
 				ahSponsorType:'',//  活动发起者类型：1：学生；2：教师
 				activityHighlightsFilesList:[]  //活动集锦附件
+				
 			},
 			activityInfo:{actName:''},
 			selectFileList:[]
 		},
 			methods:{
+				getDisplayType:function(patch){
+						var type=0;
+						console.info(patch);
+						if(patch){
+							var suffix = patch.substr(patch.lastIndexOf('.'));
+							if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
+								type=1;
+							}else if( suffix=='.amr' ||  suffix=='.mp3' || suffix=='.m4a' ){
+								type=3;
+							}
+						 	else  if( suffix=='.jpg' ||  suffix=='.png' || suffix=='.gif' ){
+								type=2;
+							}
+						}
+						return type;
+				},
 				getFileName:function(item){
 					return item.patch.substr(item.patch.lastIndexOf('/')+1);
-				},
-				getShowType:function(item){
-					var type=0;
-					var suffix = item.patch.substr(item.patch.lastIndexOf('.'));
-					if(item.type==1){
-						if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
-							type=1;
-						}else{
-							type=2;
-						}
-					}else{
-						type=3;
-					}
-					return type;
 				},
 				getShowStyle:function(item){
 					var cssStyle="";
@@ -151,7 +155,11 @@
 
 		document.addEventListener('get_activity_reply_detail', function(event) {
 			vm_activity_reply.activityInfo = event.detail.activityInfo;
+			console.info(JSON.stringify(vm_activity_reply.activityInfo));
  			vm_activity_reply.commentInfo.ahActId = vm_activity_reply.activityInfo.actId;
+ 			if(vm_activity_reply.commentInfo.ahActId>0){
+ 				getActivityReplyInfo();
+ 			}
 		});
 
 		//窗口隐藏时，重置页面数据
@@ -218,6 +226,29 @@
 	        });
 	        
 		})
+		
+		function getActivityReplyInfo(){
+	    	app.getActivityReplyInfo(vm_activity_reply.commentInfo.ahActId,function(data){
+				if(data.code==0){
+					if(data.object &&　data.object.ahActId>0)
+					{
+						vm_activity_reply.commentInfo=data.object;   
+						vm_activity_reply.selectFileList.splice(0,vm_activity_reply.selectFileList.length);
+						for(var i in vm_activity_reply.commentInfo.activityHighlightsFilesList)
+						{
+							vm_activity_reply.selectFileList.push(
+								{
+									patch:vm_activity_reply.commentInfo.activityHighlightsFilesList[i].aswfFiles,
+									type:vm_activity_reply.getDisplayType(vm_activity_reply.commentInfo.activityHighlightsFilesList[i].aswfFiles)
+								}
+							);
+						}
+						console.info(JSON.stringify(vm_my_works.selectFileList));
+					}
+				}
+				mui.toast(data.msg);
+			});
+		}
 		
 	 	function post_activity_reply(){
 				var data={};

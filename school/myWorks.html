@@ -32,50 +32,45 @@
 			<div>
 
 				<label class="label-desc">活动主题 </label>
-				<input type="text" v-model="aswName" class="input-content" data-input-password="3" placeholder="请输入活动主题">
+				<input type="text" v-model="aswName" class="input-content" readonly="readonly" data-input-password="3" placeholder="请输入活动主题">
 			</div>
 
 
 			<div class="out-div">
 				<label class="label-desc-cg">个人成果 </label>
-				<textarea v-model="myWorksInfo.aswDesc" id="textarea" rows="3" placeholder="请输入活动体会" class="text-content"></textarea>
+				<textarea :readonly="myWorksInfo.aswId>0" v-model="myWorksInfo.aswDesc" id="textarea" rows="3" placeholder="请输入活动体会" class="text-content"></textarea>
 			</div>
 
-
-			
 			<ul id="history" class="dlist" style="text-align:left;padding:0;">
 				<li v-for="item in selectFileList" :class="getShowStyle(item)">
-					 
-					
-					<span v-if="getShowType(item)==1" class='iplay'>
+					 <span v-if="getDisplayType(item.patch)==1" class='iplay'>
 						<font class='aname'   @tap='displayFile(item.patch)'>{{ getFileName(item)}}</font> 
 						<img class='file-icon' src='../images/school/video-icon.png' @tap='displayFile(item.patch)'/>
-					 	<span class='mui-icon mui-icon-close close-color3'   @tap='delUploadFileList(item.patch)'></span>
+					 	<span v-if="myWorksInfo.aswId==0" class='mui-icon mui-icon-close close-color3'   @tap='delUploadFileList(item.patch)'></span>
 					</span>
-					<span v-else-if="getShowType(item)==2" class='iplay'>
+					<span v-else-if="getDisplayType(item.patch)==2" class='iplay'>
 						<font class='aname'  @tap='displayFile(item.patch)'>{{ getFileName(item)}}</font> 
 						<img class='file-icon' src='../images/school/photo-icon.png' @tap='displayFile(item.patch)'/>
-						<span class='mui-icon mui-icon-close close-color1'  @tap='delUploadFileList(item.patch)'></span>
+						<span v-if="myWorksInfo.aswId==0" class='mui-icon mui-icon-close close-color1'  @tap='delUploadFileList(item.patch)'></span>
 					</span>
 					<span v-else class='iplay'>
 						<font class='aname'  @tap='playAudio(item.patch)'>{{ getFileName(item)}}</font>
 						<img class='file-icon' src='../images/school/record-icon.png' @tap='playAudio(item.patch)'/>
-						<span class='mui-icon mui-icon-close close-color2'  @tap='delUploadFileList(item.patch)'></span>
-					</span> 
-					
+						<span v-if="myWorksInfo.aswId==0" class='mui-icon mui-icon-close close-color2'  @tap='delUploadFileList(item.patch)'></span>
+					</span>
 					
 				</li>
 			</ul>
 
 
-			<div class="button buttonContianer">
+			<div v-if="myWorksInfo.aswId==0" class="button buttonContianer">
 				<div class="button button1" id="addAudio"></div>
 				<div class="button button2" id="addCameraImages"></div>
 				<div class="button button3" id="addVideos"></div>
 				<div class="button button4" id="addImages"></div>
 				<div class="button button5"></div>
 			</div>
-			<div class="div-tips">附件上限为9个。</div>
+			<div v-if="myWorksInfo.aswId==0" class="div-tips">附件上限为9个。</div>
 
 
 
@@ -85,7 +80,7 @@
 	</div>
 
 	<div style="height:180px;"></div>
-	<button  type="button" id="btn_my_works_post" class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn"> 保 存 </button>
+	<button v-if="myWorksInfo.aswId==0" type="button" id="btn_my_works_post" class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn"> 保 存 </button>
 
 	<div id="play" class="rp">
 		<div id="ptime" class="ptime">00:00:00/00:00:00</div><br/>
@@ -114,6 +109,7 @@
 		el: '#my_works_content',
 		data: {
 				aswName:'',
+				actEnd:1,
 			myWorksInfo:{
 				aswId:0,
 				manageId:0,
@@ -124,22 +120,24 @@
 			selectFileList:[]
 		},
 			methods:{
+				getDisplayType:function(patch){
+						var type=0;
+						console.info(patch);
+						if(patch){
+							var suffix = patch.substr(patch.lastIndexOf('.'));
+							if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
+								type=1;
+							}else if( suffix=='.amr' ||  suffix=='.mp3' || suffix=='.m4a' ){
+								type=3;
+							}
+						 	else  if( suffix=='.jpg' ||  suffix=='.png' || suffix=='.gif' ){
+								type=2;
+							}
+						}
+						return type;
+				},
 				getFileName:function(item){
 					return item.patch.substr(item.patch.lastIndexOf('/')+1);
-				},
-				getShowType:function(item){
-					var type=0;
-					var suffix = item.patch.substr(item.patch.lastIndexOf('.'));
-					if(item.type==1){
-						if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
-							type=1;
-						}else{
-							type=2;
-						}
-					}else{
-						type=3;
-					}
-					return type;
 				},
 				getShowStyle:function(item){
 					var cssStyle="";
@@ -161,8 +159,16 @@
  		vm_my_works.myWorksInfo.aswActId = event.detail.activityId; 
  		vm_my_works.aswName = event.detail.actName; 
  		vm_my_works.myWorksInfo.aswId = event.detail.aswId; 
+ 		vm_my_works.actEnd = event.detail.actEnd;
+ 		console.info(JSON.stringify(vm_my_works.myWorksInfo));
  		
- 		getMyWorksInfo();
+ 		if(vm_my_works.actEnd!=1 && vm_my_works.myWorksInfo.aswId==0){
+ 			mui.toast('活动已经结束，不能提交我的作品！');
+ 		}
+ 		
+ 		if(vm_my_works.myWorksInfo.aswId>0){
+ 			getMyWorksInfo();
+ 		}
 	});
     
     mui.plusReady(function(){
@@ -174,18 +180,22 @@
 		},false);
 		
     	$(".buttonContianer").on('tap',function(){
-			count ++
-			if(count % 2 == 1){
-				$(this).addClass('show')
-				$(this).children().animate({
-					opacity: 1
-				})
-			}else{
-				$(this).removeClass('show')
-				$(this).children().animate({
-					opacity: 0
-				})
-			}
+    		if(vm_my_works.actEnd==1){
+				count ++
+				if(count % 2 == 1){
+					$(this).addClass('show')
+					$(this).children().animate({
+						opacity: 1
+					})
+				}else{
+					$(this).removeClass('show')
+					$(this).children().animate({
+						opacity: 0
+					})
+				}
+    		}else{
+    			mui.toast('活动已经结束，不能提交我的作品！');
+    		}    		
 		})
 
 
@@ -225,18 +235,25 @@
         });
     	
     	mui('#my_works_content').on('tap','#btn_my_works_post',function(){
-			var userInfo = app.getState();
-			var data={};
-			data=vm_my_works.myWorksInfo;
-			data.manageId=userInfo.manageId
-			//console.info(JSON.stringify(data));
-			app.postMyWorks(data,function(data){
-				if(data.code==0){
-					selectFileList.splice(0,selectFileList.length);
-					mui.back(); 
-				}
-				mui.toast(data.msg);
-			});
+    		
+    		if(vm_my_works.actEnd==1){
+				var userInfo = app.getState();
+				var data={};
+				data=vm_my_works.myWorksInfo;
+				data.manageId=userInfo.manageId
+				//console.info(JSON.stringify(data));
+				app.postMyWorks(data,function(data){
+					if(data.code==0){
+						selectFileList.splice(0,selectFileList.length);
+						mui.back(); 
+					}
+					mui.toast(data.msg);
+				});
+    		}else{
+    			mui.toast('活动已经结束，不能提交我的作品！');
+    		}
+    		
+    		
 		}); 
     })
 
@@ -275,8 +292,21 @@
     function getMyWorksInfo(){
     	app.getMyWorkInfo(vm_my_works.myWorksInfo.aswId,function(data){
 			if(data.code==0){
-				vm_my_works.myWorksInfo=data.object; 
-				//vm.classList =  data.objectList;
+				if(data.object &&　data.object.aswId>0)
+				{
+					vm_my_works.myWorksInfo=data.object;  
+					vm_my_works.selectFileList.splice(0,vm_my_works.selectFileList.length);
+					for(var i in vm_my_works.myWorksInfo.activityStudentsWorksFilesList)
+					{
+						vm_my_works.selectFileList.push(
+							{
+								patch:vm_my_works.myWorksInfo.activityStudentsWorksFilesList[i].aswfFiles,
+								type:vm_my_works.getDisplayType(vm_my_works.myWorksInfo.activityStudentsWorksFilesList[i].aswfFiles)
+							}
+						);
+					}
+					console.info(JSON.stringify(vm_my_works.selectFileList));
+				}
 			}
 			mui.toast(data.msg);
 		});

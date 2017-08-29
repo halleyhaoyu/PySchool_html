@@ -66,7 +66,7 @@
 												 
 											</a>
 										</div>
-									 </li>-->
+									 </li>--> 
 								</ul>
 							</div>
 						</div>
@@ -273,12 +273,12 @@
 			var colorIndex = Math.ceil(Math.random()*4)-1;
 			if(index==0){ //我的课程
 				insertHtml+="<div class=\"myh5_card\">";
-				insertHtml+="	<a id=\""+objectList[i].tcId+"_"+objectList[i].rcId+"\" href=\"#\" class=\"top "+color_css[i%4]+"\">";//	
+				insertHtml+="	<a id=\""+objectList[i].tcId+"_"+objectList[i].rcId+"_"+objectList[i].rcAccessBook+"\" href=\"#\" class=\"top "+color_css[i%4]+"\">";//	
 				insertHtml+="		<img src=\""+objectList[i].rcLogo+"\" class=\"photo\" />";
 				
-				if(objectList[i].rcAccessBook==1){
-					insertHtml+="		<div  class=\"mui-icon mui-icon-navigate\" style=\"color: #FFFFFF;float: right; margin-right: 10px; font-size: 32px; text-shadow: 0px 2px 3px #000000;\"></div>";
-				}
+//				if(objectList[i].rcAccessBook==1){
+//					insertHtml+="		<div  class=\"mui-icon mui-icon-navigate\" style=\"color: #FFFFFF;float: right; margin-right: 10px; font-size: 32px; text-shadow: 0px 2px 3px #000000;\"></div>";
+//				}
 												
 				insertHtml+="		<p class=\"title\">"+objectList[i].rcName+"</p>";
 				//insertHtml+="		<p class=\"content1\">班级："+objectList[i].tcId+"</p>";
@@ -334,6 +334,15 @@
 				}
 			});
 			
+			webview_select_walking_detail = mui.preload({
+				url: '../walking/wkMap.html',
+				id: 'select_walking_detail',
+				styles: {
+					"render": "always",
+					"popGesture": "hide",
+					"bounce": "vertical" 
+				}
+			});
 			
 	        mui('#main_bar').on('tap', 'a', function(e) {
 			    //获取目标子页的id
@@ -347,9 +356,13 @@
 			mui('#item1').on('tap','a',function(){
 				//console.info("this.href:  " + this.href);
 				var ids=this.id.split("_");
-				console.info(ids[0]);
-				console.info(ids[1]);
-				open_course_dir_detail(ids[0],ids[1]);
+				console.info(JSON.stringify(ids)); 
+				
+				if(ids[2]==1){
+					open_select_walking_detail();
+				}else{
+					open_course_dir_detail(ids[0],ids[1]);
+				}
 			});
 			mui('#item2').on('tap','a',function(){
 				//console.info("this.href:  " + this.href);
@@ -411,6 +424,14 @@
 				webview_select_course_detail.show("slide-in-right", 300);
 			},150);
 		}
+
+		function open_select_walking_detail() {			
+		  
+			setTimeout(function () {
+				webview_select_walking_detail.show("slide-in-right", 300);
+			},150);
+		}
+
 
 	</script>
 

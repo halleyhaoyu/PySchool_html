@@ -6,15 +6,12 @@
     <title>地图</title>
     <script src="../js/mui.min.js"></script>
     <link href="../css/mui.min.css" rel="stylesheet"/>
-    <script type="text/javascript" charset="utf-8">
-      	mui.init();
-    </script>
     <link rel="stylesheet" type="text/css" href="../css/walking/wkMap.css"/>
     <style id="animateStyle"></style>
 </head>
 <body>
 	<div class="main">
-		<a href="index.html">
+		<a id="btn_wk_map_back" href="#">
 			<span class="mui-icon mui-icon-home"></span>
 		</a>
 		<div class="logo">
@@ -33,4 +30,18 @@
 <script src="../js/jquery-2.1.4.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/walking/useAll.js" type="text/javascript" charset="utf-8"></script>
 <script src="../js/walking/wkMap.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+  	mui.init();
+  	
+  	 mui.plusReady(function(){
+  	 	$("#btn_wk_map_back").on('tap',function(){
+    		 mui.back();   		
+		})
+  	 })
+  	
+  	
+  	mui.back = function() {
+		plus.webview.currentWebview().hide("auto", 300);
+	}
+</script>
 </html>
