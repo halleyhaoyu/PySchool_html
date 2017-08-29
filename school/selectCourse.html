@@ -53,6 +53,7 @@
 						 退出
 					</div>
 				</div>
+				<div v-if="classList.length==0" class="open-class-content">未开班</div>
 			</div>
 		</div>
 
@@ -139,6 +140,11 @@
 			if(data.code==0){
 				vm.courseInfo=data.object; 
 				vm.classList =  data.objectList;
+			}else{
+				if(data.code==-1007){
+				vm.courseInfo=data.object; 
+				vm.classList =[];
+			}
 			}
 			mui.toast(data.msg);
 		}); 
