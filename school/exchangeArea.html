@@ -54,13 +54,13 @@
 	</ul>
 	
 	
-	
-	<div id="slider" class="mui-slider mui-content mui-fullscreen" style="top:0px;bottom: 40px; padding-bottom: 0px;">				
+	<div id="item1" class="item-call mui-content mui-control-content mui-fullscreen mui-active" style="top:64px;bottom: 50px;background: #eee;">
+	<div id="slider" class="mui-slider mui-fullscreen">					
 		<div class="mui-slider-group">
 			<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
 				<div id="scroll1" class="mui-scroll-wrapper">
 					<div class="mui-scroll">
-						<ul class="mui-table-view">									
+						<ul class="mui-table-view">
 							<li  class="mui-table-view-cell" v-for="item in acAreaList">
 								 <div class="works-answer">
 									<img v-if="item.showStudentPic!=''" :src="item.showStudentPic" class="works-img"/>
@@ -88,6 +88,7 @@
 			</div>
 			
 		</div>
+	</div>
 	</div>
 	<!--<ul id="history" class="dlist" style="text-align:left;padding:0;display: none;"></ul>-->
 	

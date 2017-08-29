@@ -130,7 +130,8 @@
 	};
 
 	
-
+///////////////////////////////////////////////////////////////////////
+//
 	/*
 	 * 课程-获取课程列表
 	 * */
@@ -148,6 +149,7 @@
 		var url=owner.hostname+'/view/activity/courseClass.shtml?manageId='+userInfo.manageId;
 		return owner.getCommon(url,callback);
 	}
+	
 	
 	
 	
@@ -183,6 +185,19 @@
 		return owner.getCommon(url,callback); 
 	}
 	 
+	 
+	
+
+	 /*
+	 * 课程-获取我的体会
+	 */	
+	owner.getCourseExperience=function(chapClassId,callback){
+		var userInfo = app.getState();
+		// /view/teachingManage/experienceInfo.shtml?cceChapClassId=8&manageId=76
+		var url=owner.hostname+'/view/teachingManage/experienceInfo.shtml?manageId='+userInfo.manageId+'&cceChapClassId='+chapClassId; 
+		return owner.getCommon(url,callback); 
+	}
+	 
 	/*
 	  * 活动 -获取活动列表
 	  */
@@ -203,7 +218,7 @@
 	}
 	
 		/*
-	  * 活动 -获取活动详情
+	  * 活动 -获取交流区
 	  */
 	owner.getExchangeAreaList=function(classId,pageIndex,callback){
 		//view/activity/acAreaList.shtml&page=1 manageId   acaClassId 
@@ -214,8 +229,7 @@
 	}
 	
 	
-	
-		/*
+	/*
 	  * 活动 -大家作品列表
 	  */
 	owner.getEveryoneWorkList=function(activityId,pageIndex,callback){
@@ -233,9 +247,21 @@
 		// view/activity/studentWork.shtml?manageId=76
 		var userInfo = app.getState();
 		var url=owner.hostname+'/view/activity/studentWork.shtml?manageId='+userInfo.manageId+'&aswId='+aswId ;
-		return owner.getCommon(url,callback); 
-		
-	} 
+		return owner.getCommon(url,callback);
+	}
+	
+	/*
+	  * 活动 -查询活动集锦
+	  */
+	owner.getActivityReplyInfo=function(ahActId,callback){
+		// view/activity/highlightsInfo.shtml
+		var userInfo = app.getState();
+		var url=owner.hostname+'/view/activity/highlightsInfo.shtml?manageId='+userInfo.manageId+'&ahActId='+ahActId ;
+		return owner.getCommon(url,callback);
+	}
+	
+	
+	
 	
 	/*
 	  * 成果 -获取列表

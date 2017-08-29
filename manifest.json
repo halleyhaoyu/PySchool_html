@@ -316,7 +316,8 @@
 				],
 				"refer": [
 					"school/courseDir.html",
-					"school/selectCourse.html"
+					"school/selectCourse.html",
+					"walking/wkMap.html"
 				],
 				"priority": 0
 			},
@@ -570,7 +571,9 @@
 					"js/common.js",
 					"js/immersed.js",
 					"css/H5MediaFile.css",
-					"images/school/video-icon.png"
+					"images/school/video-icon.png",
+					"images/school/photo-icon.png",
+					"images/school/record-icon.png"
 				],
 				"refer": [
 					"school/showImage.html"
@@ -758,7 +761,10 @@
 					"js/immersed.js",
 					"images/astop.png",
 					"images/arecord.png",
-					"css/H5MediaFile.css"
+					"css/H5MediaFile.css",
+					"images/school/photo-icon.png",
+					"images/school/record-icon.png",
+					"images/school/video-icon.png"
 				],
 				"refer": [
 					"school/showImage.html"
@@ -797,6 +803,112 @@
 					"css/H5Plus.css",
 					"js/H5Plus.js",
 					"js/H5Plus-quit.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"walking/wkMap.html": {
+				"resources": [
+					"images/walking/MinHang/QiBao/001.png",
+					"images/walking/NanHui/TaoYuan/001.png",
+					"js/walking/useAll.js",
+					"images/walking/JiaDing/SaiCheChang/001.png",
+					"images/walking/ChongMing/ShiDi/001.png",
+					"images/walking/HuangPu/XinTianDi/001.png",
+					"images/walking/LuWan/ZhouGongGuan/001.png",
+					"images/walking/MinHang/HongQiao/001.png",
+					"images/walking/XuHui/JiaoTong/001.png",
+					"js/walking/wkMap.js",
+					"images/walking/SongJiang/HuanLeGu/001.png",
+					"images/walking/shadow.png",
+					"images/walking/PuDongXinQu/HuanQiu/001.png",
+					"images/walking/HuangPu/NanJingLu/001.png",
+					"images/walking/logo.png",
+					"images/walking/bg.png",
+					"images/walking/JinShan/NongMinHua/001.png",
+					"images/walking/HuangPu/WaiTan/001.png",
+					"images/walking/PuDongXinQu/YiShuGong/001.png",
+					"images/walking/XuHui/LvDi/001.png",
+					"images/walking/JinShan/ShaTan/001.png",
+					"images/walking/HuangPu/BoWuGuan/001.png",
+					"images/walking/HuangPu/YuYuan/001.png",
+					"js/jquery-2.1.4.min.js",
+					"images/walking/JingAn/WangJiaSha/001.png",
+					"css/mui.min.css",
+					"images/walking/map.png",
+					"images/walking/location.png",
+					"css/walking/wkMap.css",
+					"images/walking/LuWan/TianZiFang/001.png",
+					"js/mui.min.js"
+				],
+				"refer": [
+					"walking/msgInfo.html"
+				],
+				"priority": 0
+			},
+			"walking/msgInfo.html": {
+				"resources": [
+					"js/walking/useAll.js",
+					"css/walking/swiper.min.css",
+					"css/walking/top.css",
+					"images/walking/stop.png",
+					"css/mui.css",
+					"images/walking/prompt.png",
+					"images/walking/positioning.png",
+					"js/jquery-2.1.4.min.js",
+					"images/walking/play.png",
+					"images/walking/girl.png",
+					"css/walking/msgInfo.css",
+					"images/walking/boy.png",
+					"js/mui.min.js",
+					"js/walking/swiper.min.js",
+					"js/walking/msgInfo.js",
+					"css/walking/dashboard.css",
+					"images/walking/JiaDing/SaiCheChang/5.png",
+					"images/walking/JiaDing/SaiCheChang/4.png",
+					"images/walking/JiaDing/SaiCheChang/2.png",
+					"images/walking/JiaDing/SaiCheChang/1.png",
+					"images/walking/JiaDing/SaiCheChang/6.png",
+					"images/walking/JiaDing/SaiCheChang/3.png",
+					"images/walking/JinShan/ShaTan/1.png",
+					"images/walking/JinShan/ShaTan/2.png",
+					"images/walking/PuDongXinQu/HuanQiu/4.png",
+					"images/walking/PuDongXinQu/HuanQiu/3.png",
+					"images/walking/PuDongXinQu/HuanQiu/2.png",
+					"images/walking/PuDongXinQu/HuanQiu/6.png",
+					"images/walking/PuDongXinQu/HuanQiu/5.png",
+					"images/walking/PuDongXinQu/HuanQiu/1.png",
+					"images/walking/MinHang/QiBao/3.png",
+					"images/walking/MinHang/QiBao/2.png",
+					"images/walking/MinHang/QiBao/5.png",
+					"images/walking/MinHang/QiBao/1.png",
+					"images/walking/MinHang/QiBao/4.png"
+				],
+				"refer": [
+					"walking/bdBaike.html",
+					"walking/baiduMap.html"
+				],
+				"priority": 0
+			},
+			"walking/bdBaike.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/walking/top.css",
+					"css/mui.css",
+					"js/jquery-2.1.4.min.js",
+					"css/walking/dashboard.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"walking/baiduMap.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/walking/top.css",
+					"images/walking/map_marker.gif",
+					"css/mui.css",
+					"js/jquery-2.1.4.min.js",
+					"css/walking/dashboard.css"
 				],
 				"refer": [],
 				"priority": 0
