@@ -188,6 +188,10 @@ function startRecord( callback ){
 		er.style.display = 'block';
 		t = 0;
 		ri = setInterval(function(){
+			if(t==180){
+				console.log('录音时长不能超过三分钟');
+				stopRecord();
+			}
 			t++;
 			rt.innerText = timeToStr(t);
 		}, 1000);
