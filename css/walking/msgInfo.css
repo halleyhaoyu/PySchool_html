@@ -127,27 +127,29 @@ body{
 .msg-title{
 	background: #956cdc;
     height:52px;
+    width:100%;
 }
 .msg-title p:first-child{
 	color: #fff;
-	padding: 6px 16px 0 16px;
+	padding:16px;
 }
-.msg-title p:last-child{
+/*.msg-title p:last-child{
 	color: #fff;
 	padding: 0 16px 6px 16px;
 	font-size:12px;
 	opacity: .65;
-}
+}*/
 
 #item2,#item3{
 	overflow: auto;
 }
 #item2::-webkit-scrollbar, #item3::-webkit-scrollbar{display:none}
 #autotype ul{
-	height:512px;
+	min-height:512px;
+	padding-bottom: 24px;
 }
 ul li {
-	height: 123px;
+	min-height: 123px;
 }
 
 .name1,
@@ -186,7 +188,7 @@ ul li {
 .outputText1 {
 	margin-left: 80px;
 	width: 68%;
-	height: 60px;
+	/*height: 60px;*/
 	text-align: left;
 	background-color: #EAEAEA;
 	border-top-left-radius: 2em;
@@ -199,7 +201,7 @@ ul li {
 	margin-right: 80px;
 	margin-left: auto;
 	width: 68%;
-	height:60px;
+	/*height:60px;*/
 	text-align: left;
 	background-color: #B69BE8;
 	border-top-left-radius: 2em;
@@ -208,13 +210,13 @@ ul li {
 }
 
 .outputText1 p {
-	padding: 8px 8px 0px 24px;
+	padding: 12px;
 	color: #717171;
 	font-size: 16px;
 }
 
 .outputText2 p {
-	padding: 8px 8px 0px 24px;
+	padding:12px;
     color: #FFFFFF;
     font-size: 16px;
 }
@@ -238,6 +240,7 @@ div[name]:after {
 }
 .show-div{
 	float: left;
+	width: 100%;
 }
 .word-show{
 	float: left;

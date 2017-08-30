@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <title>大家作品</title>
+    
+<script src="../js/jquery-2.1.4.min.js"></script> 
+
     <script src="../js/mui.min.js"></script>
 	<script src="../js/app.js"></script>
 	<script src="../js/vue.min.js"></script>
@@ -17,8 +20,23 @@
 	<link href="../css/top.css" rel="stylesheet"/>
 	<link href="../css/school/everyoneWorks.css" rel="stylesheet"/>
     <link href="../css/school/pushCommon.css" rel="stylesheet"/>
+    <style>
+    	.slide-fade-enter-active {
+		  transition: all .5s ease;
+		}
+		.slide-fade-leave-active {
+		  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+		}
+		.slide-fade-enter, .slide-fade-leave-to
+		 {
+		  transform: translateX(0px);
+		  opacity: 0;
+		}
+    </style>
 </head>
 <body>
+	<div id="everyone_works_content">
+		 
 	<header class="mui-bar mui-bar-nav">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 		<img src="../images/head-dz.png" class="head-dz"/>
@@ -26,71 +44,207 @@
 	</header>
 	<div class="mui-content">
 
+	<transition name="slide-fade">
+		<div v-if="showInputFlag" class="bottom-div" style="z-index: 100;"> 
+			<input type="text" v-model="commentInfo.actComDesc" id="inputEWContent" style="width: 200px;" />
+			<button id="btn_everyone_work_post" @tap="everyoneWorksCommentPost()" type="button" class="mui-btn send-button"> 发送 </button>	
+		</div> 
+	</transition>
 
-
-<div id="slider" class="mui-slider mui-fullscreen" style="top:64px;padding-bottom: 0px;">				
-			<div class="mui-slider-group">
-				<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
-					<div id="scroll1" class="mui-scroll-wrapper">
-						<div class="mui-scroll">
-							<ul class="mui-table-view">									
-								<li v-for="item in workList" class="mui-table-view-cell" style="padding: 11px 0px;">
-									<div class="works-desc">
-										<div class="works-desc-top">
-											<img v-if="item.showStudentPic!=''" :src="item.showStudentPic" class="works-img"/>
-											<img v-else src="../images/school/head-pic.png" class="works-img"/>
-											<p class="works-username">{{item.aswStudentName}}<label class="works-time">{{item.aswTime}}</label></p>
-											<p class="works-content">{{item.aswDesc}}</p>
-							 
-											<div >
-												<img v-for="fileItem in item.activityStudentsWorksFilesList" :src="fileIten.aswfFiles" class="works-desc-pic"/>
-												 
+	<div id="slider" class="mui-slider mui-fullscreen" style="top:64px;padding-bottom: 0px;">				
+		<div class="mui-slider-group">
+			<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+				<div id="scroll1" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul class="mui-table-view">									
+							<li v-for="item in workList" class="mui-table-view-cell" style="padding: 11px 0px;">
+								<div class="works-desc">
+									<div class="works-desc-top">
+										<img v-if="item.showStudentPic!=''" :src="item.showStudentPic" class="works-img"/>
+										<img v-else src="../images/school/head-pic.png" class="works-img"/>
+										<p class="works-username">{{item.aswStudentName}}<label class="works-time">{{item.aswTime}}</label></p>
+										<p class="works-content">{{item.aswDesc}}&nbsp;.</p>
+						 
+										<div >
+											<div  v-for="fileItem in item.activityStudentsWorksFilesList" :style="getDisplayStyle(fileItem.aswfFiles)"> 
+												<!--<img :src="fileItem.aswfFiles" class="works-desc-pic"/>-->
+												<img v-if="2==getDisplayType(fileItem.aswfFiles)" :src="fileItem.aswfFiles"  @tap='displayFile(fileItem.aswfFiles)' class="works-desc-pic"/>
+									  			<video  v-if="1==getDisplayType(fileItem.aswfFiles)" :src="fileItem.aswfFiles" controls="controls" class="works-desc-video">
+													 不支持的文件格式。
+												</video> 
+												<audio v-if="3==getDisplayType(fileItem.aswfFiles)"  :src="fileItem.aswfFiles" controls="controls" class="works-desc-audio">
+													不支持的文件格式。 
+												</audio>
 											</div>
-							
-											<div class="icon-line">
-												<span class="mui-icon-extra mui-icon-extra-comment"> {{item.aswCommentNum}}</span>
-												<span class="mui-icon-extra mui-icon-extra-like"> {{item.aswPointNum}}</span>
-											</div>
-							
-											<div v-for="commentItem in itme.activityCommentList" class="works-answer">
-												<img v-if="commentItem.showStudentPic!=''" :src="commentItem.showStudentPic" class="works-img"/>
-												<img v-else src="../images/bigicon1.png" class="works-img"/>
-												<p class="works-username">{{commentItem.actComReviewer}}<label class="works-time">{{commentItem.actComTime}}</label></p>
-												<p class="works-content">{{commentItem.actComDesc}}</p>
-											</div> 
-							
+											
+											<!--<img v-if="2==getDisplayType(item.actFiles)" :src="item.actFiles"  @tap='displayFile(item.actFiles)' class="works-desc-pic"/>
+									  			<video  v-if="1==getDisplayType(item.actFiles)" :src="item.actFiles" controls="controls" class="works-desc-video">
+													 不支持的文件格式。
+												</video> 
+												<audio v-if="3==getDisplayType(item.actFiles)"  :src="item.actFiles" controls="controls" class="works-desc-audio">
+													不支持的文件格式。
+												</audio>
+											--> 
+												
+											
+												
 										</div>
-							
+						
+										<div class="icon-line">
+											<div  @tap="everyoneWorksComment(item)" style=" float: right; text-align: center;">
+												<span class="mui-icon-extra mui-icon-extra-comment" style="margin-right: 10px;"> {{item.aswCommentNum}}</span>
+											</div >
+											<div  @tap="everyoneWorksPintPost(item)"  style="  float: right; text-align: center;">
+												<span  class="mui-icon-extra mui-icon-extra-like" style="margin-right: 25px;"> {{item.aswPointNum}}</span>
+											</div> 
+										</div>
+						
+										<div v-for="commentItem in item.activityCommentList" class="works-answer">
+											<img v-if="commentItem.showStudentPic!=''" :src="commentItem.showStudentPic" class="works-img"/>
+											<img v-else src="../images/bigicon1.png" class="works-img"/>
+											<p class="works-username">{{commentItem.actComReviewer}}<label class="works-time">{{commentItem.actComTime}}</label></p>
+											<p class="works-content">{{commentItem.actComDesc}}</p>
+										</div> 
+						
 									</div>
-								</li>
-								 
-							</ul>
-						</div>
+						
+								</div>
+							</li>
+							 
+						</ul>
 					</div>
 				</div>
 			</div>
-									
-									
-		
- 
+		</div> 
 	</div>
 
-	
+
+	</div>
+</div>
 <script type="text/javascript" charset="UTF-8">
   	mui.init();
   	
+  	onResizeWindow();
+    window.onresize = onResizeWindow;
+    function onResizeWindow(){
+        $("#inputEWContent").css("width",$(window).width()-92);
+    }
+	    
+  	var pageIndex = 1;
+  	var currentItem;
   	var vm_everyone_work = new Vue({
-		el: '.mui-content',
-		data: {	
+		el: '#everyone_works_content',
+		data: {
 			activityId:0,
-			workList:[]
+			showInputFlag:false,
+			commentInfo:{
+				manageId:0,
+				actComDesc:'',//  评论内容
+				actComActId:0,//  与t_activity表的act_id关联
+				actComType:3,//  1：学校秀；2：班级秀 3： 普通作品
+				actComIsPoint:0,//  1：点赞；2：评论
+				actIsTeacher:2, //1：老师；2：学生
+				actAswId:0,//与t_activity_students_works表的asw_id关联
+				actObject:0//点赞或者评论的对象（1:针对活动；2:针对作品） 
+			},
+	 
+			workList:[
+//			{
+//              "aswId": 3,
+//              "aswStudentId": 24,
+//              "aswDesc": "喜欢打电话的",
+//              "aswStudentName": "  200",
+//              "aswActId": 3,
+//              "aswAsId": 5,
+//              "aswPointNum": 1,
+//              "aswCommentNum": 2,
+//              "showStudentPic": "http://112.124.110.182:11008/upload/studentPicture/20170812/B20170812184037_d0959b7a25b64a80ac9bbfa428b7110b.png",
+//              "activityStudentsWorksFilesList": [
+//                  {
+//                      "aswfId": 3,
+//                      "aswfTime": "2017-08-25 22:58:22",
+//                      "aswfStudentId": 24,
+//                      "aswfFiles": "http://112.124.110.182:11008/upload/TaskExecPicture/20170825//1503672443675.jpg20170825224730_d0841e80f28a482e86afd3c176ae064f.jpg",
+//                      "aswfStudentName": "  200",
+//                      "aswfActId": 3,
+//                      "aswfAswId": 3
+//                  },
+//                  {
+//                      "aswfId": 4,
+//                      "aswfTime": "2017-08-25 22:58:25",
+//                      "aswfStudentId": 24,
+//                      "aswfFiles": "http://112.124.110.182:11008/upload/TaskExecPicture/20170825//1500030347631.jpg20170825224736_2ce220c937c64d6c9f7f137062f2cb5f.jpg",
+//                      "aswfStudentName": "  200",
+//                      "aswfActId": 3,
+//                      "aswfAswId": 3
+//                  },
+//                  {
+//                      "aswfId": 5,
+//                      "aswfTime": "2017-08-25 22:58:28",
+//                      "aswfStudentId": 24,
+//                      "aswfFiles": "http://112.124.110.182:11008/upload/TaskExecPicture/20170825//1503672467553.amr20170825224750_47808e84e7cc4ca885452e606d0a4966.amr",
+//                      "aswfStudentName": "  200",
+//                      "aswfActId": 3,
+//                      "aswfAswId": 3
+//                  },
+//                  {
+//                      "aswfId": 6,
+//                      "aswfTime": "2017-08-25 23:03:54",
+//                      "aswfStudentId": 24,
+//                      "aswfFiles": "http://112.124.110.182:11008/upload/TaskExecPicture/20170825//1503672443675.jpg20170825224730_d0841e80f28a482e86afd3c176ae064f.jpg",
+//                      "aswfStudentName": "  200",
+//                      "aswfActId": 3,
+//                      "aswfAsId": 5,
+//                      "aswfAswId": 3
+//                  }
+//              ],
+//              "activityCommentList": []
+//          }
+			]
+		},
+		methods:{
+			getDisplayType:function(patch){
+				var type=0;
+				//console.info(patch);
+				if(patch){
+					var suffix = patch.substr(patch.lastIndexOf('.'));
+					if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
+						type=1;
+					}else if( suffix=='.amr' ||  suffix=='.mp3' || suffix=='.m4a' ){
+						type=3;
+					}
+				 	else  if( suffix=='.jpg' ||  suffix=='.png' || suffix=='.gif' ){
+						type=2;
+					}
+				}
+				return type;
+			},
+			getDisplayStyle:function(patch){
+				var type="width: 70%; margin: 2px;float:left;";
+				//console.info(patch);
+				if(patch){
+					var suffix = patch.substr(patch.lastIndexOf('.'));
+					if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
+						type="width: 30%; margin: 2px;float:left;";
+					}else if( suffix=='.amr' ||  suffix=='.mp3' || suffix=='.m4a' ){
+						type="width: 30%; margin: 2px;float:left;";
+					}
+				 	else  if( suffix=='.jpg' ||  suffix=='.png' || suffix=='.gif' ){
+						type="width: 30%; margin: 2px;float:left;";
+					}
+				}
+				return type;
+			}
 		}
 	});
 	
+	
+	
+	    
+	    
 	(function($) {
 		//阻尼系数
 		var deceleration = mui.os.ios?0.003:0.0009;
-		var pageIndex = 1;
 		$('.mui-scroll-wrapper').scroll({
 			bounce: false,
 			indicators: true, //是否显示滚动条
@@ -103,51 +257,13 @@
 					down: {
 						callback: function() {
 							var self = this;
-							var userInfo = app.getState(); 
-							if(userInfo.manageId!=undefined && userInfo.manageId!=''){
-								app.getEveryoneWorkList(vm_everyone_work.activityId,1,function(data){
-									console.info(JSON.stringify(data));
-									if(data.code==0){
-										if(data.object!=undefined){											
-											vm_everyone_work.workList=data.object.rows;
-											console.info(JSON.stringify(vm_everyone_work.workList));
-										}
-									 	pageIndex=1;
-									}
-									mui.toast(data.msg);
-									self.endPullDownToRefresh();
-								});
-							}else{
-								app.gotoLogin();
-							}
+							pushEveryoneWorksDown(self,false);
 						}
 					},
 					up: {
 						callback: function() {
 							var self = this;
-							var aa = index;
-							var userInfo = app.getState(); 
-							if(userInfo.manageId!=undefined && userInfo.manageId!=''){
-								app.getEveryoneWorkList(vm_everyone_work.classId,pageIndex,function(data){
-									console.info(JSON.stringify(data));
-									var overFlag = false;
-									if(data.code==0){
-										if(data.object!=undefined && data.object.rows.length>0){
-											console.info(JSON.stringify(data.object.rows));
-											vm_everyone_work.workList = vm_everyone_work.workList.concat(data.object.rows);
-											
-											console.info(JSON.stringify(vm_everyone_work.workList));
-										 	pageIndex++;
-										}else{
-											overFlag=true;
-										} 
-									} 
-									mui.toast(data.msg);
-									self.endPullUpToRefresh(overFlag);
-								});
-							}else{
-								app.gotoLogin();
-							}
+							pushEveryoneWorksUp(self,false);
 						}
 					}
 				});
@@ -156,9 +272,71 @@
 		});
 	})(mui);
 	
+	function pushEveryoneWorksUp(self,autoFlag){
+		var userInfo = app.getState(); 
+		if(userInfo.manageId!=undefined && userInfo.manageId!=''){
+			app.getEveryoneWorkList(vm_everyone_work.activityId,pageIndex,function(data){
+				console.info(JSON.stringify(data));
+				var overFlag = false;
+				if(data.code==0){
+					if(data.object!=undefined && data.object.rows.length>0){
+						console.info(JSON.stringify(data.object.rows));
+						vm_everyone_work.workList = vm_everyone_work.workList.concat(data.object.rows);
+						
+						console.info(JSON.stringify(vm_everyone_work.workList));
+					 	pageIndex++;
+					}else{
+						overFlag=true;
+					} 
+				} 
+				mui.toast(data.msg);
+				if(!autoFlag){
+					self.endPullUpToRefresh(overFlag);
+				}
+			});
+		}else{
+			app.gotoLogin();
+		}
+	}
+	
+	function pushEveryoneWorksDown(self,autoFlag){
+		pageIndex=1;
+		var userInfo = app.getState(); 
+		if(userInfo.manageId!=undefined && userInfo.manageId!=''){
+			app.getEveryoneWorkList(vm_everyone_work.activityId,1,function(data){
+				console.info(JSON.stringify(data));
+				if(data.code==0){
+					if(data.object!=undefined){											
+						vm_everyone_work.workList=data.object.rows;
+						console.info(JSON.stringify(vm_everyone_work.workList));
+					}
+				 	
+				}
+				mui.toast(data.msg);
+				if(!autoFlag){
+					self.endPullDownToRefresh();
+				}
+			});
+		}else{
+			app.gotoLogin();
+		}
+	}
+	
 	document.addEventListener('get_every_one_works', function(event) {
 		activityId = event.detail.activityId;
+		console.info(activityId);
 		vm_everyone_work.activityId=activityId;
+		vm_everyone_work.commentInfo.actComActId=activityId;
+		app.getEveryoneWorkList(vm_everyone_work.activityId,1,function(data){
+			console.info(JSON.stringify(data));
+			if(data.code==0){
+				if(data.object!=undefined){											
+					vm_everyone_work.workList=data.object.rows;
+					console.info(JSON.stringify(vm_everyone_work.workList));
+				}
+			}
+			mui.toast(data.msg); 
+		});
 	});
 
 	//重写返回逻辑
@@ -174,9 +352,61 @@
 			window.scrollTo(0, 0);
 			//vm.resetData();
 		},false);
-		 
 		  
 	})
+	
+	function everyoneWorksPintPost(item){
+		
+		console.info("scShowAllPintPost");
+		 		 
+		var userInfo = app.getState();
+		var data={};
+		data=vm_everyone_work.commentInfo;
+		data.manageId=userInfo.manageId;
+		data.actAswId=item.aswId; 
+		data.actComActId=vm_everyone_work.activityId;
+		data.actComType=3;//  1：学校秀；2：班级秀 3： 普通作品
+		data.actComIsPoint=1;//  1：点赞；2：评论
+		data.actObject=2;//点赞或者评论的对象（1:针对活动；2:针对作品）
+		   
+		app.postComment(data,function(data){
+			if(data.code==0){
+				//mui.back(); 
+				vm_everyone_work.commentInfo={};  
+				item.aswPointNum++;
+			}
+			mui.toast(data.msg);
+		});
+	}
+	
+	function everyoneWorksComment(item){
+		//currentItem=item;
+		console.info("scShowAllComment");
+		vm_everyone_work.commentInfo.actAswId=item.aswId;
+		vm_everyone_work.showInputFlag=true;
+	}
+	
+	function everyoneWorksCommentPost(){
+		var userInfo = app.getState();
+		var data={};
+		data=vm_everyone_work.commentInfo;
+		data.actComActId=vm_everyone_work.activityId;
+		data.manageId=userInfo.manageId;
+		data.actComType=3;//  1：学校秀；2：班级秀 3： 普通作品
+		data.actComIsPoint=2;//  1：点赞；2：评论
+		data.actObject=2;
+		  
+		app.postComment(data,function(data){
+			if(data.code==0){
+				//mui.back(); 
+				vm_everyone_work.commentInfo={}; 
+				vm_everyone_work.showInputFlag=false;
+				pushEveryoneWorksDown('',true); 
+				 
+			}
+			mui.toast(data.msg);
+		});
+	}
 	
 </script>
 </body>

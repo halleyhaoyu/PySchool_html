@@ -29,25 +29,48 @@
 		<form > 
 			<div class="out-div">
 				<label class="label-desc-cg">学习体会 </label>
-				<textarea id="textarea" v-model="experienceInfo.cceDesc" rows="3" placeholder="请输入学习体会" class="text-content"></textarea>
+				<textarea :readonly="experienceInfo.aswId>0" id="textarea" v-model="experienceInfo.cceDesc" rows="3" placeholder="请输入学习体会" class="text-content"></textarea>
 			</div> 
-		
+ 
+		 
 			<ul id="history" class="dlist" style="text-align:left;padding:0;">
-
+				<li v-for="item in selectFileList" :class="getShowStyle(item)" >
+					<span v-if="getDisplayType(item.patch)==1" class='iplay'>
+						<font class='aname'   @tap='displayFile(item.patch)'>{{ getFileName(item)}}</font> 
+						<img class='file-icon' src='../images/school/video-icon.png' @tap='displayFile(item.patch)'/>
+					 	<span v-if="experienceInfo.aswId==0" class='mui-icon mui-icon-close close-color3'   @tap='delUploadFileList(item.patch)'></span>
+					</span>
+					<span v-else-if="getDisplayType(item.patch)==2" class='iplay'>
+						<font class='aname'  @tap='displayFile(item.patch)'>{{ getFileName(item)}}</font> 
+						<img class='file-icon' src='../images/school/photo-icon.png' @tap='displayFile(item.patch)'/>
+						<span v-if="experienceInfo.aswId==0" class='mui-icon mui-icon-close close-color1'  @tap='delUploadFileList(item.patch)'></span>
+					</span>
+					<span v-else class='iplay'>
+						<font class='aname'  @tap='playAudio(item.patch)'>{{ getFileName(item)}}</font>
+						<img class='file-icon' src='../images/school/record-icon.png' @tap='playAudio(item.patch)'/>
+						<span v-if="experienceInfo.aswId==0" class='mui-icon mui-icon-close close-color2'  @tap='delUploadFileList(item.patch)'></span>
+					</span>
+				</li>
 			</ul>
 		
-		<div class="button buttonContianer">
+		<div v-if="experienceInfo.cceId==0" class="button buttonContianer"><!--
 			<div class="button button1"></div>
 			<div class="button button2"></div>
 			<div class="button button3"></div>
-			<div class="button button4"></div>
+			<div class="button button4"></div>-->
+			<div class="button button1" id="addAudio"></div>
+			<div class="button button2" id="addCameraImages"></div>
+			<div class="button button3" id="addVideos"></div>
+			<div class="button button4" id="addImages"></div>
+			<div class="button button5"></div>
+				
 		</div>
-		<div class="div-tips">附件上限为10个。</div>
+		<div v-if="experienceInfo.cceId==0" class="div-tips">附件上限为1个。</div>
  
 		</form> 
 	</div>
 
-	<button id="btn_course_exprience_post" type="button" class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn"> 保 存 </button>
+	<button v-if="experienceInfo.cceId==0" id="btn_course_exprience_post" type="button" class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn"> 保 存 </button>
 	
 	<div id="play" class="rp">
 		<div id="ptime" class="ptime">00:00:00/00:00:00</div><br/>
@@ -72,24 +95,12 @@
 <script type="text/javascript" charset="UTF-8">
     mui.init();
     var count = 0
-    $(".buttonContianer").on('tap',function(){
-        count ++
-        if(count % 2 == 1){
-            $(this).addClass('show')
-            $(this).children().animate({
-                opacity: 1
-            })
-        }else{
-            $(this).removeClass('show')
-            $(this).children().animate({
-                opacity: 0
-            })
-        }
-    })
     var vm_course_exprience = new Vue({
-		el: '#course_detail_content',
+		el: '#course_experience_content',
 		data: {
 			experienceInfo:{
+				cceId:0,
+				manageId:0,
 				cceDesc:'',
 				cceOperId:0,
 				cceOperName:'',
@@ -100,21 +111,95 @@
 				cceFiles:'',
 				cceTmId:0,
 				cceTcId:0
+			},
+			selectFileList:[]
+		},
+		methods:{
+			getDisplayType:function(patch){
+					var type=0;
+					console.info(patch);
+					if(patch){
+						var suffix = patch.substr(patch.lastIndexOf('.'));
+						if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
+							type=1;
+						}else if( suffix=='.amr' ||  suffix=='.mp3' || suffix=='.m4a' ){
+							type=3;
+						}
+					 	else  if( suffix=='.jpg' ||  suffix=='.png' || suffix=='.gif' ){
+							type=2;
+						}
+					}
+					return type;
+			},
+			getFileName:function(item){
+				return item.patch.substr(item.patch.lastIndexOf('/')+1);
+			},
+			getFileSuffix:function(item){
+				var suffix = item.patch.substr(item.patch.lastIndexOf('.'));
+				return suffix;
+			}, 
+			getShowStyle:function(item){
+				var cssStyle="";
+				var suffix = item.patch.substr(item.patch.lastIndexOf('.'));
+				if(item.type==1){
+					if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
+						cssStyle="ditem file-color3";
+					}else{
+						cssStyle="ditem file-color1";
+					}
+				}else{
+					cssStyle="ditem file-color2";
+				}
+				return cssStyle;
 			}
 		}
 	});
     document.addEventListener('get_course_detail_exprience', function(event) {
-		vm_course_exprience.experienceInfo.cceRcId = event.detail.courseId;
+		vm_course_exprience.experienceInfo.cceRcId = event.detail.rcId;
 		vm_course_exprience.experienceInfo.cceChapId = event.detail.chapId;
 		vm_course_exprience.experienceInfo.cceChapClassId = event.detail.classId;
-		console.info(vm_course_exprience.experienceInfo.cceRcId);
+		vm_course_exprience.experienceInfo.cceTmId = event.detail.tmId;
+		vm_course_exprience.experienceInfo.cceTcId = event.detail.tcId;
+		getCourseExperience();
+		console.info(JSON.stringify(vm_course_exprience.experienceInfo));
+		
 	});
     
+    function getCourseExperience(){
+    	
+	 	app.getCourseExperience(vm_course_exprience.experienceInfo.cceChapClassId,function(data){
+			if(data.code==0){
+				if(data.object &&　data.object.cceId>0)
+				{
+					vm_course_exprience.experienceInfo=data.object;  
+					vm_course_exprience.selectFileList.splice(0,vm_course_exprience.selectFileList.length);
+					vm_course_exprience.selectFileList.push(
+						{
+							patch:vm_course_exprience.experienceInfo.cceFiles,
+							type:vm_course_exprience.getDisplayType(vm_course_exprience.experienceInfo.cceFiles)
+						}
+					);
+					
+					console.info(JSON.stringify(vm_course_exprience.selectFileList));
+				}
+			}
+			mui.toast(data.msg);
+		});
+    }
+    
     mui.plusReady(function(){
+    	 
+		var self = plus.webview.currentWebview();
+		self.addEventListener("hide",function (e) {
+			window.scrollTo(0, 0);
+			//vm.resetData();
+		},false);
+		
     	mui('#course_experience_content').on('tap','#btn_course_exprience_post',function(){
 			var userInfo = app.getState();
 			var data={};
 			data=vm_course_exprience.experienceInfo;
+			data.manageId=userInfo.manageId;
 			if(userInfo.roleType==3){
 				data.cceOperId=userInfo.studentsDetail.stdId;
 				data.cceOperName=userInfo.studentsDetail.stdRealName;
@@ -126,18 +211,95 @@
 			}
 			console.info(JSON.stringify(data));
 			app.postCourseExperience(data,function(data){
-				if(data.code==0){				
+				if(data.code==0){	
+					selectFileList.splice(0,selectFileList.length);			
 					mui.back(); 
 				}
 				mui.toast(data.msg);
 			});
 			 
 		}); 
+		
+		
+		
+		
+		$(".buttonContianer").on('tap',function(){
+		    count ++
+		    if(count % 2 == 1){
+		        $(this).addClass('show')
+		        $(this).children().animate({
+		            opacity: 1
+		        })
+		    }else{
+		        $(this).removeClass('show')
+		        $(this).children().animate({
+		            opacity: 0
+		        })
+		    }
+		}) 
+
+        //录音
+        document.getElementById('addAudio').addEventListener('tap', function() {
+        	 if(vm_course_exprience.selectFileList.length>=1){
+        	 	mui.toast('只可以上传一个附件！');
+        	 }
+        	 else{
+           	 	startRecord(courseExperienceCallback); 
+        	 }
+        });
+
+        //拍照上传
+        document.getElementById('addCameraImages').addEventListener('tap', function() {
+             if(vm_course_exprience.selectFileList.length>=1){
+        	 	mui.toast('只可以上传一个附件！');
+        	 }
+        	 else{
+        	 	cameraAndUpload(courseExperienceCallback);
+        	 }
+        });
+        //拍视频上传
+        document.getElementById('addVideos').addEventListener('tap', function() {
+             if(vm_course_exprience.selectFileList.length>=1){
+        	 	mui.toast('只可以上传一个附件！');
+        	 }
+        	 else{
+        	 	
+	            videoAndUpload(courseExperienceCallback);
+	           }
+        });
+
+        //相册选择照片上传
+        document.getElementById('addImages').addEventListener('tap', function() {
+             if(vm_course_exprience.selectFileList.length>=1){
+        	 	mui.toast('只可以上传一个附件！');
+        	 }
+        	 else{
+        	 	
+	            albumAndUpload(1,courseExperienceCallback);
+	           }
+        });
     })
      
     mui.back = function() {
 		plus.webview.currentWebview().hide("auto", 300);
 	}
+    
+    // 回调
+    var courseExperienceCallback = function(data){
+    	if(data.code==0){
+    		console.info(JSON.stringify(data));
+    		if(data.code==0){
+        		vm_course_exprience.experienceInfo.cceFiles=data.objectList[0].pathAll;
+				vm_course_exprience.selectFileList=selectFileList;
+				if(vm_course_exprience.selectFileList.length>1){
+					vm_course_exprience.selectFileList.splice(1,vm_course_exprience.selectFileList.length-1);
+					mui.toast('只可以上传一个附件！');
+				}
+    		}
+    	}
+		mui.toast(data.msg);
+    }
+    
 </script>
 </body>
 </html>

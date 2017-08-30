@@ -23,10 +23,10 @@
 		<img src="../images/head-dz.png" class="head-dz"/>
 		<h1 class="mui-title">活动详情</h1>
 		<a id="activity_every_one_work" class="mui-pull-right top-edit">大家作品</a>
-		<a id="activity_reply_detail" href="#"  class="mui-pull-right top-edit" style="left:50px; right:250px">活动集锦</a>
+		<a id="activity_reply_detail"   class="mui-pull-right top-edit" style="left:50px; right:250px">活动集锦</a>
 	</header>
 
-	<nav id="main_bar" class="mui-bar mui-bar-tab">
+	<!--<nav id="main_bar" class="mui-bar mui-bar-tab">
 		<a class="mui-tab-item" href="courseAll.html">
 			<span class="mui-icon tabbar-ns-1 foot-icon"></span>
 			<span class="mui-tab-label">课程</span>
@@ -43,14 +43,16 @@
 			<span class="mui-icon tabbar-ns-4 foot-icon"></span>
 			<span class="mui-tab-label">我的</span>
 		</a>
-	</nav>
+	</nav>-->
 	 
  
 	<div class="mui-content">
 
 		<div class="show-desc">
 			<div class="show-desc-right">
-				<div id="activity_detail_join" class="ac-end-join">加入</div>
+				<div v-if="courseInfo.actEnd==1 && courseInfo.hasPart==1" id="activity_detail_quit" class="ac-end-quit">退出</div>
+				<div v-else-if="courseInfo.actEnd==1"  id="activity_detail_join" class="ac-end-join">加入</div>
+				<div v-else id="activity_detail_join_end" class="ac-end">结束</div>
 				<p style="font-size: 12px !important;">剩余名额{{courseInfo.surplustCount}}人</p>
 			</div>
 			<div class="show-desc-left">
@@ -84,7 +86,7 @@
 
 		</div>
 		<div style="padding:32px;background-color:#F7F7F7;">
-			<button id="btn_activity_my_works" type="button" 
+			<button  v-if="courseInfo.hasPart==1" @tap="open_activity_my_works()" id="btn_activity_my_works" type="button" 
 				class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn">我的作品</button>
 			<button v-if="userInfo.roleType==2" id="btn_activity_my_works_show" type="button" 
 				class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn">推荐学校秀</button>
@@ -108,7 +110,8 @@
 		el: '#actiity-detail-content',
 		data: {
 			userInfo:{roleType:2},
-			courseInfo:{
+			courseInfo:{actEnd:2,
+				hasPart:0
 		   } 
 				
 		} 
@@ -148,11 +151,11 @@
 		},false);
 		 
 		 
-	    mui('#main_bar').on('tap', 'a', function(e) {
-		    //获取目标子页的id
-		    var targetTab = this.getAttribute('href');
-		    window.location.href=targetTab;
-		});
+//	    mui('#main_bar').on('tap', 'a', function(e) {
+//		    //获取目标子页的id
+//		    var targetTab = this.getAttribute('href');
+//		    window.location.href=targetTab;
+//		});
 		
 		webview_every_one_works = mui.preload({
 			url: 'everyoneWorks.html',
@@ -180,10 +183,10 @@
 			styles: {"render": "always","popGesture": "hide","bounce": "vertical"}
 		});
 		
-		mui('#actiity-detail-content').on('tap','#btn_activity_my_works',function(){
-			//console.info("this.href:  " + this.href);
-			 open_activity_my_works();
-		}); 
+//		mui('#actiity-detail-content').on('tap','#btn_activity_my_works',function(){
+//			//console.info("this.href:  " + this.href);
+//			 open_activity_my_works();
+//		}); 
 		
 		mui('#actiity-detail-content').on('tap','#btn_activity_my_works_show',function(){
 			//console.info("this.href:  " + this.href);
@@ -204,8 +207,15 @@
 			//console.info("this.href:  " + this.href);
 			 post_activity_detail_join();
 		}); 
+		mui('#actiity-detail-content').on('tap','#activity_detail_quit',function(){
+			//console.info("this.href:  " + this.href);
+			 post_activity_detail_join();
+		}); 
 		
-		
+		mui('#actiity-detail-content').on('tap','#activity_detail_join_end',function(){
+			mui.toast("活动已经结束！");
+		}); 
+		 
 	})
 	
 	/**
@@ -236,13 +246,17 @@
 		},150);
 	}
 	
-	function open_activity_my_works() {			
+	function open_activity_my_works() {
+		console.info("open_activity_my_works");
 		//触发子窗口变更详情
 		mui.fire(webview_activity_my_works, 'get_activity_my_works', {
-				//activityId: activityId
+				activityId: activityId,
+				actName:vm_activity_detail.courseInfo.actName,
+				aswId:vm_activity_detail.courseInfo.aswId,
+				actEnd:vm_activity_detail.courseInfo.actEnd
 			});
  
-			setTimeout(function () {
+		setTimeout(function () {
 				webview_activity_my_works.show("slide-in-right", 300);
 		},150);
 	}
@@ -253,22 +267,23 @@
 		mui.toast("推荐学校秀！");
 	}
 	
-	function post_activity_detail_join(){
+	function post_activity_detail_join(type){
 		var userInfo = app.getState();
 		var data={};
 		console.info(JSON.stringify(vm_activity_detail.courseInfo));
 		data={
 				manageId:userInfo.manageId,
-				actionType:'',//  加入：join；  退出：signout
+				actionType:type,//  加入：join；  退出：signout
 				asActId:vm_activity_detail.courseInfo.actId,
 				asGradeId:userInfo.studentsDetail.stdGrade,
 				asClassId:userInfo.studentsDetail.stdClass,
-				asTcId:vm_activity_detail.courseInfo.actTcId
+				asTcId:vm_activity_detail.courseInfo.actTcId,
+				asId:vm_activity_detail.courseInfo.asId
 			}
-		if(vm_activity_detail.courseInfo.asId==undefined || vm_activity_detail.courseInfo.asId==0 ){
-			data.actionType="join";
-		}else{
+		if(vm_activity_detail.courseInfo.hasPart==1 ){
 			data.actionType="signout" ;
+		}else{
+			data.actionType="join";
 		}
 		
 		app.postActivityDetailJoin(data,function(data){

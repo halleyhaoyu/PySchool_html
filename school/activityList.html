@@ -16,7 +16,9 @@
 	<link href="../css/school/activityList.css" rel="stylesheet"/>
     <link href="../css/school/pushCommon.css" rel="stylesheet"/>
 </head>
-<body>
+<body  class="pagebg  bg_gradient">
+	<div id="activity_list_content">
+		
 	<header class="mui-bar mui-bar-nav">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 		<img src="../images/head-dz.png" class="head-dz"/>
@@ -46,22 +48,24 @@
 	</nav>
 
  
-	<div id="slider" class="mui-slider mui-content mui-fullscreen">				
-		<div class="mui-slider-group">
-			<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
-				<div id="scroll1" class="mui-scroll-wrapper">
-					<div class="mui-scroll">
-						<ul id="activity_list_list" class="mui-table-view">
-							 
-						</ul>
+	<div id="item1" class="item-call mui-content mui-control-content mui-fullscreen mui-active" style="top:64px;bottom: 50px;background: #eee;">
+		<div id="slider" class="mui-slider mui-fullscreen">				
+			<div class="mui-slider-group">
+				<div id="item_activity_list" class="mui-slider-item mui-control-content mui-active">
+					<div id="scroll1" class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<ul id="activity_list_list" class="mui-table-view">
+								 
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
-			
 		</div>
 	</div>
 			
 
+	</div>
 	<script src="../js/jquery-2.1.4.min.js"></script>
 	<script src="../js/mui.min.js"></script>
 	<script src="../js/mui.pullToRefresh.js"></script>
@@ -106,6 +110,7 @@
 								callback: function() {
 									var self = this;
 									pushActivityListDown(self,index,false);
+									
 								}
 							},
 							up: {
@@ -129,6 +134,10 @@
 					ul.innerHTML="";
 					ul.insertBefore(createActivityListFragment(index,ul, data.object.rows), ul.firstChild);
 					activityList=data.object.rows;
+//					mui('#item_activity_list').on('tap','a',function(){
+//						//console.info("this.href:  " + this.href);
+//						open_activity_detail(this.id);
+//					}); 
 				 	 pageIndex=1;
 				}else{
 					mui.toast(data.msg);
@@ -150,11 +159,14 @@
 					var ul = document.querySelector('.mui-table-view'); 
 					ul.appendChild(createActivityListFragment(index,ul, data.object.rows), ul.firstChild);
 					//activityList.concat(data.objectList); 
-					
-					mui('#item1mobile').on('tap','a',function(){
-						//console.info("this.href:  " + this.href);
-						open_activity_detail(this.id);
-					}); 
+//					 mui('#item_activity_list').off('tap','a',function(){
+//						//console.info("this.href:  " + this.href);
+//						open_activity_detail(this.id);
+//					}); 
+//					 mui('#item_activity_list').on('tap','a',function(){
+//						//console.info("this.href:  " + this.href);
+//						open_activity_detail(this.id);
+//					}); 
 				 	 pageIndex++;
 				}else{
 					mui.toast(data.msg);
@@ -179,7 +191,7 @@
 				insertHtml+="<a id=\""+objectList[i].actId+"\" href=\"#\">";
 				insertHtml+="<div class=\"show-desc\">";
 				insertHtml+="	<div class=\"show-desc-right\">";
-				if(objectList[i].actId==2){
+				if(objectList[i].actEnd==2){
 					insertHtml+="		<div class=\"ac-end\">已结束</div>";
 				}else{
 					insertHtml+="		<div class=\"ac-end-no\">未结束</div>";
@@ -234,24 +246,24 @@
 		
 		
 		 
-		mui('#item1mobile').on('tap','a',function(){
+		mui('#item_activity_list').on('tap','a',function(){
 			//console.info("this.href:  " + this.href);
 			open_activity_detail(this.id);
 		}); 
 		 
 		mui(document.body).on('tap', '#activity_add_detail', function() {
-		    console.info("1");
+		    //console.info("1");
 			//console.info("this.href:  " + this.href);
 			mui.fire(webview_activity_add_detail, 'get_activity_add_detail', {
 				//activityId: id
 			}); 
 			
-			console.info("2");
+			//console.info("2");
 			setTimeout(function () {
 				webview_activity_add_detail.show("slide-in-right", 300);
 			},150);
 			
-			console.info("3");
+			//console.info("3");
 		});
 		
 		 

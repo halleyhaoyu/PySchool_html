@@ -1,4 +1,46 @@
-//window.onload = function(){
+var areaStr = "";
+for(var i in areaArr){
+	var num = parseInt(i)+1;
+	areaStr += 
+		'<div id="'+areaArr[i]+'" class="location_container">'+
+			'<div class="animate_container">'+
+				'<span class="l_number">'+num+'</span>'+
+				'<img src="../images/walking/location.png" class="l_icon"/>'+
+			'</div>'+
+			'<img src="../images/walking/shadow.png" class="l_shadow"/>'+		
+		'</div>'	;
+}
+$('.content').append(areaStr);
+
+var areaPicStr = "";
+for(var i in areaPicArr){
+	var num = parseInt(i)+1;
+	areaPicStr +=
+		'<div class="show'+num+' rightContent">'+
+			'<div class="list_title">'+areaPicArr[i].title+'</div>'+
+			'<div class="list_detail">'+
+				'<ul>';
+				var picArr = areaPicArr[i].picArr;
+				for(var j in picArr){
+					areaPicStr +=
+						'<li class="img_li"  onclick="newPages(\''+picArr[j].pinName+'\');">'+
+							'<div class="img_show">'+
+								'<img src="'+picArr[j].picUrl+'"/>'+
+							'</div>'	+
+							'<div class="img_name">'+picArr[j].name+'</div>'+
+						'</li>';
+				}
+				areaPicStr +=
+				'</ul>'+
+			'</div>'+
+		'</div>';
+}
+$('.right_show').append(areaPicStr);
+
+
+
+
+window.onload = function(){
 	var numberArr = []
 	var timer
 	$(".location_container").each( function() {
@@ -39,11 +81,30 @@
 						runContainer.css('top',t + 'px')
 					}
 					clearInterval(timer)
-					timer = setInterval(run,10)
+					timer = setInterval(run,20)
 				}else{
 					return
 				}
+				
 			}
 		})
 	});
-//}
+	
+	$('.img_li').on('tap',function(e){
+		mui.alert(targetId)
+		var targetId = $(this).attr('magInfo');
+		
+	});
+	
+	
+}
+function newPages(targetName){
+	var baseUrl = 'msgInfo.html';
+	var url = mui.os.plus?baseUrl:baseUrl+'?targetName='+targetName;  
+	mui.openWindow({
+	    url: url,
+	    extras: {
+	        targetName: targetName
+	    }
+	})
+}

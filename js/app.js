@@ -130,7 +130,8 @@
 	};
 
 	
-
+///////////////////////////////////////////////////////////////////////
+//
 	/*
 	 * 课程-获取课程列表
 	 * */
@@ -148,6 +149,7 @@
 		var url=owner.hostname+'/view/activity/courseClass.shtml?manageId='+userInfo.manageId;
 		return owner.getCommon(url,callback);
 	}
+	
 	
 	
 	
@@ -183,6 +185,19 @@
 		return owner.getCommon(url,callback); 
 	}
 	 
+	 
+	
+
+	 /*
+	 * 课程-获取我的体会
+	 */	
+	owner.getCourseExperience=function(chapClassId,callback){
+		var userInfo = app.getState();
+		// /view/teachingManage/experienceInfo.shtml?cceChapClassId=8&manageId=76
+		var url=owner.hostname+'/view/teachingManage/experienceInfo.shtml?manageId='+userInfo.manageId+'&cceChapClassId='+chapClassId; 
+		return owner.getCommon(url,callback); 
+	}
+	 
 	/*
 	  * 活动 -获取活动列表
 	  */
@@ -199,27 +214,22 @@
 		var userInfo = app.getState();
 		var url=owner.hostname+'/view/activity/detailView.shtml?manageId='+userInfo.manageId+'&actId='+activityId;
 		return owner.getCommon(url,callback);
-//		var msg={
-//				code:-1,
-//				msg:"获取数据失败！"
-//			}
-		return callback(msg);
+ 
 	}
 	
 		/*
-	  * 活动 -获取活动详情
+	  * 活动 -获取交流区
 	  */
 	owner.getExchangeAreaList=function(classId,pageIndex,callback){
 		//view/activity/acAreaList.shtml&page=1 manageId   acaClassId 
 		var userInfo = app.getState();
 		var url=owner.hostname+'/view/activity/acAreaList.shtml?manageId='+userInfo.manageId+'&acaClassId='+classId+'&page='+pageIndex;
 		return owner.getCommon(url,callback);
-		return callback(msg);
+		
 	}
 	
 	
-	
-		/*
+	/*
 	  * 活动 -大家作品列表
 	  */
 	owner.getEveryoneWorkList=function(activityId,pageIndex,callback){
@@ -227,8 +237,30 @@
 		var userInfo = app.getState();
 		var url=owner.hostname+'/view/activity/allStudentWork.shtml?manageId='+userInfo.manageId+'&aswActId='+activityId+'&page='+pageIndex;
 		return owner.getCommon(url,callback); 
-		return callback(msg);
+		
 	}
+	
+	/*
+	  * 活动 -我的作品查询
+	  */
+	owner.getMyWorkInfo=function(aswId,callback){
+		// view/activity/studentWork.shtml?manageId=76
+		var userInfo = app.getState();
+		var url=owner.hostname+'/view/activity/studentWork.shtml?manageId='+userInfo.manageId+'&aswId='+aswId ;
+		return owner.getCommon(url,callback);
+	}
+	
+	/*
+	  * 活动 -查询活动集锦
+	  */
+	owner.getActivityReplyInfo=function(ahActId,callback){
+		// view/activity/highlightsInfo.shtml
+		var userInfo = app.getState();
+		var url=owner.hostname+'/view/activity/highlightsInfo.shtml?manageId='+userInfo.manageId+'&ahActId='+ahActId ;
+		return owner.getCommon(url,callback);
+	}
+	
+	
 	
 	
 	/*
@@ -365,14 +397,22 @@
 	}
 	
 	/*
-	  * 活动-活动申请
+	  * 活动-活动集锦
 	  */
 	owner.postActivityReply=function(data,callback){
 		//	view/activity/highlights.shtml
-		var url=owner.hostname+'view/activity/highlights.shtml';
+		var url=owner.hostname+'/view/activity/highlights.shtml';
 		return owner.postCommon(url,data,callback);
 	}
 	
+	/*
+	  * 活动-交流区
+	  */
+	owner.postExchangeArea=function(data,callback){
+		//	view/activity/acArea.shtml
+		var url=owner.hostname+'/view/activity/acArea.shtml';
+		return owner.postCommon(url,data,callback);
+	}
 	
 	
 	
@@ -429,22 +469,25 @@
 			dataType:'json',//服务器返回json格式数据
 			type:'post',//HTTP请求类型
 			timeout:10000,//超时时间设置为10秒； 
-	        //contentType:"application/json; charset=utf-8",
-	        contentType:"application/x-www-form-urlencoded; charset=utf-8",
+	        contentType:"application/json; charset=utf-8",
+	        //contentType:"application/x-www-form-urlencoded; charset=utf-8",
+	        headers:{'Content-Type':'application/json'},
 			//headers:{'Content-Type':'application/json; charset=utf-8'},	              
 			//headers:{'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},
-			 
+			processData:false,
 			success:function(data){
 				console.info(JSON.stringify(data));
 				return callback(data);
 			},
 			error:function(xhr,type,errorThrown){
 				//异常处理；
+				console.info(JSON.stringify(type));
+				console.info(JSON.stringify(errorThrown));
 				var msg={
 					code:-1,
 					msg:"数据提交失败！"
 				}
-					return callback(msg);
+				return callback(msg);
 			}
 		});
 	}

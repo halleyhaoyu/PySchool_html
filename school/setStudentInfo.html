@@ -28,7 +28,7 @@
 	<div class="mui-content">
 		<form class="mui-input-group">
 			<div class="head-div">
-				<img  :src="headPic" class="head-pic" id="headImage">
+				<img  :src="headPic" @tap="setStudentHeadImage()" class="head-pic" id="headImage">
 				<p style="font-size: 12px !important;margin-bottom: 12px;opacity: .5;">点击图片，上传新头像。</p>
 			</div>
 
@@ -52,10 +52,26 @@
 				<label>班级 <span style="color:red;"> *</span></label>
 				<input type="text" v-model="studentInfo.stdClassName"  placeholder="班级"/>
 			</div>
+			<div class="mui-input-row">
+				<label>学号 <span style="color:red;"> *</span></label>
+				<input type="text" v-model="studentInfo.stdNo"  placeholder="学号"/>
+			</div>
+			<div class="mui-input-row">
+				<label>身高 <span style="color:red;"> *</span></label>
+				<input type="text" v-model="studentInfo.stdHeight"  placeholder="年龄"/>
+			</div>
+			<div class="mui-input-row">
+				<label>体重 <span style="color:red;"> *</span></label>
+				<input type="text" v-model="studentInfo.stdWeight"  placeholder="体重（kg)"/>
+			</div>
+			<div class="mui-input-row">
+				<label>年龄 <span style="color:red;"> *</span></label>
+				<input type="text" v-model="studentInfo.stdAge"  placeholder="年龄"/>
+			</div>
 
 			<div class="mui-input-row">
-				<label>详细地址 <span style="color:red;"> *</span></label>
-				<input type="text" v-model="studentInfo.stdAddress"  placeholder="详细地址"/>
+				<label>个人简介<span style="color:red;"> *</span></label>
+				<input type="text" v-model="studentInfo.stdDesc"  placeholder="个人简介"/>
 			</div>
 
 
@@ -75,12 +91,12 @@
 	var webview_set_password = null;
 	
 	
-  	(function($,doc){
-  		$.init();
-  		$.ready(function(){
-
-  		});
-  	})(mui,document);
+//	(function($,doc){
+//		$.init();
+//		$.ready(function(){
+//
+//		});
+//	})(mui,document);
   	
   	 document.getElementById('headImage').addEventListener('tap', function() { 
      	cameraAndAlbum('修改用户头像',1);
@@ -91,6 +107,7 @@
 		data: {
 			studentInfo:{
 				 stdGender:'M',
+				manageId:0,
 //				 stdRealName:'测试200',
 //				stdGradeName:'1年级',
 //				stdClassName:'2班',
@@ -122,7 +139,8 @@
 	});
 	
   	document.addEventListener('get_set_student', function(event) {
-		vm_set_student.studentInfo = event.detail.studentInfo;
+  		var userInfo = app.getState(); 
+		vm_set_student.studentInfo = userInfo.studentsDetail;
 	});
 	
   	mui.plusReady(function(){
@@ -149,19 +167,40 @@
 				},150);
 			});
   	})
-  	function post_set_student_info(){ 
+  	function post_set_student_info(){
+  			var userInfo = app.getState();
 			var data={};
 			data=vm_set_student.studentInfo; 
+			data.manageId=userInfo.manageId;
 			console.info(JSON.stringify(data));
 			app.postSetStudentInfo(data,function(data){
-				if(data.code==0){
-					
+				if(data.code==0){ 
+					selectFileList.splice(0,selectFileList.length);	
+					var userInfo = app.getState();
+					userInfo.studentsDetail=vm_set_student.studentInfo;
+					userInfo.realName=vm_set_student.studentInfo.stdRealName;
+					app.setState(userInfo);
 				}
 				mui.toast(data.msg);
 			});
 			 
   	}
   	
+  	function setStudentHeadImage() {
+     	cameraAndAlbum('修改用户头像',1, setStudentImageCallback);
+     }
+  	
+  	
+  	// 回调
+    var setStudentImageCallback = function(data){
+    	if(data.code==0){
+    		console.info(JSON.stringify(data));
+    		if(data.code==0){
+        		vm_set_student.studentInfo.stdPic=data.objectList[0].pathAll; 
+    		}
+    	}
+		mui.toast(data.msg);
+    }
   	//重写返回逻辑
 	mui.back = function() {
 		plus.webview.currentWebview().hide("auto", 300);

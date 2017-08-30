@@ -38,6 +38,14 @@ body{
 	width: 30%;
 	margin: 2px;
 }
+.works-desc-video{
+	width: 70%;
+	margin: 2px;
+}
+.works-desc-audio{
+	width: 70%;
+	margin: 2px;
+}
 .works-answer{
 	margin: 0px 0;
 	border-bottom: 1px solid #eee;
@@ -95,6 +103,19 @@ body{
 .bt-right{
 	height: 24px;
 	vertical-align: middle;
-	float: right;
+	/*float: right;
+	margin-top: 8px;*/
+}
+.send-button{
+	width: 62px;
+    padding: 5.5px;
+    margin-top: 4px;
+    border: 1px solid #6E7B94;
+    color: #6E7B94;
+}
+.media-file-icon{
+	height: 32px;
+	vertical-align: middle;
+	float: left;
 	margin-top: 8px;
 }

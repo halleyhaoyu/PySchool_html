@@ -45,10 +45,7 @@ body{
 	50%{top: -5px;}
 	100%{top:0}
 }
-#chongming{
-	top: 7%;
-	left: 58%;
-}
+
 .l_number{
 	position: absolute;
 	left: 0.9rem;
@@ -76,18 +73,40 @@ body{
 		left: 0.4rem;
 	}
 }
-#baoshan{
-	top: 30%;
-	left: 45%;
+#huangpu{
+	top: 45%;
+    left: 48%;
 }
-#fengxian{
-	top: 65%;
-	left: 56%;
+#pudongxinqu{
+	top: 42%;
+    right:25%;
+}
+#chongming{
+	top: 7%;
+	left: 58%;
 }
 #songjiang{
 	top: 58%;
 	left: 30%;
 }
+#jinshan{
+	top: 75%;
+	left: 32%;
+}
+#minhang{
+	top: 58%;
+	left: 50%;
+}
+#nanhui{
+	top: 58%;
+	right: 15%;
+}
+#jiading{
+	top: 30%;
+	left: 30%;
+}
+
+
 .right_show{
 	height: 100vh;
 	width: 8.2rem;

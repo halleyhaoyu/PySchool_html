@@ -97,3 +97,28 @@
 	padding: 6px 0;
 	opacity: .65;
 }
+
+
+.bottom-div{
+	position: fixed;
+	bottom: 54px;
+	width: 100%;
+	background: #fff;
+	height: 40px;
+	line-height: 40px;
+	padding: 0 6px;
+	border-top: 1px solid #eee;
+}
+.bottom-div input{
+	margin-bottom: 0;
+	height: 32px;
+	border: 1px solid #ddd;
+	margin-left: 6px;
+}
+.send-button{
+	width: 62px;
+    padding: 5.5px;
+    margin-top: 4px;
+    border: 1px solid #6E7B94;
+    color: #6E7B94;
+}

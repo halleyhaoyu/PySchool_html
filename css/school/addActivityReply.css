@@ -132,7 +132,7 @@ body, .mui-content {
 	height: 32px;
 	line-height:32px;
 	padding:0 12px;
-	border: 1px solid #ddd !important;
+	border: 0px solid #ddd !important;
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
 	border-radius: 6px;
@@ -179,4 +179,31 @@ body, .mui-content {
 	position: absolute;
 	margin-left: 6px;
 	margin-top: 3px;
+}
+.file-icon{
+	height: 22px;
+	vertical-align: bottom;
+	margin-left:6px;
+}
+
+.file-color1{
+	border: 1px solid #7993F7;
+	color: #7993F7;
+}
+.close-color1{
+	color: #7993F7 !important;
+}
+.file-color2{
+	border: 1px solid #45C5FD;
+	color: #45C5FD;
+}
+.close-color2{
+	color: #45C5FD !important;
+}
+.file-color3{
+	border:1px solid #DD90F8;
+	color:#DD90F8;
+}
+.close-color3{
+	color:#DD90F8 !important;
 }
