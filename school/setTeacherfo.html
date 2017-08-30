@@ -146,6 +146,7 @@
   	})
   	function post_set_teacher_info(){ 
 			var data={};
+			var userInfo = app.getState();
 			data=vm_set_teacher.teacherInfo; 
 			data.manageId=userInfo.manageId;
 			console.info(JSON.stringify(data));

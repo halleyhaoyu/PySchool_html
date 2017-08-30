@@ -155,12 +155,23 @@
 
 		document.addEventListener('get_activity_reply_detail', function(event) {
  			vm_activity_reply.selectFileList=[];
- 			vm_activity_reply.commentInfo={};
+ 			vm_activity_reply.commentInfo={
+ 				ahId:0,
+				manageId:0,
+				ahStudentId:0,//  学生id／教师ID
+				ahDesc:'',//  活动集锦   必填
+				ahStudentName:'',//  学生姓名
+				ahActId:0,//  与t_activity表的act_id关联 必填
+				ahSponsorType:'',//  活动发起者类型：1：学生；2：教师
+				activityHighlightsFilesList:[]  //活动集锦附件
+				};
 			vm_activity_reply.activityInfo = event.detail.activityInfo;
 			console.info(JSON.stringify(vm_activity_reply.activityInfo));
  			vm_activity_reply.commentInfo.ahActId = vm_activity_reply.activityInfo.actId;
  			if(vm_activity_reply.commentInfo.ahActId>0){
  				getActivityReplyInfo();
+ 			}else{
+ 				vm_activity_reply.commentInfo.ahActId=0;
  			}
 		});
 
@@ -249,6 +260,7 @@
 					}
 				}
 				mui.toast(data.msg);
+				console.info(JSON.stringify(vm_activity_reply.commentInfo));
 			});
 		}
 		
