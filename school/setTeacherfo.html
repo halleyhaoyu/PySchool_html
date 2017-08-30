@@ -21,7 +21,7 @@
 	<div id="teacher_info_content">
 	<header class="mui-bar mui-bar-nav">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		<a id="modify_password" class="mui-pull-right setPwd"> 修改密码 </a>
+		<a id="modify_password_th" class="mui-pull-right setPwd"> 修改密码 </a>
 		<img src="../images/head-dz.png" class="head-dz"/>
 		<h1 class="mui-title">修改老师信息</h1>
 	</header>
@@ -130,7 +130,7 @@
 			
 			
 			
-  		mui('#student_info_content').on('tap', '#modify_password', function(e) {
+  		mui('#teacher_info_content').on('tap', '#modify_password_th', function(e) {
 		  mui.fire(webview_set_password, 'get_set_teacher', {
 			});	 
 			setTimeout(function () {

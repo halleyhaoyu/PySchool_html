@@ -145,27 +145,7 @@ header {
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
 }
-.ditem {
-	overflow: hidden;
-	list-style-type: none;
-	font-size: 1em;
-	padding: 1em;
-	border-bottom: inset 1px #ebebeb;
-	vertical-align: middle;
-}
-.ditem:active {
-	background: #f4f4f4;
-}
-.ditem:last-child {
-	border-bottom: inset 0px #ebebeb;
-}
-.ditem-empty {
-	overflow: hidden;
-	list-style-type: none;
-	font-size: 1em;
-	padding: 1em;
-	vertical-align: middle;
-}
+
 #output {
 	height: 64px;
 	position: fixed;

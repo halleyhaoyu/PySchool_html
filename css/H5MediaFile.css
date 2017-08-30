@@ -98,10 +98,37 @@
 	color: #333;
 	opacity: .65;
 }
+
+.ditem {
+	overflow: hidden;
+	list-style-type: none;
+	font-size: 1em;
+	padding: 1em;
+	border-bottom: inset 1px #ebebeb;
+	vertical-align: middle;
+}
+ 
 .dlist li{
 	list-style-type:none;
 	border: 1px solid #ddd;
 	padding: 6px 12px;
 	border-radius: 6px;
 	margin-top:6px;
+	
 }
+.dlist li .mui-icon{
+	float: right;
+	margin-left: 10px;
+}
+
+.dlist li .aname{ 
+	float: left;
+	 width:80%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.dlist li .file-icon{ 
+	float: right;
+}
+

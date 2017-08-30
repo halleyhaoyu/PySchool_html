@@ -64,31 +64,17 @@
 										<img v-else src="../images/school/head-pic.png" class="works-img"/>
 										<p class="works-username">{{item.aswStudentName}}<label class="works-time">{{item.aswTime}}</label></p>
 										<p class="works-content">{{item.aswDesc}}&nbsp;.</p>
-						 
-										<div >
-											<div  v-for="fileItem in item.activityStudentsWorksFilesList" :style="getDisplayStyle(fileItem.aswfFiles)"> 
-												<!--<img :src="fileItem.aswfFiles" class="works-desc-pic"/>-->
-												<img v-if="2==getDisplayType(fileItem.aswfFiles)" :src="fileItem.aswfFiles"  @tap='displayFile(fileItem.aswfFiles)' class="works-desc-pic"/>
-									  			<video  v-if="1==getDisplayType(fileItem.aswfFiles)" :src="fileItem.aswfFiles" controls="controls" class="works-desc-video">
-													 不支持的文件格式。
-												</video> 
-												<audio v-if="3==getDisplayType(fileItem.aswfFiles)"  :src="fileItem.aswfFiles" controls="controls" class="works-desc-audio">
-													不支持的文件格式。 
-												</audio>
-											</div>
-											
-											<!--<img v-if="2==getDisplayType(item.actFiles)" :src="item.actFiles"  @tap='displayFile(item.actFiles)' class="works-desc-pic"/>
-									  			<video  v-if="1==getDisplayType(item.actFiles)" :src="item.actFiles" controls="controls" class="works-desc-video">
-													 不支持的文件格式。
-												</video> 
-												<audio v-if="3==getDisplayType(item.actFiles)"  :src="item.actFiles" controls="controls" class="works-desc-audio">
-													不支持的文件格式。
-												</audio>
-											--> 
-												
-											
-												
-										</div>
+						  
+										<div  v-for="fileItem in item.activityStudentsWorksFilesList" :style="getDisplayStyle(fileItem.aswfFiles)"> 
+											<!--<img :src="fileItem.aswfFiles" class="works-desc-pic"/>-->
+											<img v-if="2==getDisplayType(fileItem.aswfFiles)" :src="fileItem.aswfFiles"  @tap='displayFile(fileItem.aswfFiles)' class="works-desc-pic"/>
+								  			<video  v-if="1==getDisplayType(fileItem.aswfFiles)" :src="fileItem.aswfFiles" controls="controls" class="works-desc-video">
+												 不支持的文件格式。
+											</video> 
+											<audio v-if="3==getDisplayType(fileItem.aswfFiles)"  :src="fileItem.aswfFiles" controls="controls" class="works-desc-audio">
+												不支持的文件格式。 
+											</audio>
+										</div> 
 						
 										<div class="icon-line">
 											<div  @tap="everyoneWorksComment(item)" style=" float: right; text-align: center;">
@@ -103,7 +89,8 @@
 											<img v-if="commentItem.showStudentPic!=''" :src="commentItem.showStudentPic" class="works-img"/>
 											<img v-else src="../images/bigicon1.png" class="works-img"/>
 											<p class="works-username">{{commentItem.actComReviewer}}<label class="works-time">{{commentItem.actComTime}}</label></p>
-											<p class="works-content">{{commentItem.actComDesc}}</p>
+											<p v-if="commentItem.actComDesc!=''" class="works-content">{{commentItem.actComDesc}}</p>
+											<p v-else class="works-content">(空白)</p>
 										</div> 
 						
 									</div>
@@ -149,6 +136,7 @@
 			},
 	 
 			workList:[
+//			
 //			{
 //              "aswId": 3,
 //              "aswStudentId": 24,
@@ -225,12 +213,12 @@
 				if(patch){
 					var suffix = patch.substr(patch.lastIndexOf('.'));
 					if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
-						type="width: 30%; margin: 2px;float:left;";
+						type="width: 100%; margin: 2px;float:left;";
 					}else if( suffix=='.amr' ||  suffix=='.mp3' || suffix=='.m4a' ){
-						type="width: 30%; margin: 2px;float:left;";
+						type="width: 100%; margin: 2px;float:left;";
 					}
 				 	else  if( suffix=='.jpg' ||  suffix=='.png' || suffix=='.gif' ){
-						type="width: 30%; margin: 2px;float:left;";
+						type="width: 100%; margin: 2px;float:left;";
 					}
 				}
 				return type;

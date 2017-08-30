@@ -41,18 +41,18 @@
 					
 					<span v-if="getDisplayType(item.patch)==1" class='iplay'>
 						<font class='aname'   @tap='displayFile(item.patch)'>{{ getFileName(item)}}</font> 
-						<img class='file-icon' src='../images/school/video-icon.png' @tap='displayFile(item.patch)'/>
 					 	<span v-if="commentInfo.ahId==0" class='mui-icon mui-icon-close close-color3'   @tap='delUploadFileList(item.patch)'></span>
+						<img class='file-icon' src='../images/school/video-icon.png' @tap='displayFile(item.patch)'/>
 					</span>
 					<span v-else-if="getDisplayType(item.patch)==2" class='iplay'>
 						<font class='aname'  @tap='displayFile(item.patch)'>{{ getFileName(item)}}</font> 
-						<img class='file-icon' src='../images/school/photo-icon.png' @tap='displayFile(item.patch)'/>
 						<span v-if="commentInfo.ahId==0" class='mui-icon mui-icon-close close-color1'  @tap='delUploadFileList(item.patch)'></span>
+						<img class='file-icon' src='../images/school/photo-icon.png' @tap='displayFile(item.patch)'/>
 					</span>
 					<span v-else class='iplay'>
 						<font class='aname'  @tap='playAudio(item.patch)'>{{ getFileName(item)}}</font>
-						<img class='file-icon' src='../images/school/record-icon.png' @tap='playAudio(item.patch)'/>
 						<span v-if="commentInfo.ahId==0" class='mui-icon mui-icon-close close-color2'  @tap='delUploadFileList(item.patch)'></span>
+						<img class='file-icon' src='../images/school/record-icon.png' @tap='playAudio(item.patch)'/>
 					</span>
 				</li>
 			</ul>
@@ -154,6 +154,8 @@
 	 
 
 		document.addEventListener('get_activity_reply_detail', function(event) {
+ 			vm_activity_reply.selectFileList=[];
+ 			vm_activity_reply.commentInfo={};
 			vm_activity_reply.activityInfo = event.detail.activityInfo;
 			console.info(JSON.stringify(vm_activity_reply.activityInfo));
  			vm_activity_reply.commentInfo.ahActId = vm_activity_reply.activityInfo.actId;
@@ -243,7 +245,7 @@
 								}
 							);
 						}
-						console.info(JSON.stringify(vm_my_works.selectFileList));
+						console.info(JSON.stringify(vm_activity_reply.selectFileList));
 					}
 				}
 				mui.toast(data.msg);
