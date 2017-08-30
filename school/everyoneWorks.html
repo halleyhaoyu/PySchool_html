@@ -136,7 +136,7 @@
 			},
 	 
 			workList:[
-//			
+		
 //			{
 //              "aswId": 3,
 //              "aswStudentId": 24,
@@ -188,6 +188,7 @@
 //              ],
 //              "activityCommentList": []
 //          }
+
 			]
 		},
 		methods:{
@@ -208,16 +209,20 @@
 				return type;
 			},
 			getDisplayStyle:function(patch){
-				var type="width: 70%; margin: 2px;float:left;";
+				var type="";
 				//console.info(patch);
 				if(patch){
 					var suffix = patch.substr(patch.lastIndexOf('.'));
 					if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
+ 
+  	        //type="width:90%;margin-left: 3px;";
 						type="width: 100%; margin: 2px;float:left;";
 					}else if( suffix=='.amr' ||  suffix=='.mp3' || suffix=='.m4a' ){
-						type="width: 100%; margin: 2px;float:left;";
+						//	type="width:90%;margin-left:6px;";
+            type="width: 100%; margin: 2px;float:left;";
 					}
 				 	else  if( suffix=='.jpg' ||  suffix=='.png' || suffix=='.gif' ){
+            //	type="width: 30%;margin-left:6px;display: inline-block;height:80px";
 						type="width: 100%; margin: 2px;float:left;";
 					}
 				}
