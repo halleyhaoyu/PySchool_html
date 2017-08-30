@@ -29,15 +29,15 @@
 }
 
 .works-desc-pic{
-	width: 100%;
-	height:100%;
+	width: 70%;
+	margin: 5px;
 }
 .works-desc-video{
-	width: 100%;
+	width: 70%;
 	margin: 5px;
 }
 .works-desc-audio{
-	width: 100%;
+	width: 70%;
 	margin: 5px;
 }
 

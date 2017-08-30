@@ -86,8 +86,8 @@
 	},
 	"plus": {
 		"splashscreen": {
-			"autoclose": false,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
-			"waiting": true
+			"autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
+			"waiting": true,"delay":"0"
 		},
 		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
@@ -145,33 +145,33 @@
 					"ldpi": "unpackage/res/icons/48x48.png", /*大屏程序图标，分辨率：48x48*/
 					"hdpi": "unpackage/res/icons/72x72.png", /*高分屏程序图标，分辨率：72x72*/
 					"xhdpi": "unpackage/res/icons/96x96.png",/*720P高分屏程序图标，分辨率：96x96*/
-					"xxhdpi": "unpackage/res/icons/144x144.png"
+					"xxhdpi": "unpackage/res/icons/144x144.png","xxxhdpi":"unpackage/res/icons/192x192.png"
 				}
 			},
 			"splashscreen": {
 				"ios": {
 					"iphone": {
 						"default": "", /*iPhone3启动图片选，分辨率：320x480*/
-						"retina35": "",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
-						"retina40": ""
+						"retina35": "D:/项目文档/P/平阳小学/logo/512.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
+						"retina40": "D:/项目文档/P/平阳小学/logo/512.png","retina47":"D:/项目文档/P/平阳小学/logo/512.png","retina55":"D:/项目文档/P/平阳小学/logo/1024.png","retina55l":"D:/项目文档/P/平阳小学/logo/2048.png"
 					},
 					"ipad": {
-						"portrait": "", /*iPad竖屏启动图片，分辨率：768x1004*/
-						"portrait-retina": "",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
-						"landscape": "", /*iPad横屏启动图片，分辨率：1024x748*/
-						"landscape-retina": "", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
-						"portrait7": "", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
-						"portrait-retina7": "",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
-						"landscape7": "", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
-						"landscape-retina7": ""
+						"portrait": "D:/项目文档/P/平阳小学/logo/512.png", /*iPad竖屏启动图片，分辨率：768x1004*/
+						"portrait-retina": "D:/项目文档/P/平阳小学/logo/1536.png",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
+						"landscape": "D:/项目文档/P/平阳小学/logo/1024.png", /*iPad横屏启动图片，分辨率：1024x748*/
+						"landscape-retina": "D:/项目文档/P/平阳小学/logo/2048.png", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
+						"portrait7": "D:/项目文档/P/平阳小学/logo/512.png", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
+						"portrait-retina7": "D:/项目文档/P/平阳小学/logo/1536.png",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
+						"landscape7": "D:/项目文档/P/平阳小学/logo/1024.png", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
+						"landscape-retina7": "D:/项目文档/P/平阳小学/logo/2048.png"
 					}
 				},
 				"android": {
 					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
 					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
-					"hdpi": "", /*高分屏启动图片，分辨率：480x762*/
-					"xhdpi": "", /*720P高分屏启动图片，分辨率：720x1242*/
-					"xxhdpi": ""
+					"hdpi": "D:/项目文档/P/平阳小学/logo/512.png", /*高分屏启动图片，分辨率：480x762*/
+					"xhdpi": "D:/项目文档/P/平阳小学/logo/1024.png", /*720P高分屏启动图片，分辨率：720x1242*/
+					"xxhdpi": "D:/项目文档/P/平阳小学/logo/1536.png"
 				}
 			}
 		}

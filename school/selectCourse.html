@@ -46,13 +46,17 @@
 				<div v-for="item in classList" class="open-class-content">
 					{{item.tcName}}<label class="open-class-label">{{item.tcTeacherName}}</label>
 					<label class="open-class-label red">剩余{{item.tcApplicantsNums}}</label>/{{item.tcNums}}
-					<div v-if="item.hasJoin==0" @tap="post_select_course(item)" class="add-info">
+					<div v-if="item.hasChooseEnd==2 && item.hasJoin==0" @tap="post_select_course(item)" class="add-info">
 						 加入 
 					</div>
-					<div v-else @tap="post_select_course(item)" class="del-info">
+					<div v-else-if="item.hasChooseEnd==2" @tap="post_select_course(item)" class="del-info">
 						 退出
 					</div>
+					<div v-else="item.hasChooseEnd==1" @tap="post_select_course(item)" class="end-info">
+						 结束
+					</div>
 				</div>
+				<div v-if="classList.length==0" class="open-class-content">未开班</div>
 			</div>
 		</div>
 
@@ -101,7 +105,8 @@
 //						"tcStartTime": 1500739200000,
 //						"tcEndTime": 1506614400000,
 //						"hasJoin": "0",
-//                      "hasTsId":"0"
+//                      "hasTsId":"0",
+//                      hasChooseEnd:2
 //						}
 			]
 				
@@ -139,6 +144,11 @@
 			if(data.code==0){
 				vm.courseInfo=data.object; 
 				vm.classList =  data.objectList;
+			}else{
+				if(data.code==-1007){
+				vm.courseInfo=data.object; 
+				vm.classList =[];
+			}
 			}
 			mui.toast(data.msg);
 		}); 
@@ -146,31 +156,38 @@
 	
 	function post_select_course(classInfo){
 		
-		var userInfo = app.getState();
-		var data={};
-		if(classInfo.hasJoin==0){
-			data={
-				manageId:userInfo.manageId,
-				actionType:"join",//  加入：join；  退出：signout
-				tsRcId:vm.courseInfo.rcId,
-				tsTcId:classInfo.tcId,
-				tsTmId:classInfo.tcTmId,
-				tsSelStdList:userInfo.studentsDetail.stdId
+		if(classInfo.hasChooseEnd==1){
+			mui.toast("选课已经结束！");
+			return false;
+		}else 
+		{
+			var userInfo = app.getState();
+			var data={};
+			if(classInfo.hasJoin==0){
+				data={
+					manageId:userInfo.manageId,
+					actionType:"join",//  加入：join；  退出：signout
+					tsRcId:vm.courseInfo.rcId,
+					tsTcId:classInfo.tcId,
+					tsTmId:classInfo.tcTmId,
+					tsSelStdList:userInfo.studentsDetail.stdId
+				}
+			}else{
+				data={
+					manageId:userInfo.manageId,
+					actionType:"signout", //  加入：join；  退出：signout
+					tsId:classInfo.hasTsId 
+				}
 			}
-		}else{
-			data={
-				manageId:userInfo.manageId,
-				actionType:"signout", //  加入：join；  退出：signout
-				tsId:classInfo.hasTsId 
-			}
+			
+			app.postSelectCourse(data,function(data){
+				if(data.code==0){
+					getSelectSourseDetail(selectCourseId);
+				}
+				mui.toast(data.msg);
+			});
 		}
 		
-		app.postSelectCourse(data,function(data){
-			if(data.code==0){
-				getSelectSourseDetail(selectCourseId);
-			}
-			mui.toast(data.msg);
-		});
 		 
 	}
 </script>

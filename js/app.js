@@ -469,7 +469,7 @@
 			dataType:'json',//服务器返回json格式数据
 			type:'post',//HTTP请求类型
 			timeout:10000,//超时时间设置为10秒； 
-	        //contentType:"application/json; charset=utf-8",
+	        contentType:"application/json; charset=utf-8",
 	        //contentType:"application/x-www-form-urlencoded; charset=utf-8",
 	        headers:{'Content-Type':'application/json'},
 			//headers:{'Content-Type':'application/json; charset=utf-8'},	              

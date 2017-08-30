@@ -44,19 +44,19 @@
 			<ul id="history" class="dlist" style="text-align:left;padding:0;">
 				<li v-for="item in selectFileList" :class="getShowStyle(item)">
 					 <span v-if="getDisplayType(item.patch)==1" class='iplay'>
-						<font class='aname'   @tap='displayFile(item.patch)'>{{ getFileName(item)}}</font> 
+						<div class='aname'   @tap='displayFile(item.patch)'>{{ getFileName(item)}}</div> 
+						<span v-if="myWorksInfo.aswId==0" class='mui-icon mui-icon-close close-color3'   @tap='delUploadFileList(item.patch)'></span>
 						<img class='file-icon' src='../images/school/video-icon.png' @tap='displayFile(item.patch)'/>
-					 	<span v-if="myWorksInfo.aswId==0" class='mui-icon mui-icon-close close-color3'   @tap='delUploadFileList(item.patch)'></span>
 					</span>
 					<span v-else-if="getDisplayType(item.patch)==2" class='iplay'>
 						<font class='aname'  @tap='displayFile(item.patch)'>{{ getFileName(item)}}</font> 
-						<img class='file-icon' src='../images/school/photo-icon.png' @tap='displayFile(item.patch)'/>
 						<span v-if="myWorksInfo.aswId==0" class='mui-icon mui-icon-close close-color1'  @tap='delUploadFileList(item.patch)'></span>
+						<img class='file-icon' src='../images/school/photo-icon.png' @tap='displayFile(item.patch)'/>
 					</span>
 					<span v-else class='iplay'>
 						<font class='aname'  @tap='playAudio(item.patch)'>{{ getFileName(item)}}</font>
-						<img class='file-icon' src='../images/school/record-icon.png' @tap='playAudio(item.patch)'/>
 						<span v-if="myWorksInfo.aswId==0" class='mui-icon mui-icon-close close-color2'  @tap='delUploadFileList(item.patch)'></span>
+						<img class='file-icon' src='../images/school/record-icon.png' @tap='playAudio(item.patch)'/>
 					</span>
 					
 				</li>
@@ -117,7 +117,12 @@
 				aswActId:0,
 				activityStudentsWorksFilesList:[]
 			},
-			selectFileList:[]
+			selectFileList:[
+//			{
+//				patch:'alsdjfoqwfalsdfjoasdifnqoifgnasldfnqiowefjasldfj.mp4',
+//				type:1
+//			}
+			]
 		},
 			methods:{
 				getDisplayType:function(patch){
