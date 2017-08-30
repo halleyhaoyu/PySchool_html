@@ -44,8 +44,12 @@
 				<input type="text"  v-model="teacherInfo.thPhs" placeholder="电话号码"/>
 			</div> 
 			<div class="mui-input-row">
-				<label>详细地址 <span style="color:red;"> *</span></label>
-				<input type="text"  v-model="teacherInfo.thAddress" placeholder="详细地址"/>
+				<label>邮箱 <span style="color:red;"> *</span></label>
+				<input type="text"  v-model="teacherInfo.thEmail" placeholder="邮箱"/>
+			</div> 
+			<div class="mui-input-row">
+				<label>个人简介 <span style="color:red;"> *</span></label>
+				<input type="text"  v-model="teacherInfo.description" placeholder="个人简介"/>
 			</div> 
 		</form>
 		<div style="padding:32px;background-color:#F7F7F7;">
@@ -76,6 +80,7 @@
 		el: '#teacher_info_content',
 		data: {
 			teacherInfo:{
+				description:'',
 				manageId:0,
 //				thName:'李四',
 //				thPhs:'1393223333',
@@ -110,6 +115,7 @@
     document.addEventListener('get_set_teacher', function(event) {
     	var userInfo = app.getState();
 		vm_set_teacher.teacherInfo = userInfo.teacherDetail;
+		vm_set_teacher.teacherInfo.description= userInfo.description
 	});
 	
   	mui.plusReady(function(){

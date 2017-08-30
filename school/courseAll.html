@@ -225,7 +225,7 @@
 				pageIndexAll=1;
 				pageIndex=pageIndexAll;
 			} 
-			console.info(pageIndex);
+			//console.info(pageIndex);
 			app.getCourseAll(5,pageIndex,function(data){
 				if(data.code==0){
 					var ul =index==0? document.querySelector("#course_all_my"):document.querySelector("#course_all_all"); //self.element.querySelector('.mui-table-view');
@@ -305,13 +305,13 @@
 	
 		mui.plusReady(function() {
 			 var userInfo = app.getState(); 
-			 console.info(userInfo.roleType);
+			// console.info(userInfo.roleType);
 		    if(userInfo.roleType==2){
 		    	vm.showAllBarFlag=0;
 		    }else{
 		    	vm.showAllBarFlag=1;
 		    }
-			console.info(vm.showAllBarFlag);
+			//console.info(vm.showAllBarFlag);
 			//预加载详情页
 			webview_course_dir_detail = mui.preload({
 				url: 'courseDir.html',

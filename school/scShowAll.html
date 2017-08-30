@@ -113,10 +113,12 @@
 											
 												</div> 
 											</div>
+											
+											<div style="clear: both;"></div>
 											<div v-for="citem in item.activityCommentList" class="works-answer">
 												<img :src="getCImage(citem)" class="works-img"/>
-												<p class="works-username">{{citem.actComReviewer}} <label class="works-time">{{citem.actComTime}}</label></p>
-												<p class="works-content">{{citem.actComDesc}}</p>
+												<p class="works-username">{{citem.actComReviewer}}&nbsp;<label class="works-time">&nbsp;{{citem.actComTime}}</label></p>
+												<p class="works-content">{{citem.actComDesc}}&nbsp;</p>
 											</div> 
 										</div>
 									</div>
@@ -200,35 +202,73 @@
 				actObject:0//点赞或者评论的对象（1:针对活动；2:针对作品） 
 			},
 			schoolShowList:[
-			{
-                "actId": 1,
-                "actName": "外滩行活动",
-                "actSchoolId": 1,
-                "actTime": "2017-08-12 18:48:24",
-                "actDesc": "测试活动发布",
-                "actNum": 8,
-                "actTeacherId": 7,
-                "actStatus": 2,
-                "actOperId": 7,
-                "actOperName": "李四",
-                "actFiles": "http://112.124.110.182:11008/upload/taskPicture/20170812/P20170812184815_1867cef31c5a41c198ebbc5d026dc2ca.png",
-                "actSendWord": "好好学习",
-                "actFine": 1,
-                "actFinePintNum": 0,
-                "actFineCommentNum": 0,
-                "actRcId": 2,
-                "actTmId": 1,
-                "actTcId": 1,
-                "actClassPointNum": 0,
-                "actClassCommentNum": 0,
-                "actSponsorType": 2,
-                "actEnd": "2",
-                "hasPart": "1",
-                "deleteFalg": 0,
-                "deleteTime": 1502535504000,
-                "showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png",
-                "activityCommentList": []
-            }
+//			{
+//			"actId": 1,
+//			"actName": "外滩行活动",
+//			"actSchoolId": 1,
+//			"actTime": "2017-08-12 18:48:24",
+//			"actUpdateTime": "2017-08-30 21:25:12",
+//			"actDesc": "测试活动发布",
+//			"actNum": 8,
+//			"actTeacherId": 7,
+//			"actStatus": 2,
+//			"actOperId": 7,
+//			"actOperName": "李四",
+//			"actFiles": "http://112.124.110.182:11008/upload/taskPicture/20170812/P20170812184815_1867cef31c5a41c198ebbc5d026dc2ca.png",
+//			"actSendWord": "好好学习",
+//			"actFine": 2,
+//			"actFinePintNum": 1,
+//			"actFineCommentNum": 3,
+//			"actRcId": 2,
+//			"actTmId": 1,
+//			"actTcId": 1,
+//			"actClassPointNum": 0,
+//			"actClassCommentNum": 0,
+//			"actSponsorType": 2,
+//			"actEnd": "2",
+//			"deleteFalg": 0,
+//			"deleteTime": 1504099562000,
+//			"showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png",
+//			"activityCommentList": [{
+//				"actComId": 35,
+//				"actComTime": "2017-08-30 21:25:39",
+//				"actComDesc": "测试卷1",
+//				"actComReviewer": "  ",
+//				"actComActId": 1,
+//				"actComType": 1,
+//				"actComIsPoint": 2,
+//				"actIsTeacher": 1,
+//				"actReviewerId": 7,
+//				"actObject": "1",
+//				"showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png"
+//			},
+//			{
+//				"actComId": 36,
+//				"actComTime": "2017-08-30 21:25:49",
+//				"actComDesc": "测试的2",
+//				"actComReviewer": "",
+//				"actComActId": 1,
+//				"actComType": 1,
+//				"actComIsPoint": 2,
+//				"actIsTeacher": 1,
+//				"actReviewerId": 7,
+//				"actObject": "1",
+//				"showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png"
+//			},
+//			{
+//				"actComId": 37,
+//				"actComTime": "2017-08-30 21:26:02",
+//				"actComDesc": "测试服3",
+//				"actComReviewer": "",
+//				"actComActId": 1,
+//				"actComType": 1,
+//				"actComIsPoint": 2,
+//				"actIsTeacher": 1,
+//				"actReviewerId": 7,
+//				"actObject": "1",
+//				"showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png"
+//			}]
+//		}
 			],
 			classShowList:[
 //			{
@@ -266,7 +306,7 @@
 				
 				getDisplayType:function(patch){
 					var type=0;
-					console.info(patch);
+					//console.info(patch);
 					if(patch){
 						var suffix = patch.substr(patch.lastIndexOf('.'));
 						if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){

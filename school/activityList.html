@@ -24,7 +24,7 @@
 		<img src="../images/head-dz.png" class="head-dz"/>
 		<h1 class="mui-title">活动</h1>
 		<a id="activity_exchange_area"  href="#"  class="mui-pull-right top-edit"> 交流区 </a>
-		<a id="activity_add_detail"     href="#"  class="mui-pull-right top-edit" style="left:50px; right:250px">活动申请</a>
+		<a v-if="userInfo.roleType==3" id="activity_add_detail"  href="#"  class="mui-pull-right top-edit" style="left:50px; right:250px">活动申请</a>
 	</header>
 
 	
@@ -86,7 +86,17 @@
 		
 		var userPicker = new mui.PopPicker();
 		
-					
+		var vm_activity_list = new Vue({
+			el: '#activity_list_content',
+			data: {
+				 userInfo:{roleType:3}
+			},
+			methods:{
+//				getFileName:function(item){
+//					return item.patch.substr(item.patch.lastIndexOf('/')+1);
+//				} 
+			}
+		});
 		
 	    mui('#main_bar').on('tap', 'a', function(e) {
 		    //获取目标子页的id
@@ -292,7 +302,7 @@
 		var courseList=[];
 		var classOption = {value:0,	text:'--请选择班级--'};
 		courseList.push(classOption);
-		console.info(JSON.stringify(courseList));
+		//console.info(JSON.stringify(courseList));
 		userPicker.setData(courseList);
 		app.getCourseAllOption(function(data){
 			if(data.code==0){ 
@@ -305,10 +315,14 @@
 							);
 					}
 				}
-				console.info(JSON.stringify(courseList));
+				//console.info(JSON.stringify(courseList));
 		 		userPicker.setData(courseList);
 			}
 		}); 
+		
+		
+		var userInfo = app.getState(); 
+		vm_activity_list.userInfo=userInfo;
 		
 		pushActivityListDown('',0,true);
 	});
