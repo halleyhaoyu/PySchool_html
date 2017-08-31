@@ -61,8 +61,8 @@
 			headers:{'Content-Type':'application/x-www-form-urlencoded; charset=utf-8'},	              
 			success:function(data){				
 				console.info(JSON.stringify(data) ); 
-				console.info(data.msg);
-				console.info(data.object.userInfo.roleType);
+				//console.info(data.msg);
+				//console.info(data.object.userInfo.roleType);
 				//服务器返回响应，根据响应结果，分析是否登录成功；
 				if(data.code=='0'){
 					owner.createState(data.object.userInfo);
