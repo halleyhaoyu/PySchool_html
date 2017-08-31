@@ -936,7 +936,8 @@
 					"images/tabbar/tabbar-sl-2.png",
 					"images/tabbar/tabbar-sl-3.png",
 					"images/tabbar/tabbar-sl-4.png",
-					"js/mui.min.js"
+					"js/mui.min.js",
+					"login.html"
 				],
 				"refer": [
 					"school/personalCenter.html",

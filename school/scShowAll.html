@@ -36,7 +36,7 @@
 	<div id="sc_show_content">
 		
 	<header class="mui-bar mui-bar-nav">
-		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>-->
 		<img src="../images/head-dz.png" class="head-dz"/>
 		<div  class="mui-segmented-control title-control">
 			<a class="mui-control-item mui-active call-btn" href="#item1" id="it1">
@@ -55,9 +55,10 @@
 			<button id="btn_show_all_post" @tap="scShowAllCommentPost()" type="button" class="mui-btn send-button"> 发送 </button>	
 		</div> 
 	</transition>
+	
  
  
-	<div id="item1" class="item-call mui-content mui-control-content mui-fullscreen mui-active" style="top:64px;bottom: 0px;background: #eee;">
+	<div id="item1" class="item-call mui-content mui-control-content mui-fullscreen mui-active" style="top:64px;bottom: 50px;background: #eee;">
 		<div id="slider" class="mui-slider mui-fullscreen">				
 			<div class="mui-slider-group">
 				<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
@@ -510,7 +511,8 @@
 	
 	
 	mui.plusReady(function () {
-			var backButtonPress = 0;
+
+		var backButtonPress = 0;
 			mui.back = function(event) {
 				backButtonPress++;
 				if (backButtonPress > 1) {
