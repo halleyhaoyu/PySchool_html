@@ -12,6 +12,7 @@
 	<script src="../js/vue.min.js"></script>
 	<script src="../js/mui.pullToRefresh.js"></script>
 	<script src="../js/mui.pullToRefresh.material.js"></script>
+	<script type="text/javascript" src="../js/common.js" ></script>
     <link href="../css/mui.css" rel="stylesheet"/>
 	<link href="../css/icons-extra.css" rel="stylesheet"/>
 	<link href="../css/app.css" rel="stylesheet"/>
@@ -60,8 +61,7 @@
 							<li v-for="item in workList" class="mui-table-view-cell" style="padding: 11px 0px;">
 								<div class="works-desc">
 									<div class="works-desc-top">
-										<img v-if="item.showStudentPic!=''" :src="item.showStudentPic" class="works-img"/>
-										<img v-else src="../images/school/head-pic.png" class="works-img"/>
+										<img :src="getImage(item)" class="works-img"/>
 										<p class="works-username">{{item.aswStudentName}}<label class="works-time">{{item.aswTime}}</label></p>
 										<p class="works-content">{{item.aswDesc}}&nbsp;.</p>
 						  
@@ -84,12 +84,11 @@
 												<span  class="mui-icon-extra mui-icon-extra-like" style="margin-right: 25px;"> {{item.aswPointNum}}</span>
 											</div> 
 										</div>
-						
+										<div style="clear: both;"></div>
 										<div v-for="commentItem in item.activityCommentList" class="works-answer">
-											<img v-if="commentItem.showStudentPic!=''" :src="commentItem.showStudentPic" class="works-img"/>
-											<img v-else src="../images/bigicon1.png" class="works-img"/>
-											<p class="works-username">{{commentItem.actComReviewer}}<label class="works-time">{{commentItem.actComTime}}</label></p>
-											<p v-if="commentItem.actComDesc!=''" class="works-content">{{commentItem.actComDesc}}</p>
+											<img  :src="getCImage(commentItem)" class="works-img"/>
+											<p class="works-username">{{commentItem.actComReviewer}}&nbsp;<label class="works-time">&nbsp;{{commentItem.actComTime}}</label></p>
+											<p v-if="commentItem.actComDesc!=''" class="works-content">{{commentItem.actComDesc}}&nbsp;</p>
 											<p v-else class="works-content">(空白)</p>
 										</div> 
 						
@@ -136,7 +135,7 @@
 			},
 	 
 			workList:[
-		
+	
 //			{
 //              "aswId": 3,
 //              "aswStudentId": 24,
@@ -152,7 +151,7 @@
 //                      "aswfId": 3,
 //                      "aswfTime": "2017-08-25 22:58:22",
 //                      "aswfStudentId": 24,
-//                      "aswfFiles": "http://112.124.110.182:11008/upload/TaskExecPicture/20170825//1503672443675.jpg20170825224730_d0841e80f28a482e86afd3c176ae064f.jpg",
+//                      "aswfFiles": "http://112.124.110.182:11008/upload/TaskExecPicture/20170825//1500030347631.jpg20170825224736_2ce220c937c64d6c9f7f137062f2cb5f.jpg",
 //                      "aswfStudentName": "  200",
 //                      "aswfActId": 3,
 //                      "aswfAswId": 3
@@ -179,16 +178,54 @@
 //                      "aswfId": 6,
 //                      "aswfTime": "2017-08-25 23:03:54",
 //                      "aswfStudentId": 24,
-//                      "aswfFiles": "http://112.124.110.182:11008/upload/TaskExecPicture/20170825//1503672443675.jpg20170825224730_d0841e80f28a482e86afd3c176ae064f.jpg",
+//                      "aswfFiles": "http://112.124.110.182:11008/upload/TaskExecPicture/20170825//1500030347631.jpg20170825224736_2ce220c937c64d6c9f7f137062f2cb5f.jpg",
 //                      "aswfStudentName": "  200",
 //                      "aswfActId": 3,
 //                      "aswfAsId": 5,
 //                      "aswfAswId": 3
 //                  }
 //              ],
-//              "activityCommentList": []
+//              "activityCommentList": [{
+//				"actComId": 35,
+//				"actComTime": "2017-08-30 21:25:39",
+//				"actComDesc": "测试卷1",
+//				"actComReviewer": "  ",
+//				"actComActId": 1,
+//				"actComType": 1,
+//				"actComIsPoint": 2,
+//				"actIsTeacher": 1,
+//				"actReviewerId": 7,
+//				"actObject": "1",
+//				"showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png"
+//			},
+//			{
+//				"actComId": 36,
+//				"actComTime": "2017-08-30 21:25:49",
+//				"actComDesc": "测试的2",
+//				"actComReviewer": "  ",
+//				"actComActId": 1,
+//				"actComType": 1,
+//				"actComIsPoint": 2,
+//				"actIsTeacher": 1,
+//				"actReviewerId": 7,
+//				"actObject": "1",
+//				"showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png"
+//			},
+//			{
+//				"actComId": 37,
+//				"actComTime": "2017-08-30 21:26:02",
+//				"actComDesc": "测试服3",
+//				"actComReviewer": "  ",
+//				"actComActId": 1,
+//				"actComType": 1,
+//				"actComIsPoint": 2,
+//				"actIsTeacher": 1,
+//				"actReviewerId": 7,
+//				"actObject": "1",
+//				"showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png"
+//			}]
 //          }
-
+ 	 
 			]
 		},
 		methods:{
@@ -209,7 +246,7 @@
 				return type;
 			},
 			getDisplayStyle:function(patch){
-				var type="";
+				var type="width: 70%; margin: 2px;float:left;";
 				//console.info(patch);
 				if(patch){
 					var suffix = patch.substr(patch.lastIndexOf('.'));
@@ -227,7 +264,23 @@
 					}
 				}
 				return type;
-			}
+			},
+				getImage:function(item){
+					var imageFile="../images/school/head-pic.png";
+					 if(item.showStudentPic!=undefined && item.showStudentPic!=''){
+						imageFile=item.showStudentPic;
+					}
+					return imageFile;
+				},
+				getCImage:function(item){
+					var imageFile="../images/school/head-pic.png";
+					if(item.actIsTeacher==1 &&　item.showTeacherPic!=undefined && item.showTeacherPic!=''){
+						imageFile=item.showTeacherPic;
+					}else if(item.actIsTeacher==2 &&　item.showStudentPic!=undefined && item.showStudentPic!=''){
+						imageFile=item.showStudentPic;
+					}
+					return imageFile;
+				}
 		}
 	});
 	
@@ -267,9 +320,10 @@
 	
 	function pushEveryoneWorksUp(self,autoFlag){
 		var userInfo = app.getState(); 
+		pageIndex++;
 		if(userInfo.manageId!=undefined && userInfo.manageId!=''){
 			app.getEveryoneWorkList(vm_everyone_work.activityId,pageIndex,function(data){
-				console.info(JSON.stringify(data));
+				//console.info(JSON.stringify(data));
 				var overFlag = false;
 				if(data.code==0){
 					if(data.object!=undefined && data.object.rows.length>0){
@@ -277,7 +331,7 @@
 						vm_everyone_work.workList = vm_everyone_work.workList.concat(data.object.rows);
 						
 						console.info(JSON.stringify(vm_everyone_work.workList));
-					 	pageIndex++;
+					 	
 					}else{
 						overFlag=true;
 					} 
@@ -321,7 +375,7 @@
 		vm_everyone_work.activityId=activityId;
 		vm_everyone_work.commentInfo.actComActId=activityId;
 		app.getEveryoneWorkList(vm_everyone_work.activityId,1,function(data){
-			console.info(JSON.stringify(data));
+			//console.info(JSON.stringify(data));
 			if(data.code==0){
 				if(data.object!=undefined){											
 					vm_everyone_work.workList=data.object.rows;

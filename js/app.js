@@ -415,6 +415,16 @@
 	}
 	
 	
+	/*
+	  * 活动-推荐学校秀
+	  */
+	owner.postShowRecommend=function(data,callback){
+		//	view/activity/recommend.shtml
+		var url=owner.hostname+'/view/activity/recommend.shtml';
+		return owner.postCommon(url,data,callback);
+	}
+	
+	
 	
 
 	/*
@@ -464,7 +474,7 @@
 			//url+=owner.getPramString(data);
 			console.log(url);
 		mui.ajax( url,{
-			data:data,
+			data:JSON.stringify(data),
 			crossDomain:true,
 			dataType:'json',//服务器返回json格式数据
 			type:'post',//HTTP请求类型

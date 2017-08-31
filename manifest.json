@@ -622,9 +622,13 @@
 					"js/mui.pullToRefresh.material.js",
 					"css/school/pushCommon.css",
 					"images/bigicon1.png",
-					"js/jquery-2.1.4.min.js"
+					"js/jquery-2.1.4.min.js",
+					"js/H5Plus.js",
+					"js/common.js"
 				],
-				"refer": [],
+				"refer": [
+					"school/showImage.html"
+				],
 				"priority": 0
 			},
 			"school/setStudentInfo.html": {

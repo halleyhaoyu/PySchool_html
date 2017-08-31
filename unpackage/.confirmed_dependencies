@@ -1,623 +1,627 @@
 {
-  "login.html": {
-    "resources": [
-      "fonts/mui-icons-extra.ttf",
-      "images/login/bg.png",
-      "js/app.js",
-      "js/web_service.js",
-      "css/login.css",
-      "js/mui.min.js",
-      "fonts/mui.ttf",
-      "css/mui.min.css",
-      "js/mui.enterfocus.js",
-      "css/icons-extra.css",
-      "images/login/sc_name@3x.png",
-      "images/login/bg@3x.png",
-      "school/courseAll.html"
-    ],
-    "refer": [
-      "school/courseAll.html"
-    ]
-  },
-  "school/courseAll.html": {
-    "resources": [
-      "css/school/courseAll.css",
-      "js/mui.pullToRefresh.js",
-      "css/top.css",
-      "css/school/pushCommon.css",
-      "js/mui.pullToRefresh.material.js",
-      "images/tabbar/tabbar-sl-1.png",
-      "css/dashboard.css",
-      "images/tabbar/tabbar-ns-2.png",
-      "images/tabbar/tabbar-ns-4.png",
-      "css/mui.css",
-      "images/head-dz.png",
-      "images/school/cc_pic.png",
-      "js/jquery-2.1.4.min.js",
-      "images/tabbar/tabbar-ns-3.png",
-      "images/school/sc_add.png",
-      "css/foot.css",
-      "school/activityList.html",
-      "js/app.js",
-      "js/mui.min.js",
-      "images/tabbar/tabbar-sl-3.png",
-      "school/scShowAll.html",
-      "school/personalCenter.html",
-      "images/tabbar/tabbar-ns-1.png",
-      "login.html",
-      "images/tabbar/tabbar-sl-2.png",
-      "js/vue.min.js",
-      "images/tabbar/tabbar-sl-4.png"
-    ],
-    "refer": [
-      "school/activityList.html",
-      "school/scShowAll.html",
-      "school/personalCenter.html",
-      "login.html",
-      "school/courseDir.html",
-      "school/selectCourse.html",
-      "walking/wkMap.html"
-    ]
-  },
-  "school/activityList.html": {
-    "resources": [
-      "images/tabbar/tabbar-ns-1.png",
-      "css/school/pushCommon.css",
-      "css/top.css",
-      "css/app.css",
-      "images/tabbar/tabbar-sl-2.png",
-      "css/dashboard.css",
-      "css/school/activityList.css",
-      "css/foot.css",
-      "css/mui.css",
-      "css/icons-extra.css",
-      "school/scShowAll.html",
-      "js/mui.pullToRefresh.js",
-      "js/app.js",
-      "js/mui.min.js",
-      "js/mui.pullToRefresh.material.js",
-      "js/jquery-2.1.4.min.js",
-      "images/tabbar/tabbar-sl-1.png",
-      "school/courseAll.html",
-      "images/tabbar/tabbar-sl-3.png",
-      "login.html",
-      "js/vue.min.js",
-      "school/activityDetails.html",
-      "js/mui.picker.js",
-      "css/mui.picker.min.css",
-      "css/mui.poppicker.css",
-      "js/mui.poppicker.js",
-      "images/tabbar/tabbar-ns-2.png",
-      "school/personalCenter.html",
-      "images/tabbar/tabbar-sl-4.png"
-    ],
-    "refer": [
-      "school/scShowAll.html",
-      "school/courseAll.html",
-      "school/personalCenter.html",
-      "login.html",
-      "school/activityDetails.html",
-      "school/exchangeArea.html",
-      "school/addActivity.html"
-    ]
-  },
-  "school/scShowAll.html": {
-    "resources": [
-      "images/tabbar/tabbar-sl-3.png",
-      "images/tabbar/tabbar-ns-2.png",
-      "images/bigicon1.png",
-      "images/school/show-yes.png",
-      "images/school/show-no.png",
-      "images/school/head-pic.png",
-      "css/school/scShowAll.css",
-      "images/bigicon3.png",
-      "school/activityList.html",
-      "school/personalCenter.html",
-      "css/app.css",
-      "css/dashboard.css",
-      "css/mui.css",
-      "images/tabbar/tabbar-sl-4.png",
-      "js/mui.pullToRefresh.js",
-      "js/app.js",
-      "js/mui.min.js",
-      "js/mui.pullToRefresh.material.js",
-      "js/jquery-2.1.4.min.js",
-      "css/icons-extra.css",
-      "school/courseAll.html",
-      "css/school/pushCommon.css",
-      "images/tabbar/tabbar-ns-1.png",
-      "images/tabbar/tabbar-sl-2.png",
-      "images/tabbar/tabbar-sl-1.png",
-      "js/vue.min.js",
-      "css/H5MediaFile.css",
-      "js/H5Plus.js",
-      "js/immersed.js",
-      "js/common.js"
-    ],
-    "refer": [
-      "school/activityList.html",
-      "school/personalCenter.html",
-      "school/courseAll.html",
-      "school/showImage.html"
-    ]
-  },
-  "school/personalCenter.html": {
-    "resources": [
-      "images/school/honor-icon.png",
-      "images/school/foot-icon.png",
-      "css/school/courseAll.css",
-      "images/school/head-btm.png",
-      "school/activityList.html",
-      "images/school/psct_top.png",
-      "js/mui.min.js",
-      "images/school/ct-dianzhui.png",
-      "css/school/studentCenter.css",
-      "images/school/btm-round.png",
-      "css/mui.css",
-      "images/tabbar/tabbar-sl-4.png",
-      "images/school/head-pic.png",
-      "school/courseAll.html",
-      "images/school/tc_02.png",
-      "images/school/tc_01.png",
-      "images/tabbar/tabbar-ns-1.png",
-      "js/app.js",
-      "js/vue.min.js",
-      "school/scShowAll.html",
-      "images/tabbar/tabbar-sl-3.png",
-      "images/tabbar/tabbar-sl-2.png"
-    ],
-    "refer": [
-      "school/activityList.html",
-      "school/courseAll.html",
-      "school/setTeacherfo.html",
-      "school/setStudentInfo.html",
-      "school/timeline.html",
-      "school/myHonor.html",
-      "school/rankingList.html",
-      "school/scShowAll.html"
-    ]
-  },
-  "school/courseDir.html": {
-    "resources": [
-      "css/school/courseDir.css",
-      "css/app.css",
-      "css/dashboard.css",
-      "css/mui.css",
-      "js/mui.min.js",
-      "css/school/courseAll.css",
-      "css/top.css",
-      "css/foot.css",
-      "js/app.js",
-      "js/vue.min.js",
-      "fonts/mui.ttf",
-      "images/head-dz.png"
-    ],
-    "refer": [
-      "school/courseDetails.html"
-    ]
-  },
-  "school/selectCourse.html": {
-    "resources": [
-      "images/school/bk-icon.png",
-      "css/school/selectCourse.css",
-      "css/icons-extra.css",
-      "css/top.css",
-      "css/app.css",
-      "js/mui.min.js",
-      "css/dashboard.css",
-      "css/foot.css",
-      "css/mui.css",
-      "js/app.js",
-      "js/vue.min.js"
-    ],
-    "refer": []
-  },
-  "school/courseDetails.html": {
-    "resources": [
-      "css/top.css",
-      "css/school/courseDetails.css",
-      "css/app.css",
-      "js/mui.min.js",
-      "css/dashboard.css",
-      "css/foot.css",
-      "css/mui.css",
-      "css/icons-extra.css",
-      "images/bigicon4.png",
-      "js/app.js",
-      "js/vue.min.js"
-    ],
-    "refer": [
-      "school/courseExperience.html"
-    ]
-  },
-  "school/activityDetails.html": {
-    "resources": [
-      "css/school/activityDetails.css",
-      "css/mui.css",
-      "images/bigicon3.png",
-      "css/app.css",
-      "js/mui.min.js",
-      "css/dashboard.css",
-      "js/vue.min.js",
-      "school/courseAll.html",
-      "js/app.js",
-      "css/icons-extra.css"
-    ],
-    "refer": [
-      "school/courseAll.html",
-      "school/activityReply.html",
-      "school/myWorks.html",
-      "school/everyoneWorks.html"
-    ]
-  },
-  "school/courseExperience.html": {
-    "resources": [
-      "js/mui.picker.js",
-      "images/school/camera.png",
-      "images/school/add-icon.png",
-      "css/dashboard.css",
-      "css/mui.css",
-      "js/jquery-2.1.4.min.js",
-      "css/school/myWorks.css",
-      "css/app.css",
-      "images/school/voice.png",
-      "js/mui.poppicker.js",
-      "images/school/album.png",
-      "css/mui.picker.min.css",
-      "css/mui.poppicker.css",
-      "images/school/copy.png",
-      "js/H5Plus.js",
-      "css/H5MediaFile.css",
-      "js/immersed.js",
-      "js/common.js",
-      "js/app.js",
-      "js/vue.min.js",
-      "js/mui.min.js",
-      "images/astop.png",
-      "images/arecord.png",
-      "images/school/record-icon.png",
-      "images/school/video-icon.png",
-      "images/school/photo-icon.png"
-    ],
-    "refer": [
-      "school/showImage.html",
-      "school/showVideo.html"
-    ]
-  },
-  "school/timeline.html": {
-    "resources": [
-      "css/school/timeline.css",
-      "images/school/timeline-dz.png",
-      "images/school/timeline.png"
-    ],
-    "refer": []
-  },
-  "school/setPassword.html": {
-    "resources": [
-      "js/mui.picker.js",
-      "css/app.css",
-      "js/mui.min.js",
-      "js/mui.poppicker.js",
-      "css/dashboard.css",
-      "css/mui.css",
-      "js/jquery-2.1.4.min.js",
-      "js/app.js",
-      "js/vue.min.js",
-      "css/school/setMsgInfo.css",
-      "css/mui.poppicker.css",
-      "css/mui.picker.min.css"
-    ],
-    "refer": []
-  },
-  "school/setStudentInfo.html": {
-    "resources": [
-      "js/mui.picker.js",
-      "css/school/setMsgInfo.css",
-      "js/app.js",
-      "js/common.js",
-      "css/app.css",
-      "js/mui.min.js",
-      "js/mui.poppicker.js",
-      "css/dashboard.css",
-      "js/vue.min.js",
-      "css/mui.poppicker.css",
-      "css/mui.picker.min.css",
-      "css/mui.css",
-      "js/jquery-2.1.4.min.js",
-      "images/school/head-pic.png"
-    ],
-    "refer": [
-      "school/setPassword.html"
-    ]
-  },
-  "school/myHonor.html": {
-    "resources": [
-      "images/school/silver-medal.png",
-      "images/school/gold-medal.png",
-      "css/school/myHonor.css"
-    ],
-    "refer": []
-  },
-  "school/activityReply.html": {
-    "resources": [
-      "css/school/activityReply.css",
-      "js/H5Plus.js",
-      "js/mui.picker.js",
-      "js/common.js",
-      "js/mui.poppicker.js",
-      "css/H5MediaFile.css",
-      "js/jquery-2.1.4.min.js",
-      "js/immersed.js",
-      "css/mui.picker.min.css",
-      "css/mui.poppicker.css",
-      "js/app.js",
-      "css/app.css",
-      "js/mui.min.js",
-      "css/dashboard.css",
-      "js/vue.min.js",
-      "css/mui.css",
-      "images/school/photo-icon.png",
-      "images/school/record-icon.png",
-      "images/astop.png",
-      "images/arecord.png",
-      "images/school/video-icon.png"
-    ],
-    "refer": []
-  },
-  "school/everyoneWorks.html": {
-    "resources": [
-      "js/mui.pullToRefresh.js",
-      "js/app.js",
-      "css/school/pushCommon.css",
-      "css/app.css",
-      "js/mui.min.js",
-      "js/mui.pullToRefresh.material.js",
-      "css/dashboard.css",
-      "js/vue.min.js",
-      "images/school/head-pic.png",
-      "css/school/everyoneWorks.css",
-      "css/mui.css",
-      "images/bigicon1.png",
-      "js/jquery-2.1.4.min.js"
-    ],
-    "refer": []
-  },
-  "school/exchangeArea.html": {
-    "resources": [
-      "images/school/addfile.png",
-      "js/mui.pullToRefresh.js",
-      "css/school/pushCommon.css",
-      "js/mui.pullToRefresh.material.js",
-      "images/bigicon1.png",
-      "css/school/activityList.css",
-      "css/school/exchangeArea.css",
-      "images/school/recording.png",
-      "js/jquery-2.1.4.min.js",
-      "js/app.js",
-      "js/mui.min.js",
-      "css/app.css",
-      "css/dashboard.css",
-      "js/vue.min.js",
-      "css/mui.css",
-      "js/H5Plus.js",
-      "js/common.js",
-      "css/H5MediaFile.css",
-      "js/immersed.js",
-      "images/astop.png",
-      "images/arecord.png",
-      "images/school/photo-icon.png",
-      "images/school/record-icon.png",
-      "images/school/video-icon.png"
-    ],
-    "refer": [
-      "school/showImage.html",
-      "school/showVideo.html"
-    ]
-  },
-  "school/addActivity.html": {
-    "resources": [
-      "js/H5Plus.js",
-      "js/mui.picker.js",
-      "js/common.js",
-      "images/school/minus.png",
-      "js/mui.poppicker.js",
-      "css/H5MediaFile.css",
-      "images/school/plus.png",
-      "css/school/addActivityReply.css",
-      "js/jquery-2.1.4.min.js",
-      "js/immersed.js",
-      "js/app.js",
-      "css/app.css",
-      "js/mui.min.js",
-      "css/dashboard.css",
-      "js/vue.min.js",
-      "css/mui.css",
-      "css/mui.picker.min.css",
-      "css/mui.poppicker.css",
-      "images/school/video-icon.png",
-      "images/school/photo-icon.png",
-      "images/school/record-icon.png"
-    ],
-    "refer": [
-      "school/showImage.html"
-    ]
-  },
-  "school/myWorks.html": {
-    "resources": [
-      "css/school/myWorks.css",
-      "css/app.css",
-      "css/dashboard.css",
-      "css/mui.css",
-      "js/H5Plus.js",
-      "js/common.js",
-      "js/jquery-2.1.4.min.js",
-      "js/mui.picker.js",
-      "js/app.js",
-      "js/mui.min.js",
-      "js/mui.poppicker.js",
-      "js/vue.min.js",
-      "js/immersed.js",
-      "images/astop.png",
-      "images/arecord.png",
-      "css/H5MediaFile.css",
-      "images/school/photo-icon.png",
-      "images/school/record-icon.png",
-      "images/school/video-icon.png"
-    ],
-    "refer": [
-      "school/showImage.html"
-    ]
-  },
-  "school/rankingList.html": {
-    "resources": [
-      "images/school/good_black.png",
-      "css/school/rankingList.css",
-      "images/school/bronze-medal.png",
-      "js/app.js",
-      "css/app.css",
-      "js/mui.min.js",
-      "css/dashboard.css",
-      "js/vue.min.js",
-      "css/mui.css",
-      "images/school/head-pic.png",
-      "images/school/silver-medal.png",
-      "images/school/gold-medal.png"
-    ],
-    "refer": []
-  },
-  "school/setTeacherfo.html": {
-    "resources": [
-      "js/mui.picker.js",
-      "css/school/setMsgInfo.css",
-      "js/app.js",
-      "js/common.js",
-      "css/app.css",
-      "js/mui.min.js",
-      "js/mui.poppicker.js",
-      "css/dashboard.css",
-      "js/vue.min.js",
-      "css/mui.poppicker.css",
-      "css/mui.picker.min.css",
-      "css/mui.css",
-      "js/jquery-2.1.4.min.js",
-      "images/school/head-pic.png"
-    ],
-    "refer": [
-      "school/setPassword.html"
-    ]
-  },
-  "school/showImage.html": {
-    "resources": [
-      "css/H5Plus.css",
-      "js/H5Plus.js",
-      "js/H5Plus-quit.js"
-    ]
-  },
-  "school/showVideo.html": {
-    "resources": [
-      "css/H5Plus.css",
-      "js/H5Plus.js",
-      "js/H5Plus-quit.js"
-    ]
-  },
-  "walking/wkMap.html": {
-    "resources": [
-      "images/walking/MinHang/QiBao/001.png",
-      "images/walking/NanHui/TaoYuan/001.png",
-      "js/walking/useAll.js",
-      "images/walking/JiaDing/SaiCheChang/001.png",
-      "images/walking/ChongMing/ShiDi/001.png",
-      "images/walking/HuangPu/XinTianDi/001.png",
-      "images/walking/LuWan/ZhouGongGuan/001.png",
-      "images/walking/MinHang/HongQiao/001.png",
-      "images/walking/XuHui/JiaoTong/001.png",
-      "js/walking/wkMap.js",
-      "images/walking/SongJiang/HuanLeGu/001.png",
-      "images/walking/shadow.png",
-      "images/walking/PuDongXinQu/HuanQiu/001.png",
-      "images/walking/HuangPu/NanJingLu/001.png",
-      "images/walking/logo.png",
-      "images/walking/bg.png",
-      "images/walking/JinShan/NongMinHua/001.png",
-      "images/walking/HuangPu/WaiTan/001.png",
-      "images/walking/PuDongXinQu/YiShuGong/001.png",
-      "images/walking/XuHui/LvDi/001.png",
-      "images/walking/JinShan/ShaTan/001.png",
-      "images/walking/HuangPu/BoWuGuan/001.png",
-      "images/walking/HuangPu/YuYuan/001.png",
-      "js/jquery-2.1.4.min.js",
-      "images/walking/JingAn/WangJiaSha/001.png",
-      "css/mui.min.css",
-      "images/walking/map.png",
-      "images/walking/location.png",
-      "css/walking/wkMap.css",
-      "images/walking/LuWan/TianZiFang/001.png",
-      "js/mui.min.js"
-    ],
-    "refer": [
-      "walking/msgInfo.html"
-    ]
-  },
-  "walking/msgInfo.html": {
-    "resources": [
-      "js/walking/useAll.js",
-      "css/walking/swiper.min.css",
-      "css/walking/top.css",
-      "images/walking/stop.png",
-      "css/mui.css",
-      "images/walking/prompt.png",
-      "images/walking/positioning.png",
-      "js/jquery-2.1.4.min.js",
-      "images/walking/play.png",
-      "images/walking/girl.png",
-      "css/walking/msgInfo.css",
-      "images/walking/boy.png",
-      "js/mui.min.js",
-      "js/walking/swiper.min.js",
-      "js/walking/msgInfo.js",
-      "css/walking/dashboard.css",
-      "images/walking/JiaDing/SaiCheChang/5.png",
-      "images/walking/JiaDing/SaiCheChang/4.png",
-      "images/walking/JiaDing/SaiCheChang/2.png",
-      "images/walking/JiaDing/SaiCheChang/1.png",
-      "images/walking/JiaDing/SaiCheChang/6.png",
-      "images/walking/JiaDing/SaiCheChang/3.png",
-      "images/walking/JinShan/ShaTan/1.png",
-      "images/walking/JinShan/ShaTan/2.png",
-      "images/walking/PuDongXinQu/HuanQiu/4.png",
-      "images/walking/PuDongXinQu/HuanQiu/3.png",
-      "images/walking/PuDongXinQu/HuanQiu/2.png",
-      "images/walking/PuDongXinQu/HuanQiu/6.png",
-      "images/walking/PuDongXinQu/HuanQiu/5.png",
-      "images/walking/PuDongXinQu/HuanQiu/1.png",
-      "images/walking/MinHang/QiBao/3.png",
-      "images/walking/MinHang/QiBao/2.png",
-      "images/walking/MinHang/QiBao/5.png",
-      "images/walking/MinHang/QiBao/1.png",
-      "images/walking/MinHang/QiBao/4.png"
-    ],
-    "refer": [
-      "walking/bdBaike.html",
-      "walking/baiduMap.html"
-    ]
-  },
-  "walking/bdBaike.html": {
-    "resources": [
-      "js/mui.min.js",
-      "css/walking/top.css",
-      "css/mui.css",
-      "js/jquery-2.1.4.min.js",
-      "css/walking/dashboard.css"
-    ]
-  },
-  "walking/baiduMap.html": {
-    "resources": [
-      "js/mui.min.js",
-      "css/walking/top.css",
-      "images/walking/map_marker.gif",
-      "css/mui.css",
-      "js/jquery-2.1.4.min.js",
-      "css/walking/dashboard.css"
-    ]
-  }
+	"login.html": {
+		"resources": [
+			"fonts/mui-icons-extra.ttf",
+			"images/login/bg.png",
+			"js/app.js",
+			"js/web_service.js",
+			"css/login.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/mui.enterfocus.js",
+			"css/icons-extra.css",
+			"images/login/sc_name@3x.png",
+			"images/login/bg@3x.png",
+			"school/courseAll.html"
+		],
+		"refer": [
+			"school/courseAll.html"
+		]
+	},
+	"school/courseAll.html": {
+		"resources": [
+			"css/school/courseAll.css",
+			"js/mui.pullToRefresh.js",
+			"css/top.css",
+			"css/school/pushCommon.css",
+			"js/mui.pullToRefresh.material.js",
+			"images/tabbar/tabbar-sl-1.png",
+			"css/dashboard.css",
+			"images/tabbar/tabbar-ns-2.png",
+			"images/tabbar/tabbar-ns-4.png",
+			"css/mui.css",
+			"images/head-dz.png",
+			"images/school/cc_pic.png",
+			"js/jquery-2.1.4.min.js",
+			"images/tabbar/tabbar-ns-3.png",
+			"images/school/sc_add.png",
+			"css/foot.css",
+			"school/activityList.html",
+			"js/app.js",
+			"js/mui.min.js",
+			"images/tabbar/tabbar-sl-3.png",
+			"school/scShowAll.html",
+			"school/personalCenter.html",
+			"images/tabbar/tabbar-ns-1.png",
+			"login.html",
+			"images/tabbar/tabbar-sl-2.png",
+			"js/vue.min.js",
+			"images/tabbar/tabbar-sl-4.png"
+		],
+		"refer": [
+			"school/activityList.html",
+			"school/scShowAll.html",
+			"school/personalCenter.html",
+			"login.html",
+			"school/courseDir.html",
+			"school/selectCourse.html",
+			"walking/wkMap.html"
+		]
+	},
+	"school/activityList.html": {
+		"resources": [
+			"images/tabbar/tabbar-ns-1.png",
+			"css/school/pushCommon.css",
+			"css/top.css",
+			"css/app.css",
+			"images/tabbar/tabbar-sl-2.png",
+			"css/dashboard.css",
+			"css/school/activityList.css",
+			"css/foot.css",
+			"css/mui.css",
+			"css/icons-extra.css",
+			"school/scShowAll.html",
+			"js/mui.pullToRefresh.js",
+			"js/app.js",
+			"js/mui.min.js",
+			"js/mui.pullToRefresh.material.js",
+			"js/jquery-2.1.4.min.js",
+			"images/tabbar/tabbar-sl-1.png",
+			"school/courseAll.html",
+			"images/tabbar/tabbar-sl-3.png",
+			"login.html",
+			"js/vue.min.js",
+			"school/activityDetails.html",
+			"js/mui.picker.js",
+			"css/mui.picker.min.css",
+			"css/mui.poppicker.css",
+			"js/mui.poppicker.js",
+			"images/tabbar/tabbar-ns-2.png",
+			"school/personalCenter.html",
+			"images/tabbar/tabbar-sl-4.png"
+		],
+		"refer": [
+			"school/scShowAll.html",
+			"school/courseAll.html",
+			"school/personalCenter.html",
+			"login.html",
+			"school/activityDetails.html",
+			"school/exchangeArea.html",
+			"school/addActivity.html"
+		]
+	},
+	"school/scShowAll.html": {
+		"resources": [
+			"images/tabbar/tabbar-sl-3.png",
+			"images/tabbar/tabbar-ns-2.png",
+			"images/bigicon1.png",
+			"images/school/show-yes.png",
+			"images/school/show-no.png",
+			"images/school/head-pic.png",
+			"css/school/scShowAll.css",
+			"images/bigicon3.png",
+			"school/activityList.html",
+			"school/personalCenter.html",
+			"css/app.css",
+			"css/dashboard.css",
+			"css/mui.css",
+			"images/tabbar/tabbar-sl-4.png",
+			"js/mui.pullToRefresh.js",
+			"js/app.js",
+			"js/mui.min.js",
+			"js/mui.pullToRefresh.material.js",
+			"js/jquery-2.1.4.min.js",
+			"css/icons-extra.css",
+			"school/courseAll.html",
+			"css/school/pushCommon.css",
+			"images/tabbar/tabbar-ns-1.png",
+			"images/tabbar/tabbar-sl-2.png",
+			"images/tabbar/tabbar-sl-1.png",
+			"js/vue.min.js",
+			"css/H5MediaFile.css",
+			"js/H5Plus.js",
+			"js/immersed.js",
+			"js/common.js"
+		],
+		"refer": [
+			"school/activityList.html",
+			"school/personalCenter.html",
+			"school/courseAll.html",
+			"school/showImage.html"
+		]
+	},
+	"school/personalCenter.html": {
+		"resources": [
+			"images/school/honor-icon.png",
+			"images/school/foot-icon.png",
+			"css/school/courseAll.css",
+			"images/school/head-btm.png",
+			"school/activityList.html",
+			"images/school/psct_top.png",
+			"js/mui.min.js",
+			"images/school/ct-dianzhui.png",
+			"css/school/studentCenter.css",
+			"images/school/btm-round.png",
+			"css/mui.css",
+			"images/tabbar/tabbar-sl-4.png",
+			"images/school/head-pic.png",
+			"school/courseAll.html",
+			"images/school/tc_02.png",
+			"images/school/tc_01.png",
+			"images/tabbar/tabbar-ns-1.png",
+			"js/app.js",
+			"js/vue.min.js",
+			"school/scShowAll.html",
+			"images/tabbar/tabbar-sl-3.png",
+			"images/tabbar/tabbar-sl-2.png"
+		],
+		"refer": [
+			"school/activityList.html",
+			"school/courseAll.html",
+			"school/setTeacherfo.html",
+			"school/setStudentInfo.html",
+			"school/timeline.html",
+			"school/myHonor.html",
+			"school/rankingList.html",
+			"school/scShowAll.html"
+		]
+	},
+	"school/courseDir.html": {
+		"resources": [
+			"css/school/courseDir.css",
+			"css/app.css",
+			"css/dashboard.css",
+			"css/mui.css",
+			"js/mui.min.js",
+			"css/school/courseAll.css",
+			"css/top.css",
+			"css/foot.css",
+			"js/app.js",
+			"js/vue.min.js",
+			"fonts/mui.ttf",
+			"images/head-dz.png"
+		],
+		"refer": [
+			"school/courseDetails.html"
+		]
+	},
+	"school/selectCourse.html": {
+		"resources": [
+			"images/school/bk-icon.png",
+			"css/school/selectCourse.css",
+			"css/icons-extra.css",
+			"css/top.css",
+			"css/app.css",
+			"js/mui.min.js",
+			"css/dashboard.css",
+			"css/foot.css",
+			"css/mui.css",
+			"js/app.js",
+			"js/vue.min.js"
+		],
+		"refer": []
+	},
+	"school/courseDetails.html": {
+		"resources": [
+			"css/top.css",
+			"css/school/courseDetails.css",
+			"css/app.css",
+			"js/mui.min.js",
+			"css/dashboard.css",
+			"css/foot.css",
+			"css/mui.css",
+			"css/icons-extra.css",
+			"images/bigicon4.png",
+			"js/app.js",
+			"js/vue.min.js"
+		],
+		"refer": [
+			"school/courseExperience.html"
+		]
+	},
+	"school/activityDetails.html": {
+		"resources": [
+			"css/school/activityDetails.css",
+			"css/mui.css",
+			"images/bigicon3.png",
+			"css/app.css",
+			"js/mui.min.js",
+			"css/dashboard.css",
+			"js/vue.min.js",
+			"school/courseAll.html",
+			"js/app.js",
+			"css/icons-extra.css"
+		],
+		"refer": [
+			"school/courseAll.html",
+			"school/activityReply.html",
+			"school/myWorks.html",
+			"school/everyoneWorks.html"
+		]
+	},
+	"school/courseExperience.html": {
+		"resources": [
+			"js/mui.picker.js",
+			"images/school/camera.png",
+			"images/school/add-icon.png",
+			"css/dashboard.css",
+			"css/mui.css",
+			"js/jquery-2.1.4.min.js",
+			"css/school/myWorks.css",
+			"css/app.css",
+			"images/school/voice.png",
+			"js/mui.poppicker.js",
+			"images/school/album.png",
+			"css/mui.picker.min.css",
+			"css/mui.poppicker.css",
+			"images/school/copy.png",
+			"js/H5Plus.js",
+			"css/H5MediaFile.css",
+			"js/immersed.js",
+			"js/common.js",
+			"js/app.js",
+			"js/vue.min.js",
+			"js/mui.min.js",
+			"images/astop.png",
+			"images/arecord.png",
+			"images/school/record-icon.png",
+			"images/school/video-icon.png",
+			"images/school/photo-icon.png"
+		],
+		"refer": [
+			"school/showImage.html",
+			"school/showVideo.html"
+		]
+	},
+	"school/timeline.html": {
+		"resources": [
+			"css/school/timeline.css",
+			"images/school/timeline-dz.png",
+			"images/school/timeline.png"
+		],
+		"refer": []
+	},
+	"school/setPassword.html": {
+		"resources": [
+			"js/mui.picker.js",
+			"css/app.css",
+			"js/mui.min.js",
+			"js/mui.poppicker.js",
+			"css/dashboard.css",
+			"css/mui.css",
+			"js/jquery-2.1.4.min.js",
+			"js/app.js",
+			"js/vue.min.js",
+			"css/school/setMsgInfo.css",
+			"css/mui.poppicker.css",
+			"css/mui.picker.min.css"
+		],
+		"refer": []
+	},
+	"school/setStudentInfo.html": {
+		"resources": [
+			"js/mui.picker.js",
+			"css/school/setMsgInfo.css",
+			"js/app.js",
+			"js/common.js",
+			"css/app.css",
+			"js/mui.min.js",
+			"js/mui.poppicker.js",
+			"css/dashboard.css",
+			"js/vue.min.js",
+			"css/mui.poppicker.css",
+			"css/mui.picker.min.css",
+			"css/mui.css",
+			"js/jquery-2.1.4.min.js",
+			"images/school/head-pic.png"
+		],
+		"refer": [
+			"school/setPassword.html"
+		]
+	},
+	"school/myHonor.html": {
+		"resources": [
+			"images/school/silver-medal.png",
+			"images/school/gold-medal.png",
+			"css/school/myHonor.css"
+		],
+		"refer": []
+	},
+	"school/activityReply.html": {
+		"resources": [
+			"css/school/activityReply.css",
+			"js/H5Plus.js",
+			"js/mui.picker.js",
+			"js/common.js",
+			"js/mui.poppicker.js",
+			"css/H5MediaFile.css",
+			"js/jquery-2.1.4.min.js",
+			"js/immersed.js",
+			"css/mui.picker.min.css",
+			"css/mui.poppicker.css",
+			"js/app.js",
+			"css/app.css",
+			"js/mui.min.js",
+			"css/dashboard.css",
+			"js/vue.min.js",
+			"css/mui.css",
+			"images/school/photo-icon.png",
+			"images/school/record-icon.png",
+			"images/astop.png",
+			"images/arecord.png",
+			"images/school/video-icon.png"
+		],
+		"refer": []
+	},
+	"school/everyoneWorks.html": {
+		"resources": [
+			"js/mui.pullToRefresh.js",
+			"js/app.js",
+			"css/school/pushCommon.css",
+			"css/app.css",
+			"js/mui.min.js",
+			"js/mui.pullToRefresh.material.js",
+			"css/dashboard.css",
+			"js/vue.min.js",
+			"images/school/head-pic.png",
+			"css/school/everyoneWorks.css",
+			"css/mui.css",
+			"images/bigicon1.png",
+			"js/jquery-2.1.4.min.js",
+			"js/H5Plus.js",
+			"js/common.js"
+		],
+		"refer": [
+			"school/showImage.html"
+		]
+	},
+	"school/exchangeArea.html": {
+		"resources": [
+			"images/school/addfile.png",
+			"js/mui.pullToRefresh.js",
+			"css/school/pushCommon.css",
+			"js/mui.pullToRefresh.material.js",
+			"images/bigicon1.png",
+			"css/school/activityList.css",
+			"css/school/exchangeArea.css",
+			"images/school/recording.png",
+			"js/jquery-2.1.4.min.js",
+			"js/app.js",
+			"js/mui.min.js",
+			"css/app.css",
+			"css/dashboard.css",
+			"js/vue.min.js",
+			"css/mui.css",
+			"js/H5Plus.js",
+			"js/common.js",
+			"css/H5MediaFile.css",
+			"js/immersed.js",
+			"images/astop.png",
+			"images/arecord.png",
+			"images/school/photo-icon.png",
+			"images/school/record-icon.png",
+			"images/school/video-icon.png"
+		],
+		"refer": [
+			"school/showImage.html",
+			"school/showVideo.html"
+		]
+	},
+	"school/addActivity.html": {
+		"resources": [
+			"js/H5Plus.js",
+			"js/mui.picker.js",
+			"js/common.js",
+			"images/school/minus.png",
+			"js/mui.poppicker.js",
+			"css/H5MediaFile.css",
+			"images/school/plus.png",
+			"css/school/addActivityReply.css",
+			"js/jquery-2.1.4.min.js",
+			"js/immersed.js",
+			"js/app.js",
+			"css/app.css",
+			"js/mui.min.js",
+			"css/dashboard.css",
+			"js/vue.min.js",
+			"css/mui.css",
+			"css/mui.picker.min.css",
+			"css/mui.poppicker.css",
+			"images/school/video-icon.png",
+			"images/school/photo-icon.png",
+			"images/school/record-icon.png"
+		],
+		"refer": [
+			"school/showImage.html"
+		]
+	},
+	"school/myWorks.html": {
+		"resources": [
+			"css/school/myWorks.css",
+			"css/app.css",
+			"css/dashboard.css",
+			"css/mui.css",
+			"js/H5Plus.js",
+			"js/common.js",
+			"js/jquery-2.1.4.min.js",
+			"js/mui.picker.js",
+			"js/app.js",
+			"js/mui.min.js",
+			"js/mui.poppicker.js",
+			"js/vue.min.js",
+			"js/immersed.js",
+			"images/astop.png",
+			"images/arecord.png",
+			"css/H5MediaFile.css",
+			"images/school/photo-icon.png",
+			"images/school/record-icon.png",
+			"images/school/video-icon.png"
+		],
+		"refer": [
+			"school/showImage.html"
+		]
+	},
+	"school/rankingList.html": {
+		"resources": [
+			"images/school/good_black.png",
+			"css/school/rankingList.css",
+			"images/school/bronze-medal.png",
+			"js/app.js",
+			"css/app.css",
+			"js/mui.min.js",
+			"css/dashboard.css",
+			"js/vue.min.js",
+			"css/mui.css",
+			"images/school/head-pic.png",
+			"images/school/silver-medal.png",
+			"images/school/gold-medal.png"
+		],
+		"refer": []
+	},
+	"school/setTeacherfo.html": {
+		"resources": [
+			"js/mui.picker.js",
+			"css/school/setMsgInfo.css",
+			"js/app.js",
+			"js/common.js",
+			"css/app.css",
+			"js/mui.min.js",
+			"js/mui.poppicker.js",
+			"css/dashboard.css",
+			"js/vue.min.js",
+			"css/mui.poppicker.css",
+			"css/mui.picker.min.css",
+			"css/mui.css",
+			"js/jquery-2.1.4.min.js",
+			"images/school/head-pic.png"
+		],
+		"refer": [
+			"school/setPassword.html"
+		]
+	},
+	"school/showImage.html": {
+		"resources": [
+			"css/H5Plus.css",
+			"js/H5Plus.js",
+			"js/H5Plus-quit.js"
+		]
+	},
+	"school/showVideo.html": {
+		"resources": [
+			"css/H5Plus.css",
+			"js/H5Plus.js",
+			"js/H5Plus-quit.js"
+		]
+	},
+	"walking/wkMap.html": {
+		"resources": [
+			"images/walking/MinHang/QiBao/001.png",
+			"images/walking/NanHui/TaoYuan/001.png",
+			"js/walking/useAll.js",
+			"images/walking/JiaDing/SaiCheChang/001.png",
+			"images/walking/ChongMing/ShiDi/001.png",
+			"images/walking/HuangPu/XinTianDi/001.png",
+			"images/walking/LuWan/ZhouGongGuan/001.png",
+			"images/walking/MinHang/HongQiao/001.png",
+			"images/walking/XuHui/JiaoTong/001.png",
+			"js/walking/wkMap.js",
+			"images/walking/SongJiang/HuanLeGu/001.png",
+			"images/walking/shadow.png",
+			"images/walking/PuDongXinQu/HuanQiu/001.png",
+			"images/walking/HuangPu/NanJingLu/001.png",
+			"images/walking/logo.png",
+			"images/walking/bg.png",
+			"images/walking/JinShan/NongMinHua/001.png",
+			"images/walking/HuangPu/WaiTan/001.png",
+			"images/walking/PuDongXinQu/YiShuGong/001.png",
+			"images/walking/XuHui/LvDi/001.png",
+			"images/walking/JinShan/ShaTan/001.png",
+			"images/walking/HuangPu/BoWuGuan/001.png",
+			"images/walking/HuangPu/YuYuan/001.png",
+			"js/jquery-2.1.4.min.js",
+			"images/walking/JingAn/WangJiaSha/001.png",
+			"css/mui.min.css",
+			"images/walking/map.png",
+			"images/walking/location.png",
+			"css/walking/wkMap.css",
+			"images/walking/LuWan/TianZiFang/001.png",
+			"js/mui.min.js"
+		],
+		"refer": [
+			"walking/msgInfo.html"
+		]
+	},
+	"walking/msgInfo.html": {
+		"resources": [
+			"js/walking/useAll.js",
+			"css/walking/swiper.min.css",
+			"css/walking/top.css",
+			"images/walking/stop.png",
+			"css/mui.css",
+			"images/walking/prompt.png",
+			"images/walking/positioning.png",
+			"js/jquery-2.1.4.min.js",
+			"images/walking/play.png",
+			"images/walking/girl.png",
+			"css/walking/msgInfo.css",
+			"images/walking/boy.png",
+			"js/mui.min.js",
+			"js/walking/swiper.min.js",
+			"js/walking/msgInfo.js",
+			"css/walking/dashboard.css",
+			"images/walking/JiaDing/SaiCheChang/5.png",
+			"images/walking/JiaDing/SaiCheChang/4.png",
+			"images/walking/JiaDing/SaiCheChang/2.png",
+			"images/walking/JiaDing/SaiCheChang/1.png",
+			"images/walking/JiaDing/SaiCheChang/6.png",
+			"images/walking/JiaDing/SaiCheChang/3.png",
+			"images/walking/JinShan/ShaTan/1.png",
+			"images/walking/JinShan/ShaTan/2.png",
+			"images/walking/PuDongXinQu/HuanQiu/4.png",
+			"images/walking/PuDongXinQu/HuanQiu/3.png",
+			"images/walking/PuDongXinQu/HuanQiu/2.png",
+			"images/walking/PuDongXinQu/HuanQiu/6.png",
+			"images/walking/PuDongXinQu/HuanQiu/5.png",
+			"images/walking/PuDongXinQu/HuanQiu/1.png",
+			"images/walking/MinHang/QiBao/3.png",
+			"images/walking/MinHang/QiBao/2.png",
+			"images/walking/MinHang/QiBao/5.png",
+			"images/walking/MinHang/QiBao/1.png",
+			"images/walking/MinHang/QiBao/4.png"
+		],
+		"refer": [
+			"walking/bdBaike.html",
+			"walking/baiduMap.html"
+		]
+	},
+	"walking/bdBaike.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/walking/top.css",
+			"css/mui.css",
+			"js/jquery-2.1.4.min.js",
+			"css/walking/dashboard.css"
+		]
+	},
+	"walking/baiduMap.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/walking/top.css",
+			"images/walking/map_marker.gif",
+			"css/mui.css",
+			"js/jquery-2.1.4.min.js",
+			"css/walking/dashboard.css"
+		]
+	}
 }
