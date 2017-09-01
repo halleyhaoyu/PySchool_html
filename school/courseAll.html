@@ -48,18 +48,7 @@
 												 
 											</a>
 										</div>
-									 </li>--> <li class="mui-table-view-cell">
-										<div class="myh5_card" > 
-											<a  href="#"  class="top sc_purple">
-												<img src="../images/school/cc_pic.png" class="photo" />
-												<br>
-												<p class="title">Walking 上海</p>
-												<!--<p href="#"  class="content1">“国际理解教育”</p>
-												<p class="content2">校本课程教材 试用本</p>-->
-												 
-											</a>
-										</div>
-									 </li>
+									 </li>--> 
 								</ul>
 							</div>
 						</div>
@@ -130,22 +119,7 @@
 			data: {
 				 showAllBarFlag:1
 			} 
-		}); 
-//      document.getElementById('it1').addEventListener('tap',function(){
-//			$('#action-1').css('display','block');
-//			$('#action-2').css('display','block');
-//          $('.mui-bar-nav').css('box-shadow','0 1px 6px #ccc');
-//      });
-//      document.getElementById('it2').addEventListener('tap',function(){
-//			$('#action-1').css('display','none');
-//			$('#action-2').css('display','none');
-//			$('.mui-bar-nav').css('box-shadow','none');
-//      }); 
-		
-		 
-		 
-
-
+		});  
 
     (function($) {
 		//阻尼系数
@@ -296,16 +270,9 @@
 	};
 	
 	
-		mui.plusReady(function() {
-			 var userInfo = app.getState(); 
-			// console.info(userInfo.roleType);
-		    if(userInfo.roleType==2){
-		    	vm.showAllBarFlag=0;
-		    }else{
-		    	vm.showAllBarFlag=1;
-		    }
-			//console.info(vm.showAllBarFlag);
-			//预加载详情页
+		document.addEventListener('get_course_all', function(event) {
+			
+		  //预加载详情页
 			webview_course_dir_detail = mui.preload({
 				url: 'courseDir.html',
 				id: 'course_dir_detail',
@@ -316,6 +283,7 @@
 				}
 			});
 			
+			console.info("preload webview_course_dir_detail");
 			
 			webview_select_course_detail = mui.preload({
 				url: 'selectCourse.html',
@@ -336,13 +304,27 @@
 					"bounce": "vertical" 
 				}
 			});
+		});
+	
+	
+	
+		mui.plusReady(function() {
+			 var userInfo = app.getState(); 
+			// console.info(userInfo.roleType);
+		    if(userInfo.roleType==2){
+		    	vm.showAllBarFlag=0;
+		    }else{
+		    	vm.showAllBarFlag=1;
+		    }
+			//console.info(vm.showAllBarFlag);
 			
-	        mui('#main_bar').on('tap', 'a', function(e) {
-			    //获取目标子页的id
-			    var targetTab = this.getAttribute('href');
-			    window.location.href=targetTab;
-			   
-			});
+			
+//	        mui('#main_bar').on('tap', 'a', function(e) {
+//			    //获取目标子页的id
+//			    var targetTab = this.getAttribute('href');
+//			    window.location.href=targetTab;
+//			   
+//			});
 			
 			
 			
@@ -399,16 +381,7 @@
 			},150);
 		}
 		
-		function open_select_course_detail(id) {			
-		 // 选课
-//		 var courseInfo={};
-//		 for(var i = 0;i<courseList0.length;i++){
-//		 	if(courseList0[i].id==id){
-//		 		courseInfo=courseList0[i];
-//		 		break;
-//		 	}
-//		 }
-		 
+		function open_select_course_detail(id) {
 			mui.fire(webview_select_course_detail, 'get_select_course_detail', {
 				courseId: id
 			});
