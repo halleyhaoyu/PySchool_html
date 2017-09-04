@@ -277,7 +277,8 @@
 					"css/icons-extra.css",
 					"images/login/sc_name@3x.png",
 					"images/login/bg@3x.png",
-					"school/courseAll.html"
+					"school/courseAll.html",
+					"school/welcomePage.html"
 				],
 				"refer": [
 					"unlock.html",
@@ -355,7 +356,8 @@
 					"school/personalCenter.html",
 					"images/tabbar/tabbar-ns-4.png",
 					"images/tabbar/tabbar-ns-2.png",
-					"images/tabbar/tabbar-sl-4.png"
+					"images/tabbar/tabbar-sl-4.png",
+					"images/head-dz.png"
 				],
 				"refer": [
 					"school/exchangeArea.html",
@@ -662,7 +664,11 @@
 					"images/school/timeline-dz.png",
 					"images/school/timeline.png",
 					"js/app.js",
-					"js/vue.min.js"
+					"js/vue.min.js",
+					"css/app.css",
+					"js/mui.min.js",
+					"css/dashboard.css",
+					"css/mui.css"
 				],
 				"refer": [],
 				"priority": 0
@@ -918,6 +924,30 @@
 					"css/walking/dashboard.css"
 				],
 				"refer": [],
+				"priority": 0
+			},
+			"school/welcomePage.html": {
+				"resources": [
+					"images/tabbar/tabbar-sl-1.png",
+					"css/mui.min.css",
+					"images/tabbar/tabbar-ns-2.png",
+					"css/foot.css",
+					"images/tabbar/tabbar-ns-4.png",
+					"school/courseAll.html",
+					"images/tabbar/tabbar-ns-3.png",
+					"images/tabbar/tabbar-ns-1.png",
+					"images/tabbar/tabbar-sl-2.png",
+					"images/tabbar/tabbar-sl-3.png",
+					"images/tabbar/tabbar-sl-4.png",
+					"js/mui.min.js",
+					"login.html",
+					"css/mui.css"
+				],
+				"refer": [
+					"school/personalCenter.html",
+					"school/activityList.html",
+					"school/scShowAll.html"
+				],
 				"priority": 0
 			}
 		},

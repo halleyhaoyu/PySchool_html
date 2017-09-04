@@ -34,26 +34,9 @@
 		
 		
 	</header>
-	<nav id="main_bar" class="mui-bar mui-bar-tab">
-		<a class="mui-tab-item" href="courseAll.html">
-			<span class="mui-icon tabbar-ns-1 foot-icon"></span>
-			<span class="mui-tab-label">课程</span>
-		</a>
-		<a class="mui-tab-item" href="activityList.html">
-			<span class="mui-icon tabbar-ns-2 foot-icon"></span>
-			<span class="mui-tab-label">活动</span>
-		</a>
-		<a class="mui-tab-item" href="scShowAll.html">
-			<span class="mui-icon tabbar-ns-3 foot-icon"></span>
-			<span class="mui-tab-label">成果</span>
-		</a>
-		<a class="mui-tab-item mui-active" href="personalCenter.html">
-			<span class="mui-icon tabbar-ns-4 foot-icon"></span>
-			<span class="mui-tab-label">我的</span>
-		</a>
-	</nav>
+	 
 	<div class="mui-content1">
-		<div v-if="userInfo.roleType==3"  >			
+		<div v-if="userInfo.roleType==3"  style="margin-top: 20px;">			
 			<div class="myh5_card">
 				<a id="personal_student_time_line_link" href="#" class="top psct_purple">
 					<img src="../images/school/btm-round.png" class="photo">
@@ -70,7 +53,7 @@
 				</a>
 			</div>
 		</div>
-		<div v-if="userInfo.roleType==2">			
+		<div v-if="userInfo.roleType==2" style="margin-top: 20px;">			
 			<div id="personal_teacher_ranking_link" class="myh5_card myh5_card2">
 				<a href="#" class="top psct_purple">
 					<img src="../images/school/tc_02.png" class="photo1" />
@@ -99,7 +82,7 @@
 			el: '#personal_center_content',
 			data: {
 					userInfo:{
-					roleType:2,
+					roleType:3,
 					realName:'姓名',
 					teacherDetail:{
 						thGender:'M',
@@ -222,11 +205,11 @@
 			
 			
 			
-			mui('#main_bar').on('tap', 'a', function(e) {
-			    //获取目标子页的id
-			    var targetTab = this.getAttribute('href');
-			    window.location.href=targetTab;
-			});
+//			mui('#main_bar').on('tap', 'a', function(e) {
+//			    //获取目标子页的id
+//			    var targetTab = this.getAttribute('href');
+//			    window.location.href=targetTab;
+//			});
 			
 			
 //	var webview_student_time_line = null;

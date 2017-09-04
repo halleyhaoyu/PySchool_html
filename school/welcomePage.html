@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <link href="../css/mui.css" rel="stylesheet"/>
+    	<link href="../css/foot.css" rel="stylesheet"/>
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+		</style>
+	</head>
+
+	<body>
+		<nav id="main_bar" class="mui-bar mui-bar-tab">
+			<a id="defaultTab" class="mui-tab-item mui-active" href="courseAll.html">
+				<span class="mui-icon tabbar-ns-1 foot-icon"></span>
+				<span class="mui-tab-label">课程</span>
+			</a>
+			<a class="mui-tab-item" href="activityList.html">
+				<span class="mui-icon tabbar-ns-2 foot-icon"></span>
+				<span class="mui-tab-label">活动</span>
+			</a>
+			<a class="mui-tab-item" href="scShowAll.html">
+				<span class="mui-icon tabbar-ns-3 foot-icon"></span>
+				<span class="mui-tab-label">成果</span>
+			</a>
+			<a class="mui-tab-item " href="personalCenter.html">
+				<span class="mui-icon tabbar-ns-4 foot-icon"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>
+		 
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			 //mui初始化
+			mui.init();
+			var webview_course_all= null;
+			var webview_activity_list= null;
+			var webview_sc_show_all= null;
+			var webview_persional_center= null;
+			var subpages = ['courseAll.html', 'activityList.html', 'scShowAll.html', 'personalCenter.html'];
+			var subpage_style = {
+				"render": "always",
+					"popGesture": "hide",
+					"bounce": "vertical" ,
+					top: '0px',
+					bottom: '50px'
+			};
+			var activeTab = subpages[0];
+			var activeTabIndex=0;
+			
+			
+			var aniShow = {};
+			
+			 //创建子页面，首个选项卡页面显示，其它均隐藏；
+			mui.plusReady(function() {
+				 
+			
+			
+				var self = plus.webview.currentWebview();
+//				for (var i = 0; i < 4; i++) {
+//					var temp = {};
+//					var sub = plus.webview.create(subpages[i], subpages[i], subpage_style);
+//					if (i > 0) {
+//						sub.hide();
+//					}else{
+//						temp[subpages[i]] = "true";
+//						//mui.extend(aniShow,temp);
+//					}
+//					self.append(sub);
+//				}
+
+				webview_course_all = mui.preload({
+					url: 'courseAll.html',
+					id: 'courseAll.html',
+					styles: subpage_style
+				});
+				webview_activity_list = mui.preload({
+					url: 'activityList.html',
+					id: 'activityList.html',
+					styles: subpage_style
+				});
+				
+				webview_sc_show_all = mui.preload({
+					url: 'scShowAll.html',
+					id: 'scShowAll.html',
+					styles: subpage_style
+				});
+				
+				webview_persional_center = mui.preload({
+					url: 'personalCenter.html',
+					id: 'personalCenter.html',
+					styles: subpage_style
+				});
+				
+				
+				mui('.mui-bar-tab').on('tap', 'a', function(e) {
+					var targetTab = this.getAttribute('href');
+					//console.info(targetTab);
+					var targetTabIndex = subpages.indexOf(targetTab)
+					if (targetTab == activeTab) {
+						return;
+					}
+					//显示目标选项卡
+					//若为iOS平台或非首次显示，则直接显示
+	//				if(mui.os.ios){ //  ||aniShow[targetTab]
+	//					plus.webview.show(targetTab);
+	//				}else{
+						//否则，使用fade-in动画，且保存变量
+	//					var temp = {};
+	//					temp[targetTab] = "true";
+						//mui.extend(aniShow,temp);
+						var showInType="slide-in-right";
+						var showOutType="slide-in-left";
+						showInType=activeTabIndex>targetTabIndex ? "slide-in-left":"slide-in-right";
+						showOutType=activeTabIndex>targetTabIndex ? "slide-out-right":"slide-out-left";
+						//console.info(showInType);
+						//plus.webview.show(targetTab,showType,300);
+						//targetTab.show(showType,300);
+						 
+					 
+						if(targetTabIndex==0){
+								webview_course_all.show(showInType,300);
+						}else if(targetTabIndex==1){
+								webview_activity_list.show(showInType,300);
+						}else if(targetTabIndex==2){
+								webview_sc_show_all.show(showInType,300);
+						}else if(targetTabIndex==3){
+								webview_persional_center.show(showInType,300);
+						}
+					 
+						
+					//}
+					//隐藏当前;
+					plus.webview.hide(activeTab,showOutType, 300);
+					plus.webview.hi
+					//更改当前活跃的选项卡
+					activeTab = targetTab;
+					activeTabIndex = targetTabIndex;
+				});
+				
+				mui.fire(webview_course_all, 'get_course_all', {
+				});
+				webview_course_all.show('zoom-out',300);
+				
+			});
+			 //当前激活选项
+			
+			//var title = document.getElementById("title");
+			 //选项卡点击事件
+			
+			
+			
+			 //自定义事件，模拟点击“首页选项卡”
+//			document.addEventListener('gohome', function() {
+//				var defaultTab = document.getElementById("defaultTab");
+//				//模拟首页点击
+//				mui.trigger(defaultTab, 'tap');
+//				console.info(JSON.stringify(defaultTab));
+//				//切换选项卡高亮
+//				var current = document.querySelector(".mui-bar-tab>.mui-tab-item.mui-active");
+//				if (defaultTab !== current) {
+//					current.classList.remove('mui-active');
+//					defaultTab.classList.add('mui-active');
+//				}
+//			});
+		</script>
+	</body>
+
+</html>
