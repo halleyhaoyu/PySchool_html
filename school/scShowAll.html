@@ -163,6 +163,7 @@
 	var pageIndexSchool = 1;
 	var pageIndexClass= 1;
   	
+		 var main;//主页
   	
   	
   	onResizeWindow();
@@ -512,12 +513,14 @@
 	
 	mui.plusReady(function () {
 
+			 main =  plus.android.runtimeMainActivity();
 		var backButtonPress = 0;
 			mui.back = function(event) {
 				backButtonPress++;
 				if (backButtonPress > 1) {
-					plus.runtime.quit();
-					app.logout();
+//					plus.runtime.quit();
+//					app.logout();
+					 main && main.moveTaskToBack(false);
 				} else {
 					plus.nativeUI.toast('再按一次退出应用');
 				}
@@ -555,8 +558,9 @@
 				//mui.back(); 
 				vm_show_all.commentInfo={};  
 				item.actFinePintNum++;
-			}
-			mui.toast(data.msg);
+			}else{
+	    		mui.toast(data.msg);
+	    	}
 		});
 	}
 	
@@ -581,8 +585,9 @@
 				vm_show_all.commentInfo={}; 
 				vm_show_all.showInputFlag=false;
 				pushScShowAllDown('',0,true); 
-			}
-			mui.toast(data.msg);
+			}else{
+	    		mui.toast(data.msg);
+	    	}
 		});
 	}
 	

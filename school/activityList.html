@@ -59,6 +59,7 @@
 	  	
 		var pageIndex = 1;
 	  	
+		 var main;//主页
 		var webview_activity_detail = null; //详情页webview
 		var webview_activity_add_detail = null; // 申请活动详情
 		var webview_activity_exchange_area = null; //交流区
@@ -203,12 +204,15 @@
 	
 	
 	mui.plusReady(function() {
+			 main =  plus.android.runtimeMainActivity();
 		var backButtonPress = 0;
 			mui.back = function(event) {
 				backButtonPress++;
 				if (backButtonPress > 1) {
-					plus.runtime.quit();
-					app.logout();
+//					plus.runtime.quit();
+//					app.logout();
+
+					 main && main.moveTaskToBack(false);
 				} else {
 					plus.nativeUI.toast('再按一次退出应用');
 				}

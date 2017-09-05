@@ -270,8 +270,9 @@
 						mui.toast('只可以上传一个附件！');
 					}
 	    		}
-	    	}
-			mui.toast(data.msg);
+	    	}else{
+				mui.toast(data.msg);
+			}
 	    }
 	    
 	    function post_add_activity(){
@@ -283,9 +284,8 @@
 			app.postAddActivity(data,function(data){
 				if(data.code==0){
 					mui.back(); 
-				}else{
-					mui.toast(data.msg);
 				}
+					mui.toast(data.msg);
 			});
 	    }
 	</script>

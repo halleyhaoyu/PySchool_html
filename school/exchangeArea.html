@@ -305,8 +305,9 @@
 						//console.info(JSON.stringify(vm_exchange_area.acAreaList));
 					}
 				 	pageIndex=1;
+				}else{
+					mui.toast(data.msg);
 				}
-				mui.toast(data.msg);
 				if(!autoFlag){
 					self.endPullDownToRefresh();
 				}
@@ -331,8 +332,9 @@
 						overFlag=true;
 					}
 					
-				} 
-				mui.toast(data.msg);
+				}else{
+					mui.toast(data.msg);
+				}
 				self.endPullUpToRefresh(overFlag);
 							
 			});
@@ -388,8 +390,10 @@
 				//pushExchangeAreaDown("",true);
 					//vm_exchange_area.selectFileList.splice(0,vm_exchange_area.selectFileList.length);
     		}
+    	}else{
+    		mui.toast(data.msg);
     	}
-		mui.toast(data.msg);
+		
     }
      
 	/**

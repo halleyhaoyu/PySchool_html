@@ -133,8 +133,9 @@
 			if(data.code==0){
 				vm_activity_detail.courseInfo=data.object; 
 				//vm.classList =  data.objectList;
+			}else{
+				mui.toast(data.msg);
 			}
-			mui.toast(data.msg);
 		});
  	}
 	//重写返回逻辑

@@ -147,16 +147,18 @@
 					app.getStudentPraiseRankingList(function(data){
 						if(data.code==0){
 							vm_ranking_list.studentRanking=data.object.rows;  
-						}
-						mui.toast(data.msg);
+						}else{
+				    		mui.toast(data.msg);
+				    	}
 					});
 				}else{
 					app.getActivityPraiseRankingList(function(data){
 						if(data.code==0){
 							vm_ranking_list.activityRanking=data.object.rows; 
 							console.info(JSON.stringify(data.object.rows));
-						}
-						mui.toast(data.msg);
+						}else{
+				    		mui.toast(data.msg);
+				    	}
 					});
 				}
 			}

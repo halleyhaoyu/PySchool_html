@@ -182,8 +182,9 @@
 					
 					console.info(JSON.stringify(vm_course_exprience.selectFileList));
 				}
+			}else{
+				mui.toast(data.msg);
 			}
-			mui.toast(data.msg);
 		});
     }
     
@@ -214,8 +215,9 @@
 				if(data.code==0){	
 					selectFileList.splice(0,selectFileList.length);			
 					mui.back(); 
-				}
-				mui.toast(data.msg);
+				} 
+					mui.toast(data.msg);
+				 
 			});
 			 
 		}); 
@@ -296,8 +298,9 @@
 					mui.toast('只可以上传一个附件！');
 				}
     		}
-    	}
-		mui.toast(data.msg);
+    	}else{
+			mui.toast(data.msg);
+		}
     }
     
 </script>

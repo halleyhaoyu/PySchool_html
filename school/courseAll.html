@@ -48,18 +48,7 @@
 												 
 											</a>
 										</div>
-									 </li>--> <li class="mui-table-view-cell">
-										<div class="myh5_card" > 
-											<a  href="#"  class="top sc_purple">
-												<img src="../images/school/cc_pic.png" class="photo" />
-												<div  class="mui-icon mui-icon-navigate" style="color: #FFFFFF;float: right; margin-right: 10px; font-size: 32px; text-shadow: 0px 2px 3px #000000;"></div>
-												<p class="title">Walking 上海</p>
-												<p href="#"  class="content1">“国际理解教育”</p>
-												<p class="content2">校本课程教材 试用本</p>
-												 
-											</a>
-										</div>
-									 </li>
+									 </li>--> 
 								</ul>
 							</div>
 						</div>
@@ -115,6 +104,8 @@
 		// var courseDirPage = null;
 		var lastCourseId = ''; //最新新闻的id
 		var webview_course_dir_detail = null; //详情页webview
+		 var main;//主页
+		var webview_select_walking_detail = null; //wk上海静态
 		var courseList0=[];
 		var courseList1=[];
 		var pageIndexMy = 1;
@@ -320,6 +311,7 @@
 	
 	
 		mui.plusReady(function() {
+			 main =  plus.android.runtimeMainActivity();
 			 var userInfo = app.getState(); 
 			// console.info(userInfo.roleType);
 		    if(userInfo.roleType==2){
@@ -360,8 +352,9 @@
 			mui.back = function(event) {
 				backButtonPress++;
 				if (backButtonPress > 1) {
-					plus.runtime.quit();
-					app.logout();
+					//plus.runtime.quit();
+					//app.logout();
+					 main && main.moveTaskToBack(false);
 				} else {
 					plus.nativeUI.toast('再按一次退出应用');
 				}

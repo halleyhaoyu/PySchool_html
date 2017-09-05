@@ -264,7 +264,8 @@
 						selectFileList.splice(0,selectFileList.length);
 						mui.back(); 
 					}
-					mui.toast(data.msg);
+			    		mui.toast(data.msg);
+			    	
 				});
     		}else{
     			mui.toast('活动已经结束，不能提交我的作品！');
@@ -304,8 +305,9 @@
 				vm_my_works.myWorksInfo.activityStudentsWorksFilesList=vm_my_works.myWorksInfo.activityStudentsWorksFilesList.concat(activityStudentsWorksFilesList);
 				
     		}
+    	}else{
+    		mui.toast(data.msg);
     	}
-		mui.toast(data.msg);
     }
     
     function getMyWorksInfo(){
@@ -326,8 +328,9 @@
 					}
 					console.info(JSON.stringify(vm_my_works.selectFileList));
 				}
-			}
-			mui.toast(data.msg);
+			}else{
+	    		mui.toast(data.msg);
+	    	}
 		});
     }
     

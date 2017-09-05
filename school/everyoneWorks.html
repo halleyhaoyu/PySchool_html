@@ -335,8 +335,9 @@
 					}else{
 						overFlag=true;
 					} 
-				} 
-				mui.toast(data.msg);
+				} else{
+					mui.toast(data.msg);
+				}
 				if(!autoFlag){
 					self.endPullUpToRefresh(overFlag);
 				}
@@ -358,8 +359,9 @@
 						console.info(JSON.stringify(vm_everyone_work.workList));
 					}
 				 	
+				}else{
+					mui.toast(data.msg);
 				}
-				mui.toast(data.msg);
 				if(!autoFlag){
 					self.endPullDownToRefresh();
 				}
@@ -381,8 +383,9 @@
 					vm_everyone_work.workList=data.object.rows;
 					console.info(JSON.stringify(vm_everyone_work.workList));
 				}
+			}else{
+				mui.toast(data.msg);
 			}
-			mui.toast(data.msg); 
 		});
 	});
 
@@ -421,8 +424,9 @@
 				//mui.back(); 
 				vm_everyone_work.commentInfo={};  
 				item.aswPointNum++;
-			}
-			mui.toast(data.msg);
+			} 
+				mui.toast(data.msg);
+			 
 		});
 	}
 	
@@ -450,8 +454,9 @@
 				vm_everyone_work.showInputFlag=false;
 				pushEveryoneWorksDown('',true); 
 				 
-			}
-			mui.toast(data.msg);
+			} 
+				mui.toast(data.msg);
+			 
 		});
 	}
 	

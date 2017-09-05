@@ -24,7 +24,7 @@
 		
 	<header class="mui-bar mui-bar-nav">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		<a id="modify_password" class="mui-pull-right setPwd" > 修改密码 </a>
+		<!--<a id="modify_password" class="mui-pull-right setPwd" > 修改密码 </a>-->
 		<img src="../images/head-dz.png" class="head-dz"/>
 		<h1 class="mui-title">修改学生信息</h1>
 	</header>
@@ -99,7 +99,7 @@
 <script type="text/javascript" charset="UTF-8">
 	mui.init();
 
-	var webview_set_password = null;
+	//var webview_set_password = null;
 	
 	var gradePicker = new mui.PopPicker();
 	var classPicker = new mui.PopPicker();
@@ -194,28 +194,28 @@
 	
 	
   	mui.plusReady(function(){
-  			webview_set_password = mui.preload({
-				url: 'setPassword.html',
-				id: 'set_password',
-				styles: {
-					"render": "always",
-					"popGesture": "hide",
-					"bounce": "vertical" 
-				}
-			});
+//			webview_set_password = mui.preload({
+//				url: 'setPassword.html',
+//				id: 'set_password',
+//				styles: {
+//					"render": "always",
+//					"popGesture": "hide",
+//					"bounce": "vertical" 
+//				}
+//			});
 			
 		mui('#student_info_content').on('tap', '#btn_set_student_post', function(e) {
 			  post_set_student_info();
 			});
 			
-  		mui('#student_info_content').on('tap', '#modify_password', function(e) {
-			  mui.fire(webview_set_password, 'get_set_teacher', {
-					//userInfo: userInfo
-				});	 
-				setTimeout(function () {
-						webview_set_password.show("slide-in-right", 300);
-				},150);
-			});
+//		mui('#student_info_content').on('tap', '#modify_password', function(e) {
+//			  mui.fire(webview_set_password, 'get_set_teacher', {
+//					//userInfo: userInfo
+//				});	 
+//				setTimeout(function () {
+//						webview_set_password.show("slide-in-right", 300);
+//				},150);
+//			});
 		mui('#student_info_content').on('tap', '#inp_stdGradeName', function(e) {
 		   op_select_grade();
 		});
@@ -256,8 +256,9 @@
     		if(data.code==0){
         		vm_set_student.studentInfo.stdPic=data.objectList[0].pathAll; 
     		}
+    	}else{
+    		mui.toast(data.msg);
     	}
-		mui.toast(data.msg);
     }
   	//重写返回逻辑
 	mui.back = function() {

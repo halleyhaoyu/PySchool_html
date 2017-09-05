@@ -270,8 +270,9 @@
 						}
 						console.info(JSON.stringify(vm_activity_reply.selectFileList));
 					}
+				}else{
+					mui.toast(data.msg);
 				}
-				mui.toast(data.msg);
 				console.info(JSON.stringify(vm_activity_reply.commentInfo));
 			});
 		}
@@ -289,8 +290,9 @@
 					if(data.code==0){
 						selectFileList.splice(0,selectFileList.length);
 						mui.back();
-					}
+					} 
 					mui.toast(data.msg);
+					 
 				});
 				 
 	  	}
@@ -326,8 +328,9 @@
 					vm_activity_reply.commentInfo.activityHighlightsFilesList=vm_activity_reply.commentInfo.activityHighlightsFilesList.concat(activityHighlightsFilesList);
 					
 	    		}
-	    	}
-			mui.toast(data.msg);
+	    	}else{
+						mui.toast(data.msg);
+					}
 	    }
 
 	</script>

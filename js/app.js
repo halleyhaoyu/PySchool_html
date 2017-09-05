@@ -109,7 +109,8 @@
 	};
 	owner.gotoLogin = function(){
 		owner.logout();
-		window.location.href='../login.html';
+		//window.location.href='../login.html';
+		 $.openWindow('../login.html') 
 	}
 
 	owner.logout = function(){		
