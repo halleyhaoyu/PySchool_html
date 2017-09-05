@@ -79,6 +79,62 @@
 			}
 		});
 		
+		document.addEventListener('get_activity_list', function(event) {
+			//预加载详情页
+			webview_activity_detail = mui.preload({
+				url: 'activityDetails.html',
+				id: 'activity_detail',
+				styles: {
+					"render": "always",
+					"popGesture": "hide",
+					"bounce": "vertical" 
+				}
+			});
+			
+			webview_activity_add_detail = mui.preload({
+				url: 'addActivity.html',
+				id: 'add_activity',
+				styles: {
+					"render": "always",
+					"popGesture": "hide",
+					"bounce": "vertical" 
+				}
+			});
+			
+			webview_activity_exchange_area = mui.preload({
+				url: 'exchangeArea.html',
+				id: 'exchange_area',
+				styles: {
+					"render": "always",
+					"popGesture": "hide",
+					"bounce": "vertical" 
+				}
+			});
+			//交流区信息准备 
+			var courseList=[];
+			var classOption = {value:0,	text:'--请选择班级--'};
+			courseList.push(classOption);
+			//console.info(JSON.stringify(courseList));
+			userPicker.setData(courseList);
+			app.getCourseAllOption(function(data){
+				if(data.code==0){ 
+					if(data.objectList){
+						for(var i=0; i<data.objectList.length;i++){ 
+							courseList.push(
+								{
+									value:data.objectList[i].tcId,
+									text:data.objectList[i].tcName}
+								);
+						}
+					}
+					//console.info(JSON.stringify(courseList));
+			 		userPicker.setData(courseList);
+				}
+			}); 
+			
+			
+			pushActivityListDown('',0,true);
+		});
 //	    mui('#main_bar').on('tap', 'a', function(e) {
 //		    //获取目标子页的id
 //		    var targetTab = this.getAttribute('href');
@@ -205,7 +261,7 @@
 	
 	mui.plusReady(function() {
 			 main =  plus.android.runtimeMainActivity();
-		var backButtonPress = 0;
+			var backButtonPress = 0;
 			mui.back = function(event) {
 				backButtonPress++;
 				if (backButtonPress > 1) {
@@ -221,36 +277,6 @@
 				}, 1000);
 				return false;
 			}; 
-		//预加载详情页
-		webview_activity_detail = mui.preload({
-			url: 'activityDetails.html',
-			id: 'activity_detail',
-			styles: {
-				"render": "always",
-				"popGesture": "hide",
-				"bounce": "vertical" 
-			}
-		});
-		
-		webview_activity_add_detail = mui.preload({
-			url: 'addActivity.html',
-			id: 'add_activity',
-			styles: {
-				"render": "always",
-				"popGesture": "hide",
-				"bounce": "vertical" 
-			}
-		});
-		
-		webview_activity_exchange_area = mui.preload({
-			url: 'exchangeArea.html',
-			id: 'exchange_area',
-			styles: {
-				"render": "always",
-				"popGesture": "hide",
-				"bounce": "vertical" 
-			}
-		});
 		
 		
 		 
@@ -279,33 +305,11 @@
 			 op_exchange_area();
 		}); 
 		 
-		//交流区信息准备 
-		var courseList=[];
-		var classOption = {value:0,	text:'--请选择班级--'};
-		courseList.push(classOption);
-		//console.info(JSON.stringify(courseList));
-		userPicker.setData(courseList);
-		app.getCourseAllOption(function(data){
-			if(data.code==0){ 
-				if(data.objectList){
-					for(var i=0; i<data.objectList.length;i++){ 
-						courseList.push(
-							{
-								value:data.objectList[i].tcId,
-								text:data.objectList[i].tcName}
-							);
-					}
-				}
-				//console.info(JSON.stringify(courseList));
-		 		userPicker.setData(courseList);
-			}
-		}); 
 		
 		
 		var userInfo = app.getState(); 
 		vm_activity_list.userInfo=userInfo;
 		
-		pushActivityListDown('',0,true);
 	});
 	
 	

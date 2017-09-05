@@ -326,7 +326,12 @@
 	});
  
   	
-  	
+  	document.addEventListener('get_sc_show_all', function(event) {
+  		
+			pushScShowAllDown('',0,true);
+			pushScShowAllDown('',1,true);
+			
+  	});
   	
 //  mui('#main_bar').on('tap', 'a', function(e) {
 //	    //获取目标子页的id
@@ -529,9 +534,6 @@
 				}, 1000);
 				return false;
 			}; 
-			
-			pushScShowAllDown('',0,true);
-			pushScShowAllDown('',1,true);
 			
 			 
 //			mui('#sc_show_content').on('tap','#btn_show_all_post',function(){
