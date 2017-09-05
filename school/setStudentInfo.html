@@ -50,7 +50,7 @@
 
 			<div class="mui-input-row">
 				<label>性别 <span style="color:red;"> *</span></label>
-				<div id="stdGenderName" class="mui-switch mui-switch-blue mui-switch-m " :class="studentInfo.stdGender=='M'?'mui-active':''" style="float: left;">
+				<div id="stdGenderName" :class="stdGenderNameClass"   style="float: left;">
 				  <div class="mui-switch-handle"></div>
 				</div>
 			</div>
@@ -118,7 +118,7 @@
 		el: '#student_info_content',
 		data: {
 			studentInfo:{
-				 stdGender:'M',
+				 stdGender:'F',
 				manageId:0,
 //				 stdRealName:'测试200',
 //				stdGradeName:'1年级',
@@ -134,6 +134,15 @@
 		    		pic=this.studentInfo.stdPic;
 		    	}
 		    	return pic;
+		    },
+		    stdGenderNameClass:function(){
+		    	var cl = 'mui-switch mui-switch-blue mui-switch-m mui-active';
+		    	if(this.studentInfo.stdGender=='M'){
+		    		cl = 'mui-switch mui-switch-blue mui-switch-m mui-active';
+		    	}else{
+		    		cl = 'mui-switch mui-switch-blue mui-switch-m';
+		    	}
+		    	return cl;
 		    },
 		    stdGenderName:  {
 		        get: function () {

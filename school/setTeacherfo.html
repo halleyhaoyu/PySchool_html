@@ -44,7 +44,7 @@
 			</div> -->
 			<div class="mui-input-row">
 				<label>性别 <span style="color:red;"> *</span></label>
-				<div id="thGenderName" class="mui-switch mui-switch-blue mui-switch-m " :class="teacherInfo.thGender=='M'?'mui-active':''" style="float: left;">
+				<div id="thGenderName" :class="thGenderNameClass"   style="float: left;">
 				  <div class="mui-switch-handle"></div>
 				</div>
 			</div>
@@ -107,6 +107,15 @@
 		    		pic=this.teacherInfo.thPic;
 		    	}
 		    	return pic;
+		    },
+		    thGenderNameClass:function(){
+		    	var cl = 'mui-switch mui-switch-blue mui-switch-m mui-active';
+		    	if(this.teacherInfo.thGender=='M'){
+		    		cl = 'mui-switch mui-switch-blue mui-switch-m mui-active';
+		    	}else{
+		    		cl = 'mui-switch mui-switch-blue mui-switch-m';
+		    	}
+		    	return cl;
 		    },
 		    thGenderName:  {
 		        get: function () {
