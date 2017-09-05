@@ -102,7 +102,19 @@
 	<script type="text/javascript" src="../js/common.js" ></script>
 	<script type="text/javascript" src="../js/immersed.js" ></script>
 	<script type="text/javascript" charset="UTF-8">
-		mui.init();
+		mui.init({
+			beforeback:function(){
+				var webview_activity_detail = plus.webview.getWebviewById('activity_detail');
+				//触发列表界面的自定义事件（refresh）,从而进行数据刷新
+				//mui.fire(list,'refresh');
+				mui.fire(webview_activity_detail, 'get_activity_detail', {
+					activityId: vm_my_works.myWorksInfo.aswActId
+				});
+				console.info('beforeback get_activity_detail');
+				//返回true，继续页面关闭逻辑
+				return true;
+	    	}
+		});
 		var count = 0;
 		 
      var vm_my_works = new Vue({
@@ -127,7 +139,7 @@
 			methods:{
 				getDisplayType:function(patch){
 						var type=0;
-						console.info(patch);
+						//console.info(patch);
 						if(patch){
 							var suffix = patch.substr(patch.lastIndexOf('.'));
 							if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
@@ -262,8 +274,10 @@
 		}); 
     })
 
-    mui.back = function() {
+    var old_back = mui.back;
+	mui.back = function() {
 		plus.webview.currentWebview().hide("auto", 300);
+		old_back();
 	}
     
     function getMyWorksFileList(fileList){ 

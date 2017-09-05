@@ -15,6 +15,9 @@
 	<link href="../css/dashboard.css" rel="stylesheet"/>
 	<link href="../css/top.css" rel="stylesheet"/>
 	<link href="../css/school/setMsgInfo.css" rel="stylesheet"/>
+	<style type="text/css">
+		 
+	</style>
 </head>
 <body>
 	<div id="student_info_content">
@@ -39,18 +42,26 @@
 			</div>
 
 
-			<div class="mui-input-row">
+			<!--<div class="mui-input-row">
 				<label>性别 <span style="color:red;"> *</span></label>
 				<input type="text" v-model="stdGenderName" placeholder="性别"/>
-			</div>
+			</div>-->
+
 
 			<div class="mui-input-row">
+				<label>性别 <span style="color:red;"> *</span></label>
+				<div id="stdGenderName" class="mui-switch mui-switch-blue mui-switch-m " :class="studentInfo.stdGender=='M'?'mui-active':''" style="float: left;">
+				  <div class="mui-switch-handle"></div>
+				</div>
+			</div>
+			
+			<div class="mui-input-row">
 				<label>年级 <span style="color:red;"> *</span></label>
-				<input type="text" v-model="studentInfo.stdGradeName"  placeholder="年级"/>
+				<input id="inp_stdGradeName" type="text" readonly="readonly" v-model="studentInfo.stdGradeName"  placeholder="年级"/>
 			</div>
 			<div class="mui-input-row">
 				<label>班级 <span style="color:red;"> *</span></label>
-				<input type="text" v-model="studentInfo.stdClassName"  placeholder="班级"/>
+				<input id="inp_stdClassName" type="text" readonly="readonly" v-model="studentInfo.stdClassName"  placeholder="班级"/>
 			</div>
 			<div class="mui-input-row">
 				<label>学号 <span style="color:red;"> *</span></label>
@@ -90,7 +101,8 @@
 
 	var webview_set_password = null;
 	
-	
+	var gradePicker = new mui.PopPicker();
+	var classPicker = new mui.PopPicker();
 //	(function($,doc){
 //		$.init();
 //		$.ready(function(){
@@ -141,7 +153,36 @@
   	document.addEventListener('get_set_student', function(event) {
   		var userInfo = app.getState(); 
 		vm_set_student.studentInfo = userInfo.studentsDetail;
+		
+		
+		var gradeList=[];
+		var gradeOption = {value:0,	text:'--选择年级--'};
+		gradeList.push(gradeOption); 
+		gradePicker.setData(gradeList);
+		app.getGradList(function(data){
+			 
+			for(var i=0; i<data.length;i++){ 
+				gradeList.push(
+				{
+					value:data[i].id,
+					text:data[i].text}
+				);
+			}
+			gradePicker.setData(gradeList);
+		});
+		 
 	});
+	
+	
+	document.getElementById("stdGenderName").addEventListener("toggle",function(event){
+	  if(event.detail.isActive){
+	    vm_set_student.studentInfo.stdGender='M';
+	  }else{
+	    vm_set_student.studentInfo.stdGender='F';
+	  }
+	})
+	
+	
 	
   	mui.plusReady(function(){
   			webview_set_password = mui.preload({
@@ -166,6 +207,14 @@
 						webview_set_password.show("slide-in-right", 300);
 				},150);
 			});
+		mui('#student_info_content').on('tap', '#inp_stdGradeName', function(e) {
+		   op_select_grade();
+		});
+		mui('#student_info_content').on('tap', '#inp_stdClassName', function(e) {
+		   op_select_class();
+		});
+				
+			
   	})
   	function post_set_student_info(){
   			var userInfo = app.getState();
@@ -204,6 +253,57 @@
   	//重写返回逻辑
 	mui.back = function() {
 		plus.webview.currentWebview().hide("auto", 300);
+	}
+  	
+  	
+  	function op_select_grade(){
+		gradePicker.show(function(items) { 
+			console.info(JSON.stringify(items));
+			if(items[0].value>0){
+				vm_set_student.studentInfo.stdGradeName=items[0].text;
+				vm_set_student.studentInfo.stdGrade=items[0].value;
+				ini_op_select_clase();
+			}else{
+				vm_set_student.studentInfo.stdGradeName='';
+				vm_set_student.studentInfo.stdGrade=0;
+			}
+		});
+		
+	}
+  	
+  	function ini_op_select_clase(){
+  		var classList=[];
+		var classOption = {value:0,	text:'--选择班级--'};
+		classList.push(classOption); 
+		classPicker.setData(classList);
+		if(vm_set_student.studentInfo.stdGrade>0)
+		{
+			app.getClassList(vm_set_student.studentInfo.stdGrade,function(data){
+				 
+				for(var i=0; i<data.length;i++){ 
+					classList.push(
+					{
+						value:data[i].id,
+						text:data[i].text}
+					);
+				}
+				classPicker.setData(classList);
+			});
+		}
+  	}
+  	
+  	function op_select_class(){
+		classPicker.show(function(items) {
+			console.info(JSON.stringify(items));
+			if(items[0].value>0){
+				vm_set_student.studentInfo.stdClassName=items[0].text;
+				vm_set_student.studentInfo.stdClass=items[0].value;
+			}else{
+				vm_set_student.studentInfo.stdClassName='';
+				vm_set_student.studentInfo.stdClass=0;
+			}
+		});
+		
 	}
   	
 </script>
