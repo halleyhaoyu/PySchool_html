@@ -455,6 +455,7 @@
       "images/school/voice.png",
       "images/school/album.png",
       "images/school/copy.png"
+
     ],
     "refer": [
       "school/showImage.html"

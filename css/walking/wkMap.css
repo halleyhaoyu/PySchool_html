@@ -7,24 +7,25 @@ body{
 	background-size: cover;
 	color: #FFF;
 }
-.mui-icon-home{
-	color: #FFF;
-	position: absolute;
-	font-size: 2rem;
-	padding: 0.5rem;
+.home-icon{
+	height: 32px;
+    margin-top: 40px;
+    margin-left: 12px;
+    position: absolute;
 }
 .logo{
-	padding: 1rem;
+	padding:40px 0 12px 0;
 	text-align: center;
 }
 .logo img{
 	width: 12rem;
 }
 .content>img{
-	width: 100%;
+	width:98%;
 }
 .content{
 	position: relative;
+	text-align: center;
 }
 .location_container{
 	width: 2rem;
@@ -34,6 +35,7 @@ body{
 	position: relative;
 	animation: l_jump 1s linear infinite;
 	-webkit-animation: l_jump 1s linear infinite;
+	animation-iteration-count:3;
 }
 @keyframes l_jump {
 	0{top: 0;}
@@ -50,6 +52,7 @@ body{
 	position: absolute;
 	left: 0.9rem;
 	top: 0.5rem;
+	color: #fff;
 }
 .l_icon{
 	width: 120%;
@@ -67,6 +70,7 @@ body{
 	.l_number{
 		left: 0.6rem;
 		top: 0.3rem;
+		color: #fff;
 	}
 	.l_shadow{
 		bottom: -0.2rem;
@@ -121,12 +125,14 @@ body{
 }
 .list_title,.img_name{
 	text-align: center;
+	color: #fff;
 }
 .list_title{
-	padding: 0.6rem;
+	padding:40px 0 0;
 	background-color: #9C35A5;
 	position: relative;
 	z-index: 5;
+	color: #fff;
 }
 .list_title:after{
 	content: '.';
@@ -136,7 +142,7 @@ body{
 	border-right: 10px solid transparent;
 	position: absolute;
 	left: calc(50% - 10px);
-	top: 2.4rem;
+	top:60px;
 }
 .list_detail{
 	width: 100%;
@@ -157,6 +163,9 @@ body{
 }*/
 .list_detail ul{
 	position: absolute;
+    overflow: auto;
+    height: 100%;
+    padding-bottom: 100px;
 }
 .list_detail ul li{
 	list-style: none;
