@@ -110,7 +110,9 @@
 	<script type="text/javascript" src="../js/common.js" ></script>
 	<script type="text/javascript" src="../js/immersed.js" ></script>
 	<script type="text/javascript" charset="UTF-8">
-	    mui.init();
+	    mui.init({
+	    	
+	    });
 	    var count = 0
 	    
 	     
@@ -164,13 +166,25 @@
 			}
 		});
 		
-		document.addEventListener('get_activity_add_detail', function(event) { 
+		document.addEventListener('get_activity_add_detail', function(event) {
+			vm_add_activity.activityInfo={					
+					manageId:0,
+					actName:'',
+					actDesc:'',
+					actNum:0,//  最大参与人数          必填
+					actStatus:1,//  1:待审核；2：审核通过；3：审核未通过
+					actParticipant:'',//  活动参与人
+					actFiles:'' //  活动附件 
+			};
+			vm_add_activity.selectFileList=[];
 		});
 	
 		
 		//重写返回逻辑
+		//var old_back = mui.back;
 		mui.back = function() {
 			plus.webview.currentWebview().hide("auto", 300);
+			//old_back();
 		}
 		
 		//窗口隐藏时，重置页面数据
@@ -256,8 +270,9 @@
 						mui.toast('只可以上传一个附件！');
 					}
 	    		}
-	    	}
-			mui.toast(data.msg);
+	    	}else{
+				mui.toast(data.msg);
+			}
 	    }
 	    
 	    function post_add_activity(){
@@ -270,7 +285,7 @@
 				if(data.code==0){
 					mui.back(); 
 				}
-				mui.toast(data.msg);
+					mui.toast(data.msg);
 			});
 	    }
 	</script>

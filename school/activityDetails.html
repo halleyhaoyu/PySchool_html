@@ -133,8 +133,9 @@
 			if(data.code==0){
 				vm_activity_detail.courseInfo=data.object; 
 				//vm.classList =  data.objectList;
+			}else{
+				mui.toast(data.msg);
 			}
-			mui.toast(data.msg);
 		});
  	}
 	//重写返回逻辑
@@ -224,7 +225,8 @@
 	function open_activity_reply_detail() {			
 		//触发子窗口变更详情
 		mui.fire(webview_activity_reply_detail, 'get_activity_reply_detail', {
-				activityInfo: vm_activity_detail.courseInfo
+					activityId: activityId,
+					activityInfo: vm_activity_detail.courseInfo
 			});
  
 			setTimeout(function () {

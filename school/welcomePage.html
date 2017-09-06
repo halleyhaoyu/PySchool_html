@@ -15,6 +15,12 @@
 			body {
 				background-color: #efeff4;
 			}
+			.main_bg{
+				background: -webkit-linear-gradient(bottom,  #FED361,#FEC332); /* Safari 5.1 - 6.0 */
+				background: -o-linear-gradient(bottom, #FED361,#FEC332); /* Opera 11.1 - 12.0 */
+				background: -moz-linear-gradient(bottom, #FED361,#FEC332); /* Firefox 3.6 - 15 */
+				background: linear-gradient(to bottom, #FED361,#FEC332); /* 标准的语法（必须放在最后） */
+			}
 		</style>
 	</head>
 
@@ -37,11 +43,11 @@
 				<span class="mui-tab-label">我的</span>
 			</a>
 		</nav>
-		 
+		 <div class="mui-fullscreen main_bg"  ></div>
 		<script src="../js/mui.min.js"></script>
 		<script type="text/javascript" charset="utf-8">
 			 //mui初始化
-			mui.init();
+			mui.init(); 
 			var webview_course_all= null;
 			var webview_activity_list= null;
 			var webview_sc_show_all= null;
@@ -128,13 +134,17 @@
 						 
 					 
 						if(targetTabIndex==0){
-								webview_course_all.show(showInType,300);
+							mui.fire(webview_course_all, 'get_course_all', {});
+							webview_course_all.show(showInType,300);
 						}else if(targetTabIndex==1){
-								webview_activity_list.show(showInType,300);
+							mui.fire(webview_activity_list, 'get_activity_list', {});
+							webview_activity_list.show(showInType,300);
 						}else if(targetTabIndex==2){
-								webview_sc_show_all.show(showInType,300);
+							mui.fire(webview_sc_show_all, 'get_sc_show_all', {});
+							webview_sc_show_all.show(showInType,300);
 						}else if(targetTabIndex==3){
-								webview_persional_center.show(showInType,300);
+							mui.fire(webview_persional_center, 'get_persional_center', {});
+							webview_persional_center.show(showInType,300);
 						}
 					 
 						
@@ -149,7 +159,7 @@
 				
 				mui.fire(webview_course_all, 'get_course_all', {
 				});
-				webview_course_all.show('zoom-out',300);
+				webview_course_all.show('fade-in',200);
 				
 			});
 			 //当前激活选项

@@ -15,13 +15,16 @@
 	<link href="../css/dashboard.css" rel="stylesheet"/>
 	<link href="../css/top.css" rel="stylesheet"/>
 	<link href="../css/school/setMsgInfo.css" rel="stylesheet"/>
+	<style type="text/css">
+		 
+	</style>
 </head>
 <body>
 	<div id="student_info_content">
 		
 	<header class="mui-bar mui-bar-nav">
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		<a id="modify_password" class="mui-pull-right setPwd" > 修改密码 </a>
+		<!--<a id="modify_password" class="mui-pull-right setPwd" > 修改密码 </a>-->
 		<img src="../images/head-dz.png" class="head-dz"/>
 		<h1 class="mui-title">修改学生信息</h1>
 	</header>
@@ -39,18 +42,26 @@
 			</div>
 
 
-			<div class="mui-input-row">
+			<!--<div class="mui-input-row">
 				<label>性别 <span style="color:red;"> *</span></label>
 				<input type="text" v-model="stdGenderName" placeholder="性别"/>
-			</div>
+			</div>-->
+
 
 			<div class="mui-input-row">
+				<label>性别 <span style="color:red;"> *</span></label>
+				<div id="stdGenderName" :class="stdGenderNameClass"   style="float: left;">
+				  <div class="mui-switch-handle"></div>
+				</div>
+			</div>
+			
+			<div class="mui-input-row">
 				<label>年级 <span style="color:red;"> *</span></label>
-				<input type="text" v-model="studentInfo.stdGradeName"  placeholder="年级"/>
+				<input id="inp_stdGradeName" type="text" readonly="readonly" v-model="studentInfo.stdGradeName"  placeholder="年级"/>
 			</div>
 			<div class="mui-input-row">
 				<label>班级 <span style="color:red;"> *</span></label>
-				<input type="text" v-model="studentInfo.stdClassName"  placeholder="班级"/>
+				<input id="inp_stdClassName" type="text" readonly="readonly" v-model="studentInfo.stdClassName"  placeholder="班级"/>
 			</div>
 			<div class="mui-input-row">
 				<label>学号 <span style="color:red;"> *</span></label>
@@ -88,9 +99,10 @@
 <script type="text/javascript" charset="UTF-8">
 	mui.init();
 
-	var webview_set_password = null;
+	//var webview_set_password = null;
 	
-	
+	var gradePicker = new mui.PopPicker();
+	var classPicker = new mui.PopPicker();
 //	(function($,doc){
 //		$.init();
 //		$.ready(function(){
@@ -106,7 +118,7 @@
 		el: '#student_info_content',
 		data: {
 			studentInfo:{
-				 stdGender:'M',
+				 stdGender:'F',
 				manageId:0,
 //				 stdRealName:'测试200',
 //				stdGradeName:'1年级',
@@ -122,6 +134,15 @@
 		    		pic=this.studentInfo.stdPic;
 		    	}
 		    	return pic;
+		    },
+		    stdGenderNameClass:function(){
+		    	var cl = 'mui-switch mui-switch-blue mui-switch-m mui-active';
+		    	if(this.studentInfo.stdGender=='M'){
+		    		cl = 'mui-switch mui-switch-blue mui-switch-m mui-active';
+		    	}else{
+		    		cl = 'mui-switch mui-switch-blue mui-switch-m';
+		    	}
+		    	return cl;
 		    },
 		    stdGenderName:  {
 		        get: function () {
@@ -141,31 +162,68 @@
   	document.addEventListener('get_set_student', function(event) {
   		var userInfo = app.getState(); 
 		vm_set_student.studentInfo = userInfo.studentsDetail;
+		
+		
+		var gradeList=[];
+		var gradeOption = {value:0,	text:'--选择年级--'};
+		gradeList.push(gradeOption); 
+		gradePicker.setData(gradeList);
+		app.getGradList(function(data){
+			 
+			for(var i=0; i<data.length;i++){ 
+				gradeList.push(
+				{
+					value:data[i].id,
+					text:data[i].text}
+				);
+			}
+			gradePicker.setData(gradeList);
+		});
+		 
 	});
 	
+	
+	document.getElementById("stdGenderName").addEventListener("toggle",function(event){
+	  if(event.detail.isActive){
+	    vm_set_student.studentInfo.stdGender='M';
+	  }else{
+	    vm_set_student.studentInfo.stdGender='F';
+	  }
+	})
+	
+	
+	
   	mui.plusReady(function(){
-  			webview_set_password = mui.preload({
-				url: 'setPassword.html',
-				id: 'set_password',
-				styles: {
-					"render": "always",
-					"popGesture": "hide",
-					"bounce": "vertical" 
-				}
-			});
+//			webview_set_password = mui.preload({
+//				url: 'setPassword.html',
+//				id: 'set_password',
+//				styles: {
+//					"render": "always",
+//					"popGesture": "hide",
+//					"bounce": "vertical" 
+//				}
+//			});
 			
 		mui('#student_info_content').on('tap', '#btn_set_student_post', function(e) {
 			  post_set_student_info();
 			});
 			
-  		mui('#student_info_content').on('tap', '#modify_password', function(e) {
-			  mui.fire(webview_set_password, 'get_set_teacher', {
-					//userInfo: userInfo
-				});	 
-				setTimeout(function () {
-						webview_set_password.show("slide-in-right", 300);
-				},150);
-			});
+//		mui('#student_info_content').on('tap', '#modify_password', function(e) {
+//			  mui.fire(webview_set_password, 'get_set_teacher', {
+//					//userInfo: userInfo
+//				});	 
+//				setTimeout(function () {
+//						webview_set_password.show("slide-in-right", 300);
+//				},150);
+//			});
+		mui('#student_info_content').on('tap', '#inp_stdGradeName', function(e) {
+		   op_select_grade();
+		});
+		mui('#student_info_content').on('tap', '#inp_stdClassName', function(e) {
+		   op_select_class();
+		});
+				
+			
   	})
   	function post_set_student_info(){
   			var userInfo = app.getState();
@@ -198,12 +256,64 @@
     		if(data.code==0){
         		vm_set_student.studentInfo.stdPic=data.objectList[0].pathAll; 
     		}
+    	}else{
+    		mui.toast(data.msg);
     	}
-		mui.toast(data.msg);
     }
   	//重写返回逻辑
 	mui.back = function() {
 		plus.webview.currentWebview().hide("auto", 300);
+	}
+  	
+  	
+  	function op_select_grade(){
+		gradePicker.show(function(items) { 
+			console.info(JSON.stringify(items));
+			if(items[0].value>0){
+				vm_set_student.studentInfo.stdGradeName=items[0].text;
+				vm_set_student.studentInfo.stdGrade=items[0].value;
+				ini_op_select_clase();
+			}else{
+				vm_set_student.studentInfo.stdGradeName='';
+				vm_set_student.studentInfo.stdGrade=0;
+			}
+		});
+		
+	}
+  	
+  	function ini_op_select_clase(){
+  		var classList=[];
+		var classOption = {value:0,	text:'--选择班级--'};
+		classList.push(classOption); 
+		classPicker.setData(classList);
+		if(vm_set_student.studentInfo.stdGrade>0)
+		{
+			app.getClassList(vm_set_student.studentInfo.stdGrade,function(data){
+				 
+				for(var i=0; i<data.length;i++){ 
+					classList.push(
+					{
+						value:data[i].id,
+						text:data[i].text}
+					);
+				}
+				classPicker.setData(classList);
+			});
+		}
+  	}
+  	
+  	function op_select_class(){
+		classPicker.show(function(items) {
+			console.info(JSON.stringify(items));
+			if(items[0].value>0){
+				vm_set_student.studentInfo.stdClassName=items[0].text;
+				vm_set_student.studentInfo.stdClass=items[0].value;
+			}else{
+				vm_set_student.studentInfo.stdClassName='';
+				vm_set_student.studentInfo.stdClass=0;
+			}
+		});
+		
 	}
   	
 </script>

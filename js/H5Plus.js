@@ -10,9 +10,9 @@ var ws=null,as='pop-in';
 function plusReady(){
 	ws=plus.webview.currentWebview();
 	// Android处理返回键
-	plus.key.addEventListener('backbutton',function(){
-		back();
-	},false);
+//	plus.key.addEventListener('backbutton',function(){
+//		back();
+//	},false);
 	compatibleAdjust();
 }
 if(w.plus){

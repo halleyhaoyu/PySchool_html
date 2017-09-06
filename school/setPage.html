@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>设置</title>
+    <script src="../js/jquery-2.1.4.min.js"></script>
+    <script src="../js/mui.min.js"></script>
+	<script src="../js/app.js"></script>
+	<script src="../js/vue.min.js"></script>
+    <link href="../css/mui.css" rel="stylesheet"/>
+	<link href="../css/app.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/mui.picker.min.css" />
+    <link rel="stylesheet" href="../css/mui.poppicker.css" />
+	<link href="../css/dashboard.css" rel="stylesheet"/>
+	<link href="../css/top.css" rel="stylesheet"/>
+	<link href="../css/school/setMsgInfo.css" rel="stylesheet"/>
+	<style type="text/css">
+		 .my_arrowr {
+		 	margin-top: 8px; margin-right: 20px; float: right;
+		 	color: #999;
+		 }
+	</style>
+</head>
+<body>
+	<div id="set_page_content">
+		
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a> 
+		<img src="../images/head-dz.png" class="head-dz"/>
+		<h1 class="mui-title">设置</h1>
+	</header>
+	<div class="mui-content">
+		<form class="mui-input-group">  
+			<div id="modify_password"  class="mui-input-row">
+				<label>修改密码  </label> 
+				<div class="mui-icon mui-icon-arrowright my_arrowr"  ></div>
+			</div>
+			<div id="personal_set_link"  class="mui-input-row">
+				<label>修改个人信息</label> 
+				<div class="mui-icon mui-icon-arrowright my_arrowr"></div>
+			</div>
+  
+			 
+
+
+		</form>
+		<div style="padding:32px;background-color:#F7F7F7;">
+			<button id="btn_set_quit_app" type="button" class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn">退出登录</button>
+		</div>
+	</div>
+	
+	</div>
+<script type="text/javascript" src="../js/mui.picker.js" ></script>
+<script type="text/javascript" src="../js/mui.poppicker.js" ></script>
+<script type="text/javascript" src="../js/common.js" ></script>
+<script type="text/javascript" charset="UTF-8">
+	mui.init();
+
+	var webview_set_password = null;
+ 	var webview_set_detail_student = null;
+	var webview_set_detail_teacher = null;
+ 
+  	
+  	 
+  	var vm_set_page = new Vue({
+		el: '#set_page_content',
+		data: {
+			studentInfo:{ }
+		},
+		computed: {
+		}
+	});
+	
+  	document.addEventListener('get_set_page', function(event) {
+  		var userInfo = app.getState(); 
+		 
+	});
+	
+	  
+  	mui.plusReady(function(){
+  		
+		webview_set_password = mui.preload({
+			url: 'setPassword.html',
+			id: 'set_password',
+			styles: {
+				"render": "always",
+				"popGesture": "hide",
+				"bounce": "vertical" 
+			}
+		});
+		
+		webview_set_detail_student = mui.preload({
+			url: 'setStudentInfo.html',
+			id: 'set_student',
+			styles: {
+				"render": "always",
+				"popGesture": "hide",
+				"bounce": "vertical" 
+			}
+		});
+		
+		webview_set_detail_teacher = mui.preload({
+			url: 'setTeacherfo.html',
+			id: 'set_teacher',
+			styles: {
+				"render": "always",
+				"popGesture": "hide",
+				"bounce": "vertical" 
+			}
+		});
+			
+			
+			
+		mui('#set_page_content').on('tap', '#btn_set_quit_app', function(e) {
+			 app.logout();
+			 plus.runtime.restart();
+			});
+			
+  		mui('#set_page_content').on('tap', '#modify_password', function(e) {
+		    mui.fire(webview_set_password, 'get_set_teacher', {
+				//userInfo: userInfo
+			});	 
+			setTimeout(function () {
+					webview_set_password.show("slide-in-right", 300);
+			},150);
+		});
+	  	mui('#set_page_content').on('tap', '#personal_set_link', function(e) {
+		    //获取目标子页的id
+		   open_set_detail(app.getState());
+		});
+  	})
+  	 
+  	//重写返回逻辑
+	mui.back = function() {
+		plus.webview.currentWebview().hide("auto", 300);
+	}
+  	
+  	 function open_set_detail(userInfo){			
+		if(userInfo.roleType==2){
+			mui.fire(webview_set_detail_teacher, 'get_set_teacher', {
+				teacherInfo: userInfo.teacherDetail
+			});	 
+			setTimeout(function () {
+					webview_set_detail_teacher.show("slide-in-right", 300);
+			},150);
+		}else{
+			mui.fire(webview_set_detail_student, 'get_set_student', {
+				studentInfo: userInfo.studentsDetail
+			});	 
+			setTimeout(function () {
+					webview_set_detail_student.show("slide-in-right", 300);
+			},150);
+		}
+	}
+  	
+</script>
+</body>
+</html>

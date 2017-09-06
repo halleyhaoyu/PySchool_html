@@ -109,3 +109,35 @@ p{font-size: 1em;margin: 0;color: #333;}
 .close-color3{
 	color:#DD90F8 !important;
 }
+
+
+
+.mui-switch-m {
+	background: purple;
+	border: 2px solid purple;
+	background-color: purple;
+	
+}
+
+.mui-switch-m.mui-active:before
+{
+    right: auto;
+    left: 10px;		
+    font-size: 14px;	
+    content: '男';		
+    color: #fff;
+}
+
+.mui-switch-m:before
+{
+    font-size: 14px;		
+    position: absolute;
+    top: 3px;
+    right: 11px;		
+    content: '女';
+    text-transform: uppercase;		
+    color: #fff;
+}
+
+
+

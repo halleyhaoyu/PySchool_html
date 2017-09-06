@@ -15,6 +15,9 @@
 	<link href="../css/dashboard.css" rel="stylesheet"/>
 	<link href="../css/top.css" rel="stylesheet"/>
 	<link href="../css/school/setMsgInfo.css" rel="stylesheet"/>
+	<style type="text/css">
+		
+	</style>
 </head>
 <body>
 	
@@ -35,10 +38,17 @@
 				<label>姓名 <span style="color:red;"> *</span></label>
 				<input type="text" v-model="teacherInfo.thName" placeholder="姓名"/>
 			</div> 
-			<div class="mui-input-row">
+			<!--<div class="mui-input-row">
 				<label>性别 <span style="color:red;"> *</span></label>
 				<input type="text" v-model="thGenderName" placeholder="性别"/>
-			</div> 
+			</div> -->
+			<div class="mui-input-row">
+				<label>性别 <span style="color:red;"> *</span></label>
+				<div id="thGenderName" :class="thGenderNameClass"   style="float: left;">
+				  <div class="mui-switch-handle"></div>
+				</div>
+			</div>
+ 
 			<div class="mui-input-row">
 				<label>电话号码 <span style="color:red;"> *</span></label>
 				<input type="text"  v-model="teacherInfo.thPhs" placeholder="电话号码"/>
@@ -46,11 +56,11 @@
 			<div class="mui-input-row">
 				<label>邮箱 <span style="color:red;"> *</span></label>
 				<input type="text"  v-model="teacherInfo.thEmail" placeholder="邮箱"/>
-			</div> 
+			</div>
 			<div class="mui-input-row">
 				<label>个人简介 <span style="color:red;"> *</span></label>
 				<input type="text"  v-model="teacherInfo.description" placeholder="个人简介"/>
-			</div> 
+			</div>
 		</form>
 		<div style="padding:32px;background-color:#F7F7F7;">
 			<button id="btn_set_teacher_post" type="button" class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn">确定</button>
@@ -76,6 +86,7 @@
      	cameraAndAlbum('修改用户头像',1);
      });
       
+     
     var vm_set_teacher = new Vue({
 		el: '#teacher_info_content',
 		data: {
@@ -96,6 +107,15 @@
 		    		pic=this.teacherInfo.thPic;
 		    	}
 		    	return pic;
+		    },
+		    thGenderNameClass:function(){
+		    	var cl = 'mui-switch mui-switch-blue mui-switch-m mui-active';
+		    	if(this.teacherInfo.thGender=='M'){
+		    		cl = 'mui-switch mui-switch-blue mui-switch-m mui-active';
+		    	}else{
+		    		cl = 'mui-switch mui-switch-blue mui-switch-m';
+		    	}
+		    	return cl;
 		    },
 		    thGenderName:  {
 		        get: function () {
@@ -118,6 +138,14 @@
 		vm_set_teacher.teacherInfo.description= userInfo.description
 	});
 	
+	document.getElementById("thGenderName").addEventListener("toggle",function(event){
+	  if(event.detail.isActive){
+	    vm_set_teacher.teacherInfo.thGender='M';
+	  }else{
+	    vm_set_teacher.teacherInfo.thGender='F';
+	  }
+	})
+		
   	mui.plusReady(function(){
 		webview_set_password = mui.preload({
 			url: 'setPassword.html',

@@ -109,7 +109,8 @@
 	};
 	owner.gotoLogin = function(){
 		owner.logout();
-		window.location.href='../login.html';
+		//window.location.href='../login.html';
+		 $.openWindow('../login.html') 
 	}
 
 	owner.logout = function(){		
@@ -292,7 +293,23 @@
 		return owner.getCommon(url,callback); 
 	}
 	
+	/*
+  		* 我的 -学生-年级列表
+  	*/
+	owner.getGradList=function(callback){
+		///select/selectGrade.shtml?type=1 
+		var url=owner.hostname+'/select/selectGrade.shtml?type=1';
+		return owner.getCommon(url,callback); 
+	}
 	
+	/*
+  		* 我的 -学生-班级列表
+  	*/
+	owner.getClassList=function(gradeId,callback){
+		///select/selectClasses.shtml?type=2&classGradeId=1
+		var url=owner.hostname+'/select/selectClasses.shtml?type=1&classGradeId='+gradeId;
+		return owner.getCommon(url,callback); 
+	}
 	
 	
 	/*
@@ -314,7 +331,22 @@
 		var url=owner.hostname+'/view/activity/praiseRankingListData.shtml?manageId='+userInfo.manageId +'&page=1';
 		return owner.getCommon(url,callback); 
 	}
-		/*
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
 	 * 业务功能
 	 * */
 	owner.getCommon=function(url,callback){

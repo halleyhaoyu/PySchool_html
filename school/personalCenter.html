@@ -18,11 +18,11 @@
 		
 	<header class="mui-bar mui-bar-nav" style="height: 260px;
     background: url(../images/school/psct_top.png);background-size: cover">
-		<a href="#" id="personal_center_set_link" class="mui-icon mui-icon-compose mui-pull-right" style="text-shadow: 0px 2px 2px #333333"></a>
+		<a href="#" id="personal_center_set_page" class="mui-icon mui-icon-gear mui-pull-right" style="text-shadow: 0px 2px 2px #333333;font-size: 28px;"></a>
 		<img src="../images/school/head-btm.png" class="head-pic-btm">
 		<img src="../images/school/ct-dianzhui.png" class="dz-icon">
 		
-		<img :src="headPic" class="head-pic">
+		<img id="personal_center_set_link" :src="headPic" class="head-pic">
 		<p class="user-name">{{userInfo.realName}}</p>
 		<div v-if="userInfo.roleType==3">
 			<p class="class-name">年级：{{userInfo.studentsDetail.stdGradeName}} &nbsp;&nbsp;班级：{{userInfo.studentsDetail.stdClassName}}</p> 
@@ -72,8 +72,10 @@
 	</div>
 <script type="text/javascript" charset="UTF-8">
   	mui.init();
+		 var main;//主页
  	var webview_set_detail_student = null;
 	var webview_set_detail_teacher = null;
+	var webview_set_page = null;
 	var webview_student_time_line = null;
 	var webview_student_honor = null;
 	var webview_ranking_list = null;
@@ -146,10 +148,31 @@
 				}
 			});
 			
+			webview_set_page = mui.preload({
+				url: 'setPage.html',
+				id: 'set_page',
+				styles: {
+					"render": "always",
+					"popGesture": "hide",
+					"bounce": "vertical" 
+				}
+			});
+			
+			
 			mui('#personal_center_content').on('tap', '#personal_center_set_link', function(e) {
 			    //获取目标子页的id
 			   open_set_detail(userInfo);
 			});
+			mui('#personal_center_content').on('tap', '#personal_center_set_page', function(e) {
+			  
+				mui.fire(webview_set_page, 'get_set_page', { 
+				});	 
+				setTimeout(function () {
+						webview_set_page.show("slide-in-right", 300);
+				},150);
+			});
+			
+			
 			
 			webview_student_time_line = mui.preload({
 				url: 'timeline.html',
@@ -216,12 +239,14 @@
 //	var webview_student_honor = null;
 			
 //			
+			 main =  plus.android.runtimeMainActivity();
 			var backButtonPress = 0;
 			mui.back = function(event) {
 				backButtonPress++;
 				if (backButtonPress > 1) {
-					plus.runtime.quit();
-					app.logout();
+//					plus.runtime.quit();
+//					app.logout();
+					main && main.moveTaskToBack(false);
 				} else {
 					plus.nativeUI.toast('再按一次退出应用');
 				}

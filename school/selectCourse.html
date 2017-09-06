@@ -146,11 +146,11 @@
 				vm.classList =  data.objectList;
 			}else{
 				if(data.code==-1007){
-				vm.courseInfo=data.object; 
-				vm.classList =[];
+					vm.courseInfo=data.object; 
+					vm.classList =[];
+				}
+				mui.toast(data.msg);
 			}
-			}
-			mui.toast(data.msg);
 		}); 
 	}
 	
@@ -183,8 +183,9 @@
 			app.postSelectCourse(data,function(data){
 				if(data.code==0){
 					getSelectSourseDetail(selectCourseId);
-				}
-				mui.toast(data.msg);
+				}else{
+		    		mui.toast(data.msg);
+		    	}
 			});
 		}
 		

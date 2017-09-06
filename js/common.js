@@ -276,20 +276,20 @@ function resetPlay(){
 	ps.style.webkitTransition = 'all 1s linear';
 	pt.innerText = '00:00:00/00:00:00';	
 }
-// 重写关闭
-var _back=window.back;
-function resetback(){
-	// 停止播放
-	if(ep.style.display == 'block'){
-		stopPlay();
-	}else if(er.style.display == 'block'){
-		stopRecord();
-	}else{
-		_back();
-	}
-}
-window.back=resetback;
-
+//// 重写关闭
+//var _back=window.back;
+//function resetback(){
+//	// 停止播放
+//	if(ep.style.display == 'block'){
+//		stopPlay();
+//	}else if(er.style.display == 'block'){
+//		stopRecord();
+//	}else{
+//		_back();
+//	}
+//}
+//window.back=resetback;
+//
 
 
 
@@ -437,16 +437,16 @@ mui.plusReady(function(){
         switch ( connectionStatus ) {
             case plus.networkinfo.CONNECTION_ETHERNET:
             case plus.networkinfo.CONNECTION_WIFI:
-            mui.toast('当前使用Wifi网络！');
+            //mui.toast('当前使用Wifi网络！');
             break; 
             case plus.networkinfo.CONNECTION_CELL2G:
-            mui.toast('当前使用2G网络！');
+           // mui.toast('当前使用2G网络！');
             break; 
             case plus.networkinfo.CONNECTION_CELL3G:
-            mui.toast('当前使用3G网络！');
+            //mui.toast('当前使用3G网络！');
             break; 
             case plus.networkinfo.CONNECTION_CELL4G:
-            mui.toast('当前使用4G网络！');
+            //mui.toast('当前使用4G网络！');
             break; 
             default:
             mui.toast('当前无网络！');

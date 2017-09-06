@@ -82,8 +82,9 @@
 			if(data.code==0){
 				vm_my_honor.honorInfo=data.object; 
 				//vm.classList =  data.objectList;
-			}
-			mui.toast(data.msg);
+			}else{
+	    		mui.toast(data.msg);
+	    	}
 		});
 	}
 	  	</script>

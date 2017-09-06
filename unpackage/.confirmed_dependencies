@@ -13,10 +13,12 @@
       "css/icons-extra.css",
       "images/login/sc_name@3x.png",
       "images/login/bg@3x.png",
-      "school/courseAll.html"
+      "school/courseAll.html",
+      "school/welcomePage.html"
     ],
     "refer": [
-      "school/courseAll.html"
+      "school/courseAll.html",
+      "school/welcomePage.html"
     ]
   },
   "school/courseAll.html": {
@@ -89,7 +91,8 @@
       "js/mui.poppicker.js",
       "images/tabbar/tabbar-ns-2.png",
       "school/personalCenter.html",
-      "images/tabbar/tabbar-sl-4.png"
+      "images/tabbar/tabbar-sl-4.png",
+      "images/head-dz.png"
     ],
     "refer": [
       "school/scShowAll.html",
@@ -288,7 +291,13 @@
     "resources": [
       "css/school/timeline.css",
       "images/school/timeline-dz.png",
-      "images/school/timeline.png"
+      "images/school/timeline.png",
+      "js/app.js",
+      "css/app.css",
+      "js/mui.min.js",
+      "css/dashboard.css",
+      "js/vue.min.js",
+      "css/mui.css"
     ],
     "refer": []
   },
@@ -440,7 +449,13 @@
       "css/mui.poppicker.css",
       "images/school/video-icon.png",
       "images/school/photo-icon.png",
-      "images/school/record-icon.png"
+      "images/school/record-icon.png",
+      "images/school/camera.png",
+      "images/school/add-icon.png",
+      "images/school/voice.png",
+      "images/school/album.png",
+      "images/school/copy.png"
+
     ],
     "refer": [
       "school/showImage.html"
@@ -622,6 +637,31 @@
       "css/mui.css",
       "js/jquery-2.1.4.min.js",
       "css/walking/dashboard.css"
+    ]
+  },
+  "school/welcomePage.html": {
+    "resources": [
+      "images/tabbar/tabbar-sl-1.png",
+      "css/mui.min.css",
+      "images/tabbar/tabbar-ns-2.png",
+      "css/foot.css",
+      "images/tabbar/tabbar-ns-4.png",
+      "school/courseAll.html",
+      "images/tabbar/tabbar-ns-3.png",
+      "images/tabbar/tabbar-ns-1.png",
+      "images/tabbar/tabbar-sl-2.png",
+      "images/tabbar/tabbar-sl-3.png",
+      "images/tabbar/tabbar-sl-4.png",
+      "js/mui.min.js",
+      "login.html",
+      "css/mui.css"
+    ],
+    "refer": [
+      "school/personalCenter.html",
+      "school/activityList.html",
+      "school/scShowAll.html",
+      "school/courseAll.html",
+      "login.html"
     ]
   }
 }

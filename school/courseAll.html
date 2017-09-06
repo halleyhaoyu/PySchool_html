@@ -35,7 +35,7 @@
 				<div class="mui-slider-group">
 					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
 						<div id="scroll1" class="mui-scroll-wrapper">
-							<div class="mui-scroll">
+							<div class="mui-scroll" style="min-height: 550px;">
 								<ul id="course_all_my"  class="mui-table-view">									
 									 <!--<li class="mui-table-view-cell">
 										<div class="myh5_card" > 
@@ -71,7 +71,7 @@
 				<div class="mui-slider-group mui-fullscreen" style="top:64px;bottom: 0px; padding-top: 10px;">
 					<div id="item11" class="mui-slider-item mui-control-content mui-active" style="margin-top:0px;">
 						<div id="scroll1" class="mui-scroll-wrapper">
-							<div class="mui-scroll">
+							<div class="mui-scroll" style="min-height: 550px;">
 								<ul id="course_all_all"  class="mui-table-view">									
 									 <!--<li class="mui-table-view-cell">
 										<div class="myh5_card">
@@ -104,6 +104,8 @@
 		// var courseDirPage = null;
 		var lastCourseId = ''; //最新新闻的id
 		var webview_course_dir_detail = null; //详情页webview
+		 var main;//主页
+		var webview_select_walking_detail = null; //wk上海静态
 		var courseList0=[];
 		var courseList1=[];
 		var pageIndexMy = 1;
@@ -304,11 +306,14 @@
 					"bounce": "vertical" 
 				}
 			});
+			
+			pushCourseAllDown( '',0,true);
 		});
 	
 	
 	
 		mui.plusReady(function() {
+			 main =  plus.android.runtimeMainActivity();
 			 var userInfo = app.getState(); 
 			// console.info(userInfo.roleType);
 		    if(userInfo.roleType==2){
@@ -349,8 +354,9 @@
 			mui.back = function(event) {
 				backButtonPress++;
 				if (backButtonPress > 1) {
-					plus.runtime.quit();
-					app.logout();
+					//plus.runtime.quit();
+					//app.logout();
+					 main && main.moveTaskToBack(false);
 				} else {
 					plus.nativeUI.toast('再按一次退出应用');
 				}
@@ -360,7 +366,6 @@
 				return false;
 			}; 
 			
-			pushCourseAllDown( '',0,true);
 			pushCourseAllDown( '',1,true);
 		});
 		
