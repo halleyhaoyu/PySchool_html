@@ -5,7 +5,9 @@ html,body{
 	background-size: cover !important;
 }
 
-body,.mui-content{background-color: initial;}
+body,.mui-content{
+	background-color: initial;
+}
 
 @media screen and (max-width: 374px){
 	body{
@@ -13,6 +15,11 @@ body,.mui-content{background-color: initial;}
 	}
 	body,input,textarea,p{font-size: 14px;}
 	.mui-input-row>label{line-height: 1.5}
+	.p_text {margin-top:12%;}
+	.button-group button{padding:0;height:48px;}
+	.mui-input-group .mui-input-row {height:46px;line-height:46px;}
+	.mui-icon-extra,.mui-icon:not(.mui-icon-eye) {margin:8px;}
+	.mui-input-row .mui-input-password~.mui-icon-eye {top:12px;}
 }
 
 @media screen and (min-width: 375px) and (max-width: 413px){
@@ -21,6 +28,11 @@ body,.mui-content{background-color: initial;}
 	}
 	body,input,textarea,p{font-size: 15px;}
 	.mui-input-row>label{line-height: 1.2}
+	.p_text {margin-top:22%;}
+	.button-group button{padding:0;height:60px;}
+	.mui-input-group .mui-input-row {height: 56px;line-height:56px;}
+	.mui-icon-extra,.mui-icon:not(.mui-icon-eye) {margin:12px;}
+	.mui-input-row .mui-input-password~.mui-icon-eye {top:16px;}
 }
 
 @media screen and (min-width: 414px) {
@@ -29,6 +41,11 @@ body,.mui-content{background-color: initial;}
 	}
 	body,input,textarea,p{font-size: 16px;}
 	.mui-input-row>label{line-height: 1.18}
+	.p_text {margin-top:25%;}
+	.button-group button{padding:0;height:60px;}
+	.mui-input-group .mui-input-row {height: 56px;line-height:56px;}
+	.mui-icon-extra,.mui-icon:not(.mui-icon-eye) {margin:12px;}
+	.mui-input-row .mui-input-password~.mui-icon-eye {top:16px;}
 }
 :-moz-placeholder {
 	color: #fff; opacity:1;
@@ -54,7 +71,6 @@ input::-webkit-input-placeholder{
 .mui-input-row .mui-input-password~.mui-icon-eye{
 	color: #FFF;
 	opacity: 0.65;
-	top: 8px;
 }
 .mui-input-row .mui-input-password~.mui-icon-eye.mui-active{
 	color: #FFF;
@@ -64,11 +80,11 @@ input::-webkit-input-placeholder{
 .img-wrapper img{margin: 0 auto;display: block;height: auto;}
 
 
-.mui-input-group{margin: 30px;background: inherit;}
+.mui-input-group{margin:32px 32px 20px 32px;background: inherit;}
 
 .mui-input-group .mui-input-row{
-	margin: 15px 0;
-	border: 1px solid #fff;
+	margin: 20px 0;
+	border: 2px solid #fff;
 	border-radius: 30px;
 }
 .mui-input-group input{padding-left:42px;color: #fff;}
@@ -78,16 +94,17 @@ input::-webkit-input-placeholder{
 }
 .mui-button-row{padding-top: 0;}
 
-.button-group{margin-top:35px;}
+.button-group{margin-top:20px;}
 
-.button-group button{padding:0;height:38px;}
+
 
 #login-btn{
 	background-color: #FEC63A;
 	border-color: #FEC63A;
-	border-radius:25px;
+	border-radius:30px;
 	margin-bottom: 15px;
 	box-shadow:0 8px 9px 0 rgba(7,155,237,0.81);
+	color: #4f3c04;
 }
 
 #reg-btn{color: #25A5FF;border-color: #25A5FF;border-radius:25px;margin-bottom:25px;}
@@ -98,8 +115,6 @@ input::-webkit-input-placeholder{
 
 .mui-icon:not(.mui-icon-eye){
 	position: absolute;
-	margin-top: 6px;
-	margin-left: 12px;
 	color: #fff;
     /*width: 16px;*/
     /*height: 18px;*/
