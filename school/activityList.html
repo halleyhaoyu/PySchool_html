@@ -260,7 +260,11 @@
 	
 	
 	mui.plusReady(function() {
-			 main =  plus.android.runtimeMainActivity();
+			if(plus.os.name=="Android"){
+				main =  plus.android.runtimeMainActivity();
+			}else if(plus.os.name=="iOS"){				
+				main =  plus.ios.runtimeMainActivity()
+			}
 			var backButtonPress = 0;
 			mui.back = function(event) {
 				backButtonPress++;
