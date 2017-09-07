@@ -4,19 +4,19 @@
     color: #D9AA34;
     /*color: #aa45bd;*/
     background-color: rgb(255, 255, 255);
-    border-radius: 20px;
+    border-radius: 24px;
 }
 .title-control .mui-control-item {
     color: #fff;
-    line-height:32px;
+    line-height:48px;
     border-left: 0;
     opacity: 1;
 }
 .title-control{
-    width:55% !important;
+    width:65% !important;
     border: 0;
     top:24px !important;
-    border-radius: 20px;
+    border-radius: 24px;
     background: #D9AA34;
     /*background: #CC8FD7;*/
 }
@@ -24,7 +24,7 @@
 
 .desc-control {
     width: 100% !important;
-    top: 64px !important;
+    top: 84px !important;
     border: 0;
     border-radius: 0;
     position: fixed;

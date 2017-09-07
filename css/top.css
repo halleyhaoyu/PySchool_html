@@ -6,8 +6,8 @@
 	background: -moz-linear-gradient(bottom, #FED361,#FEC332); /* Firefox 3.6 - 15 */
 	background: linear-gradient(to bottom, #FED361,#FEC332); /* 标准的语法（必须放在最后） */
 
-	-webkit-box-shadow: 0 1px 6px rgba(0,0,0,0.3);
-	box-shadow: 0 1px 6px rgba(0,0,0,0.3)
+	-webkit-box-shadow:none;
+	box-shadow:none;
 }
 .head-dz{
 	width: 66px;

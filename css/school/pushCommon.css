@@ -3,7 +3,7 @@ body {
 	background-color: #efeff4;
 }
 .mui-bar~.mui-content .mui-fullscreen {
-	top: 10px;
+	/*top: 10px;*/
 	height: auto;
 }
 .mui-pull-top-tips {

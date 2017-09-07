@@ -26,6 +26,6 @@
 	background-image: url(../images/tabbar/tabbar-sl-4.png);
 }
 .mui-bar-tab {
-    -webkit-box-shadow: 0 0 1px #BBBBBB;
-    box-shadow: 0 0 1px #BBBBBB;
+	-webkit-box-shadow:0 -7px 4px 0 rgba(0,0,0,0.07);
+   box-shadow:0 -7px 4px 0 rgba(0,0,0,0.07);
 }
