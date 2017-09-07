@@ -313,7 +313,13 @@
 	
 	
 		mui.plusReady(function() {
-			 main =  plus.android.runtimeMainActivity();
+			
+			if(plus.os.name=="Android"){
+				main =  plus.android.runtimeMainActivity();
+			}else if(plus.os.name=="iOS"){				
+				main =  plus.ios.runtimeMainActivity()
+			}
+			
 			 var userInfo = app.getState(); 
 			// console.info(userInfo.roleType);
 		    if(userInfo.roleType==2){
