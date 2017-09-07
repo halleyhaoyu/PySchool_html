@@ -307,16 +307,15 @@
 				}
 			});
 			
-			pushCourseAllDown( '',0,true);
 		});
 	
 	
 	
 		mui.plusReady(function() {
 			
-			if(plus.os.name=="Android"){
+			if(mui.os.android){
 				main =  plus.android.runtimeMainActivity();
-			}else if(plus.os.name=="iOS"){				
+			}else{				
 				main =  plus.ios.runtimeMainActivity()
 			}
 			
@@ -372,6 +371,7 @@
 				return false;
 			}; 
 			
+			pushCourseAllDown( '',0,true);
 			pushCourseAllDown( '',1,true);
 		});
 		
