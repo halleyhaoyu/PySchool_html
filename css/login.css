@@ -9,6 +9,34 @@ body,.mui-content{
 	background-color: initial;
 }
 
+#logo {
+	max-width: 200px;
+}
+
+.p_text {
+	color: #fff;
+	text-align: center;
+	font-size: 24px;
+}
+
+.mui-input-group:before {
+	background-color: initial;
+}
+
+
+.login-user{
+	height: 20px !important;
+    width: 20px !important;
+    background-repeat: round !important;
+	background: url('../images/login/user.png');
+}
+.login-pwd{
+	height: 20px !important;
+    width: 20px !important;
+    background-repeat: round !important;
+	background: url('../images/login/pwd.png');
+}
+
 @media screen and (max-width: 374px){
 	body{
 		background: #25a5ff url(../images/login/bg.png) no-repeat fixed center;
@@ -18,7 +46,7 @@ body,.mui-content{
 	.p_text {margin-top:12%;}
 	.button-group button{padding:0;height:48px;}
 	.mui-input-group .mui-input-row {height:46px;line-height:46px;}
-	.mui-icon-extra,.mui-icon:not(.mui-icon-eye) {margin:8px;}
+	.mui-icon:not(.mui-icon-eye) {margin:12px;}
 	.mui-input-row .mui-input-password~.mui-icon-eye {top:12px;}
 }
 
@@ -31,7 +59,7 @@ body,.mui-content{
 	.p_text {margin-top:22%;}
 	.button-group button{padding:0;height:60px;}
 	.mui-input-group .mui-input-row {height: 56px;line-height:56px;}
-	.mui-icon-extra,.mui-icon:not(.mui-icon-eye) {margin:12px;}
+	.mui-icon:not(.mui-icon-eye) {margin:16px;}
 	.mui-input-row .mui-input-password~.mui-icon-eye {top:16px;}
 }
 
@@ -44,7 +72,7 @@ body,.mui-content{
 	.p_text {margin-top:25%;}
 	.button-group button{padding:0;height:60px;}
 	.mui-input-group .mui-input-row {height: 56px;line-height:56px;}
-	.mui-icon-extra,.mui-icon:not(.mui-icon-eye) {margin:12px;}
+	.mui-icon:not(.mui-icon-eye) {margin:16px;}
 	.mui-input-row .mui-input-password~.mui-icon-eye {top:16px;}
 }
 :-moz-placeholder {
