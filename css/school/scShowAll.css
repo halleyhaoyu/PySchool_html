@@ -1,3 +1,7 @@
+.mui-bar-nav {
+    height: 84px;
+}
+
 .works-desc:first-child{
 	margin-top: 0;
 }
