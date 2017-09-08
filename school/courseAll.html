@@ -273,7 +273,37 @@
 	
 		document.addEventListener('get_course_all', function(event) {
 			
-		  //预加载详情页
+		  
+			
+		});
+	
+	
+	
+		mui.plusReady(function() {
+			
+			if(mui.os.android){
+				main =  plus.android.runtimeMainActivity();
+			}else{				
+				main = null;//  plus.ios.runtimeMainActivity()
+			}
+			
+			 var userInfo = app.getState(); 
+			// console.info(userInfo.roleType);
+		    if(userInfo.roleType==2){
+		    	vm.showAllBarFlag=0;
+		    }else{
+		    	vm.showAllBarFlag=1;
+		    }
+			//console.info(vm.showAllBarFlag);
+			
+			
+//	        mui('#main_bar').on('tap', 'a', function(e) {
+//			    //获取目标子页的id
+//			    var targetTab = this.getAttribute('href');
+//			    window.location.href=targetTab;
+//			   
+//			});
+//预加载详情页
 			webview_course_dir_detail = mui.preload({
 				url: 'courseDir.html',
 				id: 'course_dir_detail',
@@ -305,37 +335,6 @@
 					"bounce": "vertical" 
 				}
 			});
-			
-		});
-	
-	
-	
-		mui.plusReady(function() {
-			
-			if(mui.os.android){
-				main =  plus.android.runtimeMainActivity();
-			}else{				
-				main = null;//  plus.ios.runtimeMainActivity()
-			}
-			
-			 var userInfo = app.getState(); 
-			// console.info(userInfo.roleType);
-		    if(userInfo.roleType==2){
-		    	vm.showAllBarFlag=0;
-		    }else{
-		    	vm.showAllBarFlag=1;
-		    }
-			//console.info(vm.showAllBarFlag);
-			
-			
-//	        mui('#main_bar').on('tap', 'a', function(e) {
-//			    //获取目标子页的id
-//			    var targetTab = this.getAttribute('href');
-//			    window.location.href=targetTab;
-//			   
-//			});
-			
-			
 			
 			mui('#item1').on('tap','a',function(){
 				//console.info("this.href:  " + this.href);
@@ -374,6 +373,8 @@
 			
 			pushCourseAllDown( '',0,true);
 			pushCourseAllDown( '',1,true);
+			
+			
 		});
 		
 		 /**
