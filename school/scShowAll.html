@@ -51,7 +51,6 @@
 	<transition name="slide-fade">
 		<div v-if="showInputFlag" class="bottom-div" style="z-index: 100;"> 
 			<input type="text" v-model="commentInfo.actComDesc" id="inputContent" style=""/>
-	 
 			<button id="btn_show_all_post" @tap="scShowAllCommentPost()" type="button" class="mui-btn send-button"> 发送 </button>	
 		</div> 
 	</transition>
@@ -582,17 +581,22 @@
 		data.actComType=1;//  1：学校秀；2：班级秀 3： 普通作品
 		data.actComIsPoint=2;//  1：点赞；2：评论
 		data.actObject=1;
-		  
-		app.postComment(data,function(data){
-			if(data.code==0){
-				//mui.back(); 
-				vm_show_all.commentInfo={}; 
-				vm_show_all.showInputFlag=false;
-				pushScShowAllDown('',0,true); 
-			}else{
-	    		mui.toast(data.msg);
-	    	}
-		});
+		if(vm_show_all.commentInfo.actComDesc==""){
+		    mui.toast("空内容不能提交！");
+			vm_show_all.showInputFlag=false;
+		}else{
+			app.postComment(data,function(data){
+				if(data.code==0){
+					//mui.back(); 
+					vm_show_all.commentInfo={}; 
+					vm_show_all.showInputFlag=false;
+					pushScShowAllDown('',0,true); 
+				}else{
+		    		mui.toast(data.msg);
+		    	}
+			});
+		}
+		
 	}
 	
 </script>
