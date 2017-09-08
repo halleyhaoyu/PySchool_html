@@ -45,7 +45,7 @@ body,.mui-content{
 	.mui-input-row>label{line-height: 1.5}
 	.p_text {margin-top:12%;}
 	.button-group button{padding:0;height:48px;}
-	.mui-input-group .mui-input-row {height:46px;line-height:46px;}
+	.mui-input-group .mui-input-row {height:46px;line-height:42px;}
 	.mui-icon:not(.mui-icon-eye) {margin:12px;}
 	.mui-input-row .mui-input-password~.mui-icon-eye {top:12px;}
 }
@@ -58,7 +58,7 @@ body,.mui-content{
 	.mui-input-row>label{line-height: 1.2}
 	.p_text {margin-top:22%;}
 	.button-group button{padding:0;height:60px;}
-	.mui-input-group .mui-input-row {height: 56px;line-height:56px;}
+	.mui-input-group .mui-input-row {height: 56px;line-height:52px;}
 	.mui-icon:not(.mui-icon-eye) {margin:16px;}
 	.mui-input-row .mui-input-password~.mui-icon-eye {top:16px;}
 }
@@ -71,7 +71,7 @@ body,.mui-content{
 	.mui-input-row>label{line-height: 1.18}
 	.p_text {margin-top:25%;}
 	.button-group button{padding:0;height:60px;}
-	.mui-input-group .mui-input-row {height: 56px;line-height:56px;}
+	.mui-input-group .mui-input-row {height: 56px;line-height:52px;}
 	.mui-icon:not(.mui-icon-eye) {margin:16px;}
 	.mui-input-row .mui-input-password~.mui-icon-eye {top:16px;}
 }
