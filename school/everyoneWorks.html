@@ -373,6 +373,8 @@
 	
 	document.addEventListener('get_every_one_works', function(event) {
 		activityId = event.detail.activityId;
+		vm_everyone_work.workList=[];
+		//console.info(vm_everyone_work.workList.length);
 		console.info(activityId);
 		vm_everyone_work.activityId=activityId;
 		vm_everyone_work.commentInfo.actComActId=activityId;
