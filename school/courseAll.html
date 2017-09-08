@@ -102,6 +102,7 @@
 		// var courseDirPage = null;
 		var lastCourseId = ''; //最新新闻的id
 		var webview_course_dir_detail = null; //详情页webview
+		var webview_select_course_detail = null; //选课详情
 		 var main;//主页
 		var webview_select_walking_detail = null; //wk上海静态
 		var courseList0=[];
@@ -314,7 +315,7 @@
 			if(mui.os.android){
 				main =  plus.android.runtimeMainActivity();
 			}else{				
-				main =  plus.ios.runtimeMainActivity()
+				main = null;//  plus.ios.runtimeMainActivity()
 			}
 			
 			 var userInfo = app.getState(); 
@@ -359,7 +360,9 @@
 				if (backButtonPress > 1) {
 					//plus.runtime.quit();
 					//app.logout();
-					 main && main.moveTaskToBack(false);
+					if(mui.os.android){
+						main && main.moveTaskToBack(false);
+					}
 				} else {
 					plus.nativeUI.toast('再按一次退出应用');
 				}

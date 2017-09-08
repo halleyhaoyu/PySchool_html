@@ -80,6 +80,7 @@
 	  
   	mui.plusReady(function(){
   		
+  		console.info("preload  webview_set_password start");
 		webview_set_password = mui.preload({
 			url: 'setPassword.html',
 			id: 'set_password',
@@ -90,6 +91,8 @@
 			}
 		});
 		
+  		console.info("preload  webview_set_password end ");
+  		console.info("preload  webview_set_detail_student start");
 		webview_set_detail_student = mui.preload({
 			url: 'setStudentInfo.html',
 			id: 'set_student',
@@ -100,6 +103,7 @@
 			}
 		});
 		
+  		console.info("preload  webview_set_detail_teacher start");
 		webview_set_detail_teacher = mui.preload({
 			url: 'setTeacherfo.html',
 			id: 'set_teacher',
@@ -111,6 +115,7 @@
 		});
 			
 			
+  		console.info("preload  webview_set_detail_teacher end");
 			
 		mui('#set_page_content').on('tap', '#btn_set_quit_app', function(e) {
 			 app.logout();

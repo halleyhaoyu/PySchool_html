@@ -239,7 +239,7 @@
 //	var webview_student_honor = null;
 			
 //			
-			if(plus.os.name=="Android"){
+			if(mui.os.android){
 				main =  plus.android.runtimeMainActivity();
 			}
 			var backButtonPress = 0;
@@ -248,7 +248,9 @@
 				if (backButtonPress > 1) {
 //					plus.runtime.quit();
 //					app.logout();
-					main && main.moveTaskToBack(false);
+					if(mui.os.android){
+						main && main.moveTaskToBack(false);
+					}
 				} else {
 					plus.nativeUI.toast('再按一次退出应用');
 				}
