@@ -78,7 +78,7 @@ body{
  
 .bottom-div{
 	position: fixed;
-	bottom: 21px;
+	bottom: 0px;
 	width: 100%;
 	background: #fff;
 	height: 60px;
