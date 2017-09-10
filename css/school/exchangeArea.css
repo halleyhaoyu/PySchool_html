@@ -75,13 +75,13 @@ body{
 .item-guaji, .item-call {
 	padding: 0;
 }
-
+ 
 .bottom-div{
 	position: fixed;
-	bottom: 0;
+	bottom: 0px;
 	width: 100%;
 	background: #fff;
-	height: 40px;
+	height: 60px;
 	line-height: 40px;
 	padding: 0 6px;
 	border-top: 1px solid #eee;
@@ -92,7 +92,6 @@ body{
 	border: 1px solid #ddd;
 	margin-left: 6px;
 }
-
 .bt-left{
 	height: 24px;
 	vertical-align: middle;

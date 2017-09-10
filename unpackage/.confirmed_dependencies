@@ -14,7 +14,9 @@
       "images/login/sc_name@3x.png",
       "images/login/bg@3x.png",
       "school/courseAll.html",
-      "school/welcomePage.html"
+      "school/welcomePage.html",
+      "images/login/pwd.png",
+      "images/login/user.png"
     ],
     "refer": [
       "school/courseAll.html",
@@ -92,7 +94,8 @@
       "images/tabbar/tabbar-ns-2.png",
       "school/personalCenter.html",
       "images/tabbar/tabbar-sl-4.png",
-      "images/head-dz.png"
+      "images/head-dz.png",
+      "fonts/mui-icons-extra.ttf"
     ],
     "refer": [
       "school/scShowAll.html",
@@ -135,7 +138,8 @@
       "css/H5MediaFile.css",
       "js/H5Plus.js",
       "js/immersed.js",
-      "js/common.js"
+      "js/common.js",
+      "fonts/mui-icons-extra.ttf"
     ],
     "refer": [
       "school/activityList.html",
@@ -177,7 +181,8 @@
       "school/timeline.html",
       "school/myHonor.html",
       "school/rankingList.html",
-      "school/scShowAll.html"
+      "school/scShowAll.html",
+      "school/setPage.html"
     ]
   },
   "school/courseDir.html": {
@@ -455,7 +460,6 @@
       "images/school/voice.png",
       "images/school/album.png",
       "images/school/copy.png"
-
     ],
     "refer": [
       "school/showImage.html"
@@ -530,14 +534,16 @@
       "css/H5Plus.css",
       "js/H5Plus.js",
       "js/H5Plus-quit.js"
-    ]
+    ],
+    "refer": []
   },
   "school/showVideo.html": {
     "resources": [
       "css/H5Plus.css",
       "js/H5Plus.js",
       "js/H5Plus-quit.js"
-    ]
+    ],
+    "refer": []
   },
   "walking/wkMap.html": {
     "resources": [
@@ -571,7 +577,8 @@
       "images/walking/location.png",
       "css/walking/wkMap.css",
       "images/walking/LuWan/TianZiFang/001.png",
-      "js/mui.min.js"
+      "js/mui.min.js",
+      "images/walking/home.png"
     ],
     "refer": [
       "walking/msgInfo.html"
@@ -627,7 +634,8 @@
       "css/mui.css",
       "js/jquery-2.1.4.min.js",
       "css/walking/dashboard.css"
-    ]
+    ],
+    "refer": []
   },
   "walking/baiduMap.html": {
     "resources": [
@@ -637,7 +645,8 @@
       "css/mui.css",
       "js/jquery-2.1.4.min.js",
       "css/walking/dashboard.css"
-    ]
+    ],
+    "refer": []
   },
   "school/welcomePage.html": {
     "resources": [

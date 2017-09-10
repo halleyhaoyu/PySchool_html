@@ -89,7 +89,7 @@
 		<div style="padding:32px;background-color:#F7F7F7;">
 			<button  v-if="userInfo.roleType==3 && courseInfo.hasPart==1" @tap="open_activity_my_works()" id="btn_activity_my_works" type="button" 
 				class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn">我的作品</button>
-			<button v-if="userInfo.roleType==2" id="btn_activity_my_works_show" type="button" 
+			<button v-if="userInfo.roleType==2 && courseInfo.actFine==1" id="btn_activity_my_works_show" type="button" 
 				class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn">推荐学校秀</button>
 		</div>
 	</div>
@@ -112,7 +112,8 @@
 		data: {
 			userInfo:{roleType:2},
 			courseInfo:{actEnd:1,
-				hasPart:1
+				hasPart:1,
+				actFine:1
 		    }
 		} 
 	});

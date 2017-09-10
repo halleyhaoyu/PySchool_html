@@ -102,6 +102,7 @@
 		// var courseDirPage = null;
 		var lastCourseId = ''; //最新新闻的id
 		var webview_course_dir_detail = null; //详情页webview
+		var webview_select_course_detail = null; //选课详情
 		 var main;//主页
 		var webview_select_walking_detail = null; //wk上海静态
 		var courseList0=[];
@@ -272,7 +273,37 @@
 	
 		document.addEventListener('get_course_all', function(event) {
 			
-		  //预加载详情页
+		  
+			
+		});
+	
+	
+	
+		mui.plusReady(function() {
+			
+			if(mui.os.android){
+				main =  plus.android.runtimeMainActivity();
+			}else{				
+				main = null;//  plus.ios.runtimeMainActivity()
+			}
+			
+			 var userInfo = app.getState(); 
+			// console.info(userInfo.roleType);
+		    if(userInfo.roleType==2){
+		    	vm.showAllBarFlag=0;
+		    }else{
+		    	vm.showAllBarFlag=1;
+		    }
+			//console.info(vm.showAllBarFlag);
+			
+			
+//	        mui('#main_bar').on('tap', 'a', function(e) {
+//			    //获取目标子页的id
+//			    var targetTab = this.getAttribute('href');
+//			    window.location.href=targetTab;
+//			   
+//			});
+//预加载详情页
 			webview_course_dir_detail = mui.preload({
 				url: 'courseDir.html',
 				id: 'course_dir_detail',
@@ -305,36 +336,6 @@
 				}
 			});
 			
-			pushCourseAllDown( '',0,true);
-		});
-	
-	
-	
-		mui.plusReady(function() {
-			
-			if(plus.os.name=="Android"){
-				main =  plus.android.runtimeMainActivity();
-			}
-			
-			 var userInfo = app.getState(); 
-			// console.info(userInfo.roleType);
-		    if(userInfo.roleType==2){
-		    	vm.showAllBarFlag=0;
-		    }else{
-		    	vm.showAllBarFlag=1;
-		    }
-			//console.info(vm.showAllBarFlag);
-			
-			
-//	        mui('#main_bar').on('tap', 'a', function(e) {
-//			    //获取目标子页的id
-//			    var targetTab = this.getAttribute('href');
-//			    window.location.href=targetTab;
-//			   
-//			});
-			
-			
-			
 			mui('#item1').on('tap','a',function(){
 				//console.info("this.href:  " + this.href);
 				var ids=this.id.split("_");
@@ -358,7 +359,9 @@
 				if (backButtonPress > 1) {
 					//plus.runtime.quit();
 					//app.logout();
-					 main && main.moveTaskToBack(false);
+					if(mui.os.android){
+						main && main.moveTaskToBack(false);
+					}
 				} else {
 					plus.nativeUI.toast('再按一次退出应用');
 				}
@@ -368,7 +371,10 @@
 				return false;
 			}; 
 			
+			pushCourseAllDown( '',0,true);
 			pushCourseAllDown( '',1,true);
+			
+			
 		});
 		
 		 /**

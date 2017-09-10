@@ -30,8 +30,9 @@
 						<span v-else-if="index>2" class="ranking-num mui-pull-left">{{index+1}}</span>
 						
 						<img class="mui-media-object mui-pull-left" src="../images/school/head-pic.png">
-						<div class="mui-media-body">{{item.showActName}}
-							<span class="mui-pull-right  ranking-span" style="width: 90px;"> {{item.showActTime}}
+						<div class="mui-media-body">{{item.aswStudentName}}
+							<span class="mui-pull-right  ranking-span" style="width: 60px; float: right;"> 
+								<img class="good_black" src="../images/school/good_black.png"> {{item.aswPointNum}}
 							</span>
 						</div>
 					</a>
@@ -47,7 +48,7 @@
 						<div class="mui-media-body">
 							 {{item.actName}}
 							<span class="mui-pull-right  ranking-span">
-								<img class="good_black" src="../images/school/good_black.png">{{item.showTotalPointNum}}
+								<img class="good_black" src="../images/school/good_black.png"> {{item.showTotalPointNum}}
 							</span>
 						</div>						
 					</a>
@@ -110,13 +111,13 @@
 			var vm_ranking_list = new Vue({
 				el: '#ranking_list_content',
 				data: {
-					showType:2,
+					showType:1,
 					studentRanking:[
-//					 {showActName:'123a',showActTime:'2017-08-08'}
-//					,{showActName:'123b',showActTime:'2017-08-08'}
-//					,{showActName:'123c',showActTime:'2017-08-08'}
-//					,{showActName:'123d',showActTime:'2017-08-08'}
-//					,{showActName:'123e',showActTime:'2017-08-08'}
+					 {aswStudentName:'123a',aswPointNum:'111'}
+					,{aswStudentName:'123b',aswPointNum:'111'}
+					,{aswStudentName:'123c',aswPointNum:'11'}
+					,{aswStudentName:'123d',aswPointNum:'5'}
+					,{aswStudentName:'123e',aswPointNum:'1'}
 					],
 					activityRanking:[
 //					 {actName:'456',showTotalPointNum:78}
