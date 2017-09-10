@@ -142,12 +142,12 @@ body{
  */
 .msg-title{
 	background: #956cdc;
-    height:52px;
+    height:62px;
     width:100%;
 }
 .msg-title p:first-child{
 	color: #fff;
-	padding:16px;
+	padding: 22px 16px;
 }
 /*.msg-title p:last-child{
 	color: #fff;
@@ -155,6 +155,16 @@ body{
 	font-size:12px;
 	opacity: .65;
 }*/
+
+.msg-dw{
+	padding: 10px 16px 2px 16px !important;
+}
+.msg-dw-sub{
+	font-size: 0.8em !important;
+    color: #fff !important;
+    padding: 0 16px !important;
+    opacity: .65 !important;
+}
 
 #item2,#item3{
 	overflow: auto;
@@ -178,7 +188,7 @@ ul li {
     display: inline-block;
     margin-top:0;
     position: absolute;
-    bottom: 32px;
+    bottom:0;
 }
 
 .name1 {
@@ -270,7 +280,7 @@ div[name]:after {
 .word-float-left{
 	width: 32px;
     float: left;
-    font-size: 32px;
+    font-size:3em;
     color: #d2d2d2;
     padding: 16px 12px 0 12px;
     height: 66px;

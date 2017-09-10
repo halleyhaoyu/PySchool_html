@@ -78,7 +78,7 @@ body{
 	}
 }
 #huangpu{
-	top: 45%;
+	top: 42%;
     left: 48%;
 }
 #pudongxinqu{
@@ -86,19 +86,19 @@ body{
     right:25%;
 }
 #chongming{
-	top: 7%;
-	left: 58%;
+	top:12%;
+	left:63%;
 }
 #songjiang{
-	top: 58%;
-	left: 30%;
+	top: 60%;
+	left:28%;
 }
 #jinshan{
 	top: 75%;
-	left: 32%;
+	left: 35%;
 }
 #minhang{
-	top: 58%;
+	top: 55%;
 	left: 50%;
 }
 #nanhui{
@@ -128,7 +128,7 @@ body{
 	color: #fff;
 }
 .list_title{
-	padding:40px 0 0;
+	padding:40px 0 12px 0;
 	background-color: #9C35A5;
 	position: relative;
 	z-index: 5;
@@ -142,7 +142,7 @@ body{
 	border-right: 10px solid transparent;
 	position: absolute;
 	left: calc(50% - 10px);
-	top:60px;
+	top:72px;
 }
 .list_detail{
 	width: 100%;
