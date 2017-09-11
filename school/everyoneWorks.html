@@ -58,7 +58,7 @@
 				<div id="scroll1" class="mui-scroll-wrapper">
 					<div class="mui-scroll" style="min-height: 550px;">
 						<ul class="mui-table-view">									
-							<li v-for="item in workList" class="mui-table-view-cell" style="padding: 11px 0px;">
+							<li v-for="item in workList" class="mui-table-view-cell" style="padding:0 0 12px 0px;">
 								<div class="works-desc">
 									<div class="works-desc-top">
 										<img :src="getImage(item)" class="works-img"/>
@@ -77,11 +77,15 @@
 										</div> 
 						
 										<div class="icon-line">
-											<div  @tap="everyoneWorksComment(item)" style=" float: right; text-align: center;">
-												<span class="mui-icon-extra mui-icon-extra-comment" style="margin-right: 10px;"> {{item.aswCommentNum}}</span>
+											<div  @tap="everyoneWorksComment(item)" style=" float: right;">
+												<span  style="margin-right: 10px;"> <img src="../images/school/reply.png" class="icon-reply" />
+													<label class="works-label">{{item.aswCommentNum}}</label>
+												</span>
 											</div >
-											<div  @tap="everyoneWorksPintPost(item)"  style="  float: right; text-align: center;">
-												<span  class="mui-icon-extra mui-icon-extra-like" style="margin-right: 25px;"> {{item.aswPointNum}}</span>
+											<div  @tap="everyoneWorksPintPost(item)"  style="  float: right;">
+												<span  style="margin-right: 25px;"> <img src="../images/school/like.png" class="icon-reply" /> 
+													<label class="works-label">{{item.aswPointNum}}</label>
+												</span>
 											</div> 
 										</div>
 										<div style="clear: both;"></div>
@@ -136,95 +140,95 @@
 	 
 			workList:[
 	
-//			{
-//              "aswId": 3,
-//              "aswStudentId": 24,
-//              "aswDesc": "喜欢打电话的",
-//              "aswStudentName": "  200",
-//              "aswActId": 3,
-//              "aswAsId": 5,
-//              "aswPointNum": 1,
-//              "aswCommentNum": 2,
-//              "showStudentPic": "http://112.124.110.182:11008/upload/studentPicture/20170812/B20170812184037_d0959b7a25b64a80ac9bbfa428b7110b.png",
-//              "activityStudentsWorksFilesList": [
-//                  {
-//                      "aswfId": 3,
-//                      "aswfTime": "2017-08-25 22:58:22",
-//                      "aswfStudentId": 24,
-//                      "aswfFiles": "http://112.124.110.182:11008/upload/TaskExecPicture/20170825//1500030347631.jpg20170825224736_2ce220c937c64d6c9f7f137062f2cb5f.jpg",
-//                      "aswfStudentName": "  200",
-//                      "aswfActId": 3,
-//                      "aswfAswId": 3
-//                  },
-//                  {
-//                      "aswfId": 4,
-//                      "aswfTime": "2017-08-25 22:58:25",
-//                      "aswfStudentId": 24,
-//                      "aswfFiles": "http://112.124.110.182:11008/upload/TaskExecPicture/20170825//1500030347631.jpg20170825224736_2ce220c937c64d6c9f7f137062f2cb5f.jpg",
-//                      "aswfStudentName": "  200",
-//                      "aswfActId": 3,
-//                      "aswfAswId": 3
-//                  },
-//                  {
-//                      "aswfId": 5,
-//                      "aswfTime": "2017-08-25 22:58:28",
-//                      "aswfStudentId": 24,
-//                      "aswfFiles": "http://112.124.110.182:11008/upload/TaskExecPicture/20170825//1503672467553.amr20170825224750_47808e84e7cc4ca885452e606d0a4966.amr",
-//                      "aswfStudentName": "  200",
-//                      "aswfActId": 3,
-//                      "aswfAswId": 3
-//                  },
-//                  {
-//                      "aswfId": 6,
-//                      "aswfTime": "2017-08-25 23:03:54",
-//                      "aswfStudentId": 24,
-//                      "aswfFiles": "http://112.124.110.182:11008/upload/TaskExecPicture/20170825//1500030347631.jpg20170825224736_2ce220c937c64d6c9f7f137062f2cb5f.jpg",
-//                      "aswfStudentName": "  200",
-//                      "aswfActId": 3,
-//                      "aswfAsId": 5,
-//                      "aswfAswId": 3
-//                  }
-//              ],
-//              "activityCommentList": [{
-//				"actComId": 35,
-//				"actComTime": "2017-08-30 21:25:39",
-//				"actComDesc": "测试卷1",
-//				"actComReviewer": "  ",
-//				"actComActId": 1,
-//				"actComType": 1,
-//				"actComIsPoint": 2,
-//				"actIsTeacher": 1,
-//				"actReviewerId": 7,
-//				"actObject": "1",
-//				"showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png"
-//			},
-//			{
-//				"actComId": 36,
-//				"actComTime": "2017-08-30 21:25:49",
-//				"actComDesc": "测试的2",
-//				"actComReviewer": "  ",
-//				"actComActId": 1,
-//				"actComType": 1,
-//				"actComIsPoint": 2,
-//				"actIsTeacher": 1,
-//				"actReviewerId": 7,
-//				"actObject": "1",
-//				"showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png"
-//			},
-//			{
-//				"actComId": 37,
-//				"actComTime": "2017-08-30 21:26:02",
-//				"actComDesc": "测试服3",
-//				"actComReviewer": "  ",
-//				"actComActId": 1,
-//				"actComType": 1,
-//				"actComIsPoint": 2,
-//				"actIsTeacher": 1,
-//				"actReviewerId": 7,
-//				"actObject": "1",
-//				"showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png"
-//			}]
-//          }
+			{
+                "aswId": 3,
+                "aswStudentId": 24,
+                "aswDesc": "喜欢打电话的",
+                "aswStudentName": "  200",
+                "aswActId": 3,
+                "aswAsId": 5,
+                "aswPointNum": 1,
+                "aswCommentNum": 2,
+                "showStudentPic": "http://112.124.110.182:11008/upload/studentPicture/20170812/B20170812184037_d0959b7a25b64a80ac9bbfa428b7110b.png",
+                "activityStudentsWorksFilesList": [
+                    {
+                        "aswfId": 3,
+                        "aswfTime": "2017-08-25 22:58:22",
+                        "aswfStudentId": 24,
+                        "aswfFiles": "http://112.124.110.182:11008/upload/TaskExecPicture/20170825//1500030347631.jpg20170825224736_2ce220c937c64d6c9f7f137062f2cb5f.jpg",
+                        "aswfStudentName": "  200",
+                        "aswfActId": 3,
+                        "aswfAswId": 3
+                    },
+                    {
+                        "aswfId": 4,
+                        "aswfTime": "2017-08-25 22:58:25",
+                        "aswfStudentId": 24,
+                        "aswfFiles": "http://112.124.110.182:11008/upload/TaskExecPicture/20170825//1500030347631.jpg20170825224736_2ce220c937c64d6c9f7f137062f2cb5f.jpg",
+                        "aswfStudentName": "  200",
+                        "aswfActId": 3,
+                        "aswfAswId": 3
+                    },
+                    {
+                        "aswfId": 5,
+                        "aswfTime": "2017-08-25 22:58:28",
+                        "aswfStudentId": 24,
+                        "aswfFiles": "http://112.124.110.182:11008/upload/TaskExecPicture/20170825//1503672467553.amr20170825224750_47808e84e7cc4ca885452e606d0a4966.amr",
+                        "aswfStudentName": "  200",
+                        "aswfActId": 3,
+                        "aswfAswId": 3
+                    },
+                    {
+                        "aswfId": 6,
+                        "aswfTime": "2017-08-25 23:03:54",
+                        "aswfStudentId": 24,
+                        "aswfFiles": "http://112.124.110.182:11008/upload/TaskExecPicture/20170825//1500030347631.jpg20170825224736_2ce220c937c64d6c9f7f137062f2cb5f.jpg",
+                        "aswfStudentName": "  200",
+                        "aswfActId": 3,
+                        "aswfAsId": 5,
+                        "aswfAswId": 3
+                    }
+                ],
+                "activityCommentList": [{
+				"actComId": 35,
+				"actComTime": "2017-08-30 21:25:39",
+				"actComDesc": "测试卷1",
+				"actComReviewer": "  ",
+				"actComActId": 1,
+				"actComType": 1,
+				"actComIsPoint": 2,
+				"actIsTeacher": 1,
+				"actReviewerId": 7,
+				"actObject": "1",
+				"showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png"
+			},
+			{
+				"actComId": 36,
+				"actComTime": "2017-08-30 21:25:49",
+				"actComDesc": "测试的2",
+				"actComReviewer": "  ",
+				"actComActId": 1,
+				"actComType": 1,
+				"actComIsPoint": 2,
+				"actIsTeacher": 1,
+				"actReviewerId": 7,
+				"actObject": "1",
+				"showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png"
+			},
+			{
+				"actComId": 37,
+				"actComTime": "2017-08-30 21:26:02",
+				"actComDesc": "测试服3",
+				"actComReviewer": "  ",
+				"actComActId": 1,
+				"actComType": 1,
+				"actComIsPoint": 2,
+				"actIsTeacher": 1,
+				"actReviewerId": 7,
+				"actObject": "1",
+				"showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png"
+			}]
+            }
  	 
 			]
 		},

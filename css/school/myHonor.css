@@ -14,9 +14,9 @@ h3{
 }
 
 .ranking-title{
-	font-size: 16px !important;
+	font-size:1.4em !important;
 	padding: 6px 0 0 24px;
-	opacity: .65;
+	/*opacity: .65;*/
 }
 
 
@@ -59,12 +59,11 @@ body,.mui-content {
     text-align: center;
 }
 .rk-p1{
-	color: #333;
-	opacity: .65;
+	color: #878787;
 }
 .rk-p2{
 	margin-top:12px;
-	font-size:24px !important;
+	font-size:1.8em !important;
 	color: #333;
 }
 
@@ -80,6 +79,7 @@ body,.mui-content {
     float: left;
     margin-top: 10px;
     width: 15%;
+    color: #878787;
 }
 .glb-show{
 	float: right;
@@ -89,4 +89,5 @@ body,.mui-content {
     float: left;
     margin-top: 4px;
     width: 15%;
+    color: #878787;
 }

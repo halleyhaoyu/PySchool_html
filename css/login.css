@@ -1,7 +1,7 @@
 html,body{
 	height: 100%;
 	letter-spacing:1px;
-	font-family: "微软雅黑" !important;
+	font-family:PingFangSC-Regular !important;
 	background-size: cover !important;
 }
 
@@ -16,7 +16,7 @@ body,.mui-content{
 .p_text {
 	color: #fff;
 	text-align: center;
-	font-size: 24px;
+	font-size: 1.8em;
 }
 
 .mui-input-group:before {
@@ -115,7 +115,12 @@ input::-webkit-input-placeholder{
 	border: 2px solid #fff;
 	border-radius: 30px;
 }
-.mui-input-group input{padding-left:42px;color: #fff;}
+.mui-input-group input{
+	/*padding-left:42px;*/
+	color: #fff;
+	text-align: center;
+	font-size: 1.1em;
+}
 
 .mui-input-group input:last-child {
     background: inherit;
@@ -134,7 +139,9 @@ input::-webkit-input-placeholder{
 	box-shadow:0 8px 9px 0 rgba(7,155,237,0.81);
 	color: #4f3c04;
 }
-
+.mui-btn-block {
+    font-size:1.3em !important;
+}
 #reg-btn{color: #25A5FF;border-color: #25A5FF;border-radius:25px;margin-bottom:25px;}
 
 .link-group a{color:#33a2f1;font-size:14px;}

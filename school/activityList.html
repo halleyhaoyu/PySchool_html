@@ -23,20 +23,54 @@
 		<img src="../images/head-dz.png" class="head-dz"/>
 		<h1 class="mui-title">活动</h1>
 		<a id="activity_exchange_area"  href="#"  class="mui-pull-right top-edit"> 交流区 </a>
-		<a v-if="userInfo.roleType==3" id="activity_add_detail"  href="#"  class="mui-pull-right top-edit" style="left:50px; right:250px">活动申请</a>
+		<a v-if="userInfo.roleType==3" id="activity_add_detail"  href="#"  class="mui-pull-right top-edit" 
+			style="left:32px; right:250px;width:60px;">活动申请</a>
 	</header>
 
 	
  
  
-	<div id="item1" class="item-call mui-content mui-control-content mui-fullscreen mui-active" style="top:64px;bottom: 0px;background: #eee;">
+	<div id="item1" class="item-call mui-content mui-control-content mui-fullscreen mui-active" 
+		style="top:64px;bottom: 0px;background: #fff;">
 		<div id="slider" class="mui-slider mui-fullscreen">				
 			<div class="mui-slider-group">
 				<div id="item_activity_list" class="mui-slider-item mui-control-content mui-active">
 					<div id="scroll1" class="mui-scroll-wrapper">
 						<div class="mui-scroll" style="min-height: 550px;">
 							<ul id="activity_list_list" class="mui-table-view">
+								 <li class="mui-table-view-cell">
+								 	<a id="aa" href="#">
+								 		<div class="show-desc">
+											<div class="show-desc-right">
+												<div class="ac-end">已结束</div>
+											</div>
+											<div class="show-desc-left">
+												<p class="show-desc-title">欢乐中国豫园行</p>
+												<p class="show-desc-content">发布人：赵先生</p>
+												<p class="show-desc-content">发布日期：2017-07-25</p>
+											</div>
+								
+										</div>
+								 	</a>
+								 </li>
 								 
+								 <li class="mui-table-view-cell">
+								 	<a id="aa" href="#">
+								 		<div class="show-desc">
+											<div class="show-desc-right">
+												<div class="ac-end-no">未结束</div>
+											</div>
+											<div class="show-desc-left">
+												<p class="show-desc-title">欢乐中国豫园行</p>
+												<p class="show-desc-content">发布人：赵先生</p>
+												<p class="show-desc-content">发布日期：2017-07-25</p>
+											</div>
+								
+										</div>
+
+								 	</a>
+								 </li>
+								 	
 							</ul>
 						</div>
 					</div>

@@ -34,6 +34,7 @@
 	margin: 10px 0;
 	padding: 12px 0 12px 12px;
 	height: initial;
+	box-shadow:0 5px 10px 0 rgba(0,0,0,0.11);
 }
 .myh5_card .top .title {
 	font-size: 24px;
@@ -62,12 +63,13 @@
 .course-title{
 	color: #D9AA34;
 	display: inline-block;
-	font-size: 16px;
+	font-size: 1.2em;
 }
 .course-desc{
 	padding: 8px 0;
 	color: #333;
 	border-bottom: 1px solid #ddd;
+	font-size: 1em;
 }
 .course-desc:last-child{
 	border-bottom: 0;

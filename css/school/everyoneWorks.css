@@ -17,15 +17,16 @@
 	margin-right: 12px;
 }
 .works-username{
-	font-size: 12px !important;
-	opacity: .5;
+	font-size:1em !important;
+	opacity: .6;
+	color: #65728f;
 }
 .works-time{
 	float: right;
 }
 .works-content{
 	margin-top: 12px;
-	color: #333;
+	color:#65728f;
 }
 
 .works-desc-pic{
@@ -95,4 +96,12 @@
     margin-top: 4px;
     border: 1px solid #6E7B94;
     color: #6E7B94;
+}
+
+
+.icon-reply{
+	width:24px;
+}
+.works-label{
+	vertical-align: super;
 }

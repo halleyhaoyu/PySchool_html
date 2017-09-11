@@ -1,6 +1,6 @@
 html,body{height: 100%;}
 
-body,.mui-content{font-family: "微软雅黑";background-color: #F7F7F7;color:#1A1A1A}
+body,.mui-content{font-family: "微软雅黑";background-color: #FFF;color:#1A1A1A}
 
 @media screen and (max-width: 374px){
 	body,input,textarea,p{font-size: 14px !important;font-family: "微软雅黑" !important;}
@@ -53,7 +53,6 @@ body,.mui-content{font-family: "微软雅黑";background-color: #F7F7F7;color:#1
 
 header a,.mui-bar .mui-title{
 	color: #333;
-	opacity: .5;
 }
 
 a {

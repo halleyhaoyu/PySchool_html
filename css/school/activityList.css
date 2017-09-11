@@ -4,17 +4,17 @@
 	font-size: 14px;
 	position: fixed;
 	right: 10px;
-	opacity: .5;
+	/*opacity: .5;*/
 }
 
 .show-desc{ 
-	margin: 0 12px;
+	/*margin: 0 12px;*/
 	height: 120px;
 	border: 1px solid #eee;
 	background: #fff;
 	padding:12px 0 12px 12px;
 	border-radius: 6px;
-	box-shadow: 0 0 19px 0 rgba(0,0,0,0.18);
+	box-shadow: 0 5px 9px 0 rgba(0,0,0,0.13);
 }
 
 .show-desc-right{
@@ -57,4 +57,14 @@
 	opacity: .65;
 }
 
+.mui-table-view-cell > a:not(.mui-btn) {
+    margin: 0;
+}
+
+.mui-table-view-cell {
+    padding: 0 6px 6px 6px;
+}
+#activity_list_list .mui-table-view-cell:first-child{
+	margin-top:12px;
+}
 
