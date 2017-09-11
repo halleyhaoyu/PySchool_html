@@ -28,7 +28,12 @@
 	  transform: translateX(0px);
 	  opacity: 0;
 	}
- 	
+ 	.mui-table-view-cell {
+	    padding: 0 0 12px 0;
+	}
+	#sc_show_class_list .mui-table-view-cell:first-child{
+	    margin-top:12px;
+	}
 	
     </style>
 </head>
@@ -57,7 +62,8 @@
 	
  
  
-	<div id="item1" class="item-call mui-content mui-control-content mui-fullscreen mui-active" style="top:84px;bottom: 0px;background: #eee;">
+	<div id="item1" class="item-call mui-content mui-control-content mui-fullscreen mui-active" 
+		style="top:84px;bottom: 0px;background:#fff;">
 		<div id="slider" class="mui-slider mui-fullscreen">				
 			<div class="mui-slider-group">
 				<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
@@ -87,11 +93,15 @@
 											</div>
 											<div class="icon-line">
 												<div :id="'sc_show_c_'+item.actId" @tap="scShowAllComment(item)" style=" float: right; text-align: center;">
-													<span   class="mui-icon-extra mui-icon-extra-comment" style="margin-right: 10px;"> {{item.actFineCommentNum}}</span>
+													<span  style="margin-right: 10px;"> <img src="../images/school/reply.png" class="icon-reply" />
+														<label class="works-label"> {{item.actFineCommentNum}} </label>
+													</span>
 												
 												</div :id="'sc_show_p_'+item.actId" >
 												<div  @tap="scShowAllPintPost(item)"  style="  float: right; text-align: center;">
-													<span  class="mui-icon-extra mui-icon-extra-like" style="margin-right: 25px;"> {{item.actFinePintNum}} </span>
+													<span  style="margin-right: 25px;"> <img src="../images/school/like.png" class="icon-reply" /> 
+														<label class="works-label"> {{item.actFinePintNum}} </label>
+													</span>
 											
 												</div> 
 											</div>
@@ -116,7 +126,8 @@
 	</div>
 
 	
-	<div id="item2" class="item-call mui-content mui-control-content mui-fullscreen" style="top:84px;bottom: 0px;background: #eee;">
+	<div id="item2" class="item-call mui-content mui-control-content mui-fullscreen" 
+		style="top:84px;bottom: 0px;background: #fff;">
 		<div id="slider" class="mui-slider mui-fullscreen">				
 			<div class="mui-slider-group">
 				<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
@@ -130,13 +141,13 @@
 										<div class="show-desc-right">
 											<img v-if="item.hasPart==1" src="../images/school/show-yes.png" class="show-icon">
 											<img v-else src="../images/school/show-no.png" class="show-icon">
-											<p v-if="item.hasPart==1">已参加</p>
-											<p  v-else>未参加</p>
+											<p class="p-diy" v-if="item.hasPart==1">已参加</p>
+											<p class="p-diy" v-else>未参加</p>
 										</div>
 										<div class="show-desc-left">
 											<p class="show-desc-title">{{item.actName}}</p>
 											<p class="show-desc-content">发布人：{{item.actOperName}}</p>
-											<p class="show-desc-content">{{item.actTime}}</p>
+											<p class="show-desc-content ct-sb">{{item.actTime}}</p>
 										</div>
 									</div>
 								</li>
@@ -185,104 +196,104 @@
 				actObject:0//点赞或者评论的对象（1:针对活动；2:针对作品） 
 			},
 			schoolShowList:[
-//			{
-//			"actId": 1,
-//			"actName": "外滩行活动",
-//			"actSchoolId": 1,
-//			"actTime": "2017-08-12 18:48:24",
-//			"actUpdateTime": "2017-08-30 21:25:12",
-//			"actDesc": "测试活动发布",
-//			"actNum": 8,
-//			"actTeacherId": 7,
-//			"actStatus": 2,
-//			"actOperId": 7,
-//			"actOperName": "李四",
-//			"actFiles": "http://112.124.110.182:11008/upload/taskPicture/20170812/P20170812184815_1867cef31c5a41c198ebbc5d026dc2ca.png",
-//			"actSendWord": "好好学习",
-//			"actFine": 2,
-//			"actFinePintNum": 1,
-//			"actFineCommentNum": 3,
-//			"actRcId": 2,
-//			"actTmId": 1,
-//			"actTcId": 1,
-//			"actClassPointNum": 0,
-//			"actClassCommentNum": 0,
-//			"actSponsorType": 2,
-//			"actEnd": "2",
-//			"deleteFalg": 0,
-//			"deleteTime": 1504099562000,
-//			"showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png",
-//			"activityCommentList": [{
-//				"actComId": 35,
-//				"actComTime": "2017-08-30 21:25:39",
-//				"actComDesc": "测试卷1",
-//				"actComReviewer": "  ",
-//				"actComActId": 1,
-//				"actComType": 1,
-//				"actComIsPoint": 2,
-//				"actIsTeacher": 1,
-//				"actReviewerId": 7,
-//				"actObject": "1",
-//				"showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png"
-//			},
-//			{
-//				"actComId": 36,
-//				"actComTime": "2017-08-30 21:25:49",
-//				"actComDesc": "测试的2",
-//				"actComReviewer": "",
-//				"actComActId": 1,
-//				"actComType": 1,
-//				"actComIsPoint": 2,
-//				"actIsTeacher": 1,
-//				"actReviewerId": 7,
-//				"actObject": "1",
-//				"showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png"
-//			},
-//			{
-//				"actComId": 37,
-//				"actComTime": "2017-08-30 21:26:02",
-//				"actComDesc": "测试服3",
-//				"actComReviewer": "",
-//				"actComActId": 1,
-//				"actComType": 1,
-//				"actComIsPoint": 2,
-//				"actIsTeacher": 1,
-//				"actReviewerId": 7,
-//				"actObject": "1",
-//				"showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png"
-//			}]
-//		}
+			{
+			"actId": 1,
+			"actName": "外滩行活动",
+			"actSchoolId": 1,
+			"actTime": "2017-08-12 18:48:24",
+			"actUpdateTime": "2017-08-30 21:25:12",
+			"actDesc": "测试活动发布",
+			"actNum": 8,
+			"actTeacherId": 7,
+			"actStatus": 2,
+			"actOperId": 7,
+			"actOperName": "李四",
+			"actFiles": "http://112.124.110.182:11008/upload/taskPicture/20170812/P20170812184815_1867cef31c5a41c198ebbc5d026dc2ca.png",
+			"actSendWord": "好好学习",
+			"actFine": 2,
+			"actFinePintNum": 1,
+			"actFineCommentNum": 3,
+			"actRcId": 2,
+			"actTmId": 1,
+			"actTcId": 1,
+			"actClassPointNum": 0,
+			"actClassCommentNum": 0,
+			"actSponsorType": 2,
+			"actEnd": "2",
+			"deleteFalg": 0,
+			"deleteTime": 1504099562000,
+			"showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png",
+			"activityCommentList": [{
+				"actComId": 35,
+				"actComTime": "2017-08-30 21:25:39",
+				"actComDesc": "测试卷1",
+				"actComReviewer": "  ",
+				"actComActId": 1,
+				"actComType": 1,
+				"actComIsPoint": 2,
+				"actIsTeacher": 1,
+				"actReviewerId": 7,
+				"actObject": "1",
+				"showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png"
+			},
+			{
+				"actComId": 36,
+				"actComTime": "2017-08-30 21:25:49",
+				"actComDesc": "测试的2",
+				"actComReviewer": "",
+				"actComActId": 1,
+				"actComType": 1,
+				"actComIsPoint": 2,
+				"actIsTeacher": 1,
+				"actReviewerId": 7,
+				"actObject": "1",
+				"showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png"
+			},
+			{
+				"actComId": 37,
+				"actComTime": "2017-08-30 21:26:02",
+				"actComDesc": "测试服3",
+				"actComReviewer": "",
+				"actComActId": 1,
+				"actComType": 1,
+				"actComIsPoint": 2,
+				"actIsTeacher": 1,
+				"actReviewerId": 7,
+				"actObject": "1",
+				"showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png"
+			}]
+		}
 			],
 			classShowList:[
-//			{
-//              "actId": 2,
-//              "actName": "外滩行活动02",
-//              "actSchoolId": 1,
-//              "actTime": "2017-08-16 18:48:24",
-//              "actDesc": "测试活动发布",
-//              "actNum": 9,
-//              "actTeacherId": 7,
-//              "actStatus": 2,
-//              "actOperId": 24,
-//              "actOperName": "测试200",
-//              "actFiles": "http://112.124.110.182:11008/upload/taskPicture/20170812/P20170812184815_1867cef31c5a41c198ebbc5d026dc2ca.png",
-//              "actSendWord": "好好学习",
-//              "actFine": 2,
-//              "actFinePintNum": 0,
-//              "actFineCommentNum": 0,
-//              "actRcId": 2,
-//              "actTmId": 1,
-//              "actTcId": 1,
-//              "actClassPointNum": 2,
-//              "actClassCommentNum": 0,
-//              "actSponsorType": 1,
-//              "actEnd": "2",
-//              "hasPart": "1",
-//              "deleteFalg": 0,
-//              "deleteTime": 1503476057000,
-//              "showStudentPic": "http://112.124.110.182:11008/upload/studentPicture/20170812/B20170812184037_d0959b7a25b64a80ac9bbfa428b7110b.png",
-//              "activityCommentList": []
-//          }
+			{
+                "actId": 2,
+                "actName": "外滩行活动02",
+                "actSchoolId": 1,
+                "actTime": "2017-08-16 18:48:24",
+                "actDesc": "测试活动发布",
+                "actNum": 9,
+                "actTeacherId": 7,
+                "actStatus": 2,
+                "actOperId": 24,
+                "actOperName": "测试200",
+                "actFiles": "http://112.124.110.182:11008/upload/taskPicture/20170812/P20170812184815_1867cef31c5a41c198ebbc5d026dc2ca.png",
+                "actSendWord": "好好学习",
+                "actFine": 2,
+                "actFinePintNum": 0,
+                "actFineCommentNum": 0,
+                "actRcId": 2,
+                "actTmId": 1,
+                "actTcId": 1,
+                "actClassPointNum": 2,
+                "actClassCommentNum": 0,
+                "actSponsorType": 1,
+                "actEnd": "2",
+                "hasPart": "1",
+                "deleteFalg": 0,
+                "deleteTime": 1503476057000,
+                "showStudentPic": "http://112.124.110.182:11008/upload/studentPicture/20170812/B20170812184037_d0959b7a25b64a80ac9bbfa428b7110b.png",
+                "activityCommentList": []
+            }
 			]
 		},
 		methods:{ 

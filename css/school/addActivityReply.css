@@ -87,15 +87,6 @@ body, .mui-content {
 }
 
 
-.input-content{
-	border: 1px solid #ddd !important;
-	padding-left: 80px !important;
-	height: 32px !important;
-	line-height: 32px !important;
-}
-
-.input-content-min{
-	width: 120px !important;}
 .button3{
 	background: url(../../images/school/camera.png);
 	background-size: cover;
@@ -144,6 +135,8 @@ body, .mui-content {
 	padding-left: 80px !important;
 	height: 32px !important;
 	line-height: 32px !important;
+	color:#4a4a4a;
+	font-weight: bold;
 }
 
 .input-content-min{
