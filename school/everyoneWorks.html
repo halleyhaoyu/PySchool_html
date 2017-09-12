@@ -64,18 +64,18 @@
 										<img :src="getImage(item)" class="works-img"/>
 										<p class="works-username">{{item.aswStudentName}}<label class="works-time">{{item.aswTime}}</label></p>
 										<p class="works-content">{{item.aswDesc}}&nbsp;.</p>
-						  
-										<div  v-for="fileItem in item.activityStudentsWorksFilesList" :style="getDisplayStyle(fileItem.aswfFiles)"> 
-											<!--<img :src="fileItem.aswfFiles" class="works-desc-pic"/>-->
-											<img v-if="2==getDisplayType(fileItem.aswfFiles)" :src="fileItem.aswfFiles"  @tap='displayFile(fileItem.aswfFiles)' class="works-desc-pic"/>
-								  			<video  v-if="1==getDisplayType(fileItem.aswfFiles)" :src="fileItem.aswfFiles" controls="controls" class="works-desc-video">
-												 不支持的文件格式。
-											</video> 
-											<audio v-if="3==getDisplayType(fileItem.aswfFiles)"  :src="fileItem.aswfFiles" controls="controls" class="works-desc-audio">
-												不支持的文件格式。 
-											</audio>
-										</div> 
-						
+										<div style="margin-top: 6px;width:100%;">
+											<div  v-for="fileItem in item.activityStudentsWorksFilesList" :style="getDisplayStyle(fileItem.aswfFiles)" > 
+												<!--<img :src="fileItem.aswfFiles" class="works-desc-pic"/>-->
+												<img v-if="2==getDisplayType(fileItem.aswfFiles)" :src="fileItem.aswfFiles"  @tap='displayFile(fileItem.aswfFiles)' class="works-desc-pic"/>
+									  			<video  v-if="1==getDisplayType(fileItem.aswfFiles)" :src="fileItem.aswfFiles" controls="controls" class="works-desc-video">
+													 不支持的文件格式。
+												</video> 
+												<audio v-if="3==getDisplayType(fileItem.aswfFiles)"  :src="fileItem.aswfFiles" controls="controls" class="works-desc-audio">
+													不支持的文件格式。 
+												</audio>
+											</div> 
+										</div>
 										<div class="icon-line">
 											<div  @tap="everyoneWorksComment(item)" style=" float: right;">
 												<span  style="margin-right: 10px;"> <img src="../images/school/reply.png" class="icon-reply" />
@@ -144,48 +144,65 @@
                 "aswId": 3,
                 "aswStudentId": 24,
                 "aswDesc": "喜欢打电话的",
-                "aswStudentName": "  200",
+                "aswStudentName": "张三",
                 "aswActId": 3,
                 "aswAsId": 5,
                 "aswPointNum": 1,
                 "aswCommentNum": 2,
-                "showStudentPic": "http://112.124.110.182:11008/upload/studentPicture/20170812/B20170812184037_d0959b7a25b64a80ac9bbfa428b7110b.png",
+                "showStudentPic": "../images/school/head-pic.png",
                 "activityStudentsWorksFilesList": [
                     {
                         "aswfId": 3,
                         "aswfTime": "2017-08-25 22:58:22",
                         "aswfStudentId": 24,
-                        "aswfFiles": "http://112.124.110.182:11008/upload/TaskExecPicture/20170825//1500030347631.jpg20170825224736_2ce220c937c64d6c9f7f137062f2cb5f.jpg",
+                        "aswfFiles": "../images/walking/XuHui/JiaoTong/6.png",
                         "aswfStudentName": "  200",
                         "aswfActId": 3,
                         "aswfAswId": 3
                     },
                     {
-                        "aswfId": 4,
-                        "aswfTime": "2017-08-25 22:58:25",
+                        "aswfId": 3,
+                        "aswfTime": "2017-08-25 22:58:22",
                         "aswfStudentId": 24,
-                        "aswfFiles": "http://112.124.110.182:11008/upload/TaskExecPicture/20170825//1500030347631.jpg20170825224736_2ce220c937c64d6c9f7f137062f2cb5f.jpg",
+                        "aswfFiles": "../images/school/video-icon.png",
                         "aswfStudentName": "  200",
                         "aswfActId": 3,
                         "aswfAswId": 3
                     },
                     {
-                        "aswfId": 5,
-                        "aswfTime": "2017-08-25 22:58:28",
+                        "aswfId": 3,
+                        "aswfTime": "2017-08-25 22:58:22",
                         "aswfStudentId": 24,
-                        "aswfFiles": "http://112.124.110.182:11008/upload/TaskExecPicture/20170825//1503672467553.amr20170825224750_47808e84e7cc4ca885452e606d0a4966.amr",
+                        "aswfFiles": "../images/school/video-icon.png",
                         "aswfStudentName": "  200",
                         "aswfActId": 3,
                         "aswfAswId": 3
                     },
                     {
-                        "aswfId": 6,
-                        "aswfTime": "2017-08-25 23:03:54",
+                        "aswfId": 3,
+                        "aswfTime": "2017-08-25 22:58:22",
                         "aswfStudentId": 24,
-                        "aswfFiles": "http://112.124.110.182:11008/upload/TaskExecPicture/20170825//1500030347631.jpg20170825224736_2ce220c937c64d6c9f7f137062f2cb5f.jpg",
+                        "aswfFiles": "../images/school/record-icon.png",
                         "aswfStudentName": "  200",
                         "aswfActId": 3,
-                        "aswfAsId": 5,
+                        "aswfAswId": 3
+                    },
+                    {
+                        "aswfId": 3,
+                        "aswfTime": "2017-08-25 22:58:22",
+                        "aswfStudentId": 24,
+                        "aswfFiles": "../images/walking/XuHui/JiaoTong/4.png",
+                        "aswfStudentName": "  200",
+                        "aswfActId": 3,
+                        "aswfAswId": 3
+                    },
+                    {
+                        "aswfId": 3,
+                        "aswfTime": "2017-08-25 22:58:22",
+                        "aswfStudentId": 24,
+                        "aswfFiles": "../images/walking/XuHui/JiaoTong/5.png",
+                        "aswfStudentName": "  200",
+                        "aswfActId": 3,
                         "aswfAswId": 3
                     }
                 ],
@@ -200,7 +217,7 @@
 				"actIsTeacher": 1,
 				"actReviewerId": 7,
 				"actObject": "1",
-				"showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png"
+				"showTeacherPic": "../images/school/head-pic.png"
 			},
 			{
 				"actComId": 36,
@@ -213,7 +230,7 @@
 				"actIsTeacher": 1,
 				"actReviewerId": 7,
 				"actObject": "1",
-				"showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png"
+				"showTeacherPic": "../images/school/head-pic.png"
 			},
 			{
 				"actComId": 37,
@@ -226,7 +243,7 @@
 				"actIsTeacher": 1,
 				"actReviewerId": 7,
 				"actObject": "1",
-				"showTeacherPic": "http://112.124.110.182:11008/upload/SchoolPicture/20170812/B20170812184009_b00db04f8f8b4dcf9d4a804ecff7a6b5.png"
+				"showTeacherPic": "../images/school/head-pic.png"
 			}]
             }
  	 
@@ -250,23 +267,19 @@
 				return type;
 			},
 			getDisplayStyle:function(patch){
-				var type="width: 70%; margin: 2px;float:left;";
-				//console.info(patch);
-				if(patch){
-					var suffix = patch.substr(patch.lastIndexOf('.'));
-					if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
- 
-  	        //type="width:90%;margin-left: 3px;";
-						type="width: 100%; margin: 2px;float:left;";
-					}else if( suffix=='.amr' ||  suffix=='.mp3' || suffix=='.m4a' ){
-						//	type="width:90%;margin-left:6px;";
-            type="width: 100%; margin: 2px;float:left;";
-					}
-				 	else  if( suffix=='.jpg' ||  suffix=='.png' || suffix=='.gif' ){
-            //	type="width: 30%;margin-left:6px;display: inline-block;height:80px";
-						type="width: 100%; margin: 2px;float:left;";
-					}
-				}
+				var type="width:33.333%;display: inline-block;height:80px;padding:0 3px";
+//				//console.info(patch);
+//				if(patch){
+//					var suffix = patch.substr(patch.lastIndexOf('.'));
+//					if(suffix=='.mov' || suffix=='.3gp' || suffix=='.mp4' || suffix=='.avi'){
+//						type="width:32%;margin: 0 1px;display: inline-block;height:80px";
+//					}else if( suffix=='.amr' ||  suffix=='.mp3' || suffix=='.m4a' ){
+//          				type="width:32%;margin: 0 1px;display: inline-block;height:80px";
+//					}
+//				 	else  if( suffix=='.jpg' ||  suffix=='.png' || suffix=='.gif' ){
+//            			type="width:32%;margin: 0 1px;display: inline-block;height:80px";
+//					}
+//				}
 				return type;
 			},
 				getImage:function(item){
