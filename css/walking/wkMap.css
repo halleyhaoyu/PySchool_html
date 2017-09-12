@@ -33,8 +33,8 @@ body{
 }
 .animate_container{
 	position: relative;
-	animation: l_jump 1s linear infinite;
-	-webkit-animation: l_jump 1s linear infinite;
+	animation: l_jump 1s linear 3;
+	-webkit-animation: l_jump 1s linear 3;
 	animation-iteration-count:3;
 }
 @keyframes l_jump {

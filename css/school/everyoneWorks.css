@@ -30,15 +30,16 @@
 }
 
 .works-desc-pic{
-	width: 30%;
-	margin: 5px;
+	width:100%;
+	/*margin: 0 2px;*/
+	height: 100%;
 }
 .works-desc-video{
-	width: 70%;
+	width:100%;
 	margin: 5px;
 }
 .works-desc-audio{
-	width: 70%;
+	width:100%;
 	margin: 5px;
 }
 
