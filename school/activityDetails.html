@@ -22,8 +22,8 @@
 		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 		<img src="../images/head-dz.png" class="head-dz"/>
 		<h1 class="mui-title">活动详情</h1>
-		<a id="activity_every_one_work" class="mui-pull-right top-edit">大家作品</a>
-		<a id="activity_reply_detail"   class="mui-pull-right top-edit" style="left:32px; right:250px;width: 60px;">活动集锦</a>
+		<a id="activity_every_one_work" class="mui-pull-right head-pull-right">大家作品</a>
+		<!--<a id="activity_reply_detail"   class="mui-pull-right top-edit" style="left:32px; right:250px;width: 60px;">活动集锦</a>-->
 	</header>
 
 	<!--<nav id="main_bar" class="mui-bar mui-bar-tab">
@@ -86,10 +86,12 @@
 			<p  class="content">{{courseInfo.actSendWord}}</p>
 
 		</div>
-		<div style="padding:32px;background-color:#FFF;">
-			<button  v-if="userInfo.roleType==3 && courseInfo.hasPart==1" @tap="open_activity_my_works()" id="btn_activity_my_works" type="button" 
-				class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn">我的作品</button>
-			<button v-if="userInfo.roleType==2 && courseInfo.actFine==1" id="btn_activity_my_works_show" type="button" 
+		<div style="padding:32px;background-color:#FFF;text-align: center;">
+			<button  v-if="userInfo.roleType==2 && courseInfo.hasPart==1" @tap="open_activity_my_works()" id="btn_activity_my_works" type="button" 
+				class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn" style="width:48%;display:inline-block;">我的作品</button>
+			<button  v-if="userInfo.roleType==2 && courseInfo.hasPart==1" id="activity_reply_detail" type="button" 
+				class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn" style="width:48%;display:inline-block;">活动集锦</button>
+			<button v-if="userInfo.roleType==3 && courseInfo.actFine==1" id="btn_activity_my_works_show" type="button" 
 				class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn">推荐学校秀</button>
 		</div>
 	</div>
