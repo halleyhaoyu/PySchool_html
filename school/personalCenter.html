@@ -11,6 +11,14 @@
     <link href="../css/school/courseAll.css" rel="stylesheet"/>
   	<link href="../css/foot.css" rel="stylesheet"/>
 	<link href="../css/school/studentCenter.css" rel="stylesheet"/>
+	<style type="text/css">
+		#personal_center_set_page{
+			width: 28px;
+		    position: relative;
+		    z-index: 999;
+		    margin: 32px 10px;
+		}
+	</style>
 </head>
 <body>
 	<div id="personal_center_content">
@@ -18,8 +26,8 @@
 		
 	<header class="mui-bar mui-bar-nav" style="height: 272px;
     background: url(../images/school/psct_top.png);background-size: cover">
-    		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-		<a href="#" id="personal_center_set_page" class="mui-icon mui-icon-gear mui-pull-right" style="text-shadow: 0px 2px 2px #333333;font-size: 28px;"></a>
+    		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="font-size:36px;"></a>
+    		<img src="../images/school/setting.png" id="personal_center_set_page" class="mui-pull-right">
 		<img src="../images/school/head-btm.png" class="head-pic-btm">
 		<img src="../images/school/ct-dianzhui.png" class="dz-icon">
 		
@@ -54,7 +62,7 @@
 				</a>
 			</div>
 		</div>
-		<div v-if="userInfo.roleType==2" style="margin-top: 20px;">			
+		<div  style="margin-top: 20px;">			
 			<div id="personal_teacher_ranking_link" class="myh5_card myh5_card2">
 				<a href="#" class="top psct_purple">
 					<img src="../images/school/tc_02.png" class="photo1" />
