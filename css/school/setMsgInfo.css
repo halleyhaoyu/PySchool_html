@@ -37,6 +37,7 @@
 .head-pic{
 	margin-top: 12px;
 	width:80px;
+	border-radius:50%;
 }
 .setPwd{
 	margin:32px 0px;
