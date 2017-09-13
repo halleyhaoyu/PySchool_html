@@ -3,3 +3,4 @@ unpackage/
 .confirmed_dependencies
 /._manifest.json5680177373087986436.tmp
 /.gitignore
+/manifest.json
