@@ -21,10 +21,11 @@
 		
 	<header class="mui-bar mui-bar-nav"> 
 		<img src="../images/head-dz.png" class="head-dz"/>
+		<a v-if="userInfo.roleType==3" id="activity_add_detail"  href="#"  class="mui-pull-left head-pull-left" 
+			>活动申请</a>
 		<h1 class="mui-title">活动</h1>
-		<a id="activity_exchange_area"  href="#"  class="mui-pull-right top-edit"> 交流区 </a>
-		<a v-if="userInfo.roleType==3" id="activity_add_detail"  href="#"  class="mui-pull-right top-edit" 
-			style="left:32px; right:250px;width:60px;">活动申请</a>
+		<a id="activity_exchange_area"  href="#"  class="mui-pull-right head-pull-right"> 交流区 </a>
+		
 	</header>
 
 	
