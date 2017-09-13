@@ -29,10 +29,11 @@
 </head>
 <body class="pagebg  bg_gradient">
 	<header class="mui-bar mui-bar-nav">
-		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<a class="mui-icon mui-icon-left-nav mui-pull-left" onclick="newPages()"></a>
 		<h1 class="mui-title"></h1>
 	</header>
 	<iframe src="#"  id="iframeStr" style="height: 800px;margin-top: 64px;width: 100%;"></iframe>
+	<input type="hidden" id="targetName"/>
 	<script src="../js/jquery-2.1.4.min.js"></script>
 	<script src="../js/mui.min.js"></script>
 	
@@ -45,10 +46,22 @@
 	mui.plusReady(function () {
 		var self = plus.webview.currentWebview();
 		console.log(self.targetName)
+		 $('#targetName').val(self.targetName);
 		$('.mui-title').append(self.targetName);
 		$('#iframeStr').attr("src","https://wapbaike.baidu.com/item/"+self.targetName);
 	});
 	
+	function newPages(){
+		var targetName = $('#targetName').val();
+		var baseUrl = 'msgInfo.html';
+		var url = mui.os.plus?baseUrl:baseUrl+'?targetName='+targetName;  
+		mui.openWindow({
+		    url: url,
+		    extras: {
+		        targetName: targetName
+		    }
+		})
+	}
 	</script>
 
 </body>

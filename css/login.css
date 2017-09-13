@@ -43,10 +43,10 @@ body,.mui-content{
 	}
 	body,input,textarea,p{font-size: 14px;}
 	.mui-input-row>label{line-height: 1.5}
-	.p_text {margin-top:12%;}
+	.p_text {margin-top:13%;}
 	.button-group button{padding:0;height:48px;}
 	.mui-input-group .mui-input-row {height:46px;line-height:42px;}
-	.mui-icon:not(.mui-icon-eye) {margin:12px;}
+	.mui-icon:not(.mui-icon-eye) {margin:10px 12px;}
 	.mui-input-row .mui-input-password~.mui-icon-eye {top:12px;}
 }
 
@@ -59,7 +59,7 @@ body,.mui-content{
 	.p_text {margin-top:22%;}
 	.button-group button{padding:0;height:60px;}
 	.mui-input-group .mui-input-row {height: 56px;line-height:52px;}
-	.mui-icon:not(.mui-icon-eye) {margin:16px;}
+	.mui-icon:not(.mui-icon-eye) {margin:14px 16px;}
 	.mui-input-row .mui-input-password~.mui-icon-eye {top:16px;}
 }
 
@@ -69,10 +69,10 @@ body,.mui-content{
 	}
 	body,input,textarea,p{font-size: 16px;}
 	.mui-input-row>label{line-height: 1.18}
-	.p_text {margin-top:25%;}
+	.p_text {margin-top:26%;}
 	.button-group button{padding:0;height:60px;}
 	.mui-input-group .mui-input-row {height: 56px;line-height:52px;}
-	.mui-icon:not(.mui-icon-eye) {margin:16px;}
+	.mui-icon:not(.mui-icon-eye) {margin:14px 16px;}
 	.mui-input-row .mui-input-password~.mui-icon-eye {top:16px;}
 }
 :-moz-placeholder {
@@ -108,7 +108,7 @@ input::-webkit-input-placeholder{
 .img-wrapper img{margin: 0 auto;display: block;height: auto;}
 
 
-.mui-input-group{margin:32px 32px 20px 32px;background: inherit;}
+.mui-input-group{margin:28px 32px 20px 32px;background: inherit;}
 
 .mui-input-group .mui-input-row{
 	margin: 20px 0;
