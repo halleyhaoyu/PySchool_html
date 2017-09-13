@@ -139,7 +139,9 @@
       "js/H5Plus.js",
       "js/immersed.js",
       "js/common.js",
-      "fonts/mui-icons-extra.ttf"
+      "fonts/mui-icons-extra.ttf",
+      "images/school/like.png",
+      "images/school/reply.png"
     ],
     "refer": [
       "school/activityList.html",
@@ -171,7 +173,8 @@
       "js/vue.min.js",
       "school/scShowAll.html",
       "images/tabbar/tabbar-sl-3.png",
-      "images/tabbar/tabbar-sl-2.png"
+      "images/tabbar/tabbar-sl-2.png",
+      "fonts/mui.ttf"
     ],
     "refer": [
       "school/activityList.html",
@@ -374,7 +377,15 @@
       "images/school/record-icon.png",
       "images/astop.png",
       "images/arecord.png",
-      "images/school/video-icon.png"
+      "images/school/video-icon.png",
+      "css/top.css",
+      "images/school/camera.png",
+      "images/school/add-icon.png",
+      "fonts/mui.ttf",
+      "images/head-dz.png",
+      "images/school/voice.png",
+      "images/school/album.png",
+      "images/school/copy.png"
     ],
     "refer": []
   },
@@ -671,6 +682,28 @@
       "school/scShowAll.html",
       "school/courseAll.html",
       "login.html"
+    ]
+  },
+  "school/setPage.html": {
+    "refer": [
+      "school/setPassword.html",
+      "school/setTeacherfo.html",
+      "school/setStudentInfo.html"
+    ],
+    "resources": [
+      "js/mui.picker.js",
+      "css/school/setMsgInfo.css",
+      "js/app.js",
+      "js/common.js",
+      "css/app.css",
+      "js/mui.min.js",
+      "js/mui.poppicker.js",
+      "css/dashboard.css",
+      "js/vue.min.js",
+      "css/mui.poppicker.css",
+      "css/mui.picker.min.css",
+      "css/mui.css",
+      "js/jquery-2.1.4.min.js"
     ]
   }
 }

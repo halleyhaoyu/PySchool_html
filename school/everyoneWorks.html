@@ -68,12 +68,14 @@
 											<div  v-for="fileItem in item.activityStudentsWorksFilesList" :style="getDisplayStyle(fileItem.aswfFiles)" > 
 												<!--<img :src="fileItem.aswfFiles" class="works-desc-pic"/>-->
 												<img v-if="2==getDisplayType(fileItem.aswfFiles)" :src="fileItem.aswfFiles"  @tap='displayFile(fileItem.aswfFiles)' class="works-desc-pic"/>
-									  			<video  v-if="1==getDisplayType(fileItem.aswfFiles)" :src="fileItem.aswfFiles" controls="controls" class="works-desc-video">
+									  			<img v-if="1==getDisplayType(fileItem.aswfFiles)" src="../images/school/video-icon.png"  @tap='displayFile(fileItem.aswfFiles)' class="works-desc-pic"/>
+									  			<img v-if="3==getDisplayType(fileItem.aswfFiles)" src="../images/school/record-icon.png"  @tap='playAudio(fileItem.aswfFiles)' class="works-desc-pic"/>
+									  			<!--<video  v-if="1==getDisplayType(fileItem.aswfFiles)" :src="fileItem.aswfFiles" controls="controls" class="works-desc-video">
 													 不支持的文件格式。
 												</video> 
 												<audio v-if="3==getDisplayType(fileItem.aswfFiles)"  :src="fileItem.aswfFiles" controls="controls" class="works-desc-audio">
 													不支持的文件格式。 
-												</audio>
+												</audio>-->
 											</div> 
 										</div>
 										<div class="icon-line">
@@ -140,112 +142,112 @@
 	 
 			workList:[
 	
-			{
-                "aswId": 3,
-                "aswStudentId": 24,
-                "aswDesc": "喜欢打电话的",
-                "aswStudentName": "张三",
-                "aswActId": 3,
-                "aswAsId": 5,
-                "aswPointNum": 1,
-                "aswCommentNum": 2,
-                "showStudentPic": "../images/school/head-pic.png",
-                "activityStudentsWorksFilesList": [
-                    {
-                        "aswfId": 3,
-                        "aswfTime": "2017-08-25 22:58:22",
-                        "aswfStudentId": 24,
-                        "aswfFiles": "../images/walking/XuHui/JiaoTong/6.png",
-                        "aswfStudentName": "  200",
-                        "aswfActId": 3,
-                        "aswfAswId": 3
-                    },
-                    {
-                        "aswfId": 3,
-                        "aswfTime": "2017-08-25 22:58:22",
-                        "aswfStudentId": 24,
-                        "aswfFiles": "../images/school/video-icon.png",
-                        "aswfStudentName": "  200",
-                        "aswfActId": 3,
-                        "aswfAswId": 3
-                    },
-                    {
-                        "aswfId": 3,
-                        "aswfTime": "2017-08-25 22:58:22",
-                        "aswfStudentId": 24,
-                        "aswfFiles": "../images/school/video-icon.png",
-                        "aswfStudentName": "  200",
-                        "aswfActId": 3,
-                        "aswfAswId": 3
-                    },
-                    {
-                        "aswfId": 3,
-                        "aswfTime": "2017-08-25 22:58:22",
-                        "aswfStudentId": 24,
-                        "aswfFiles": "../images/school/record-icon.png",
-                        "aswfStudentName": "  200",
-                        "aswfActId": 3,
-                        "aswfAswId": 3
-                    },
-                    {
-                        "aswfId": 3,
-                        "aswfTime": "2017-08-25 22:58:22",
-                        "aswfStudentId": 24,
-                        "aswfFiles": "../images/walking/XuHui/JiaoTong/4.png",
-                        "aswfStudentName": "  200",
-                        "aswfActId": 3,
-                        "aswfAswId": 3
-                    },
-                    {
-                        "aswfId": 3,
-                        "aswfTime": "2017-08-25 22:58:22",
-                        "aswfStudentId": 24,
-                        "aswfFiles": "../images/walking/XuHui/JiaoTong/5.png",
-                        "aswfStudentName": "  200",
-                        "aswfActId": 3,
-                        "aswfAswId": 3
-                    }
-                ],
-                "activityCommentList": [{
-				"actComId": 35,
-				"actComTime": "2017-08-30 21:25:39",
-				"actComDesc": "测试卷1",
-				"actComReviewer": "  ",
-				"actComActId": 1,
-				"actComType": 1,
-				"actComIsPoint": 2,
-				"actIsTeacher": 1,
-				"actReviewerId": 7,
-				"actObject": "1",
-				"showTeacherPic": "../images/school/head-pic.png"
-			},
-			{
-				"actComId": 36,
-				"actComTime": "2017-08-30 21:25:49",
-				"actComDesc": "测试的2",
-				"actComReviewer": "  ",
-				"actComActId": 1,
-				"actComType": 1,
-				"actComIsPoint": 2,
-				"actIsTeacher": 1,
-				"actReviewerId": 7,
-				"actObject": "1",
-				"showTeacherPic": "../images/school/head-pic.png"
-			},
-			{
-				"actComId": 37,
-				"actComTime": "2017-08-30 21:26:02",
-				"actComDesc": "测试服3",
-				"actComReviewer": "  ",
-				"actComActId": 1,
-				"actComType": 1,
-				"actComIsPoint": 2,
-				"actIsTeacher": 1,
-				"actReviewerId": 7,
-				"actObject": "1",
-				"showTeacherPic": "../images/school/head-pic.png"
-			}]
-            }
+//			{
+//              "aswId": 3,
+//              "aswStudentId": 24,
+//              "aswDesc": "喜欢打电话的",
+//              "aswStudentName": "张三",
+//              "aswActId": 3,
+//              "aswAsId": 5,
+//              "aswPointNum": 1,
+//              "aswCommentNum": 2,
+//              "showStudentPic": "../images/school/head-pic.png",
+//              "activityStudentsWorksFilesList": [
+//                  {
+//                      "aswfId": 3,
+//                      "aswfTime": "2017-08-25 22:58:22",
+//                      "aswfStudentId": 24,
+//                      "aswfFiles": "http://112.124.110.182:11008/upload/TaskExecPicture/20170825//1503672467553.amr20170825224750_47808e84e7cc4ca885452e606d0a4966.amr",
+//                      "aswfStudentName": "  200",
+//                      "aswfActId": 3,
+//                      "aswfAswId": 3
+//                  },
+//                  {
+//                      "aswfId": 3,
+//                      "aswfTime": "2017-08-25 22:58:22",
+//                      "aswfStudentId": 24,
+//                      "aswfFiles": "../images/school/video-icon.png",
+//                      "aswfStudentName": "  200",
+//                      "aswfActId": 3,
+//                      "aswfAswId": 3
+//                  },
+//                  {
+//                      "aswfId": 3,
+//                      "aswfTime": "2017-08-25 22:58:22",
+//                      "aswfStudentId": 24,
+//                      "aswfFiles": "../images/school/video-icon.png",
+//                      "aswfStudentName": "  200",
+//                      "aswfActId": 3,
+//                      "aswfAswId": 3
+//                  },
+//                  {
+//                      "aswfId": 3,
+//                      "aswfTime": "2017-08-25 22:58:22",
+//                      "aswfStudentId": 24,
+//                      "aswfFiles": "../images/school/record-icon.png",
+//                      "aswfStudentName": "  200",
+//                      "aswfActId": 3,
+//                      "aswfAswId": 3
+//                  },
+//                  {
+//                      "aswfId": 3,
+//                      "aswfTime": "2017-08-25 22:58:22",
+//                      "aswfStudentId": 24,
+//                      "aswfFiles": "../images/walking/XuHui/JiaoTong/4.png",
+//                      "aswfStudentName": "  200",
+//                      "aswfActId": 3,
+//                      "aswfAswId": 3
+//                  },
+//                  {
+//                      "aswfId": 3,
+//                      "aswfTime": "2017-08-25 22:58:22",
+//                      "aswfStudentId": 24,
+//                      "aswfFiles": "../images/walking/XuHui/JiaoTong/5.png",
+//                      "aswfStudentName": "  200",
+//                      "aswfActId": 3,
+//                      "aswfAswId": 3
+//                  }
+//              ],
+//              "activityCommentList": [{
+//				"actComId": 35,
+//				"actComTime": "2017-08-30 21:25:39",
+//				"actComDesc": "测试卷1",
+//				"actComReviewer": "  ",
+//				"actComActId": 1,
+//				"actComType": 1,
+//				"actComIsPoint": 2,
+//				"actIsTeacher": 1,
+//				"actReviewerId": 7,
+//				"actObject": "1",
+//				"showTeacherPic": "../images/school/head-pic.png"
+//			},
+//			{
+//				"actComId": 36,
+//				"actComTime": "2017-08-30 21:25:49",
+//				"actComDesc": "测试的2",
+//				"actComReviewer": "  ",
+//				"actComActId": 1,
+//				"actComType": 1,
+//				"actComIsPoint": 2,
+//				"actIsTeacher": 1,
+//				"actReviewerId": 7,
+//				"actObject": "1",
+//				"showTeacherPic": "../images/school/head-pic.png"
+//			},
+//			{
+//				"actComId": 37,
+//				"actComTime": "2017-08-30 21:26:02",
+//				"actComDesc": "测试服3",
+//				"actComReviewer": "  ",
+//				"actComActId": 1,
+//				"actComType": 1,
+//				"actComIsPoint": 2,
+//				"actIsTeacher": 1,
+//				"actReviewerId": 7,
+//				"actObject": "1",
+//				"showTeacherPic": "../images/school/head-pic.png"
+//			}]
+//          }
  	 
 			]
 		},
