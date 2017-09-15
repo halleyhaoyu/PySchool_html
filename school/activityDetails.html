@@ -87,13 +87,14 @@
 
 		</div>
 		<div style="padding:32px;background-color:#FFF;text-align: center;">
-			<button  v-if="userInfo.roleType==2 && courseInfo.hasPart==1" @tap="open_activity_my_works()" id="btn_activity_my_works" type="button" 
+			<button  v-if="userInfo.roleType==3 && courseInfo.hasPart==1" @tap="open_activity_my_works()" id="btn_activity_my_works" type="button" 
 				class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn" style="width:48%;display:inline-block;">我的作品</button>
-			<button  v-if="userInfo.roleType==2 && courseInfo.hasPart==1" id="activity_reply_detail" type="button" 
+			<button    id="activity_reply_detail" type="button" 
 				class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn" style="width:48%;display:inline-block;">活动集锦</button>
-			<button v-if="userInfo.roleType==3 && courseInfo.actFine==1" id="btn_activity_my_works_show" type="button" 
+			<button v-if="userInfo.roleType==2 && courseInfo.actFine==1" id="btn_activity_my_works_show" type="button" 
 				class="mui-btn mui-btn-primary mui-btn-block besttone-full-btn">推荐学校秀</button>
-		</div>
+		</div> 
+		
 	</div>
 	
 </div>
@@ -112,7 +113,7 @@
   	var vm_activity_detail = new Vue({
 		el: '#actiity-detail-content',
 		data: {
-			userInfo:{roleType:2},
+			userInfo:{roleType:3},
 			courseInfo:{actEnd:1,
 				hasPart:1,
 				actFine:1
